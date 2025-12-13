@@ -1,14 +1,39 @@
 {
   "name": "rachelandtim-dot-fun",
+  "version": "1.0.0",
+  "description": "A gloriously nostalgic Geocities-style wedding website for Rachel & Tim's wedding in Brooklyn, NYC",
   "type": "module",
-  "version": "0.0.1",
-  "email": "timrbula@gmail.com",
+  "author": {
+    "name": "Tim Rbula",
+    "email": "timrbula@gmail.com"
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/rachelandtim-dot-fun.git"
+  },
+  "keywords": [
+    "wedding",
+    "website",
+    "geocities",
+    "astro",
+    "react",
+    "typescript",
+    "supabase",
+    "vercel",
+    "90s",
+    "retro",
+    "nostalgia"
+  ],
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "check": "astro check",
+    "format": "prettier --write .",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.astro"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -24,5 +49,9 @@
   },
   "devDependencies": {
     "@types/node": "^22.9.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
   }
 }
