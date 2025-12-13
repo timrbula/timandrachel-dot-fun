@@ -20,7 +20,8 @@ A gloriously nostalgic Geocities-style wedding website celebrating Rachel & Tim'
 
 - **[CONTRIBUTING.md](./CONTRIBUTING.md)** - Development setup and contribution guidelines
 - **[ARCHITECTURE.md](./ARCHITECTURE.md)** - System architecture and technical design
-- **[DATABASE_SETUP.md](./DATABASE_SETUP.md)** - Database schema and setup instructions
+- **[SUPABASE_SETUP.md](./SUPABASE_SETUP.md)** - Complete Supabase database setup guide
+- **[DATABASE_SETUP.md](./DATABASE_SETUP.md)** - Database schema reference
 
 ### Planning & Reference
 

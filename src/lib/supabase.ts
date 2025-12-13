@@ -1,57 +1,60 @@
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
-// Lazy initialization - only create client when needed
-let supabaseClient: SupabaseClient | null = null;
+// Environment variables - support both Astro (import.meta.env) and Node.js (process.env)
+const supabaseUrl =
+  (typeof import.meta !== "undefined" && import.meta.env?.SUPABASE_URL) ||
+  process.env.SUPABASE_URL;
+const supabaseServiceKey =
+  (typeof import.meta !== "undefined" &&
+    import.meta.env?.SUPABASE_SERVICE_KEY) ||
+  process.env.SUPABASE_SERVICE_KEY;
 
-// Helper to get Supabase client (creates it on first use)
-export function getSupabase(): SupabaseClient {
-  if (!supabaseClient) {
-    const supabaseUrl = import.meta.env.SUPABASE_URL;
-
-    if (!supabaseUrl || supabaseUrl === "https://placeholder.supabase.co") {
-      throw new Error(
-        "Missing SUPABASE_URL environment variable. Please check your .env file."
-      );
-    }
-
-    // We use a dummy anon key since we only use service role key in API routes
-    supabaseClient = createClient(supabaseUrl, "dummy-key-for-build", {
-      auth: {
-        persistSession: false,
-        autoRefreshToken: false,
-      },
-    });
-  }
-
-  return supabaseClient;
+// Validate environment variables
+if (!supabaseUrl) {
+  throw new Error(
+    "Missing SUPABASE_URL environment variable. Please check your .env file."
+  );
 }
 
-// Helper to check if Supabase is configured with real URL
-export function isSupabaseConfigured(): boolean {
-  const url = import.meta.env.SUPABASE_URL;
-  return !!url && url !== "https://placeholder.supabase.co";
+if (!supabaseServiceKey) {
+  throw new Error(
+    "Missing SUPABASE_SERVICE_KEY environment variable. Please check your .env file."
+  );
 }
 
-// Export a getter for backwards compatibility
-export const supabase = {
-  get client() {
-    return getSupabase();
+// Create Supabase client with service role key
+// This client has full access to the database and bypasses RLS
+// IMPORTANT: Only use this in API routes (server-side), never in client code
+export const supabase = createClient(supabaseUrl, supabaseServiceKey, {
+  auth: {
+    persistSession: false,
+    autoRefreshToken: false,
   },
-};
+});
 
-// Database Types (will be expanded as we build out features)
-export interface Guest {
+// Helper function to get Supabase client (for backwards compatibility)
+export function getSupabase(): SupabaseClient {
+  return supabase;
+}
+
+// Helper to check if Supabase is configured
+export function isSupabaseConfigured(): boolean {
+  return !!supabaseUrl && !!supabaseServiceKey;
+}
+
+// Database Types
+export interface RSVP {
   id: string;
   created_at: string;
-  name: string;
-  email: string;
-  phone?: string;
+  guest_name: string;
+  guest_email: string;
   attending: boolean;
   plus_one: boolean;
   plus_one_name?: string;
   dietary_restrictions?: string;
-  song_request?: string;
-  message?: string;
+  song_requests?: string;
+  special_accommodations?: string;
+  number_of_guests: number;
 }
 
 export interface GuestbookEntry {
@@ -59,11 +62,11 @@ export interface GuestbookEntry {
   created_at: string;
   name: string;
   message: string;
-  approved: boolean;
+  location?: string;
 }
 
 export interface VisitorCount {
-  id: string;
+  id: number;
   count: number;
   last_updated: string;
 }
@@ -73,10 +76,9 @@ export interface VisitorCount {
 /**
  * Submit RSVP
  */
-export async function submitRSVP(data: Omit<Guest, "id" | "created_at">) {
-  const client = getSupabase();
-  const { data: guest, error } = await client
-    .from("guests")
+export async function submitRSVP(data: Omit<RSVP, "id" | "created_at">) {
+  const { data: rsvp, error } = await supabase
+    .from("rsvps")
     .insert([data])
     .select()
     .single();
@@ -86,16 +88,15 @@ export async function submitRSVP(data: Omit<Guest, "id" | "created_at">) {
     throw error;
   }
 
-  return guest;
+  return rsvp;
 }
 
 /**
- * Get all RSVPs (admin only)
+ * Get all RSVPs (admin only - requires service role key)
  */
-export async function getAllRSVPs() {
-  const client = getSupabase();
-  const { data, error } = await client
-    .from("guests")
+export async function getAllRSVPs(): Promise<RSVP[]> {
+  const { data, error } = await supabase
+    .from("rsvps")
     .select("*")
     .order("created_at", { ascending: false });
 
@@ -104,17 +105,20 @@ export async function getAllRSVPs() {
     throw error;
   }
 
-  return data;
+  return data || [];
 }
 
 /**
  * Submit guestbook entry
  */
-export async function submitGuestbookEntry(name: string, message: string) {
-  const client = getSupabase();
-  const { data, error } = await client
+export async function submitGuestbookEntry(
+  name: string,
+  message: string,
+  location?: string
+): Promise<GuestbookEntry> {
+  const { data, error } = await supabase
     .from("guestbook")
-    .insert([{ name, message, approved: false }])
+    .insert([{ name, message, location }])
     .select()
     .single();
 
@@ -127,84 +131,51 @@ export async function submitGuestbookEntry(name: string, message: string) {
 }
 
 /**
- * Get approved guestbook entries
+ * Get guestbook entries (paginated)
  */
-export async function getGuestbookEntries() {
-  const client = getSupabase();
-  const { data, error } = await client
+export async function getGuestbookEntries(
+  page: number = 1,
+  limit: number = 10
+): Promise<GuestbookEntry[]> {
+  const from = (page - 1) * limit;
+  const to = from + limit - 1;
+
+  const { data, error } = await supabase
     .from("guestbook")
     .select("*")
-    .eq("approved", true)
-    .order("created_at", { ascending: false });
+    .order("created_at", { ascending: false })
+    .range(from, to);
 
   if (error) {
     console.error("Error fetching guestbook entries:", error);
     throw error;
   }
 
-  return data;
+  return data || [];
 }
 
 /**
- * Increment visitor count
+ * Increment visitor count using the database function
  */
-export async function incrementVisitorCount() {
-  const client = getSupabase();
-  // First, try to get the current count
-  const { data: existing, error: fetchError } = await client
-    .from("visitor_count")
-    .select("*")
-    .single();
+export async function incrementVisitorCount(): Promise<number> {
+  const { data, error } = await supabase.rpc("increment_visitor_count");
 
-  if (fetchError && fetchError.code !== "PGRST116") {
-    // PGRST116 is "no rows returned" - that's okay
-    console.error("Error fetching visitor count:", fetchError);
-    return null;
+  if (error) {
+    console.error("Error incrementing visitor count:", error);
+    return 0;
   }
 
-  if (existing) {
-    // Update existing count
-    const { data, error } = await client
-      .from("visitor_count")
-      .update({
-        count: existing.count + 1,
-        last_updated: new Date().toISOString(),
-      })
-      .eq("id", existing.id)
-      .select()
-      .single();
-
-    if (error) {
-      console.error("Error updating visitor count:", error);
-      return null;
-    }
-
-    return data;
-  } else {
-    // Create initial count
-    const { data, error } = await client
-      .from("visitor_count")
-      .insert([{ count: 1 }])
-      .select()
-      .single();
-
-    if (error) {
-      console.error("Error creating visitor count:", error);
-      return null;
-    }
-
-    return data;
-  }
+  return data || 0;
 }
 
 /**
  * Get current visitor count
  */
-export async function getVisitorCount() {
-  const client = getSupabase();
-  const { data, error } = await client
+export async function getVisitorCount(): Promise<number> {
+  const { data, error } = await supabase
     .from("visitor_count")
     .select("count")
+    .eq("id", 1)
     .single();
 
   if (error) {

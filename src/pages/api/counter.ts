@@ -32,6 +32,7 @@ export const GET: APIRoute = async ({ request }) => {
     const { data, error } = await supabase
       .from("visitor_count")
       .select("count")
+      .eq("id", 1)
       .single();
 
     if (error) {
@@ -104,18 +105,17 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     }
 
     const supabase = getSupabase();
-    // First, get the current count
-    const { data: existing, error: fetchError } = await supabase
-      .from("visitor_count")
-      .select("*")
-      .single();
 
-    if (fetchError && fetchError.code !== "PGRST116") {
-      // PGRST116 is "no rows returned"
-      console.error("Error fetching visitor count:", fetchError);
+    // Use the database function to increment the counter atomically
+    const { data: newCount, error } = await supabase.rpc(
+      "increment_visitor_count"
+    );
+
+    if (error) {
+      console.error("Error incrementing visitor count:", error);
       return new Response(
         JSON.stringify({
-          error: "Failed to fetch visitor count",
+          error: "Failed to increment visitor count",
         }),
         {
           status: 500,
@@ -124,62 +124,6 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
           },
         }
       );
-    }
-
-    let newCount: number;
-
-    if (existing) {
-      // Update existing count
-      const { data, error } = await supabase
-        .from("visitor_count")
-        .update({
-          count: existing.count + 1,
-          last_updated: new Date().toISOString(),
-        })
-        .eq("id", existing.id)
-        .select()
-        .single();
-
-      if (error) {
-        console.error("Error updating visitor count:", error);
-        return new Response(
-          JSON.stringify({
-            error: "Failed to update visitor count",
-          }),
-          {
-            status: 500,
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-      }
-
-      newCount = data.count;
-    } else {
-      // Create initial count (should only happen once)
-      const { data, error } = await supabase
-        .from("visitor_count")
-        .insert([{ count: 1 }])
-        .select()
-        .single();
-
-      if (error) {
-        console.error("Error creating visitor count:", error);
-        return new Response(
-          JSON.stringify({
-            error: "Failed to create visitor count",
-          }),
-          {
-            status: 500,
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-      }
-
-      newCount = data.count;
     }
 
     return new Response(

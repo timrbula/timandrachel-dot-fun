@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model RSVP {
+  id                     String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  createdAt              DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  guestName              String   @map("guest_name")
+  guestEmail             String   @map("guest_email")
+  attending              Boolean
+  plusOne                Boolean  @default(false) @map("plus_one")
+  plusOneName            String?  @map("plus_one_name")
+  dietaryRestrictions    String?  @map("dietary_restrictions")
+  songRequests           String?  @map("song_requests")
+  specialAccommodations  String?  @map("special_accommodations")
+  numberOfGuests         Int      @default(1) @map("number_of_guests")
+
+  @@index([guestEmail], map: "idx_rsvps_email")
+  @@index([createdAt(sort: Desc)], map: "idx_rsvps_created_at")
+  @@map("rsvps")
+}
+
+model Guestbook {
+  id        String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  name      String
+  message   String
+  location  String?
+
+  @@index([createdAt(sort: Desc)], map: "idx_guestbook_created_at")
+  @@map("guestbook")
+}
+
+model VisitorCount {
+  id          Int      @id @default(1)
+  count       Int      @default(0)
+  lastUpdated DateTime @default(now()) @map("last_updated") @db.Timestamptz(6)
+
+  @@map("visitor_count")
+}
