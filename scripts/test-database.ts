@@ -28,8 +28,13 @@ try {
 }
 
 // Now import after env vars are loaded
-const { supabase, getVisitorCount, incrementVisitorCount } =
-  await import("../src/lib/supabase.js");
+const {
+  prisma,
+  getVisitorCount,
+  incrementVisitorCount,
+  getGuestbookEntries,
+  getAllRSVPs,
+} = await import("../src/lib/supabase.js");
 
 interface TestResult {
   name: string;
@@ -45,24 +50,15 @@ const results: TestResult[] = [];
  */
 async function testConnection(): Promise<TestResult> {
   try {
-    const { data, error } = await supabase
-      .from("visitor_count")
-      .select("count")
-      .limit(1);
-
-    if (error) {
-      return {
-        name: "Database Connection",
-        passed: false,
-        message: "Failed to connect to database",
-        error: error.message,
-      };
-    }
+    // Test connection by querying the visitor_count table
+    await prisma.visitorCount.findUnique({
+      where: { id: 1 },
+    });
 
     return {
       name: "Database Connection",
       passed: true,
-      message: "Successfully connected to Supabase",
+      message: "Successfully connected to database via Prisma",
     };
   } catch (error) {
     return {
@@ -139,24 +135,12 @@ async function testIncrementFunction(): Promise<TestResult> {
  */
 async function testGuestbookTable(): Promise<TestResult> {
   try {
-    const { data, error } = await supabase
-      .from("guestbook")
-      .select("*")
-      .limit(1);
-
-    if (error) {
-      return {
-        name: "Guestbook Table",
-        passed: false,
-        message: "Failed to query guestbook table",
-        error: error.message,
-      };
-    }
+    const entries = await getGuestbookEntries(1, 1);
 
     return {
       name: "Guestbook Table",
       passed: true,
-      message: `Guestbook table accessible (${data?.length || 0} entries)`,
+      message: `Guestbook table accessible (${entries.length} entries fetched)`,
     };
   } catch (error) {
     return {
@@ -173,21 +157,12 @@ async function testGuestbookTable(): Promise<TestResult> {
  */
 async function testRSVPsTable(): Promise<TestResult> {
   try {
-    const { data, error } = await supabase.from("rsvps").select("*").limit(1);
-
-    if (error) {
-      return {
-        name: "RSVPs Table",
-        passed: false,
-        message: "Failed to query RSVPs table",
-        error: error.message,
-      };
-    }
+    const rsvps = await getAllRSVPs();
 
     return {
       name: "RSVPs Table",
       passed: true,
-      message: `RSVPs table accessible (${data?.length || 0} entries)`,
+      message: `RSVPs table accessible (${rsvps.length} entries)`,
     };
   } catch (error) {
     return {
@@ -203,7 +178,7 @@ async function testRSVPsTable(): Promise<TestResult> {
  * Run all tests
  */
 async function runTests() {
-  console.log("🧪 Testing Supabase Database Connection...\n");
+  console.log("🧪 Testing Database Connection...\n");
   console.log("=".repeat(50));
   console.log("");
 
@@ -243,14 +218,10 @@ async function runTests() {
     console.log("⚠️  Some tests failed. Please check your database setup.");
     console.log("");
     console.log("Troubleshooting:");
-    console.log(
-      "1. Verify your .env file has correct SUPABASE_URL and SUPABASE_SERVICE_KEY"
-    );
-    console.log(
-      "2. Ensure you ran the migration: supabase/migrations/001_initial_schema.sql"
-    );
-    console.log("3. Check that RLS policies are enabled on all tables");
-    console.log("4. Review SUPABASE_SETUP.md for detailed setup instructions");
+    console.log("1. Verify your .env file has correct DATABASE_URL");
+    console.log("2. Ensure you ran: npm run db:push or npm run db:migrate");
+    console.log("3. Check that your database is accessible");
+    console.log("4. Review README.md for detailed setup instructions");
     process.exit(1);
   }
 }

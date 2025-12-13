@@ -1,5 +1,9 @@
-import { prisma } from "./prisma";
-import type { RSVP as PrismaRSVP, Guestbook as PrismaGuestbook, VisitorCount as PrismaVisitorCount } from "@prisma/client";
+import prisma from "./prisma";
+import type {
+  RSVP as PrismaRSVP,
+  Guestbook as PrismaGuestbook,
+  VisitorCount as PrismaVisitorCount,
+} from "@prisma/client";
 
 // Database Types (matching Prisma schema)
 export interface RSVP {
@@ -70,7 +74,9 @@ function formatVisitorCount(count: PrismaVisitorCount): VisitorCount {
 /**
  * Submit RSVP
  */
-export async function submitRSVP(data: Omit<RSVP, "id" | "created_at">): Promise<RSVP> {
+export async function submitRSVP(
+  data: Omit<RSVP, "id" | "created_at">
+): Promise<RSVP> {
   try {
     const rsvp = await prisma.rSVP.create({
       data: {
