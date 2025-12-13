@@ -116,7 +116,7 @@ export function truncateText(
  * Generate a random ID
  */
 export function generateId(prefix: string = "id"): string {
-  return `${prefix}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  return `${prefix}-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 }
 
 /**
@@ -205,9 +205,11 @@ export async function copyToClipboard(text: string): Promise<boolean> {
       textArea.select();
 
       try {
-        document.execCommand("copy");
+        // Using deprecated execCommand as fallback for older browsers
+        // TypeScript doesn't recognize execCommand anymore, but it's still supported in browsers
+        const success = (document as any).execCommand("copy");
         textArea.remove();
-        return true;
+        return success;
       } catch (error) {
         console.error("Failed to copy:", error);
         textArea.remove();

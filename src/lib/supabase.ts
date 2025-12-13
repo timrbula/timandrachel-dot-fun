@@ -2,7 +2,6 @@ import prisma from "./prisma";
 import type {
   RSVP as PrismaRSVP,
   Guestbook as PrismaGuestbook,
-  VisitorCount as PrismaVisitorCount,
 } from "@prisma/client";
 
 // Database Types (matching Prisma schema)
@@ -59,15 +58,6 @@ function formatGuestbookEntry(entry: PrismaGuestbook): GuestbookEntry {
     name: entry.name,
     message: entry.message,
     location: entry.location,
-  };
-}
-
-// Helper function to convert Prisma VisitorCount to API format
-function formatVisitorCount(count: PrismaVisitorCount): VisitorCount {
-  return {
-    id: count.id,
-    count: count.count,
-    last_updated: count.lastUpdated.toISOString(),
   };
 }
 

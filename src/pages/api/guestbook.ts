@@ -6,7 +6,7 @@ import { sendGuestbookNotification } from "../../lib/resend";
 // Rate limiting map
 const rateLimitMap = new Map<string, number>();
 const RATE_LIMIT_WINDOW = 300000; // 5 minutes
-const MAX_REQUESTS = 5; // Max 5 guestbook entries per 5 minutes per IP
+// const MAX_REQUESTS = 5; // Max 5 guestbook entries per 5 minutes per IP (currently unused)
 
 /**
  * Check rate limit

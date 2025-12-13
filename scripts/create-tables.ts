@@ -28,7 +28,9 @@ async function createTables() {
       process.cwd(),
       "supabase/migrations/001_initial_schema.sql"
     );
-    const migrationSQL = readFileSync(migrationPath, "utf-8");
+    // Migration SQL is read but not used directly due to API limitations
+    // const migrationSQL = readFileSync(migrationPath, "utf-8");
+    readFileSync(migrationPath, "utf-8"); // Verify file exists
 
     console.log("📄 Executing migration: 001_initial_schema.sql\n");
 
@@ -41,8 +43,8 @@ async function createTables() {
       throw new Error("Could not extract project reference from URL");
     }
 
-    // Use Supabase Management API to execute SQL
-    const managementUrl = `https://api.supabase.com/v1/projects/${projectRef}/database/query`;
+    // Note: Supabase Management API URL (not used due to auth requirements)
+    // const managementUrl = `https://api.supabase.com/v1/projects/${projectRef}/database/query`;
 
     console.log(
       "⚠️  Direct SQL execution via API requires additional authentication."

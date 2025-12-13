@@ -9,7 +9,7 @@ import {
 // Rate limiting map
 const rateLimitMap = new Map<string, number>();
 const RATE_LIMIT_WINDOW = 300000; // 5 minutes
-const MAX_REQUESTS = 3; // Max 3 RSVP submissions per 5 minutes per IP
+// const MAX_REQUESTS = 3; // Max 3 RSVP submissions per 5 minutes per IP (currently unused)
 
 /**
  * Check rate limit
@@ -235,6 +235,45 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     );
   } catch (error) {
     console.error("Error in POST /api/rsvp:", error);
+    return new Response(
+      JSON.stringify({
+        error: "An unexpected error occurred. Please try again.",
+      }),
+      {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  }
+};
+
+export const GET: APIRoute = async ({ clientAddress }) => {
+  try {
+    // Get client identifier
+    const identifier = clientAddress || "unknown";
+
+    // Check rate limit
+    if (!checkRateLimit(identifier)) {
+      return new Response(
+        JSON.stringify({
+          error:
+            "Too many RSVP submissions. Please wait a few minutes and try again.",
+        }),
+        {
+          status: 429,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    }
+
+    const rsvp_list = await prisma.rSVP.findMany({});
+    return new Response(JSON.stringify(rsvp_list), { status: 200 });
+  } catch (error) {
+    console.error("Error in GET /api/rsvp:", error);
     return new Response(
       JSON.stringify({
         error: "An unexpected error occurred. Please try again.",

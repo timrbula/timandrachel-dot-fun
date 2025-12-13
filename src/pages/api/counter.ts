@@ -4,7 +4,7 @@ import { prisma } from "../../lib/supabase";
 // Rate limiting map (in-memory, simple implementation)
 const rateLimitMap = new Map<string, number>();
 const RATE_LIMIT_WINDOW = 60000; // 1 minute
-const MAX_REQUESTS = 10; // Max 10 requests per minute per IP
+// const MAX_REQUESTS = 10; // Max 10 requests per minute per IP (currently unused)
 
 /**
  * Simple rate limiting check
@@ -25,7 +25,7 @@ function checkRateLimit(identifier: string): boolean {
  * GET /api/counter
  * Fetch the current visitor count
  */
-export const GET: APIRoute = async ({ request }) => {
+export const GET: APIRoute = async () => {
   try {
     // Get current count from database
     const visitorCount = await prisma.visitorCount.findUnique({
@@ -66,7 +66,7 @@ export const GET: APIRoute = async ({ request }) => {
  * POST /api/counter
  * Increment the visitor count
  */
-export const POST: APIRoute = async ({ request, clientAddress }) => {
+export const POST: APIRoute = async ({ clientAddress }) => {
   try {
     // Get client identifier (IP address or fallback)
     const identifier = clientAddress || "unknown";
