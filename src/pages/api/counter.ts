@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { getSupabase } from "../../lib/supabase";
+import { prisma } from "../../lib/supabase";
 
 // Rate limiting map (in-memory, simple implementation)
 const rateLimitMap = new Map<string, number>();
@@ -27,33 +27,15 @@ function checkRateLimit(identifier: string): boolean {
  */
 export const GET: APIRoute = async ({ request }) => {
   try {
-    const supabase = getSupabase();
     // Get current count from database
-    const { data, error } = await supabase
-      .from("visitor_count")
-      .select("count")
-      .eq("id", 1)
-      .single();
-
-    if (error) {
-      console.error("Error fetching visitor count:", error);
-      return new Response(
-        JSON.stringify({
-          error: "Failed to fetch visitor count",
-          count: 0,
-        }),
-        {
-          status: 500,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-    }
+    const visitorCount = await prisma.visitorCount.findUnique({
+      where: { id: 1 },
+      select: { count: true },
+    });
 
     return new Response(
       JSON.stringify({
-        count: data?.count || 0,
+        count: visitorCount?.count || 0,
       }),
       {
         status: 200,
@@ -104,31 +86,25 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       );
     }
 
-    const supabase = getSupabase();
-
-    // Use the database function to increment the counter atomically
-    const { data: newCount, error } = await supabase.rpc(
-      "increment_visitor_count"
-    );
-
-    if (error) {
-      console.error("Error incrementing visitor count:", error);
-      return new Response(
-        JSON.stringify({
-          error: "Failed to increment visitor count",
-        }),
-        {
-          status: 500,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-    }
+    // Use upsert to increment the counter atomically
+    const result = await prisma.visitorCount.upsert({
+      where: { id: 1 },
+      update: {
+        count: {
+          increment: 1,
+        },
+        lastUpdated: new Date(),
+      },
+      create: {
+        id: 1,
+        count: 1,
+        lastUpdated: new Date(),
+      },
+    });
 
     return new Response(
       JSON.stringify({
-        count: newCount,
+        count: result.count,
         success: true,
       }),
       {

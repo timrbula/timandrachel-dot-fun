@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { getSupabase } from "../../lib/supabase";
+import { prisma } from "../../lib/supabase";
 import { sanitizeInput } from "../../lib/utils";
 import { sendGuestbookNotification } from "../../lib/resend";
 
@@ -29,7 +29,6 @@ function checkRateLimit(identifier: string): boolean {
  */
 export const GET: APIRoute = async ({ url }) => {
   try {
-    const supabase = getSupabase();
     const page = parseInt(url.searchParams.get("page") || "1");
     const limit = parseInt(url.searchParams.get("limit") || "10");
 
@@ -37,39 +36,34 @@ export const GET: APIRoute = async ({ url }) => {
     const validPage = Math.max(1, page);
     const validLimit = Math.min(Math.max(1, limit), 50); // Max 50 per page
 
-    const from = (validPage - 1) * validLimit;
-    const to = from + validLimit - 1;
+    const skip = (validPage - 1) * validLimit;
 
     // Fetch entries from database
-    const { data, error, count } = await supabase
-      .from("guestbook")
-      .select("*", { count: "exact" })
-      .order("created_at", { ascending: false })
-      .range(from, to);
+    const [entries, totalCount] = await Promise.all([
+      prisma.guestbook.findMany({
+        orderBy: {
+          createdAt: "desc",
+        },
+        skip,
+        take: validLimit,
+      }),
+      prisma.guestbook.count(),
+    ]);
 
-    if (error) {
-      console.error("Error fetching guestbook entries:", error);
-      return new Response(
-        JSON.stringify({
-          error: "Failed to fetch guestbook entries",
-          entries: [],
-          hasMore: false,
-        }),
-        {
-          status: 500,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-    }
+    const hasMore = skip + validLimit < totalCount;
 
-    const totalCount = count || 0;
-    const hasMore = to < totalCount - 1;
+    // Format entries to match API format
+    const formattedEntries = entries.map((entry) => ({
+      id: entry.id,
+      created_at: entry.createdAt.toISOString(),
+      name: entry.name,
+      message: entry.message,
+      location: entry.location,
+    }));
 
     return new Response(
       JSON.stringify({
-        entries: data || [],
+        entries: formattedEntries,
         hasMore,
         total: totalCount,
         page: validPage,
@@ -106,7 +100,6 @@ export const GET: APIRoute = async ({ url }) => {
  */
 export const POST: APIRoute = async ({ request, clientAddress }) => {
   try {
-    const supabase = getSupabase();
     // Get client identifier
     const identifier = clientAddress || "unknown";
 
@@ -209,26 +202,9 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     };
 
     // Insert entry into database
-    const { data: entry, error: insertError } = await supabase
-      .from("guestbook")
-      .insert([sanitizedData])
-      .select()
-      .single();
-
-    if (insertError) {
-      console.error("Error inserting guestbook entry:", insertError);
-      return new Response(
-        JSON.stringify({
-          error: "Failed to save guestbook entry. Please try again.",
-        }),
-        {
-          status: 500,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-    }
+    const entry = await prisma.guestbook.create({
+      data: sanitizedData,
+    });
 
     // Send notification email to admin
     try {
@@ -249,7 +225,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
         entry: {
           id: entry.id,
           name: entry.name,
-          created_at: entry.created_at,
+          created_at: entry.createdAt.toISOString(),
         },
       }),
       {

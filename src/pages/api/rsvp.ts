@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { getSupabase } from "../../lib/supabase";
+import { prisma } from "../../lib/supabase";
 import { sanitizeInput, isValidEmail } from "../../lib/utils";
 import {
   sendRSVPConfirmation,
@@ -32,7 +32,6 @@ function checkRateLimit(identifier: string): boolean {
  */
 export const POST: APIRoute = async ({ request, clientAddress }) => {
   try {
-    const supabase = getSupabase();
     // Get client identifier
     const identifier = clientAddress || "unknown";
 
@@ -150,26 +149,14 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     };
 
     // Check for duplicate submission (same email)
-    const { data: existingRSVP, error: checkError } = await supabase
-      .from("rsvps")
-      .select("id")
-      .eq("guest_email", sanitizedData.guest_email)
-      .maybeSingle();
-
-    if (checkError && checkError.code !== "PGRST116") {
-      console.error("Error checking for duplicate RSVP:", checkError);
-      return new Response(
-        JSON.stringify({
-          error: "Failed to check for existing RSVP",
-        }),
-        {
-          status: 500,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-    }
+    const existingRSVP = await prisma.rSVP.findFirst({
+      where: {
+        guestEmail: sanitizedData.guest_email,
+      },
+      select: {
+        id: true,
+      },
+    });
 
     if (existingRSVP) {
       return new Response(
@@ -187,26 +174,19 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     }
 
     // Insert RSVP into database
-    const { data: rsvp, error: insertError } = await supabase
-      .from("rsvps")
-      .insert([sanitizedData])
-      .select()
-      .single();
-
-    if (insertError) {
-      console.error("Error inserting RSVP:", insertError);
-      return new Response(
-        JSON.stringify({
-          error: "Failed to save RSVP. Please try again.",
-        }),
-        {
-          status: 500,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-    }
+    const rsvp = await prisma.rSVP.create({
+      data: {
+        guestName: sanitizedData.guest_name,
+        guestEmail: sanitizedData.guest_email,
+        attending: sanitizedData.attending,
+        plusOne: sanitizedData.plus_one,
+        plusOneName: sanitizedData.plus_one_name,
+        dietaryRestrictions: sanitizedData.dietary_restrictions,
+        songRequests: sanitizedData.song_requests,
+        specialAccommodations: sanitizedData.special_accommodations,
+        numberOfGuests: sanitizedData.number_of_guests,
+      },
+    });
 
     // Send confirmation email to guest
     try {
@@ -242,7 +222,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
         message: "RSVP submitted successfully!",
         rsvp: {
           id: rsvp.id,
-          guest_name: rsvp.guest_name,
+          guest_name: rsvp.guestName,
           attending: rsvp.attending,
         },
       }),

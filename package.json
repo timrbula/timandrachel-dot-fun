@@ -35,7 +35,11 @@
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.astro",
     "db:setup": "./scripts/setup-database.sh",
-    "db:test": "tsx scripts/test-database.ts"
+    "db:test": "tsx scripts/test-database.ts",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:studio": "prisma studio"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
