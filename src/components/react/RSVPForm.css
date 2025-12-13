@@ -1,4 +1,128 @@
 /* RSVP Form Styles */
+
+/* Guest Search Section */
+.rsvp-form-container {
+  width: 100%;
+}
+
+.guest-search-section {
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background: rgba(0, 255, 255, 0.05);
+  border: 2px solid var(--color-cyan);
+  border-radius: 8px;
+}
+
+.search-title {
+  font-size: 1.5rem;
+  color: var(--color-yellow);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.search-description {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--color-cyan);
+}
+
+.search-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.search-input {
+  flex: 1;
+  padding: 0.8rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--color-cyan);
+  border-radius: 4px;
+  color: var(--color-white);
+  font-family: "Comic Sans MS", cursive;
+  font-size: 1rem;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--color-yellow);
+  box-shadow: 0 0 10px var(--color-yellow);
+}
+
+.search-results {
+  margin-top: 1.5rem;
+}
+
+.guest-found,
+.guest-not-found {
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.guest-found h4,
+.guest-not-found h4 {
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.guest-found p,
+.guest-not-found p {
+  margin-bottom: 0.5rem;
+}
+
+.plus-one-notice {
+  color: var(--color-green);
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.already-rsvpd {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(255, 0, 255, 0.1);
+  border-radius: 4px;
+}
+
+.contact-note {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--color-cyan);
+}
+
+.skip-search {
+  text-align: center;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 2px dashed var(--color-cyan);
+}
+
+.skip-button {
+  background: none;
+  border: none;
+  color: var(--color-cyan);
+  text-decoration: underline;
+  cursor: pointer;
+  font-family: "Comic Sans MS", cursive;
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
+.skip-button:hover {
+  color: var(--color-yellow);
+}
+
+.form-divider {
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-cyan),
+    transparent
+  );
+  margin: 2rem 0;
+}
+
+/* Original Form Styles */
 .rsvp-form {
   display: flex;
   flex-direction: column;
@@ -11,6 +135,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  animation: fadeIn 0.3s ease-out;
 }
 
 /* Labels */
@@ -285,10 +410,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.form-group {
-  animation: fadeIn 0.3s ease-out;
 }
 
 /* Made with Bob */

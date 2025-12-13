@@ -4,7 +4,11 @@ import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [react()],
+  integrations: [
+    react({
+      include: ['**/react/*'],
+    }),
+  ],
   output: 'server',
   site: 'https://rachelandtim.fun',
   adapter: vercel({
@@ -12,7 +16,7 @@ export default defineConfig({
       enabled: true,
     },
     maxDuration: 8,
-  }),
+  })
 });
 
 // Made with Bob

@@ -1,0 +1,159 @@
+.leaderboard {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.leaderboard-title {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.leaderboard-loading,
+.leaderboard-error,
+.leaderboard-empty {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.1rem;
+  color: var(--color-cyan);
+}
+
+.leaderboard-error button {
+  margin-top: 1rem;
+}
+
+.leaderboard-table {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.leaderboard-header {
+  display: grid;
+  grid-template-columns: 80px 1fr 100px 120px;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(255, 0, 255, 0.2);
+  border: 2px solid var(--color-magenta);
+  font-weight: bold;
+  color: var(--color-yellow);
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.leaderboard-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 100px 120px;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(0, 255, 255, 0.1);
+  border: 2px solid var(--color-cyan);
+  border-top: none;
+  transition: all 0.3s ease;
+}
+
+.leaderboard-row:hover {
+  background: rgba(0, 255, 255, 0.2);
+  transform: translateX(5px);
+}
+
+.leaderboard-row-top3 {
+  background: rgba(255, 215, 0, 0.15);
+  border-color: var(--color-yellow);
+  font-weight: bold;
+}
+
+.leaderboard-row-top3:hover {
+  background: rgba(255, 215, 0, 0.25);
+}
+
+.leaderboard-col-rank,
+.leaderboard-col-name,
+.leaderboard-col-score,
+.leaderboard-col-date {
+  display: flex;
+  align-items: center;
+}
+
+.leaderboard-col-rank {
+  justify-content: center;
+}
+
+.leaderboard-col-score {
+  justify-content: center;
+  font-weight: bold;
+  color: var(--color-yellow);
+}
+
+.leaderboard-col-date {
+  justify-content: flex-end;
+  font-size: 0.85rem;
+  color: var(--color-cyan);
+}
+
+.leaderboard-rank {
+  font-size: 1.5rem;
+}
+
+.leaderboard-name {
+  color: var(--color-white);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.leaderboard-score {
+  font-size: 1.2rem;
+}
+
+.leaderboard-refresh {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .leaderboard {
+    padding: 1rem;
+  }
+
+  .leaderboard-title {
+    font-size: 1.5rem;
+  }
+
+  .leaderboard-header,
+  .leaderboard-row {
+    grid-template-columns: 60px 1fr 80px;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .leaderboard-col-date {
+    display: none;
+  }
+
+  .leaderboard-rank {
+    font-size: 1.2rem;
+  }
+
+  .leaderboard-score {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .leaderboard-header,
+  .leaderboard-row {
+    grid-template-columns: 50px 1fr 70px;
+    gap: 0.25rem;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .leaderboard-rank {
+    font-size: 1rem;
+  }
+}
+
+/* Made with Bob */

@@ -1,0 +1,55 @@
+.animation-toggle {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  background: linear-gradient(180deg, #ffff00, #ff8800);
+  border: 3px outset #ffff00;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+  font-size: 1.2rem;
+  transition: all 0.2s ease;
+  z-index: 1002;
+}
+
+.animation-toggle:hover {
+  background: linear-gradient(180deg, #ffff00, #ffaa00);
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 15px rgba(255, 255, 0, 0.8),
+    3px 5px 0 rgba(0, 0, 0, 0.5);
+}
+
+.animation-toggle:active {
+  border-style: inset;
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+}
+
+.animation-toggle.disabled {
+  background: linear-gradient(180deg, #808080, #606060);
+  border-color: #808080;
+  opacity: 0.7;
+}
+
+.animation-toggle.disabled .animation-icon {
+  opacity: 0.5;
+}
+
+.animation-icon {
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .animation-toggle {
+    top: 0;
+    right: 4.5rem;
+    left: auto;
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
+}
+
+/* Made with Bob */

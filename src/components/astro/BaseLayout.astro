@@ -18,6 +18,11 @@ const {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = new URL(image, Astro.site);
+
+// Import CSS content
+import globalStyles from "../../styles/global.css?raw";
+import geocitiesStyles from "../../styles/geocities.css?raw";
+import animationsStyles from "../../styles/animations.css?raw";
 ---
 
 <!doctype html>
@@ -55,10 +60,10 @@ const ogImageURL = new URL(image, Astro.site);
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- Import Styles -->
-    <link rel="stylesheet" href="/src/styles/global.css" />
-    <link rel="stylesheet" href="/src/styles/geocities.css" />
-    <link rel="stylesheet" href="/src/styles/animations.css" />
+    <!-- Styles -->
+    <style is:global set:html={globalStyles}></style>
+    <style is:global set:html={geocitiesStyles}></style>
+    <style is:global set:html={animationsStyles}></style>
 
     <!-- Generator -->
     <meta name="generator" content={Astro.generator} />

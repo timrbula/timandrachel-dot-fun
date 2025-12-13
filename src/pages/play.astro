@@ -1,0 +1,151 @@
+---
+import BaseLayout from "../components/astro/BaseLayout.astro";
+import Marquee from "../components/react/Marquee";
+import RainbowDivider from "../components/react/RainbowDivider";
+import GameTabs from "../components/react/GameTabs";
+import GeoButton from "../components/react/GeoButton";
+---
+
+<BaseLayout
+  title="Play Flappy Wedding - Rachel & Tim's Wedding"
+  description="Play our NYC and wedding-themed Flappy Bird game! Help the bride and groom navigate through the city!"
+>
+  <!-- Marquee Banner -->
+  <Marquee client:load speed={15}>
+    🎮 Play Flappy Wedding! 🎮 Navigate through NYC! 💕 Beat your high score! 💕
+  </Marquee>
+
+  <div class="container">
+    <!-- Page Header -->
+    <section class="page-header text-center">
+      <h1 class="text-3d">🎮 Flappy Wedding 🎮</h1>
+      <p class="subtitle text-neon">
+        Help Rachel & Tim fly through the NYC skyline!
+      </p>
+    </section>
+
+    <RainbowDivider client:load variant="animated" />
+
+    <!-- Game and Leaderboard Tabs -->
+    <section class="game-tabs-section">
+      <GameTabs client:load />
+    </section>
+
+    <!-- Back to Home -->
+    <section class="navigation-section text-center geo-box-raised">
+      <h2 class="text-neon-pink">Ready to RSVP?</h2>
+      <p>Had fun playing? Don't forget to RSVP for the real celebration!</p>
+      <div class="button-group">
+        <GeoButton client:load variant="warning" href="/rsvp">
+          💌 RSVP Now
+        </GeoButton>
+        <GeoButton client:load variant="secondary" href="/">
+          🏠 Back to Home
+        </GeoButton>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="dots" />
+  </div>
+
+  <!-- Bottom Marquee -->
+  <Marquee client:load speed={20} direction="right">
+    💕 Thanks for playing! 💕 See you at the wedding! 🎉 October 9, 2026 🗽
+  </Marquee>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding: 2rem 0;
+  }
+
+  .page-header h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .game-tabs-section {
+    margin: 2rem 0;
+  }
+
+  .navigation-section {
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 2rem;
+  }
+
+  .navigation-section h2 {
+    margin-bottom: 1rem;
+  }
+
+  .navigation-section p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .fun-facts {
+    max-width: 700px;
+    margin: 3rem auto;
+  }
+
+  .fun-facts h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .fun-facts ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .fun-facts li {
+    font-size: 1.1rem;
+    color: var(--color-cyan);
+    margin-bottom: 0.75rem;
+    padding-left: 0;
+  }
+
+  .fun-facts li::before {
+    content: "▸ ";
+    color: var(--color-yellow);
+    font-weight: bold;
+    margin-right: 0.5rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-header h1 {
+      font-size: 2.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+    }
+
+    .navigation-section {
+      padding: 1.5rem;
+    }
+
+    .button-group {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .fun-facts li {
+      font-size: 1rem;
+    }
+  }
+</style>

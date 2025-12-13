@@ -337,7 +337,7 @@ export default function RSVPForm() {
             className="form-textarea"
             value={formData.dietaryRestrictions}
             onChange={handleChange}
-            placeholder="Let us know about any dietary needs..."
+            placeholder="Let us know about any dietary needs"
             rows={3}
             disabled={loading}
           />
@@ -356,7 +356,7 @@ export default function RSVPForm() {
             className="form-textarea"
             value={formData.songRequests}
             onChange={handleChange}
-            placeholder="Help us build the perfect playlist! What songs will get you on the dance floor?"
+            placeholder="Help us build the perfect playlist :)"
             rows={3}
             disabled={loading}
           />

@@ -9,9 +9,28 @@ datasource db {
   provider = "postgresql"
 }
 
+model Guest {
+  id                String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  createdAt         DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt         DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+  name              String
+  email             String   @unique
+  allowPlusOne      Boolean  @default(false) @map("allow_plus_one")
+  maxGuests         Int      @default(1) @map("max_guests")
+  invitationSent    Boolean  @default(false) @map("invitation_sent")
+  invitationSentAt  DateTime? @map("invitation_sent_at") @db.Timestamptz(6)
+  notes             String?
+  rsvps             RSVP[]
+
+  @@index([email], map: "idx_guests_email")
+  @@index([name], map: "idx_guests_name")
+  @@map("guests")
+}
+
 model RSVP {
   id                     String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   createdAt              DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  guestId                String?  @map("guest_id") @db.Uuid
   guestName              String   @map("guest_name")
   guestEmail             String   @map("guest_email")
   attending              Boolean
@@ -21,8 +40,10 @@ model RSVP {
   songRequests           String?  @map("song_requests")
   specialAccommodations  String?  @map("special_accommodations")
   numberOfGuests         Int      @default(1) @map("number_of_guests")
+  guest                  Guest?   @relation(fields: [guestId], references: [id], onDelete: SetNull)
 
   @@index([guestEmail], map: "idx_rsvps_email")
+  @@index([guestId], map: "idx_rsvps_guest_id")
   @@index([createdAt(sort: Desc)], map: "idx_rsvps_created_at")
   @@map("rsvps")
 }
@@ -44,4 +65,15 @@ model VisitorCount {
   lastUpdated DateTime @default(now()) @map("last_updated") @db.Timestamptz(6)
 
   @@map("visitor_count")
+}
+
+model GameScore {
+  id        String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  name      String
+  score     Int
+  
+  @@index([score(sort: Desc)], map: "idx_game_scores_score")
+  @@index([createdAt(sort: Desc)], map: "idx_game_scores_created_at")
+  @@map("game_scores")
 }

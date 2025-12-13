@@ -239,6 +239,8 @@ img {
 
 .marquee-content {
   display: inline-flex;
+  width: 100%;
+  justify-content: center;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }

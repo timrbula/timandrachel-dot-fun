@@ -4,7 +4,7 @@ import Marquee from "../components/react/Marquee";
 import BlinkingText from "../components/react/BlinkingText";
 import RainbowDivider from "../components/react/RainbowDivider";
 import GeoButton from "../components/react/GeoButton";
-import RSVPForm from "../components/react/RSVPForm";
+import RSVPFormWithSearch from "../components/react/RSVPFormWithSearch";
 ---
 
 <BaseLayout
@@ -13,7 +13,7 @@ import RSVPForm from "../components/react/RSVPForm";
 >
   <!-- Top Marquee -->
   <Marquee client:load speed={15}>
-    💌 RSVP to Our Wedding! 💌 Please respond by April 9th, 2026 💌
+    💌 RSVP to our Wedding! 💌 Please respond by April 9th, 2026 💌
   </Marquee>
 
   <div class="container">
@@ -88,7 +88,7 @@ import RSVPForm from "../components/react/RSVPForm";
         </h2>
 
         <!-- RSVP Form Component -->
-        <RSVPForm client:load />
+        <RSVPFormWithSearch client:load />
       </div>
     </section>
 
@@ -224,10 +224,7 @@ import RSVPForm from "../components/react/RSVPForm";
 
         <div class="faq-card geo-box-raised">
           <h3 class="text-neon-pink">Can I take photos?</h3>
-          <p>
-            Absolutely! We'll have a hashtag for you to share. But please, no
-            phones during the ceremony. 📱❌
-          </p>
+          <p>Absolutely! We'll have a photographer but please snap away :)</p>
         </div>
       </div>
     </section>

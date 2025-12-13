@@ -173,9 +173,28 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       );
     }
 
+    // Try to find matching guest in the guest list
+    let guestId: string | null = null;
+    try {
+      const matchingGuest = await prisma.guest.findFirst({
+        where: {
+          email: sanitizedData.guest_email,
+        },
+        select: {
+          id: true,
+        },
+      });
+      if (matchingGuest) {
+        guestId = matchingGuest.id;
+      }
+    } catch (error) {
+      console.log("Guest lookup failed, continuing without link:", error);
+    }
+
     // Insert RSVP into database
     const rsvp = await prisma.rSVP.create({
       data: {
+        guestId: guestId,
         guestName: sanitizedData.guest_name,
         guestEmail: sanitizedData.guest_email,
         attending: sanitizedData.attending,

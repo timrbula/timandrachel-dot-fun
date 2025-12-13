@@ -540,6 +540,38 @@
   animation: typing 3s steps(40, end);
 }
 
+/* Disable animations when toggled off */
+html.no-animations *,
+html.no-animations *::before,
+html.no-animations *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  animation-play-state: paused !important;
+}
+
+html.no-animations .blink,
+html.no-animations .blink-slow,
+html.no-animations .blink-fast {
+  animation: none !important;
+  opacity: 1 !important;
+}
+
+html.no-animations .sparkle,
+html.no-animations .pulse,
+html.no-animations .glow,
+html.no-animations .glow-text,
+html.no-animations .neon-glow,
+html.no-animations .bounce,
+html.no-animations .spin,
+html.no-animations .wiggle,
+html.no-animations .float,
+html.no-animations .rainbow-text,
+html.no-animations .rainbow-bg,
+html.no-animations .rainbow-border {
+  animation: none !important;
+}
+
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   *,

@@ -3,7 +3,7 @@
 A gloriously nostalgic Geocities-style wedding website celebrating Rachel & Tim's wedding in Brooklyn, NYC!
 
 **Live Site:** [Coming Soon]
-**Venue:** Radio Star, Brooklyn
+**Venue:** Neptune @ Radio Star, Brooklyn
 **Date:** Friday, October 9th, 2026
 
 ---
@@ -13,6 +13,7 @@ A gloriously nostalgic Geocities-style wedding website celebrating Rachel & Tim'
 ### For Users & Maintainers
 
 - **[MAINTENANCE_GUIDE.md](./MAINTENANCE_GUIDE.md)** - How to update content, manage RSVPs, and maintain the site
+- **[GUEST_LIST_GUIDE.md](./GUEST_LIST_GUIDE.md)** - 🆕 Guest list management and RSVP tracking
 - **[FAQ.md](./FAQ.md)** - Frequently asked questions
 - **[BACKUP_STRATEGY.md](./BACKUP_STRATEGY.md)** - Backup and recovery procedures
 
