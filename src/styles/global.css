@@ -1,0 +1,336 @@
+/* CSS Reset & Base Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family:
+    "Comic Sans MS", "Chalkboard SE", "Comic Neue", cursive, sans-serif;
+  line-height: 1.6;
+  color: #ffffff;
+  background: #000080
+    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0ic3RhcnMiIHg9IjAiIHk9IjAiIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSIxIiBmaWxsPSIjRkZGRkZGIi8+PGNpcmNsZSBjeD0iODAiIGN5PSI4MCIgcj0iMS41IiBmaWxsPSIjRkZGRkZGIi8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iNDAiIHI9IjEiIGZpbGw9IiNGRkZGRkYiLz48Y2lyY2xlIGN4PSI2MCIgY3k9IjE0MCIgcj0iMSIgZmlsbD0iI0ZGRkZGRiIvPjxjaXJjbGUgY3g9IjE2MCIgY3k9IjEyMCIgcj0iMS41IiBmaWxsPSIjRkZGRkZGIi8+PGNpcmNsZSBjeD0iMTAwIiBjeT0iMTgwIiByPSIxIiBmaWxsPSIjRkZGRkZGIi8+PGNpcmNsZSBjeD0iMTgwIiBjeT0iNjAiIHI9IjEiIGZpbGw9IiNGRkZGRkYiLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjEwMCIgcj0iMS41IiBmaWxsPSIjRkZGRkZGIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0idXJsKCNzdGFycykiLz48L3N2Zz4=");
+  background-attachment: fixed;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Impact", "Arial Black", sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow:
+    2px 2px 0 #000,
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    3px 3px 5px rgba(0, 0, 0, 0.5);
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 3rem;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 2.5rem;
+  line-height: 1.3;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+p {
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Links */
+a {
+  color: #00ffff;
+  text-decoration: underline;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+}
+
+a:hover {
+  color: #ff00ff;
+  text-shadow: 0 0 10px rgba(255, 0, 255, 0.8);
+  text-decoration: none;
+}
+
+a:visited {
+  color: #ff69b4;
+}
+
+/* Lists */
+ul,
+ol {
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: linear-gradient(90deg, #ff00ff, #00ffff, #ffff00, #00ff00);
+  border: 2px solid #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff00ff, #00ffff);
+  border: 2px solid #000;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ffff00, #00ff00);
+}
+
+::-webkit-scrollbar-corner {
+  background: #000;
+}
+
+/* Firefox Scrollbar */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #ff00ff #000080;
+}
+
+/* Layout Utilities */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.section {
+  padding: 3rem 0;
+  margin: 2rem 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  .container {
+    padding: 0 0.5rem;
+  }
+
+  .section {
+    padding: 2rem 0;
+    margin: 1rem 0;
+  }
+}
+
+/* Selection */
+::selection {
+  background: #ff00ff;
+  color: #ffff00;
+  text-shadow: none;
+}
+
+::-moz-selection {
+  background: #ff00ff;
+  color: #ffff00;
+  text-shadow: none;
+}
+
+/* Focus Styles */
+:focus {
+  outline: 3px dashed #00ffff;
+  outline-offset: 3px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Skip to Content Link */
+.skip-to-content {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  background: #ff00ff;
+  color: #ffff00;
+  padding: 1rem;
+  text-decoration: none;
+  font-weight: bold;
+  z-index: 9999;
+}
+
+.skip-to-content:focus {
+  top: 0;
+}
+
+/* Made with Bob */
+
+/* React Component Styles */
+
+/* Marquee Component */
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.5rem 0;
+  border-top: 2px solid var(--color-cyan, #00ffff);
+  border-bottom: 2px solid var(--color-magenta, #ff00ff);
+}
+
+.marquee-content {
+  display: inline-flex;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.marquee-left {
+  animation-name: marquee-left;
+  animation-duration: var(--marquee-speed, 20s);
+}
+
+.marquee-right {
+  animation-name: marquee-right;
+  animation-duration: var(--marquee-speed, 20s);
+}
+
+.marquee-container[data-pause-on-hover="true"] .marquee-content:hover {
+  animation-play-state: paused;
+}
+
+.marquee-text {
+  padding: 0 2rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--color-yellow, #ffff00);
+  text-shadow: 2px 2px 0 #000;
+}
+
+/* Under Construction Component */
+.under-construction {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: rgba(0, 0, 0, 0.5);
+  border: 5px dashed var(--color-yellow, #ffff00);
+  margin: 2rem 0;
+}
+
+.construction-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.construction-gif {
+  margin-bottom: 2rem;
+}
+
+.construction-gif img {
+  display: inline-block;
+  border: 3px solid var(--color-orange, #ff8800);
+  box-shadow: 0 0 20px rgba(255, 136, 0, 0.6);
+}
+
+.construction-banner {
+  display: inline-block;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  border: 3px solid var(--color-yellow, #ffff00);
+}
+
+.construction-text {
+  margin: 0 1rem;
+}
+
+.construction-message {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+.construction-subtext {
+  font-size: 1rem;
+  color: var(--color-cyan, #00ffff);
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .marquee-text {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .construction-banner {
+    font-size: 1.2rem;
+    padding: 0.75rem 1.5rem;
+  }
+
+  .construction-message {
+    font-size: 1rem;
+  }
+
+  .construction-subtext {
+    font-size: 0.9rem;
+  }
+}

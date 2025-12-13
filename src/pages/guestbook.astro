@@ -1,0 +1,604 @@
+---
+import BaseLayout from "../components/astro/BaseLayout.astro";
+import Marquee from "../components/react/Marquee";
+import BlinkingText from "../components/react/BlinkingText";
+import RainbowDivider from "../components/react/RainbowDivider";
+import GeoButton from "../components/react/GeoButton";
+import GuestbookComponent from "../components/react/Guestbook";
+---
+
+<BaseLayout
+  title="Guestbook - Rachel & Tim 📖"
+  description="Sign our guestbook! Leave us a message, share your excitement, or give us some wedding advice!"
+>
+  <!-- Top Marquee -->
+  <Marquee client:load speed={15}>
+    📖 Sign Our Guestbook! 📖 Leave us a message! 📖 Share your excitement! 📖
+  </Marquee>
+
+  <div class="container">
+    <!-- Page Header -->
+    <section class="page-header text-center">
+      <h1 class="text-3d">
+        <BlinkingText client:load speed="slow">📖</BlinkingText>
+        Guestbook
+        <BlinkingText client:load speed="slow">✍️</BlinkingText>
+      </h1>
+      <p class="subtitle text-neon-pink">
+        Leave us a message! Share your excitement, wedding advice, or your
+        favorite NYC memory!
+      </p>
+    </section>
+
+    <RainbowDivider client:load variant="animated" />
+
+    <!-- Introduction -->
+    <section class="intro-section">
+      <div class="intro-box geo-box-neon text-center">
+        <h2 class="text-neon">
+          <BlinkingText client:load>✨</BlinkingText>
+          Welcome to Our Guestbook!
+          <BlinkingText client:load>✨</BlinkingText>
+        </h2>
+        <div class="intro-content">
+          <p>
+            Remember the good old days when every website had a guestbook? We're
+            bringing it back! 🎉
+          </p>
+          <p>
+            Drop us a line, share your excitement about the wedding, give us
+            some marriage advice, or just say hi! 💕
+          </p>
+          <p class="intro-highlight rainbow-text">
+            All messages are public, so keep it fun and friendly! 😊
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="stars" />
+
+    <!-- Guestbook Component -->
+    <section class="guestbook-section">
+      <GuestbookComponent client:load />
+    </section>
+
+    <RainbowDivider client:load variant="solid" />
+
+    <!-- Guidelines -->
+    <section class="guidelines-section">
+      <div class="guidelines-box geo-box">
+        <h2 class="text-center text-neon">
+          <BlinkingText client:load>📝</BlinkingText>
+          Guestbook Guidelines
+          <BlinkingText client:load>📝</BlinkingText>
+        </h2>
+        <div class="guidelines-content">
+          <div class="guideline-item">
+            <span class="guideline-icon">✅</span>
+            <p>
+              <strong>Do:</strong> Share your excitement, wedding advice, or favorite
+              memories!
+            </p>
+          </div>
+          <div class="guideline-item">
+            <span class="guideline-icon">✅</span>
+            <p>
+              <strong>Do:</strong> Keep it fun, friendly, and appropriate for all
+              ages!
+            </p>
+          </div>
+          <div class="guideline-item">
+            <span class="guideline-icon">✅</span>
+            <p>
+              <strong>Do:</strong> Use emojis! The more, the merrier! 🎉💕✨
+            </p>
+          </div>
+          <div class="guideline-item">
+            <span class="guideline-icon">❌</span>
+            <p>
+              <strong>Don't:</strong> Share personal contact information publicly
+            </p>
+          </div>
+          <div class="guideline-item">
+            <span class="guideline-icon">❌</span>
+            <p><strong>Don't:</strong> Post spam or promotional content</p>
+          </div>
+          <div class="guideline-item">
+            <span class="guideline-icon">💡</span>
+            <p>
+              <strong>Tip:</strong> Your message will be visible to everyone, so spread
+              the love! 💕
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="animated" />
+
+    <!-- Prompts Section -->
+    <section class="prompts-section">
+      <h2 class="text-center text-3d">
+        <BlinkingText client:load>💭</BlinkingText>
+        Need Inspiration?
+        <BlinkingText client:load>💭</BlinkingText>
+      </h2>
+      <p class="text-center prompts-subtitle">
+        Not sure what to write? Here are some ideas!
+      </p>
+
+      <div class="prompts-grid">
+        <div class="prompt-card geo-box-raised">
+          <h3 class="text-neon">💕 Share Your Excitement</h3>
+          <ul>
+            <li>"Can't wait to celebrate with you!"</li>
+            <li>"So happy for you both!"</li>
+            <li>"This is going to be epic!"</li>
+          </ul>
+        </div>
+
+        <div class="prompt-card geo-box-raised">
+          <h3 class="text-neon-pink">💍 Wedding Advice</h3>
+          <ul>
+            <li>"Always say 'I love you' before bed"</li>
+            <li>"Never stop dating each other"</li>
+            <li>"Laugh together every day"</li>
+          </ul>
+        </div>
+
+        <div class="prompt-card geo-box-raised">
+          <h3 class="text-neon">🗽 NYC Memories</h3>
+          <ul>
+            <li>"Remember when we..."</li>
+            <li>"My favorite NYC spot is..."</li>
+            <li>"Brooklyn is the best because..."</li>
+          </ul>
+        </div>
+
+        <div class="prompt-card geo-box-raised">
+          <h3 class="text-neon-pink">🎉 Fun Messages</h3>
+          <ul>
+            <li>"Let's party!"</li>
+            <li>"Save me a slice of cake!"</li>
+            <li>"See you on the dance floor!"</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="stars" />
+
+    <!-- Stats Section (Placeholder) -->
+    <section class="stats-section">
+      <div class="stats-box geo-box-neon text-center">
+        <h2 class="text-3d">
+          <BlinkingText client:load>📊</BlinkingText>
+          Guestbook Stats
+          <BlinkingText client:load>📊</BlinkingText>
+        </h2>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <p class="stat-number rainbow-text">0</p>
+            <p class="stat-label">Total Entries</p>
+          </div>
+          <div class="stat-item">
+            <p class="stat-number text-neon">0</p>
+            <p class="stat-label">Cities Represented</p>
+          </div>
+          <div class="stat-item">
+            <p class="stat-number text-neon-pink">0</p>
+            <p class="stat-label">Emojis Used</p>
+          </div>
+        </div>
+        <p class="stats-note">
+          <em>Stats will update once the guestbook goes live! 🚀</em>
+        </p>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="dots" />
+
+    <!-- CTA Section -->
+    <section class="cta-section text-center">
+      <div class="cta-box geo-box-raised">
+        <h2 class="text-3d">
+          <BlinkingText client:load>🎉</BlinkingText>
+          Explore More
+          <BlinkingText client:load>🎉</BlinkingText>
+        </h2>
+        <p class="cta-text">
+          Check out the rest of our website while you're here!
+        </p>
+        <div class="cta-buttons">
+          <GeoButton client:load variant="warning" href="/rsvp">
+            💌 RSVP Now!
+          </GeoButton>
+          <GeoButton client:load variant="primary" href="/schedule">
+            📅 View Schedule
+          </GeoButton>
+          <GeoButton client:load variant="secondary" href="/travel">
+            ✈️ Travel Info
+          </GeoButton>
+          <GeoButton client:load variant="primary" href="/">
+            🏠 Back to Home
+          </GeoButton>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Bottom Marquee -->
+  <Marquee client:load speed={20} direction="right">
+    📖 Sign our guestbook! ✍️ Leave us a message! 💕 We can't wait to read them
+    all! 🎉
+  </Marquee>
+</BaseLayout>
+
+<style>
+  /* Page Header */
+  .page-header {
+    padding: 2rem 0;
+  }
+
+  .page-header h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.3rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Introduction Section */
+  .intro-section {
+    margin: 3rem 0;
+  }
+
+  .intro-box {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2.5rem;
+  }
+
+  .intro-content p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .intro-highlight {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 1.5rem;
+  }
+
+  /* Form Section */
+  .form-section {
+    margin: 3rem 0;
+  }
+
+  .form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2.5rem;
+  }
+
+  .form-container h2 {
+    margin-bottom: 2rem;
+  }
+
+  /* Form Placeholder */
+  .form-placeholder {
+    background: rgba(255, 0, 255, 0.1);
+    border: 3px dashed var(--color-magenta);
+    border-radius: 12px;
+    padding: 3rem 2rem;
+    margin: 2rem 0;
+  }
+
+  .placeholder-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .placeholder-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+
+  .placeholder-content h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .placeholder-content p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .contact-info {
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    background: rgba(0, 255, 255, 0.1);
+    border-radius: 8px;
+  }
+
+  .contact-info p {
+    margin-bottom: 0.5rem;
+  }
+
+  .placeholder-animation {
+    margin-top: 2rem;
+    font-size: 1.3rem;
+  }
+
+  /* Form Preview */
+  .form-preview {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 3px solid var(--color-cyan);
+  }
+
+  .form-preview h3 {
+    margin-bottom: 2rem;
+  }
+
+  .preview-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .preview-field label {
+    display: block;
+    font-weight: bold;
+    color: var(--color-yellow);
+    margin-bottom: 0.5rem;
+  }
+
+  .preview-input {
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--color-cyan);
+    border-radius: 4px;
+    padding: 0.8rem;
+    color: var(--color-white);
+    font-style: italic;
+  }
+
+  /* Entries Section */
+  .entries-section {
+    margin: 3rem 0;
+  }
+
+  .entries-subtitle {
+    font-size: 1.1rem;
+    margin: 1rem 0 2rem 0;
+    color: var(--color-cyan);
+  }
+
+  .entries-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .entry-card {
+    padding: 2rem;
+  }
+
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .entry-name {
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+
+  .entry-location {
+    font-size: 0.95rem;
+    color: var(--color-cyan);
+  }
+
+  .entry-message {
+    margin: 1.5rem 0;
+    line-height: 1.6;
+  }
+
+  .entry-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 2px solid rgba(0, 255, 255, 0.3);
+    font-size: 0.9rem;
+  }
+
+  .entry-date {
+    color: var(--color-yellow);
+  }
+
+  .entry-emoji {
+    font-size: 1.5rem;
+  }
+
+  /* Guidelines Section */
+  .guidelines-section {
+    margin: 3rem 0;
+  }
+
+  .guidelines-box {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem;
+  }
+
+  .guidelines-content {
+    margin-top: 2rem;
+  }
+
+  .guideline-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+  }
+
+  .guideline-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .guideline-item p {
+    line-height: 1.6;
+  }
+
+  /* Prompts Section */
+  .prompts-section {
+    margin: 3rem 0;
+  }
+
+  .prompts-subtitle {
+    font-size: 1.1rem;
+    margin: 1rem 0 2rem 0;
+    color: var(--color-cyan);
+  }
+
+  .prompts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .prompt-card {
+    padding: 2rem;
+  }
+
+  .prompt-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .prompt-card ul {
+    margin: 0.5rem 0 0 1.5rem;
+  }
+
+  .prompt-card li {
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  /* Stats Section */
+  .stats-section {
+    margin: 3rem 0;
+  }
+
+  .stats-box {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2.5rem;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 1.1rem;
+    color: var(--color-yellow);
+  }
+
+  .stats-note {
+    margin-top: 2rem;
+    font-size: 1.1rem;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    margin: 3rem 0;
+  }
+
+  .cta-box {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  .cta-text {
+    font-size: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .cta-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  /* Links */
+  a {
+    text-decoration: underline;
+  }
+
+  a:hover {
+    opacity: 0.8;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-header h1 {
+      font-size: 2.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+    }
+
+    .entries-container {
+      grid-template-columns: 1fr;
+    }
+
+    .prompts-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .stat-number {
+      font-size: 3rem;
+    }
+
+    .cta-buttons {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

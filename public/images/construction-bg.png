@@ -1,0 +1,14 @@
+<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Yellow and black diagonal stripes pattern -->
+  <defs>
+    <pattern id="construction-stripes" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect x="0" y="0" width="10" height="20" fill="#FFD700"/>
+      <rect x="10" y="0" width="10" height="20" fill="#000000"/>
+    </pattern>
+  </defs>
+  
+  <rect width="100" height="100" fill="url(#construction-stripes)"/>
+  
+  <!-- Add some texture/noise for authenticity -->
+  <rect width="100" height="100" fill="black" opacity="0.05"/>
+</svg>

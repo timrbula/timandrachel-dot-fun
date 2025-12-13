@@ -1,0 +1,77 @@
+<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @keyframes float-envelope {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+      }
+      @keyframes flap {
+        0%, 50%, 100% { transform: rotateX(0deg); }
+        25% { transform: rotateX(-20deg); }
+        75% { transform: rotateX(20deg); }
+      }
+      .envelope {
+        animation: float-envelope 2s ease-in-out infinite;
+      }
+      .envelope-body {
+        fill: #F0E68C;
+        stroke: #DAA520;
+        stroke-width: 2;
+      }
+      .envelope-flap {
+        fill: #FFD700;
+        stroke: #DAA520;
+        stroke-width: 2;
+      }
+      .letter {
+        fill: white;
+        stroke: #CCC;
+        stroke-width: 1;
+      }
+    </style>
+  </defs>
+  
+  <g class="envelope">
+    <!-- Letter inside (visible at top) -->
+    <rect class="letter" x="30" y="35" width="40" height="30" rx="2"/>
+    <line x1="35" y1="42" x2="65" y2="42" stroke="#999" stroke-width="1"/>
+    <line x1="35" y1="47" x2="65" y2="47" stroke="#999" stroke-width="1"/>
+    <line x1="35" y1="52" x2="60" y2="52" stroke="#999" stroke-width="1"/>
+    <line x1="35" y1="57" x2="62" y2="57" stroke="#999" stroke-width="1"/>
+    
+    <!-- Envelope body -->
+    <rect class="envelope-body" x="25" y="45" width="50" height="35" rx="3"/>
+    
+    <!-- Envelope bottom flap (triangles) -->
+    <path class="envelope-body" d="M 25 45 L 50 65 L 75 45 Z"/>
+    
+    <!-- Envelope top flap -->
+    <path class="envelope-flap" d="M 25 45 L 50 60 L 75 45 L 50 30 Z"/>
+    
+    <!-- Stamp -->
+    <rect x="60" y="50" width="10" height="8" fill="#FF6347" stroke="#8B0000" stroke-width="1" rx="1"/>
+    <circle cx="65" cy="54" r="2" fill="#FFE4E1" opacity="0.7"/>
+    
+    <!-- Address lines -->
+    <line x1="30" y1="68" x2="55" y2="68" stroke="#8B7355" stroke-width="1" opacity="0.6"/>
+    <line x1="30" y1="72" x2="50" y2="72" stroke="#8B7355" stroke-width="1" opacity="0.6"/>
+    
+    <!-- Hearts decoration -->
+    <path d="M 35 55 L 36 57 L 35 58 L 34 57 Z" fill="#FF1493" opacity="0.7"/>
+    <path d="M 40 56 L 41 58 L 40 59 L 39 58 Z" fill="#FF69B4" opacity="0.7"/>
+  </g>
+  
+  <!-- Motion lines -->
+  <line x1="15" y1="50" x2="20" y2="50" stroke="#CCC" stroke-width="1" opacity="0.5">
+    <animate attributeName="x1" values="15;10;15" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="20;15;20" dur="2s" repeatCount="indefinite"/>
+  </line>
+  <line x1="15" y1="55" x2="18" y2="55" stroke="#CCC" stroke-width="1" opacity="0.5">
+    <animate attributeName="x1" values="15;12;15" dur="2s" begin="0.3s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="18;15;18" dur="2s" begin="0.3s" repeatCount="indefinite"/>
+  </line>
+  <line x1="80" y1="50" x2="85" y2="50" stroke="#CCC" stroke-width="1" opacity="0.5">
+    <animate attributeName="x1" values="80;85;80" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="85;90;85" dur="2s" repeatCount="indefinite"/>
+  </line>
+</svg>

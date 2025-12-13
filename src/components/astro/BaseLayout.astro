@@ -1,0 +1,123 @@
+---
+import Navigation from "./Navigation.astro";
+import Footer from "./Footer.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  noIndex?: boolean;
+}
+
+const {
+  title = "Rachel & Tim's Wedding - October 9, 2026",
+  description = "Join us for our totally rad wedding celebration in Brooklyn! It's gonna be epic! 💕✨",
+  image = "/og-image.png",
+  noIndex = false,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(image, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta
+      property="twitter:image"
+      content={new URL("/twitter-image.png", Astro.site)}
+    />
+
+    <!-- Preload Critical Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Import Styles -->
+    <link rel="stylesheet" href="/src/styles/global.css" />
+    <link rel="stylesheet" href="/src/styles/geocities.css" />
+    <link rel="stylesheet" href="/src/styles/animations.css" />
+
+    <!-- Generator -->
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#000080" />
+
+    <script is:inline>
+      // Prevent FOUC (Flash of Unstyled Content)
+      document.documentElement.classList.add("js-enabled");
+    </script>
+  </head>
+  <body>
+    <!-- Skip to Content Link for Accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to Content</a>
+
+    <!-- Navigation -->
+    <Navigation />
+
+    <!-- Main Content -->
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <Footer />
+
+    <!-- Background Music Player (Optional - can be enabled later) -->
+    <!-- <audio id="bg-music" loop>
+    <source src="/audio/background-music.mp3" type="audio/mpeg">
+  </audio> -->
+
+    <script>
+      // Add any global JavaScript here
+      // Example: Visitor counter, music player controls, etc.
+
+      // Log a fun message to console
+      console.log(
+        "%c💕 Welcome to Rachel & Tim's Wedding Website! 💕",
+        "font-size: 20px; color: #FF00FF; text-shadow: 2px 2px 0 #00FFFF;"
+      );
+      console.log(
+        "%cBuilt with love (and lots of Geocities nostalgia) in Brooklyn",
+        "color: #00FFFF;"
+      );
+    </script>
+  </body>
+</html>
+
+<style>
+  /* Additional page-level styles */
+  main {
+    min-height: calc(100vh - 200px);
+    padding: 2rem 0;
+  }
+
+  @media (max-width: 768px) {
+    main {
+      padding: 1rem 0;
+    }
+  }
+</style>

@@ -1,0 +1,561 @@
+/* Geocities Animations */
+
+/* Blinking Text Animation */
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.blink {
+  animation: blink 1s infinite;
+}
+
+.blink-slow {
+  animation: blink 2s infinite;
+}
+
+.blink-fast {
+  animation: blink 0.5s infinite;
+}
+
+/* Rainbow Color Cycling */
+@keyframes rainbow {
+  0% {
+    color: #ff0000;
+  }
+  14% {
+    color: #ff8800;
+  }
+  28% {
+    color: #ffff00;
+  }
+  42% {
+    color: #00ff00;
+  }
+  57% {
+    color: #00ffff;
+  }
+  71% {
+    color: #0080ff;
+  }
+  85% {
+    color: #8000ff;
+  }
+  100% {
+    color: #ff00ff;
+  }
+}
+
+.rainbow-text {
+  animation: rainbow 3s linear infinite;
+}
+
+@keyframes rainbow-bg {
+  0% {
+    background-color: #ff0000;
+  }
+  14% {
+    background-color: #ff8800;
+  }
+  28% {
+    background-color: #ffff00;
+  }
+  42% {
+    background-color: #00ff00;
+  }
+  57% {
+    background-color: #00ffff;
+  }
+  71% {
+    background-color: #0080ff;
+  }
+  85% {
+    background-color: #8000ff;
+  }
+  100% {
+    background-color: #ff00ff;
+  }
+}
+
+.rainbow-bg {
+  animation: rainbow-bg 3s linear infinite;
+}
+
+@keyframes rainbow-border {
+  0% {
+    border-color: #ff0000;
+  }
+  14% {
+    border-color: #ff8800;
+  }
+  28% {
+    border-color: #ffff00;
+  }
+  42% {
+    border-color: #00ff00;
+  }
+  57% {
+    border-color: #00ffff;
+  }
+  71% {
+    border-color: #0080ff;
+  }
+  85% {
+    border-color: #8000ff;
+  }
+  100% {
+    border-color: #ff00ff;
+  }
+}
+
+.rainbow-border {
+  animation: rainbow-border 3s linear infinite;
+}
+
+/* Marquee Scrolling */
+@keyframes marquee-left {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.marquee-left {
+  animation: marquee-left 20s linear infinite;
+}
+
+.marquee-right {
+  animation: marquee-right 20s linear infinite;
+}
+
+/* Spinning/Rotating */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation: spin 2s linear infinite;
+}
+
+.spin-slow {
+  animation: spin 4s linear infinite;
+}
+
+.spin-fast {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.spin-reverse {
+  animation: spin-reverse 2s linear infinite;
+}
+
+/* Pulsing/Glowing Effects */
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 5px currentColor;
+  }
+  50% {
+    box-shadow:
+      0 0 20px currentColor,
+      0 0 30px currentColor;
+  }
+}
+
+.glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow-text {
+  0%,
+  100% {
+    text-shadow: 0 0 5px currentColor;
+  }
+  50% {
+    text-shadow:
+      0 0 20px currentColor,
+      0 0 30px currentColor;
+  }
+}
+
+.glow-text {
+  animation: glow-text 2s ease-in-out infinite;
+}
+
+@keyframes neon-glow {
+  0%,
+  100% {
+    text-shadow:
+      0 0 5px currentColor,
+      0 0 10px currentColor;
+  }
+  50% {
+    text-shadow:
+      0 0 10px currentColor,
+      0 0 20px currentColor,
+      0 0 30px currentColor;
+  }
+}
+
+.neon-glow {
+  animation: neon-glow 1.5s ease-in-out infinite;
+}
+
+/* Bouncing Animations */
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.bounce {
+  animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce-horizontal {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(20px);
+  }
+}
+
+.bounce-horizontal {
+  animation: bounce-horizontal 1s ease-in-out infinite;
+}
+
+/* Shake Animation */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-5px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+.shake-infinite {
+  animation: shake 0.5s ease-in-out infinite;
+}
+
+/* Wiggle Animation */
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+}
+
+.wiggle {
+  animation: wiggle 1s ease-in-out infinite;
+}
+
+/* Fade In/Out */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fade-in 1s ease-in;
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.fade-out {
+  animation: fade-out 1s ease-out;
+}
+
+/* Slide In Animations */
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-left {
+  animation: slide-in-left 0.5s ease-out;
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-right {
+  animation: slide-in-right 0.5s ease-out;
+}
+
+@keyframes slide-in-top {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-top {
+  animation: slide-in-top 0.5s ease-out;
+}
+
+@keyframes slide-in-bottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-bottom {
+  animation: slide-in-bottom 0.5s ease-out;
+}
+
+/* Zoom Animations */
+@keyframes zoom-in {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.zoom-in {
+  animation: zoom-in 0.5s ease-out;
+}
+
+@keyframes zoom-out {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+.zoom-out {
+  animation: zoom-out 0.5s ease-in;
+}
+
+/* Flip Animation */
+@keyframes flip {
+  0% {
+    transform: perspective(400px) rotateY(0);
+  }
+  100% {
+    transform: perspective(400px) rotateY(360deg);
+  }
+}
+
+.flip {
+  animation: flip 2s ease-in-out infinite;
+}
+
+/* Float Animation */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Gradient Animation */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* Sparkle Effect */
+@keyframes sparkle {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+.sparkle {
+  animation: sparkle 1s ease-in-out infinite;
+}
+
+/* Construction Warning Animation */
+@keyframes construction-warning {
+  0%,
+  100% {
+    background-color: #ffff00;
+    color: #000000;
+  }
+  50% {
+    background-color: #ff0000;
+    color: #ffff00;
+  }
+}
+
+.construction-warning {
+  animation: construction-warning 1s ease-in-out infinite;
+}
+
+/* Typing Effect */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.typing {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 3s steps(40, end);
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .blink,
+  .blink-slow,
+  .blink-fast {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* Made with Bob */

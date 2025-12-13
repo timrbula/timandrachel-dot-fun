@@ -1,0 +1,741 @@
+---
+import BaseLayout from "../components/astro/BaseLayout.astro";
+import Marquee from "../components/react/Marquee";
+import BlinkingText from "../components/react/BlinkingText";
+import RainbowDivider from "../components/react/RainbowDivider";
+import GeoButton from "../components/react/GeoButton";
+---
+
+<BaseLayout
+  title="Travel & Accommodations - Rachel & Tim ✈️"
+  description="Everything you need to know about getting to Brooklyn and where to stay for our wedding!"
+>
+  <!-- Top Marquee -->
+  <Marquee client:load speed={15}>
+    ✈️ Travel Guide ✈️ Hotels ✈️ Getting Around NYC ✈️ Brooklyn Tips ✈️
+  </Marquee>
+
+  <div class="container">
+    <!-- Page Header -->
+    <section class="page-header text-center">
+      <h1 class="text-3d">
+        <BlinkingText client:load speed="slow">✈️</BlinkingText>
+        Travel & Accommodations
+        <BlinkingText client:load speed="slow">🗽</BlinkingText>
+      </h1>
+      <p class="subtitle text-neon-pink">
+        Your complete guide to getting to Brooklyn and making the most of your
+        NYC adventure!
+      </p>
+    </section>
+
+    <RainbowDivider client:load variant="animated" />
+
+    <!-- Hotels Section -->
+    <section class="hotels-section">
+      <h2 class="text-center text-3d">
+        <BlinkingText client:load>🏨</BlinkingText>
+        Where to Stay
+        <BlinkingText client:load>🏨</BlinkingText>
+      </h2>
+
+      <div class="hotels-grid">
+        <!-- The William Vale -->
+        <div class="hotel-card geo-box-neon">
+          <h3 class="text-neon">The William Vale</h3>
+          <p class="hotel-location">📍 111 N 12th St, Williamsburg</p>
+          <p class="hotel-distance">🚶 1.2 miles from venue</p>
+          <div class="hotel-details">
+            <p><strong>Rate:</strong> $$$</p>
+            <p><strong>Features:</strong></p>
+            <ul>
+              <li>🍸 Rooftop bar with amazing views</li>
+              <li>🛏️ Modern, stylish rooms</li>
+              <li>🌆 Stunning Manhattan skyline views</li>
+              <li>🍽️ On-site restaurant</li>
+            </ul>
+          </div>
+          <GeoButton
+            client:load
+            variant="primary"
+            href="https://www.thewilliamvale.com"
+          >
+            🔗 Book Now
+          </GeoButton>
+        </div>
+
+        <!-- The Hoxton -->
+        <div class="hotel-card geo-box-neon">
+          <h3 class="text-neon-pink">The Hoxton, Williamsburg</h3>
+          <p class="hotel-location">📍 97 Wythe Ave, Williamsburg</p>
+          <p class="hotel-distance">🚶 1.5 miles from venue</p>
+          <div class="hotel-details">
+            <p><strong>Rate:</strong> $$-$$$</p>
+            <p><strong>Features:</strong></p>
+            <ul>
+              <li>🎨 Trendy boutique hotel</li>
+              <li>🍔 Great restaurant & bar</li>
+              <li>☕ Lobby coffee shop</li>
+              <li>🎯 Hip Williamsburg location</li>
+            </ul>
+          </div>
+          <GeoButton
+            client:load
+            variant="primary"
+            href="https://thehoxton.com/williamsburg"
+          >
+            🔗 Book Now
+          </GeoButton>
+        </div>
+
+        <!-- McCarren Hotel -->
+        <div class="hotel-card geo-box-neon">
+          <h3 class="text-neon">McCarren Hotel & Pool</h3>
+          <p class="hotel-location">📍 160 N 12th St, Williamsburg</p>
+          <p class="hotel-distance">🚶 1.3 miles from venue</p>
+          <div class="hotel-details">
+            <p><strong>Rate:</strong> $$</p>
+            <p><strong>Features:</strong></p>
+            <ul>
+              <li>🏊 Rooftop pool (seasonal)</li>
+              <li>😎 Casual, laid-back vibe</li>
+              <li>🎵 Live music venue</li>
+              <li>🍕 Near great restaurants</li>
+            </ul>
+          </div>
+          <GeoButton
+            client:load
+            variant="primary"
+            href="https://mccarrenhotel.com"
+          >
+            🔗 Book Now
+          </GeoButton>
+        </div>
+      </div>
+
+      <div class="hotel-note geo-box text-center">
+        <p>
+          <BlinkingText client:load>💡</BlinkingText>
+          <strong>Pro Tip:</strong> Book early for the best rates! October is a popular
+          time in NYC. 🍂
+        </p>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="stars" />
+
+    <!-- Airports Section -->
+    <section class="airports-section">
+      <h2 class="text-center text-3d">
+        <BlinkingText client:load>✈️</BlinkingText>
+        Getting to NYC
+        <BlinkingText client:load>✈️</BlinkingText>
+      </h2>
+
+      <div class="airports-grid">
+        <!-- JFK -->
+        <div class="airport-card geo-box-raised">
+          <h3 class="text-neon">🛫 JFK International</h3>
+          <p class="airport-distance">~15 miles from Brooklyn</p>
+          <div class="transport-options">
+            <p><strong>🚇 Public Transit:</strong></p>
+            <ul>
+              <li>AirTrain to Jamaica Station</li>
+              <li>E train to Court Sq</li>
+              <li>Transfer to G train to Greenpoint Ave</li>
+              <li>⏱️ ~90 minutes</li>
+              <li>💰 ~$10</li>
+            </ul>
+            <p><strong>🚕 Taxi/Uber:</strong></p>
+            <ul>
+              <li>⏱️ 45-60 minutes (traffic dependent)</li>
+              <li>💰 $60-80</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- LaGuardia -->
+        <div class="airport-card geo-box-raised">
+          <h3 class="text-neon-pink">🛫 LaGuardia Airport</h3>
+          <p class="airport-distance">~10 miles from Brooklyn</p>
+          <div class="transport-options">
+            <p><strong>🚇 Public Transit:</strong></p>
+            <ul>
+              <li>Q70 bus to Jackson Heights</li>
+              <li>7 train to Court Sq</li>
+              <li>Transfer to G train to Greenpoint Ave</li>
+              <li>⏱️ ~75 minutes</li>
+              <li>💰 ~$3</li>
+            </ul>
+            <p><strong>🚕 Taxi/Uber:</strong></p>
+            <ul>
+              <li>⏱️ 30-45 minutes (traffic dependent)</li>
+              <li>💰 $50-70</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Newark -->
+        <div class="airport-card geo-box-raised">
+          <h3 class="text-neon">🛫 Newark Airport</h3>
+          <p class="airport-distance">~20 miles from Brooklyn</p>
+          <div class="transport-options">
+            <p><strong>🚇 Public Transit:</strong></p>
+            <ul>
+              <li>AirTrain to Newark Penn Station</li>
+              <li>NJ Transit to NY Penn Station</li>
+              <li>Subway to Brooklyn</li>
+              <li>⏱️ ~90 minutes</li>
+              <li>💰 ~$15</li>
+            </ul>
+            <p><strong>🚕 Taxi/Uber:</strong></p>
+            <ul>
+              <li>⏱️ 60-75 minutes (traffic dependent)</li>
+              <li>💰 $80-100</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="dots" />
+
+    <!-- NYC Subway Guide -->
+    <section class="subway-section">
+      <h2 class="text-center text-3d">
+        <BlinkingText client:load>🚇</BlinkingText>
+        NYC Subway Survival Guide
+        <BlinkingText client:load>🚇</BlinkingText>
+      </h2>
+
+      <div class="subway-content geo-box-neon">
+        <div class="subway-info">
+          <h3 class="text-neon-pink">🎫 MetroCard Basics</h3>
+          <ul>
+            <li>💳 Purchase at any subway station</li>
+            <li>💰 $2.90 per ride</li>
+            <li>🎟️ Unlimited 7-day pass: $34</li>
+            <li>📱 OMNY tap-to-pay also available!</li>
+          </ul>
+
+          <h3 class="text-neon">🗺️ The G Train</h3>
+          <p>Your best friend for getting to Greenpoint!</p>
+          <ul>
+            <li>🟢 The G train is the green line</li>
+            <li>⏰ Runs less frequently than other lines</li>
+            <li>🕐 Plan for 10-15 min wait times</li>
+            <li>📍 Get off at Greenpoint Ave station</li>
+          </ul>
+
+          <h3 class="text-neon-pink">💡 Pro Tips</h3>
+          <ul>
+            <li>🚶 Stand clear of the closing doors!</li>
+            <li>📱 Download the MTA app for real-time updates</li>
+            <li>🎒 Keep bags close during rush hour</li>
+            <li>🚫 Don't block the doors</li>
+            <li>👀 Watch for service changes on weekends</li>
+            <li>🗣️ New Yorkers are actually helpful - just ask!</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="solid" />
+
+    <!-- Greenpoint Neighborhood Guide -->
+    <section class="neighborhood-section">
+      <h2 class="text-center text-3d">
+        <BlinkingText client:load>🌆</BlinkingText>
+        Explore Greenpoint
+        <BlinkingText client:load>🌆</BlinkingText>
+      </h2>
+
+      <div class="neighborhood-intro geo-box text-center">
+        <p class="neighborhood-description">
+          Greenpoint is a hip, artistic neighborhood with Polish heritage,
+          waterfront views, and some of the best food and coffee in Brooklyn!
+          🎨☕
+        </p>
+      </div>
+
+      <div class="neighborhood-grid">
+        <!-- Food & Drink -->
+        <div class="neighborhood-card geo-box-raised">
+          <h3 class="text-neon">🍽️ Food & Drink</h3>
+          <ul>
+            <li><strong>Five Leaves</strong> - Amazing brunch spot</li>
+            <li><strong>Paulie Gee's</strong> - Best pizza in Brooklyn</li>
+            <li><strong>Achilles Heel</strong> - Craft cocktails</li>
+            <li><strong>Peter Pan Donut & Pastry</strong> - Classic donuts</li>
+            <li><strong>Variety Coffee Roasters</strong> - Excellent coffee</li>
+            <li><strong>Greenpoint Beer & Ale</strong> - Vintage bar vibes</li>
+          </ul>
+        </div>
+
+        <!-- Things to Do -->
+        <div class="neighborhood-card geo-box-raised">
+          <h3 class="text-neon-pink">🎯 Things to Do</h3>
+          <ul>
+            <li>
+              <strong>Transmitter Park</strong> - Waterfront park with Manhattan views
+            </li>
+            <li><strong>McCarren Park</strong> - Great for walking/running</li>
+            <li><strong>WNYC Transmitter Park</strong> - Sunset views 🌅</li>
+            <li><strong>Local boutiques</strong> - Unique shopping</li>
+            <li><strong>Street art</strong> - Murals everywhere!</li>
+            <li><strong>Polish delis</strong> - Try the pierogis!</li>
+          </ul>
+        </div>
+
+        <!-- Getting Around -->
+        <div class="neighborhood-card geo-box-raised">
+          <h3 class="text-neon">🚶 Getting Around</h3>
+          <ul>
+            <li><strong>Walk!</strong> - Most walkable neighborhood</li>
+            <li><strong>Citi Bike</strong> - Bike share stations everywhere</li>
+            <li><strong>G Train</strong> - Connects to Williamsburg</li>
+            <li>
+              <strong>L Train</strong> - Quick to Manhattan (from Bedford)
+            </li>
+            <li><strong>Uber/Lyft</strong> - Always available</li>
+            <li><strong>Yellow Cabs</strong> - Classic NYC experience 🚕</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="animated" />
+
+    <!-- NYC Survival Tips -->
+    <section class="tips-section">
+      <h2 class="text-center text-3d">
+        <BlinkingText client:load>🗽</BlinkingText>
+        NYC Survival Tips
+        <BlinkingText client:load>🗽</BlinkingText>
+      </h2>
+
+      <div class="tips-grid">
+        <!-- Walking -->
+        <div class="tip-card geo-box-neon">
+          <h3>👟 Walking</h3>
+          <p>New Yorkers walk FAST. Keep right, walk left!</p>
+          <p>Wear comfortable shoes - you'll walk A LOT.</p>
+          <p>Don't stop in the middle of the sidewalk! 🚶‍♂️</p>
+        </div>
+
+        <!-- Food -->
+        <div class="tip-card geo-box-neon">
+          <h3>🍕 Food</h3>
+          <p>Pizza by the slice is a way of life.</p>
+          <p>Bodega breakfast sandwiches are amazing.</p>
+          <p>Try a real NYC bagel with schmear! 🥯</p>
+        </div>
+
+        <!-- Tipping -->
+        <div class="tip-card geo-box-neon">
+          <h3>💵 Tipping</h3>
+          <p>Restaurants: 18-20%</p>
+          <p>Bars: $1-2 per drink</p>
+          <p>Taxis: 15-20%</p>
+          <p>Coffee: $1 in the tip jar ☕</p>
+        </div>
+
+        <!-- Weather -->
+        <div class="tip-card geo-box-neon">
+          <h3>🌤️ October Weather</h3>
+          <p>Bring layers! It can be chilly.</p>
+          <p>Light jacket or sweater recommended.</p>
+          <p>Beautiful fall foliage! 🍂</p>
+        </div>
+
+        <!-- Safety -->
+        <div class="tip-card geo-box-neon">
+          <h3>🔒 Safety</h3>
+          <p>NYC is very safe! Use common sense.</p>
+          <p>Keep valuables close on the subway.</p>
+          <p>Trust your instincts. 👀</p>
+        </div>
+
+        <!-- Cash -->
+        <div class="tip-card geo-box-neon">
+          <h3>💰 Cash</h3>
+          <p>Many places are card-only now.</p>
+          <p>But some spots are cash-only!</p>
+          <p>Have $20-40 cash just in case. 💵</p>
+        </div>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="stars" />
+
+    <!-- Things to Do in NYC -->
+    <section class="attractions-section">
+      <h2 class="text-center text-3d">
+        <BlinkingText client:load>🎭</BlinkingText>
+        Things to Do in NYC
+        <BlinkingText client:load>🎭</BlinkingText>
+      </h2>
+
+      <div class="attractions-grid">
+        <!-- Brooklyn -->
+        <div class="attraction-card geo-box-raised">
+          <h3 class="text-neon">🌉 Brooklyn Highlights</h3>
+          <ul>
+            <li>Walk the Brooklyn Bridge 🌉</li>
+            <li>Brooklyn Bridge Park</li>
+            <li>DUMBO neighborhood</li>
+            <li>Prospect Park</li>
+            <li>Brooklyn Museum</li>
+            <li>Coney Island (if weather permits)</li>
+            <li>Smorgasburg food market (weekends)</li>
+          </ul>
+        </div>
+
+        <!-- Manhattan -->
+        <div class="attraction-card geo-box-raised">
+          <h3 class="text-neon-pink">🗽 Manhattan Must-Sees</h3>
+          <ul>
+            <li>Central Park 🌳</li>
+            <li>Times Square (touristy but iconic)</li>
+            <li>High Line Park</li>
+            <li>9/11 Memorial</li>
+            <li>Statue of Liberty & Ellis Island</li>
+            <li>MoMA or Met Museum</li>
+            <li>Chelsea Market</li>
+          </ul>
+        </div>
+
+        <!-- Food Tours -->
+        <div class="attraction-card geo-box-raised">
+          <h3 class="text-neon">🍴 Food Adventures</h3>
+          <ul>
+            <li>Pizza tour (obviously) 🍕</li>
+            <li>Chinatown dim sum</li>
+            <li>Little Italy</li>
+            <li>Chelsea Market</li>
+            <li>Eataly (Italian food hall)</li>
+            <li>Katz's Deli (pastrami sandwich)</li>
+            <li>Levain Bakery (cookies!) 🍪</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="attractions-note geo-box text-center">
+        <p>
+          <BlinkingText client:load>⭐</BlinkingText>
+          <strong>Need more recommendations?</strong> Hit us up! We love sharing our
+          favorite spots! 💕
+        </p>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="dots" />
+
+    <!-- CTA Section -->
+    <section class="cta-section text-center geo-box-neon">
+      <h2 class="text-3d">
+        <BlinkingText client:load>🎉</BlinkingText>
+        Ready for Your NYC Adventure?
+        <BlinkingText client:load>🎉</BlinkingText>
+      </h2>
+      <p class="cta-text">
+        Book your travel and accommodations, then let us know you're coming!
+      </p>
+      <div class="cta-buttons">
+        <GeoButton client:load variant="warning" href="/rsvp">
+          💌 RSVP Now!
+        </GeoButton>
+        <GeoButton client:load variant="secondary" href="/schedule">
+          📅 View Schedule
+        </GeoButton>
+        <GeoButton client:load variant="primary" href="/">
+          🏠 Back to Home
+        </GeoButton>
+      </div>
+    </section>
+  </div>
+
+  <!-- Bottom Marquee -->
+  <Marquee client:load speed={20} direction="right">
+    🗽 Welcome to NYC! 🍕 Brooklyn awaits! ☕ See you in October! 💕
+  </Marquee>
+</BaseLayout>
+
+<style>
+  /* Page Header */
+  .page-header {
+    padding: 2rem 0;
+  }
+
+  .page-header h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.3rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Hotels Section */
+  .hotels-section {
+    margin: 3rem 0;
+  }
+
+  .hotels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+  }
+
+  .hotel-card {
+    padding: 2rem;
+  }
+
+  .hotel-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .hotel-location,
+  .hotel-distance {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .hotel-details {
+    margin: 1.5rem 0;
+  }
+
+  .hotel-details ul {
+    margin: 0.5rem 0 1rem 1.5rem;
+  }
+
+  .hotel-details li {
+    margin-bottom: 0.3rem;
+  }
+
+  .hotel-note {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+  }
+
+  /* Airports Section */
+  .airports-section {
+    margin: 3rem 0;
+  }
+
+  .airports-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+  }
+
+  .airport-card {
+    padding: 2rem;
+  }
+
+  .airport-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .airport-distance {
+    color: var(--color-cyan);
+    margin-bottom: 1rem;
+  }
+
+  .transport-options ul {
+    margin: 0.5rem 0 1rem 1.5rem;
+  }
+
+  .transport-options li {
+    margin-bottom: 0.3rem;
+  }
+
+  /* Subway Section */
+  .subway-section {
+    margin: 3rem 0;
+  }
+
+  .subway-content {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2.5rem;
+  }
+
+  .subway-info h3 {
+    font-size: 1.6rem;
+    margin: 1.5rem 0 1rem 0;
+  }
+
+  .subway-info h3:first-child {
+    margin-top: 0;
+  }
+
+  .subway-info ul {
+    margin: 0.5rem 0 1rem 1.5rem;
+  }
+
+  .subway-info li {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Neighborhood Section */
+  .neighborhood-section {
+    margin: 3rem 0;
+  }
+
+  .neighborhood-intro {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+  }
+
+  .neighborhood-description {
+    font-size: 1.2rem;
+    line-height: 1.8;
+  }
+
+  .neighborhood-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+  }
+
+  .neighborhood-card {
+    padding: 2rem;
+  }
+
+  .neighborhood-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .neighborhood-card ul {
+    margin: 0.5rem 0 0 1.5rem;
+  }
+
+  .neighborhood-card li {
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+  }
+
+  /* Tips Section */
+  .tips-section {
+    margin: 3rem 0;
+  }
+
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+  }
+
+  .tip-card {
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .tip-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .tip-card p {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+
+  /* Attractions Section */
+  .attractions-section {
+    margin: 3rem 0;
+  }
+
+  .attractions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+  }
+
+  .attraction-card {
+    padding: 2rem;
+  }
+
+  .attraction-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .attraction-card ul {
+    margin: 0.5rem 0 0 1.5rem;
+  }
+
+  .attraction-card li {
+    margin-bottom: 0.5rem;
+  }
+
+  .attractions-note {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    max-width: 700px;
+    margin: 3rem auto;
+    padding: 3rem 2rem;
+  }
+
+  .cta-text {
+    font-size: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-header h1 {
+      font-size: 2.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+    }
+
+    .hotels-grid,
+    .airports-grid,
+    .neighborhood-grid,
+    .attractions-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .tips-grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+    }
+  }
+</style>

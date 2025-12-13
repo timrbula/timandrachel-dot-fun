@@ -1,0 +1,56 @@
+<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @keyframes dance {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        25% { transform: translateY(-5px) rotate(-3deg); }
+        50% { transform: translateY(0) rotate(0deg); }
+        75% { transform: translateY(-5px) rotate(3deg); }
+      }
+      .couple {
+        animation: dance 2s ease-in-out infinite;
+        transform-origin: 50px 70px;
+      }
+      .person-left {
+        fill: #4169E1;
+      }
+      .person-right {
+        fill: #FF69B4;
+      }
+      .head {
+        fill: #FFE4C4;
+      }
+      .heart {
+        fill: #FF1493;
+        opacity: 0.8;
+      }
+    </style>
+  </defs>
+  
+  <g class="couple">
+    <!-- Left person (groom) -->
+    <circle class="head" cx="35" cy="30" r="8"/>
+    <rect class="person-left" x="28" y="38" width="14" height="25" rx="3"/>
+    <rect class="person-left" x="25" y="40" width="6" height="15" rx="2"/>
+    <rect class="person-left" x="41" y="40" width="6" height="15" rx="2"/>
+    <rect class="person-left" x="28" y="63" width="6" height="20" rx="2"/>
+    <rect class="person-left" x="36" y="63" width="6" height="20" rx="2"/>
+    
+    <!-- Right person (bride) -->
+    <circle class="head" cx="65" cy="30" r="8"/>
+    <rect class="person-right" x="58" y="38" width="14" height="25" rx="3"/>
+    <rect class="person-right" x="53" y="40" width="6" height="15" rx="2"/>
+    <rect class="person-right" x="69" y="40" width="6" height="15" rx="2"/>
+    <path class="person-right" d="M 58 63 L 55 83 L 61 83 Z"/>
+    <path class="person-right" d="M 72 63 L 69 83 L 75 83 Z"/>
+    
+    <!-- Hearts above -->
+    <path class="heart" d="M 50 15 L 52 18 L 50 20 L 48 18 Z"/>
+    <path class="heart" d="M 45 10 L 46 12 L 45 13 L 44 12 Z"/>
+    <path class="heart" d="M 55 10 L 56 12 L 55 13 L 54 12 Z"/>
+  </g>
+  
+  <!-- Music notes -->
+  <text x="15" y="25" font-size="12" fill="#FFD700">♪</text>
+  <text x="80" y="25" font-size="12" fill="#FFD700">♫</text>
+</svg>

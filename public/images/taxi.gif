@@ -1,0 +1,81 @@
+<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @keyframes drive {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(10px); }
+      }
+      @keyframes wheel-spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      .taxi-body {
+        fill: #FFD700;
+        stroke: #DAA520;
+        stroke-width: 2;
+        animation: drive 1s ease-in-out infinite alternate;
+      }
+      .wheel {
+        fill: #333;
+        stroke: #666;
+        stroke-width: 2;
+        animation: wheel-spin 1s linear infinite;
+      }
+      .window {
+        fill: #87CEEB;
+        opacity: 0.7;
+      }
+      .sign {
+        fill: #000;
+      }
+    </style>
+  </defs>
+  
+  <!-- Road -->
+  <rect x="0" y="75" width="100" height="25" fill="#555"/>
+  <rect x="0" y="87" width="20" height="3" fill="#FFF"/>
+  <rect x="30" y="87" width="20" height="3" fill="#FFF"/>
+  <rect x="60" y="87" width="20" height="3" fill="#FFF"/>
+  <rect x="90" y="87" width="10" height="3" fill="#FFF"/>
+  
+  <!-- Taxi body -->
+  <g class="taxi-body">
+    <!-- Main body -->
+    <rect x="20" y="50" width="50" height="20" rx="3"/>
+    
+    <!-- Hood -->
+    <path d="M 20 60 L 15 70 L 25 70 L 20 60 Z"/>
+    
+    <!-- Trunk -->
+    <path d="M 70 60 L 75 70 L 65 70 L 70 60 Z"/>
+    
+    <!-- Roof -->
+    <rect x="30" y="40" width="30" height="10" rx="2"/>
+    
+    <!-- Windows -->
+    <rect class="window" x="32" y="42" width="12" height="8" rx="1"/>
+    <rect class="window" x="46" y="42" width="12" height="8" rx="1"/>
+    
+    <!-- Door line -->
+    <line x1="45" y1="50" x2="45" y2="70" stroke="#DAA520" stroke-width="1.5"/>
+    
+    <!-- Headlights -->
+    <circle cx="17" cy="65" r="2" fill="#FFFF00" opacity="0.8"/>
+    
+    <!-- Taillights -->
+    <circle cx="73" cy="65" r="2" fill="#FF0000" opacity="0.8"/>
+    
+    <!-- TAXI sign on roof -->
+    <rect class="sign" x="38" y="35" width="14" height="5" rx="1"/>
+    <text x="40" y="39" font-size="4" fill="#FFD700" font-weight="bold">TAXI</text>
+  </g>
+  
+  <!-- Wheels (separate from body for independent animation) -->
+  <g>
+    <circle class="wheel" cx="30" cy="70" r="5" style="transform-origin: 30px 70px"/>
+    <circle cx="30" cy="70" r="2" fill="#999"/>
+    
+    <circle class="wheel" cx="60" cy="70" r="5" style="transform-origin: 60px 70px"/>
+    <circle cx="60" cy="70" r="2" fill="#999"/>
+  </g>
+</svg>

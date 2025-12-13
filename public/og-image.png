@@ -1,0 +1,75 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @keyframes shimmer {
+        0%, 100% { opacity: 0.6; }
+        50% { opacity: 1; }
+      }
+      .title { 
+        font-family: 'Comic Sans MS', cursive, sans-serif; 
+        font-size: 80px; 
+        font-weight: bold;
+        fill: #FF1493;
+        text-anchor: middle;
+      }
+      .subtitle {
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        font-size: 48px;
+        fill: #00FFFF;
+        text-anchor: middle;
+      }
+      .date {
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        font-size: 56px;
+        font-weight: bold;
+        fill: #FFD700;
+        text-anchor: middle;
+      }
+      .sparkle {
+        fill: #FFD700;
+        animation: shimmer 2s ease-in-out infinite;
+      }
+      .heart {
+        fill: #FF69B4;
+      }
+    </style>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0B1026;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1a1a3e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0B1026;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg-gradient)"/>
+  
+  <!-- Stars -->
+  <circle class="sparkle" cx="100" cy="80" r="3" style="animation-delay: 0s"/>
+  <circle class="sparkle" cx="200" cy="120" r="2" style="animation-delay: 0.5s"/>
+  <circle class="sparkle" cx="300" cy="60" r="3" style="animation-delay: 1s"/>
+  <circle class="sparkle" cx="900" cy="100" r="2" style="animation-delay: 1.5s"/>
+  <circle class="sparkle" cx="1000" cy="150" r="3" style="animation-delay: 0.3s"/>
+  <circle class="sparkle" cx="1100" cy="90" r="2" style="animation-delay: 0.8s"/>
+  <circle class="sparkle" cx="150" cy="500" r="2" style="animation-delay: 1.2s"/>
+  <circle class="sparkle" cx="1050" cy="520" r="3" style="animation-delay: 0.6s"/>
+  
+  <!-- Hearts decoration -->
+  <path class="heart" d="M 200 250 L 210 260 L 200 270 L 190 260 Z" opacity="0.6"/>
+  <path class="heart" d="M 1000 250 L 1010 260 L 1000 270 L 990 260 Z" opacity="0.6"/>
+  <path class="heart" d="M 180 400 L 190 410 L 180 420 L 170 410 Z" opacity="0.5"/>
+  <path class="heart" d="M 1020 400 L 1030 410 L 1020 420 L 1010 410 Z" opacity="0.5"/>
+  
+  <!-- Wedding rings -->
+  <g transform="translate(600, 200)">
+    <circle cx="-40" cy="0" r="35" fill="none" stroke="#FFD700" stroke-width="6"/>
+    <circle cx="40" cy="0" r="35" fill="none" stroke="#FFD700" stroke-width="6"/>
+    <circle cx="-35" cy="-10" r="4" fill="#FFD700" opacity="0.8"/>
+    <circle cx="35" cy="-10" r="4" fill="#FFD700" opacity="0.8"/>
+  </g>
+  
+  <!-- Text content -->
+  <text class="title" x="600" y="340">Rachel & Tim</text>
+  <text class="subtitle" x="600" y="410">are getting married!</text>
+  <text class="date" x="600" y="490">October 9, 2026</text>
+  <text class="subtitle" x="600" y="560">Brooklyn, NY</text>
+</svg>

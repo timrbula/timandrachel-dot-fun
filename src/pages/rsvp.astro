@@ -1,0 +1,624 @@
+---
+import BaseLayout from "../components/astro/BaseLayout.astro";
+import Marquee from "../components/react/Marquee";
+import BlinkingText from "../components/react/BlinkingText";
+import RainbowDivider from "../components/react/RainbowDivider";
+import GeoButton from "../components/react/GeoButton";
+import RSVPForm from "../components/react/RSVPForm";
+---
+
+<BaseLayout
+  title="RSVP - Rachel & Tim 💌"
+  description="Let us know if you can make it to our wedding! RSVP by April 9th, 2026."
+>
+  <!-- Top Marquee -->
+  <Marquee client:load speed={15}>
+    💌 RSVP to Our Wedding! 💌 Please respond by April 9th, 2026 💌
+  </Marquee>
+
+  <div class="container">
+    <!-- Page Header -->
+    <section class="page-header text-center">
+      <h1 class="text-3d">
+        <BlinkingText client:load speed="slow">💌</BlinkingText>
+        RSVP
+        <BlinkingText client:load speed="slow">💌</BlinkingText>
+      </h1>
+      <p class="subtitle text-neon-pink">
+        We can't wait to celebrate with you! Please let us know if you can make
+        it!
+      </p>
+    </section>
+
+    <RainbowDivider client:load variant="animated" />
+
+    <!-- Deadline Notice -->
+    <section class="deadline-section">
+      <div class="deadline-box geo-box-neon text-center">
+        <h2 class="text-neon">
+          <BlinkingText client:load>⏰</BlinkingText>
+          RSVP Deadline
+          <BlinkingText client:load>⏰</BlinkingText>
+        </h2>
+        <p class="deadline-date rainbow-text">April 9th, 2026</p>
+        <p class="deadline-text">
+          Please respond by this date so we can finalize our headcount with the
+          venue!
+        </p>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="stars" />
+
+    <!-- Introduction -->
+    <section class="intro-section">
+      <div class="intro-box geo-box">
+        <h2 class="text-center text-neon-pink">How to RSVP</h2>
+        <div class="intro-content">
+          <p>
+            <strong>Step 1:</strong> Fill out the form below with your information
+            📝
+          </p>
+          <p>
+            <strong>Step 2:</strong> Let us know if you're bringing a plus-one 👥
+          </p>
+          <p>
+            <strong>Step 3:</strong> Tell us about any dietary restrictions 🍽️
+          </p>
+          <p>
+            <strong>Step 4:</strong> Request your favorite songs for the dance floor!
+            🎵
+          </p>
+          <p>
+            <strong>Step 5:</strong> Hit submit and get excited! 🎉
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="dots" />
+
+    <!-- RSVP Form Placeholder -->
+    <section class="form-section">
+      <div class="form-container geo-box-raised">
+        <h2 class="text-center text-3d">
+          <BlinkingText client:load>✨</BlinkingText>
+          Your RSVP
+          <BlinkingText client:load>✨</BlinkingText>
+        </h2>
+
+        <!-- RSVP Form Component -->
+        <RSVPForm client:load />
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="solid" />
+
+    <!-- Plus-One Info -->
+    <section class="plusone-section">
+      <div class="plusone-box geo-box-neon">
+        <h2 class="text-center text-neon">
+          <BlinkingText client:load>👥</BlinkingText>
+          About Plus-Ones
+          <BlinkingText client:load>👥</BlinkingText>
+        </h2>
+        <div class="plusone-content">
+          <p>
+            <strong>If your invitation says "and Guest"</strong> - you're welcome
+            to bring a plus-one! 🎉
+          </p>
+          <p>
+            <strong>If it doesn't mention a guest</strong> - we're keeping it intimate
+            and can only accommodate those listed on the invitation. We hope you understand!
+            💕
+          </p>
+          <p>
+            <strong>Not sure?</strong> Check your invitation or reach out to us! We're
+            happy to clarify.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="animated" />
+
+    <!-- Success Message (Hidden by default) -->
+    <section
+      class="success-section"
+      id="success-message"
+      style="display: none;"
+    >
+      <div class="success-box geo-box-raised text-center">
+        <h2 class="text-3d">
+          <BlinkingText client:load>🎊</BlinkingText>
+          Thank You!
+          <BlinkingText client:load>🎊</BlinkingText>
+        </h2>
+        <p class="success-text rainbow-text">Your RSVP has been received!</p>
+        <div class="success-animation">
+          <p class="success-icon">🎉</p>
+          <p>Check your email for confirmation!</p>
+          <p class="text-neon-pink">
+            We're so excited to celebrate with you in Brooklyn!
+          </p>
+        </div>
+        <GeoButton client:load variant="primary" href="/">
+          🏠 Back to Home
+        </GeoButton>
+      </div>
+    </section>
+
+    <!-- Error Message (Hidden by default) -->
+    <section class="error-section" id="error-message" style="display: none;">
+      <div class="error-box geo-box text-center">
+        <h2 class="text-neon">
+          <BlinkingText client:load>⚠️</BlinkingText>
+          Oops!
+          <BlinkingText client:load>⚠️</BlinkingText>
+        </h2>
+        <p class="error-text">Something went wrong with your RSVP. 😢</p>
+        <p>Please try again or reach out to us directly:</p>
+        <p>
+          📧 <a href="mailto:hello@rachelandtim.fun" class="text-cyan"
+            >hello@rachelandtim.fun</a
+          >
+        </p>
+        <GeoButton client:load variant="warning" href="/rsvp">
+          🔄 Try Again
+        </GeoButton>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="stars" />
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <h2 class="text-center text-3d">
+        <BlinkingText client:load>❓</BlinkingText>
+        RSVP Questions?
+        <BlinkingText client:load>❓</BlinkingText>
+      </h2>
+
+      <div class="faq-grid">
+        <div class="faq-card geo-box-raised">
+          <h3 class="text-neon">Can I change my RSVP?</h3>
+          <p>
+            Of course! Life happens. Just reach out to us and we'll update your
+            response.
+          </p>
+        </div>
+
+        <div class="faq-card geo-box-raised">
+          <h3 class="text-neon-pink">What if I have dietary restrictions?</h3>
+          <p>
+            No problem! Let us know in the form and we'll make sure you're taken
+            care of. 🍽️
+          </p>
+        </div>
+
+        <div class="faq-card geo-box-raised">
+          <h3 class="text-neon">Can I bring my kids?</h3>
+          <p>
+            We love your little ones, but this is an adults-only celebration.
+            Thank you for understanding! 💕
+          </p>
+        </div>
+
+        <div class="faq-card geo-box-raised">
+          <h3 class="text-neon-pink">What should I wear?</h3>
+          <p>
+            Cocktail attire! Dress to impress, but be comfortable for dancing!
+            👗🕺
+          </p>
+        </div>
+
+        <div class="faq-card geo-box-raised">
+          <h3 class="text-neon">Will there be parking?</h3>
+          <p>
+            Street parking and nearby garages available. Check out our <a
+              href="/schedule"
+              class="text-cyan">Schedule page</a
+            > for details!
+          </p>
+        </div>
+
+        <div class="faq-card geo-box-raised">
+          <h3 class="text-neon-pink">Can I take photos?</h3>
+          <p>
+            Absolutely! We'll have a hashtag for you to share. But please, no
+            phones during the ceremony. 📱❌
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="dots" />
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+      <div class="contact-box geo-box-neon text-center">
+        <h2 class="text-3d">
+          <BlinkingText client:load>💬</BlinkingText>
+          Still Have Questions?
+          <BlinkingText client:load>💬</BlinkingText>
+        </h2>
+        <p class="contact-text">
+          Don't be shy! Reach out to us anytime. We're here to help! 💕
+        </p>
+        <div class="contact-methods">
+          <p>
+            📧 Email: <a href="mailto:hello@rachelandtim.fun" class="text-cyan"
+              >hello@rachelandtim.fun</a
+            >
+          </p>
+          <p>📱 Text us for our phone numbers!</p>
+          <p>💬 Or catch us on social media!</p>
+        </div>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="animated" />
+
+    <!-- CTA Section -->
+    <section class="cta-section text-center">
+      <div class="cta-box geo-box-raised">
+        <h2 class="text-3d">
+          <BlinkingText client:load>🎉</BlinkingText>
+          Explore More
+          <BlinkingText client:load>🎉</BlinkingText>
+        </h2>
+        <div class="cta-buttons">
+          <GeoButton client:load variant="primary" href="/schedule">
+            📅 View Schedule
+          </GeoButton>
+          <GeoButton client:load variant="secondary" href="/travel">
+            ✈️ Travel Info
+          </GeoButton>
+          <GeoButton client:load variant="primary" href="/guestbook">
+            📖 Sign Guestbook
+          </GeoButton>
+          <GeoButton client:load variant="secondary" href="/">
+            🏠 Back to Home
+          </GeoButton>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Bottom Marquee -->
+  <Marquee client:load speed={20} direction="right">
+    💕 Can't wait to celebrate with you! 🎉 RSVP by April 9th, 2026 💌
+  </Marquee>
+</BaseLayout>
+
+<style>
+  /* Page Header */
+  .page-header {
+    padding: 2rem 0;
+  }
+
+  .page-header h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.3rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* Deadline Section */
+  .deadline-section {
+    margin: 3rem 0;
+  }
+
+  .deadline-box {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2.5rem;
+  }
+
+  .deadline-box h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .deadline-date {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 1rem 0;
+  }
+
+  .deadline-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  /* Introduction Section */
+  .intro-section {
+    margin: 3rem 0;
+  }
+
+  .intro-box {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2.5rem;
+  }
+
+  .intro-content p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  /* Form Section */
+  .form-section {
+    margin: 3rem 0;
+  }
+
+  .form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2.5rem;
+  }
+
+  .form-container h2 {
+    margin-bottom: 2rem;
+  }
+
+  /* Form Placeholder */
+  .form-placeholder {
+    background: rgba(255, 0, 255, 0.1);
+    border: 3px dashed var(--color-magenta);
+    border-radius: 12px;
+    padding: 3rem 2rem;
+    margin: 2rem 0;
+  }
+
+  .placeholder-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .placeholder-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+
+  .placeholder-content h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .placeholder-content p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .contact-info {
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    background: rgba(0, 255, 255, 0.1);
+    border-radius: 8px;
+  }
+
+  .contact-info p {
+    margin-bottom: 0.5rem;
+  }
+
+  .placeholder-animation {
+    margin-top: 2rem;
+    font-size: 1.3rem;
+  }
+
+  /* Form Preview */
+  .form-preview {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 3px solid var(--color-cyan);
+  }
+
+  .form-preview h3 {
+    margin-bottom: 2rem;
+  }
+
+  .preview-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .preview-field label {
+    display: block;
+    font-weight: bold;
+    color: var(--color-yellow);
+    margin-bottom: 0.5rem;
+  }
+
+  .preview-input {
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--color-cyan);
+    border-radius: 4px;
+    padding: 0.8rem;
+    color: var(--color-white);
+    font-style: italic;
+  }
+
+  /* Plus-One Section */
+  .plusone-section {
+    margin: 3rem 0;
+  }
+
+  .plusone-box {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2.5rem;
+  }
+
+  .plusone-content p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  /* Success Section */
+  .success-section {
+    margin: 3rem 0;
+  }
+
+  .success-box {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  .success-text {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 1.5rem 0;
+  }
+
+  .success-animation {
+    margin: 2rem 0;
+  }
+
+  .success-icon {
+    font-size: 5rem;
+    margin: 1rem 0;
+    animation: bounce 1s infinite;
+  }
+
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  /* Error Section */
+  .error-section {
+    margin: 3rem 0;
+  }
+
+  .error-box {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    background: rgba(255, 0, 0, 0.1);
+    border: 3px solid var(--color-red);
+  }
+
+  .error-text {
+    font-size: 1.3rem;
+    margin: 1rem 0;
+  }
+
+  /* FAQ Section */
+  .faq-section {
+    margin: 3rem 0;
+  }
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+  }
+
+  .faq-card {
+    padding: 2rem;
+  }
+
+  .faq-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .faq-card p {
+    line-height: 1.6;
+  }
+
+  /* Contact Section */
+  .contact-section {
+    margin: 3rem 0;
+  }
+
+  .contact-box {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2.5rem;
+  }
+
+  .contact-text {
+    font-size: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .contact-methods {
+    margin-top: 2rem;
+  }
+
+  .contact-methods p {
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    margin: 3rem 0;
+  }
+
+  .cta-box {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  .cta-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  /* Links */
+  a {
+    text-decoration: underline;
+  }
+
+  a:hover {
+    opacity: 0.8;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-header h1 {
+      font-size: 2.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+    }
+
+    .deadline-date {
+      font-size: 2rem;
+    }
+
+    .success-text {
+      font-size: 1.5rem;
+    }
+
+    .faq-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-buttons {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

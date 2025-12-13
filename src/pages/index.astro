@@ -1,18 +1,401 @@
 ---
-// Rachel & Tim's Wedding Website - Home Page
+import BaseLayout from "../components/astro/BaseLayout.astro";
+import Marquee from "../components/react/Marquee";
+import BlinkingText from "../components/react/BlinkingText";
+import RainbowDivider from "../components/react/RainbowDivider";
+import GeoButton from "../components/react/GeoButton";
+import UnderConstruction from "../components/react/UnderConstruction";
+import { daysUntilWedding, formatDate, WEDDING_DATE } from "../lib/utils";
+
+const daysLeft = daysUntilWedding();
+const weddingDateFormatted = formatDate(WEDDING_DATE, {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rachel & Tim's Wedding - October 9, 2026</title>
-    <meta name="description" content="Join us for our wedding celebration at Radio Star, Brooklyn" />
-  </head>
-  <body>
-    <h1>Rachel & Tim's Wedding</h1>
-    <p>Friday, October 9th, 2026</p>
-    <p>Radio Star, Brooklyn</p>
-  </body>
-</html>
+<BaseLayout
+  title="Rachel & Tim's Wedding - June 14, 2025 🎉"
+  description="Join us for our totally rad wedding celebration in Brooklyn! It's gonna be epic! 💕✨"
+>
+  <!-- Marquee Banner -->
+  <Marquee client:load speed={15}>
+    💕 Welcome to Rachel & Tim's Wedding Website! 💕 June 14, 2025 💕 Brooklyn,
+    NY 💕
+  </Marquee>
+
+  <div class="container">
+    <!-- Hero Section -->
+    <section class="hero-section text-center">
+      <h1 class="text-3d">
+        <BlinkingText client:load speed="slow">💕</BlinkingText>
+        Rachel & Tim
+        <BlinkingText client:load speed="slow">💕</BlinkingText>
+      </h1>
+
+      <h2 class="text-neon">Are Getting Married!</h2>
+
+      <div class="wedding-date geo-box-neon">
+        <p class="date-text rainbow-text">{weddingDateFormatted}</p>
+        <p class="location-text text-neon-pink">Radio Star • Brooklyn, NY</p>
+      </div>
+
+      <!-- Countdown -->
+      <div class="countdown geo-box-raised">
+        <h3 class="text-outline">
+          <BlinkingText client:load>⏰</BlinkingText>
+          Countdown to the Big Day!
+          <BlinkingText client:load>⏰</BlinkingText>
+        </h3>
+        <p class="countdown-number">
+          <span class="text-neon glow-text">{daysLeft}</span>
+        </p>
+        <p class="countdown-label">Days to Go!</p>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="animated" />
+
+    <!-- Welcome Message -->
+    <section class="welcome-section geo-box">
+      <h2 class="text-neon-pink">Welcome to Our Website!</h2>
+      <p>
+        Hey there, awesome human! 👋 We're SO excited to celebrate our wedding
+        with you!
+      </p>
+      <p>
+        This website is your one-stop shop for all the deets about our big day.
+        We've got the schedule, travel info, RSVP form, and even a guestbook
+        where you can leave us a message (please do, we love reading them! 💕).
+      </p>
+      <p>
+        We're going full <span class="text-rainbow">Geocities nostalgia</span> with
+        this site because why not? Life's too short for boring wedding websites! 🎉
+      </p>
+    </section>
+
+    <RainbowDivider client:load variant="stars" />
+
+    <!-- Quick Links -->
+    <section class="quick-links-section text-center">
+      <h2 class="text-3d">Quick Links</h2>
+      <div class="button-grid">
+        <GeoButton client:load variant="primary" href="/schedule">
+          📅 View Schedule
+        </GeoButton>
+        <GeoButton client:load variant="secondary" href="/travel">
+          ✈️ Travel Info
+        </GeoButton>
+        <GeoButton client:load variant="warning" href="/rsvp">
+          💌 RSVP Now!
+        </GeoButton>
+        <GeoButton client:load variant="primary" href="/guestbook">
+          📖 Sign Guestbook
+        </GeoButton>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="dots" />
+
+    <!-- Our Story (Placeholder) -->
+    <section class="story-section geo-box-raised">
+      <h2 class="text-neon">Our Story</h2>
+      <div class="story-content">
+        <p>
+          <span class="text-neon-pink">Rachel</span> and <span class="text-neon"
+            >Tim</span
+          > met in the most Brooklyn way possible... 🗽
+        </p>
+        <p>
+          <em
+            >(More details coming soon! We're still writing this part because we
+            can't agree on who made the first move 😂)</em
+          >
+        </p>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="solid" />
+
+    <!-- Important Info -->
+    <section class="info-section">
+      <div class="info-grid">
+        <div class="info-box geo-box-neon">
+          <h3>📍 Location</h3>
+          <p><strong>Radio Star</strong></p>
+          <p>13 Greenpoint Ave</p>
+          <p>Brooklyn, NY 11222</p>
+          <GeoButton client:load variant="secondary" href="/travel">
+            Get Directions
+          </GeoButton>
+        </div>
+
+        <div class="info-box geo-box-neon">
+          <h3>⏰ Time</h3>
+          <p><strong>Ceremony:</strong> 6:00 PM</p>
+          <p><strong>Reception:</strong> 7:00 PM</p>
+          <p><strong>Last Call:</strong> 12:00 AM</p>
+          <GeoButton client:load variant="secondary" href="/schedule">
+            Full Schedule
+          </GeoButton>
+        </div>
+
+        <div class="info-box geo-box-neon">
+          <h3>👔 Dress Code</h3>
+          <p><strong>Cocktail Attire</strong></p>
+          <p>Dress to impress!</p>
+          <p>(But also be comfortable for dancing 💃🕺)</p>
+        </div>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="animated" />
+
+    <!-- RSVP CTA -->
+    <section class="rsvp-cta text-center geo-box-raised">
+      <h2 class="text-3d">
+        <BlinkingText client:load>✨</BlinkingText>
+        Don't Forget to RSVP!
+        <BlinkingText client:load>✨</BlinkingText>
+      </h2>
+      <p class="rsvp-text">
+        We need to know if you're coming so we can plan accordingly! Please RSVP
+        by <strong class="text-neon-pink">April 9, 2026</strong>.
+      </p>
+      <GeoButton client:load variant="warning" href="/rsvp">
+        🎉 RSVP Now! 🎉
+      </GeoButton>
+    </section>
+
+    <RainbowDivider client:load variant="stars" />
+
+    <!-- Fun Badges Section -->
+    <section class="badges-section text-center">
+      <h3 class="text-rainbow">Check Out These Cool Badges!</h3>
+      <div class="badges-container">
+        <span class="geo-badge geo-badge-new blink">✨ NEW</span>
+        <span class="geo-badge geo-badge-hot">🔥 HOT</span>
+        <span class="geo-badge geo-badge-cool">😎 COOL</span>
+        <span
+          class="geo-badge"
+          style="background: #FF00FF; color: #FFFF00; border-color: #00FFFF;"
+        >
+          💕 LOVE
+        </span>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="dots" />
+
+    <!-- Under Construction Notice for Future Pages -->
+    <section class="construction-section">
+      <h2 class="text-center text-neon">Coming Soon!</h2>
+      <UnderConstruction
+        client:load
+        message="More awesome content is on the way!"
+      />
+    </section>
+  </div>
+
+  <!-- Bottom Marquee -->
+  <Marquee client:load speed={20} direction="right">
+    🎉 See you in Brooklyn! 🗽 October 9, 2026 💕 Rachel & Tim 💕
+  </Marquee>
+</BaseLayout>
+
+<style>
+  /* Hero Section */
+  .hero-section {
+    padding: 3rem 0;
+  }
+
+  .hero-section h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .wedding-date {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+  }
+
+  .date-text {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+
+  .location-text {
+    font-size: 1.3rem;
+  }
+
+  .countdown {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 2rem;
+  }
+
+  .countdown h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .countdown-number {
+    font-size: 5rem;
+    font-weight: bold;
+    margin: 1rem 0;
+    line-height: 1;
+  }
+
+  .countdown-label {
+    font-size: 1.5rem;
+    color: var(--color-yellow);
+  }
+
+  /* Welcome Section */
+  .welcome-section {
+    max-width: 800px;
+    margin: 3rem auto;
+  }
+
+  .welcome-section h2 {
+    margin-bottom: 1.5rem;
+  }
+
+  .welcome-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+
+  /* Quick Links */
+  .quick-links-section {
+    margin: 3rem 0;
+  }
+
+  .button-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 2rem auto;
+  }
+
+  /* Story Section */
+  .story-section {
+    max-width: 800px;
+    margin: 3rem auto;
+  }
+
+  .story-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  /* Info Section */
+  .info-section {
+    margin: 3rem 0;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .info-box {
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .info-box h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .info-box p {
+    margin-bottom: 0.5rem;
+  }
+
+  .info-box button,
+  .info-box a {
+    margin-top: 1rem;
+  }
+
+  /* RSVP CTA */
+  .rsvp-cta {
+    max-width: 700px;
+    margin: 3rem auto;
+    padding: 3rem 2rem;
+  }
+
+  .rsvp-text {
+    font-size: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  /* Badges Section */
+  .badges-section {
+    margin: 3rem 0;
+  }
+
+  .badges-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+
+  /* Construction Section */
+  .construction-section {
+    margin: 3rem 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-section h1 {
+      font-size: 2.5rem;
+    }
+
+    .hero-section h2 {
+      font-size: 1.8rem;
+    }
+
+    .date-text {
+      font-size: 1.3rem;
+    }
+
+    .location-text {
+      font-size: 1rem;
+    }
+
+    .countdown-number {
+      font-size: 3.5rem;
+    }
+
+    .countdown-label {
+      font-size: 1.2rem;
+    }
+
+    .button-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .info-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+</style>

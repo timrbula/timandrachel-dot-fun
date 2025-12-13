@@ -1,0 +1,591 @@
+---
+import BaseLayout from "../components/astro/BaseLayout.astro";
+import Marquee from "../components/react/Marquee";
+import BlinkingText from "../components/react/BlinkingText";
+import RainbowDivider from "../components/react/RainbowDivider";
+import GeoButton from "../components/react/GeoButton";
+
+const VENUE_NAME = "Radio Star";
+const VENUE_ADDRESS = "13 Greenpoint Ave, Brooklyn, NY 11222";
+const WEDDING_DATE = "Friday, October 9th, 2026";
+const CEREMONY_TIME = "6:00 PM";
+---
+
+<BaseLayout
+  title="Wedding Schedule - Rachel & Tim 📅"
+  description="All the details for our wedding day! Timeline, venue info, and directions to Radio Star in Brooklyn."
+>
+  <!-- Top Marquee -->
+  <Marquee client:load speed={15}>
+    📅 Wedding Day Schedule 📅 October 9th, 2026 📅 Radio Star, Brooklyn 📅
+  </Marquee>
+
+  <div class="container">
+    <!-- Page Header -->
+    <section class="page-header text-center">
+      <h1 class="text-3d">
+        <BlinkingText client:load speed="slow">🕐</BlinkingText>
+        Wedding Day Schedule
+        <BlinkingText client:load speed="slow">🕐</BlinkingText>
+      </h1>
+      <p class="subtitle text-neon-pink">
+        Mark your calendars! Here's everything you need to know about our big
+        day!
+      </p>
+    </section>
+
+    <RainbowDivider client:load variant="animated" />
+
+    <!-- Date & Time Box -->
+    <section class="date-section">
+      <div class="date-box geo-box-neon text-center">
+        <h2 class="text-neon">📅 {WEDDING_DATE}</h2>
+        <p class="ceremony-time rainbow-text">{CEREMONY_TIME}</p>
+        <p class="venue-name text-neon-pink">{VENUE_NAME}</p>
+        <p class="venue-address">{VENUE_ADDRESS}</p>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="stars" />
+
+    <!-- Timeline -->
+    <section class="timeline-section">
+      <h2 class="text-center text-3d">
+        <BlinkingText client:load>✨</BlinkingText>
+        Event Timeline
+        <BlinkingText client:load>✨</BlinkingText>
+      </h2>
+
+      <div class="timeline">
+        <!-- Event 1: Ceremony -->
+        <div class="timeline-item geo-box-raised">
+          <div class="timeline-icon">💒</div>
+          <div class="timeline-content">
+            <h3 class="text-neon">6:00 PM - Ceremony</h3>
+            <p>Join us as we say "I do!" 💕</p>
+            <p>
+              The ceremony will be intimate and heartfelt (and hopefully not too
+              long because we want to party!)
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-arrow text-center">
+          <span class="arrow-down">⬇️</span>
+        </div>
+
+        <!-- Event 2: Cocktail Hour -->
+        <div class="timeline-item geo-box-raised">
+          <div class="timeline-icon">🍸</div>
+          <div class="timeline-content">
+            <h3 class="text-neon-pink">7:00 PM - Cocktail Hour</h3>
+            <p>Drinks, appetizers, and mingling! 🥂</p>
+            <p>
+              Enjoy signature cocktails and delicious bites while we take some
+              photos.
+            </p>
+            <p class="text-neon">🎵 Live music to set the vibe!</p>
+          </div>
+        </div>
+
+        <div class="timeline-arrow text-center">
+          <span class="arrow-down">⬇️</span>
+        </div>
+
+        <!-- Event 3: Reception & Dinner -->
+        <div class="timeline-item geo-box-raised">
+          <div class="timeline-icon">🍽️</div>
+          <div class="timeline-content">
+            <h3 class="text-neon">8:00 PM - Reception & Dinner</h3>
+            <p>Time to eat! 🍴</p>
+            <p>
+              Delicious food, heartfelt toasts, and maybe some embarrassing
+              stories from our friends and family.
+            </p>
+            <p><strong>Menu details coming soon!</strong></p>
+          </div>
+        </div>
+
+        <div class="timeline-arrow text-center">
+          <span class="arrow-down">⬇️</span>
+        </div>
+
+        <!-- Event 4: Dancing -->
+        <div class="timeline-item geo-box-raised">
+          <div class="timeline-icon">💃</div>
+          <div class="timeline-content">
+            <h3 class="text-neon-pink">9:30 PM - Dancing!</h3>
+            <p>Let's get this party started! 🕺💃</p>
+            <p>
+              First dance, parent dances, and then the dance floor is YOURS!
+            </p>
+            <p class="text-rainbow">
+              Bring your best moves! No judgment zone! 🎉
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-arrow text-center">
+          <span class="arrow-down">⬇️</span>
+        </div>
+
+        <!-- Event 5: Cake Cutting -->
+        <div class="timeline-item geo-box-raised">
+          <div class="timeline-icon">🎂</div>
+          <div class="timeline-content">
+            <h3 class="text-neon">10:30 PM - Cake Cutting</h3>
+            <p>Sweet treats time! 🍰</p>
+            <p>
+              Watch us attempt to feed each other cake without making a mess
+              (spoiler: we will make a mess).
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-arrow text-center">
+          <span class="arrow-down">⬇️</span>
+        </div>
+
+        <!-- Event 6: Last Call -->
+        <div class="timeline-item geo-box-raised">
+          <div class="timeline-icon">🌙</div>
+          <div class="timeline-content">
+            <h3 class="text-neon-pink">12:00 AM - Last Call</h3>
+            <p>All good things must come to an end... 😢</p>
+            <p>But the memories will last forever! 💕</p>
+            <p><em>(After-party location TBD for the night owls! 🦉)</em></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="dots" />
+
+    <!-- Venue Details -->
+    <section class="venue-section">
+      <h2 class="text-center text-3d">
+        <BlinkingText client:load>📍</BlinkingText>
+        Venue Details
+        <BlinkingText client:load>📍</BlinkingText>
+      </h2>
+
+      <div class="venue-grid">
+        <!-- Venue Info -->
+        <div class="venue-info geo-box-neon">
+          <h3 class="text-neon">🎪 {VENUE_NAME}</h3>
+          <p><strong>Address:</strong></p>
+          <p>{VENUE_ADDRESS}</p>
+          <p class="venue-description">
+            Radio Star is an awesome Brooklyn venue with great vibes, amazing
+            food, and the perfect space for our celebration!
+          </p>
+          <GeoButton
+            client:load
+            variant="primary"
+            href="https://www.google.com/maps/search/?api=1&query=Radio+Star+13+Greenpoint+Ave+Brooklyn+NY"
+          >
+            🗺️ Open in Google Maps
+          </GeoButton>
+        </div>
+
+        <!-- Subway Directions -->
+        <div class="subway-info geo-box-neon">
+          <h3 class="text-neon-pink">🚇 Subway Directions</h3>
+          <p><strong>Nearest Station:</strong></p>
+          <p class="text-neon">Greenpoint Ave (G train)</p>
+          <p>Just a 5-minute walk from the station!</p>
+
+          <div class="subway-routes">
+            <p><strong>From Manhattan:</strong></p>
+            <ul>
+              <li>Take L train to Bedford Ave</li>
+              <li>Transfer to G train</li>
+              <li>Get off at Greenpoint Ave</li>
+            </ul>
+            <p><em>OR</em></p>
+            <ul>
+              <li>Take 7 train to Court Sq</li>
+              <li>Transfer to G train</li>
+              <li>Get off at Greenpoint Ave</li>
+            </ul>
+          </div>
+
+          <p class="subway-tip">
+            <BlinkingText client:load>💡</BlinkingText>
+            <strong>Pro Tip:</strong> The G train runs less frequently than other
+            lines, so plan extra time!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="solid" />
+
+    <!-- Map Section -->
+    <section class="map-section">
+      <h2 class="text-center text-3d">📍 Find Us Here! 📍</h2>
+      <div class="map-container geo-box">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.2076489476847!2d-73.95634!3d40.730831!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2594a0b0b0b0b%3A0x0!2s13%20Greenpoint%20Ave%2C%20Brooklyn%2C%20NY%2011222!5e0!3m2!1sen!2sus!4v1234567890"
+          width="100%"
+          height="450"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Radio Star Location Map"></iframe>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="animated" />
+
+    <!-- Additional Info -->
+    <section class="additional-info">
+      <div class="info-grid">
+        <!-- Parking -->
+        <div class="info-card geo-box-raised">
+          <h3>🚗 Parking</h3>
+          <p><strong>Street Parking:</strong></p>
+          <p>Available nearby (check signs for restrictions)</p>
+          <p><strong>Parking Garages:</strong></p>
+          <ul>
+            <li>Icon Parking - 67 West St (0.3 miles)</li>
+            <li>Various Greenpoint Parking locations</li>
+          </ul>
+          <p class="parking-tip">
+            <em
+              >💡 Tip: Uber/Lyft might be easier if you're planning to enjoy the
+              open bar! 🍻</em
+            >
+          </p>
+        </div>
+
+        <!-- Weather -->
+        <div class="info-card geo-box-raised">
+          <h3>🌤️ October Weather</h3>
+          <p><strong>Expected Conditions:</strong></p>
+          <p>🌡️ High: 64°F (18°C)</p>
+          <p>🌡️ Low: 50°F (10°C)</p>
+          <p><strong>What to Bring:</strong></p>
+          <p>🧥 Light jacket or wrap</p>
+          <p>👗 Layers are your friend!</p>
+          <p class="weather-note">
+            October in NYC is beautiful with fall foliage! 🍂
+          </p>
+        </div>
+
+        <!-- Accessibility -->
+        <div class="info-card geo-box-raised">
+          <h3>♿ Accessibility</h3>
+          <p><strong>Venue Access:</strong></p>
+          <p>✅ Street-level entrance</p>
+          <p>✅ Accessible restrooms</p>
+          <p><strong>Subway Access:</strong></p>
+          <p>G train has elevator access at select stops</p>
+          <p class="accessibility-note">
+            <em
+              >Questions about accessibility? <a href="/rsvp" class="text-neon"
+                >Contact us!</a
+              ></em
+            >
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="stars" />
+
+    <!-- CTA Section -->
+    <section class="cta-section text-center geo-box-neon">
+      <h2 class="text-3d">
+        <BlinkingText client:load>🎉</BlinkingText>
+        Ready to Party?
+        <BlinkingText client:load>🎉</BlinkingText>
+      </h2>
+      <p class="cta-text">Don't forget to RSVP so we know you're coming!</p>
+      <GeoButton client:load variant="warning" href="/rsvp">
+        💌 RSVP Now!
+      </GeoButton>
+      <div class="cta-links">
+        <GeoButton client:load variant="secondary" href="/travel">
+          ✈️ Travel Info
+        </GeoButton>
+        <GeoButton client:load variant="primary" href="/">
+          🏠 Back to Home
+        </GeoButton>
+      </div>
+    </section>
+  </div>
+
+  <!-- Bottom Marquee -->
+  <Marquee client:load speed={20} direction="right">
+    🎉 See you on October 9th, 2026! 📅 Radio Star, Brooklyn 🗽 Let's celebrate!
+    💕
+  </Marquee>
+</BaseLayout>
+
+<style>
+  /* Page Header */
+  .page-header {
+    padding: 2rem 0;
+  }
+
+  .page-header h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.3rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* Date Section */
+  .date-section {
+    margin: 3rem 0;
+  }
+
+  .date-box {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2.5rem;
+  }
+
+  .date-box h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .ceremony-time {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 1rem 0;
+  }
+
+  .venue-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 1rem 0;
+  }
+
+  .venue-address {
+    font-size: 1.2rem;
+    color: var(--color-cyan);
+  }
+
+  /* Timeline */
+  .timeline-section {
+    margin: 3rem 0;
+  }
+
+  .timeline {
+    max-width: 800px;
+    margin: 2rem auto;
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+    margin-bottom: 1rem;
+    align-items: flex-start;
+  }
+
+  .timeline-icon {
+    font-size: 3rem;
+    flex-shrink: 0;
+  }
+
+  .timeline-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-content p {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+
+  .timeline-arrow {
+    margin: 1rem 0;
+  }
+
+  .arrow-down {
+    font-size: 2rem;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(10px);
+    }
+  }
+
+  /* Venue Section */
+  .venue-section {
+    margin: 3rem 0;
+  }
+
+  .venue-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 2rem auto;
+  }
+
+  .venue-info,
+  .subway-info {
+    padding: 2rem;
+  }
+
+  .venue-info h3,
+  .subway-info h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .venue-description {
+    margin: 1.5rem 0;
+    line-height: 1.6;
+  }
+
+  .subway-routes {
+    margin: 1.5rem 0;
+  }
+
+  .subway-routes ul {
+    margin: 0.5rem 0 1rem 1.5rem;
+  }
+
+  .subway-routes li {
+    margin-bottom: 0.3rem;
+  }
+
+  .subway-tip {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: rgba(255, 255, 0, 0.1);
+    border: 2px dashed var(--color-yellow);
+    border-radius: 8px;
+  }
+
+  /* Map Section */
+  .map-section {
+    margin: 3rem 0;
+  }
+
+  .map-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1rem;
+  }
+
+  .map-container iframe {
+    border-radius: 8px;
+  }
+
+  /* Additional Info */
+  .additional-info {
+    margin: 3rem 0;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .info-card {
+    padding: 2rem;
+  }
+
+  .info-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    color: var(--color-cyan);
+  }
+
+  .info-card ul {
+    margin: 0.5rem 0 1rem 1.5rem;
+  }
+
+  .info-card li {
+    margin-bottom: 0.3rem;
+  }
+
+  .parking-tip,
+  .weather-note,
+  .accessibility-note {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    max-width: 700px;
+    margin: 3rem auto;
+    padding: 3rem 2rem;
+  }
+
+  .cta-text {
+    font-size: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .cta-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-header h1 {
+      font-size: 2.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+    }
+
+    .ceremony-time {
+      font-size: 2rem;
+    }
+
+    .venue-name {
+      font-size: 1.5rem;
+    }
+
+    .timeline-item {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1.5rem;
+    }
+
+    .timeline-icon {
+      font-size: 2.5rem;
+    }
+
+    .venue-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .info-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-links {
+      flex-direction: column;
+    }
+  }
+</style>

@@ -1,0 +1,85 @@
+<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @keyframes subway-move {
+        0%, 100% { transform: translateX(0); }
+        50% { transform: translateX(5px); }
+      }
+      .subway {
+        animation: subway-move 2s ease-in-out infinite;
+      }
+      .train-body {
+        fill: #C0C0C0;
+        stroke: #808080;
+        stroke-width: 2;
+      }
+      .window {
+        fill: #87CEEB;
+        opacity: 0.8;
+      }
+      .line-circle {
+        fill: #FF6B35;
+      }
+      .track {
+        fill: none;
+        stroke: #654321;
+        stroke-width: 3;
+      }
+    </style>
+  </defs>
+  
+  <!-- Tracks -->
+  <line class="track" x1="0" y1="75" x2="100" y2="75"/>
+  <line class="track" x1="0" y1="80" x2="100" y2="80"/>
+  
+  <!-- Subway ties -->
+  <rect x="10" y="73" width="3" height="10" fill="#654321"/>
+  <rect x="25" y="73" width="3" height="10" fill="#654321"/>
+  <rect x="40" y="73" width="3" height="10" fill="#654321"/>
+  <rect x="55" y="73" width="3" height="10" fill="#654321"/>
+  <rect x="70" y="73" width="3" height="10" fill="#654321"/>
+  <rect x="85" y="73" width="3" height="10" fill="#654321"/>
+  
+  <g class="subway">
+    <!-- Train body -->
+    <rect class="train-body" x="15" y="35" width="70" height="35" rx="5"/>
+    
+    <!-- Front rounded section -->
+    <path class="train-body" d="M 15 50 Q 10 52.5 15 55 L 15 50 Z"/>
+    
+    <!-- Windows -->
+    <rect class="window" x="20" y="40" width="12" height="10" rx="2"/>
+    <rect class="window" x="35" y="40" width="12" height="10" rx="2"/>
+    <rect class="window" x="50" y="40" width="12" height="10" rx="2"/>
+    <rect class="window" x="65" y="40" width="12" height="10" rx="2"/>
+    
+    <!-- Door -->
+    <rect x="40" y="52" width="20" height="18" fill="#696969" rx="1"/>
+    <line x1="50" y1="52" x2="50" y2="70" stroke="#C0C0C0" stroke-width="1"/>
+    <circle cx="45" cy="61" r="1.5" fill="#FFD700"/>
+    <circle cx="55" cy="61" r="1.5" fill="#FFD700"/>
+    
+    <!-- Line number circle -->
+    <circle class="line-circle" cx="25" cy="60" r="6"/>
+    <text x="25" y="63" font-size="8" fill="white" text-anchor="middle" font-weight="bold">7</text>
+    
+    <!-- Headlight -->
+    <circle cx="12" cy="52.5" r="3" fill="#FFFF00" opacity="0.9"/>
+    
+    <!-- Wheels -->
+    <circle cx="25" cy="70" r="4" fill="#333" stroke="#666" stroke-width="1"/>
+    <circle cx="40" cy="70" r="4" fill="#333" stroke="#666" stroke-width="1"/>
+    <circle cx="60" cy="70" r="4" fill="#333" stroke="#666" stroke-width="1"/>
+    <circle cx="75" cy="70" r="4" fill="#333" stroke="#666" stroke-width="1"/>
+    
+    <!-- Wheel centers -->
+    <circle cx="25" cy="70" r="1.5" fill="#999"/>
+    <circle cx="40" cy="70" r="1.5" fill="#999"/>
+    <circle cx="60" cy="70" r="1.5" fill="#999"/>
+    <circle cx="75" cy="70" r="1.5" fill="#999"/>
+  </g>
+  
+  <!-- Tunnel entrance suggestion -->
+  <path d="M 0 30 Q 5 20 10 30" fill="none" stroke="#333" stroke-width="2" opacity="0.3"/>
+  <path d="M 90 30 Q 95 20 100 30" fill="none" stroke="#333" stroke-width="2" opacity="0.3"/>
+</svg>

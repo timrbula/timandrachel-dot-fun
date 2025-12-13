@@ -1,0 +1,294 @@
+/* RSVP Form Styles */
+.rsvp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 100%;
+}
+
+/* Form Groups */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Labels */
+.form-label {
+  font-weight: bold;
+  color: var(--color-yellow);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-label.required::after {
+  content: "*";
+  color: var(--color-red);
+  font-size: 1.2rem;
+}
+
+/* Inputs */
+.form-input,
+.form-textarea {
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-family: inherit;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--color-cyan);
+  border-radius: 4px;
+  color: var(--color-white);
+  transition: all 0.3s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--color-magenta);
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.form-input:disabled,
+.form-textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-input.error,
+.form-textarea.error {
+  border-color: var(--color-red);
+  background: rgba(255, 0, 0, 0.1);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.5;
+}
+
+/* Radio Buttons */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(0, 255, 255, 0.05);
+  border-radius: 8px;
+  border: 2px solid var(--color-cyan);
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  padding: 0.75rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid transparent;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.radio-label:hover {
+  background: rgba(0, 255, 255, 0.1);
+  border-color: var(--color-cyan);
+}
+
+.radio-label input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--color-magenta);
+}
+
+.radio-text {
+  font-size: 1.1rem;
+  color: var(--color-white);
+}
+
+/* Checkbox */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  padding: 1rem;
+  background: rgba(255, 0, 255, 0.1);
+  border: 2px solid var(--color-magenta);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.checkbox-label:hover {
+  background: rgba(255, 0, 255, 0.2);
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--color-magenta);
+}
+
+.checkbox-text {
+  font-size: 1.1rem;
+  color: var(--color-white);
+  font-weight: bold;
+}
+
+/* Error Messages */
+.form-error {
+  color: var(--color-red);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: rgba(255, 0, 0, 0.1);
+  border-radius: 4px;
+  border-left: 3px solid var(--color-red);
+}
+
+.form-error::before {
+  content: "⚠️";
+}
+
+/* Submit Error */
+.submit-error {
+  padding: 1rem;
+  background: rgba(255, 0, 0, 0.2);
+  border: 2px solid var(--color-red);
+  border-radius: 8px;
+  color: var(--color-white);
+  text-align: center;
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+/* Submit Button */
+.submit-button {
+  padding: 1rem 3rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-family: "Comic Sans MS", cursive;
+  background: linear-gradient(180deg, var(--color-magenta), #8000ff);
+  color: var(--color-yellow);
+  border: 3px outset var(--color-magenta);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.submit-button:hover:not(:disabled) {
+  background: linear-gradient(180deg, #ff00ff, var(--color-magenta));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(255, 0, 255, 0.5);
+}
+
+.submit-button:active:not(:disabled) {
+  transform: translateY(0);
+  border-style: inset;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: linear-gradient(180deg, #808080, #606060);
+}
+
+.spinner {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Form Note */
+.form-note {
+  text-align: center;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+.required-indicator {
+  color: var(--color-red);
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .rsvp-form {
+    gap: 1.25rem;
+  }
+
+  .form-label {
+    font-size: 0.95rem;
+  }
+
+  .form-input,
+  .form-textarea {
+    padding: 0.65rem;
+    font-size: 0.95rem;
+  }
+
+  .radio-label,
+  .checkbox-label {
+    padding: 0.75rem;
+  }
+
+  .radio-text,
+  .checkbox-text {
+    font-size: 1rem;
+  }
+
+  .submit-button {
+    padding: 0.875rem 2rem;
+    font-size: 1.1rem;
+    width: 100%;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-group {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Made with Bob */

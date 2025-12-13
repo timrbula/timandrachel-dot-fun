@@ -1,0 +1,351 @@
+/* Geocities Theme Variables & Styles */
+
+:root {
+  /* Primary Colors */
+  --color-cyan: #00ffff;
+  --color-magenta: #ff00ff;
+  --color-yellow: #ffff00;
+  --color-lime: #00ff00;
+  --color-hot-pink: #ff69b4;
+  --color-electric-blue: #0080ff;
+  --color-orange: #ff8800;
+  --color-purple: #8000ff;
+
+  /* Background Colors */
+  --bg-dark-blue: #000080;
+  --bg-black: #000000;
+  --bg-teal: #008080;
+
+  /* Gradients */
+  --gradient-rainbow: linear-gradient(
+    90deg,
+    #ff0000 0%,
+    #ff8800 14%,
+    #ffff00 28%,
+    #00ff00 42%,
+    #00ffff 57%,
+    #0080ff 71%,
+    #8000ff 85%,
+    #ff00ff 100%
+  );
+
+  --gradient-sunset: linear-gradient(
+    180deg,
+    #ff00ff 0%,
+    #ff0080 50%,
+    #ff8800 100%
+  );
+
+  --gradient-ocean: linear-gradient(
+    180deg,
+    #00ffff 0%,
+    #0080ff 50%,
+    #000080 100%
+  );
+
+  --gradient-neon: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #00ff00);
+
+  /* Border Styles */
+  --border-3d-raised:
+    inset -2px -2px 0 rgba(0, 0, 0, 0.5),
+    inset 2px 2px 0 rgba(255, 255, 255, 0.5);
+
+  --border-3d-sunken:
+    inset 2px 2px 0 rgba(0, 0, 0, 0.5),
+    inset -2px -2px 0 rgba(255, 255, 255, 0.5);
+
+  --border-neon-glow: 0 0 10px currentColor, 0 0 20px currentColor;
+
+  /* Shadows */
+  --shadow-3d: 4px 4px 0 rgba(0, 0, 0, 0.5);
+  --shadow-glow-cyan: 0 0 20px rgba(0, 255, 255, 0.8);
+  --shadow-glow-magenta: 0 0 20px rgba(255, 0, 255, 0.8);
+  --shadow-glow-yellow: 0 0 20px rgba(255, 255, 0, 0.8);
+  --shadow-deep: 8px 8px 16px rgba(0, 0, 0, 0.8);
+}
+
+/* Geocities Box Styles */
+.geo-box {
+  background: rgba(0, 0, 128, 0.8);
+  border: 4px ridge var(--color-cyan);
+  padding: 1.5rem;
+  margin: 1rem 0;
+  box-shadow: var(--shadow-3d);
+}
+
+.geo-box-raised {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 128, 255, 0.9),
+    rgba(0, 0, 128, 0.9)
+  );
+  border: 4px outset var(--color-magenta);
+  padding: 1.5rem;
+  margin: 1rem 0;
+  box-shadow: var(--shadow-deep);
+}
+
+.geo-box-sunken {
+  background: rgba(0, 0, 0, 0.6);
+  border: 4px inset var(--color-lime);
+  padding: 1.5rem;
+  margin: 1rem 0;
+  box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+.geo-box-neon {
+  background: rgba(0, 0, 0, 0.8);
+  border: 3px solid var(--color-cyan);
+  padding: 1.5rem;
+  margin: 1rem 0;
+  box-shadow:
+    0 0 10px var(--color-cyan),
+    inset 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+/* Geocities Buttons */
+.geo-button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-family: "Impact", "Arial Black", sans-serif;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  border: 3px outset;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-3d);
+  letter-spacing: 1px;
+}
+
+.geo-button:active {
+  border-style: inset;
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+.geo-button-primary {
+  background: linear-gradient(180deg, #ff00ff, #8000ff);
+  color: #ffff00;
+  border-color: #ff00ff #8000ff #8000ff #ff00ff;
+}
+
+.geo-button-primary:hover {
+  background: linear-gradient(180deg, #ff69b4, #ff00ff);
+  box-shadow:
+    0 0 20px rgba(255, 0, 255, 0.8),
+    var(--shadow-3d);
+}
+
+.geo-button-secondary {
+  background: linear-gradient(180deg, #00ffff, #0080ff);
+  color: #000080;
+  border-color: #00ffff #0080ff #0080ff #00ffff;
+}
+
+.geo-button-secondary:hover {
+  background: linear-gradient(180deg, #00ff00, #00ffff);
+  box-shadow:
+    0 0 20px rgba(0, 255, 255, 0.8),
+    var(--shadow-3d);
+}
+
+.geo-button-warning {
+  background: linear-gradient(180deg, #ffff00, #ff8800);
+  color: #000000;
+  border-color: #ffff00 #ff8800 #ff8800 #ffff00;
+}
+
+.geo-button-warning:hover {
+  background: linear-gradient(180deg, #ff8800, #ff0000);
+  box-shadow:
+    0 0 20px rgba(255, 136, 0, 0.8),
+    var(--shadow-3d);
+}
+
+/* Dividers */
+.geo-divider {
+  height: 4px;
+  margin: 2rem 0;
+  border: none;
+  background: var(--gradient-rainbow);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.geo-divider-stars {
+  height: 20px;
+  margin: 2rem 0;
+  border: none;
+  background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBvbHlnb24gcG9pbnRzPSIyMCwwIDI0LDEyIDE2LDEyIiBmaWxsPSIjRkZGRjAwIi8+PHBvbHlnb24gcG9pbnRzPSIyMCwyMCAyNCw4IDE2LDgiIGZpbGw9IiMwMEZGRkYiLz48L3N2Zz4=")
+    repeat-x center;
+}
+
+.geo-divider-dots {
+  height: 8px;
+  margin: 2rem 0;
+  border: none;
+  background: radial-gradient(circle, #ff00ff 2px, transparent 2px) 0 0 / 20px
+    8px repeat-x;
+}
+
+/* Text Effects */
+.text-neon {
+  color: var(--color-cyan);
+  /* text-shadow:
+    0 0 1px var(--color-cyan),
+    0 0 1px var(--color-cyan),
+    0 0 1px var(--color-cyan),
+    1px 1px 0 #000; */
+}
+
+.text-neon-pink {
+  color: var(--color-magenta);
+  /* text-shadow:
+    0 0 5px var(--color-magenta),
+    0 0 10px var(--color-magenta),
+    0 0 20px var(--color-magenta),
+    2px 2px 0 #000; */
+}
+
+.text-3d {
+  color: #ffffff;
+  text-shadow:
+    1px 1px 0 #ff00ff,
+    2px 2px 0 #00ffff,
+    3px 3px 0 #ffff00,
+    4px 4px 0 #00ff00,
+    5px 5px 10px rgba(0, 0, 0, 0.8);
+}
+
+.text-outline {
+  color: #ffff00;
+  text-shadow:
+    -2px -2px 0 #000,
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+    2px 2px 0 #000,
+    0 0 10px rgba(255, 255, 0, 0.8);
+}
+
+.text-rainbow {
+  background: var(--gradient-rainbow);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: bold;
+}
+
+/* Background Patterns */
+.bg-pattern-stars {
+  background: #000080
+    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0ic3RhcnMiIHg9IjAiIHk9IjAiIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSIxIiBmaWxsPSIjRkZGRkZGIi8+PGNpcmNsZSBjeD0iODAiIGN5PSI4MCIgcj0iMS41IiBmaWxsPSIjRkZGRkZGIi8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iNDAiIHI9IjEiIGZpbGw9IiNGRkZGRkYiLz48Y2lyY2xlIGN4PSI2MCIgY3k9IjE0MCIgcj0iMSIgZmlsbD0iI0ZGRkZGRiIvPjxjaXJjbGUgY3g9IjE2MCIgY3k9IjEyMCIgcj0iMS41IiBmaWxsPSIjRkZGRkZGIi8+PGNpcmNsZSBjeD0iMTAwIiBjeT0iMTgwIiByPSIxIiBmaWxsPSIjRkZGRkZGIi8+PGNpcmNsZSBjeD0iMTgwIiBjeT0iNjAiIHI9IjEiIGZpbGw9IiNGRkZGRkYiLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjEwMCIgcj0iMS41IiBmaWxsPSIjRkZGRkZGIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0idXJsKCNzdGFycykiLz48L3N2Zz4=");
+}
+
+.bg-pattern-grid {
+  background:
+    linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.bg-gradient-sunset {
+  background: var(--gradient-sunset);
+}
+
+.bg-gradient-ocean {
+  background: var(--gradient-ocean);
+}
+
+.bg-gradient-neon {
+  background: var(--gradient-neon);
+  background-size: 400% 400%;
+}
+
+/* Badges & Labels */
+.geo-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: 2px solid;
+  border-radius: 0;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+.geo-badge-new {
+  background: #ff0000;
+  color: #ffff00;
+  border-color: #ffff00;
+  animation: blink 1s infinite;
+}
+
+.geo-badge-hot {
+  background: #ff8800;
+  color: #ffffff;
+  border-color: #ffff00;
+}
+
+.geo-badge-cool {
+  background: #00ffff;
+  color: #000080;
+  border-color: #0080ff;
+}
+
+/* Visitor Counter Style */
+.visitor-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #000000;
+  border: 3px ridge #00ffff;
+  font-family: "Courier New", monospace;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #00ff00;
+  box-shadow:
+    inset 0 0 10px rgba(0, 255, 0, 0.3),
+    0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.visitor-counter-digit {
+  display: inline-block;
+  width: 1.5rem;
+  height: 2rem;
+  line-height: 2rem;
+  text-align: center;
+  background: #001100;
+  border: 1px solid #00ff00;
+  box-shadow: inset 0 0 5px rgba(0, 255, 0, 0.5);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .geo-box,
+  .geo-box-raised,
+  .geo-box-sunken,
+  .geo-box-neon {
+    padding: 1rem;
+    border-width: 3px;
+  }
+
+  .geo-button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+
+  .visitor-counter {
+    font-size: 1rem;
+  }
+
+  .visitor-counter-digit {
+    width: 1.2rem;
+    height: 1.6rem;
+    line-height: 1.6rem;
+  }
+}
+
+/* Made with Bob */

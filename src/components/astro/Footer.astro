@@ -1,0 +1,256 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <!-- Rainbow Divider -->
+    <hr class="geo-divider" />
+
+    <!-- Footer Content -->
+    <div class="footer-content">
+      <!-- Made With Love -->
+      <div class="footer-section">
+        <p class="made-with-love">
+          <span class="blink">💕</span>
+          Made with <span class="text-neon-pink">❤️</span> in Brooklyn
+          <span class="blink">💕</span>
+        </p>
+      </div>
+
+      <!-- Visitor Counter -->
+      <div class="footer-section">
+        <div class="visitor-counter">
+          <span>👀 Visitors:</span>
+          <span class="visitor-counter-digit">0</span>
+          <span class="visitor-counter-digit">0</span>
+          <span class="visitor-counter-digit">0</span>
+          <span class="visitor-counter-digit">4</span>
+          <span class="visitor-counter-digit">2</span>
+          <span class="visitor-counter-digit">0</span>
+        </div>
+      </div>
+
+      <!-- Copyright & Links -->
+      <div class="footer-section">
+        <p class="copyright">
+          © {currentYear} Rachel & Tim • All Rights Reserved
+        </p>
+        <p class="footer-links">
+          <a href="/privacy">Privacy</a>
+          <span class="separator">|</span>
+          <a href="/accessibility">Accessibility</a>
+          <span class="separator">|</span>
+          <a href="mailto:hello@rachelandtim.fun">Contact</a>
+        </p>
+      </div>
+
+      <!-- Best Viewed Badge -->
+      <div class="footer-section">
+        <div class="best-viewed-badge">
+          <img
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='31'%3E%3Crect width='88' height='31' fill='%23000080'/%3E%3Ctext x='44' y='20' font-family='Arial' font-size='12' fill='%2300FFFF' text-anchor='middle'%3EBEST VIEWED%3C/text%3E%3Ctext x='44' y='28' font-family='Arial' font-size='8' fill='%23FFFF00' text-anchor='middle'%3EWith Love%3C/text%3E%3C/svg%3E"
+            alt="Best viewed with love"
+            width="88"
+            height="31"
+            class="bounce"
+          />
+        </div>
+      </div>
+
+      <!-- Geocities-style Badges -->
+      <div class="footer-badges">
+        <span class="geo-badge geo-badge-hot">🔥 HOT</span>
+        <span class="geo-badge geo-badge-new blink-slow">✨ NEW</span>
+        <span class="geo-badge geo-badge-cool">😎 COOL</span>
+      </div>
+    </div>
+
+    <!-- Bottom Divider -->
+    <hr class="geo-divider-stars" />
+
+    <!-- Fun Footer Message -->
+    <div class="footer-message">
+      <p class="text-center">
+        <span class="rainbow-text"
+          >This website is 100% Geocities-inspired and proud of it!</span
+        >
+      </p>
+      <p class="text-center small-text">
+        Built with <a href="https://astro.build" target="_blank" rel="noopener"
+          >Astro</a
+        >,
+        <a href="https://react.dev" target="_blank" rel="noopener">React</a>,
+        and
+        <a href="https://supabase.com" target="_blank" rel="noopener"
+          >Supabase</a
+        >
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 80, 0.95),
+      rgba(0, 0, 128, 0.95)
+    );
+    border-top: 5px solid;
+    border-image: linear-gradient(90deg, #00ff00, #ffff00, #00ffff, #ff00ff) 1;
+    padding: 2rem 0 1rem;
+    margin-top: 4rem;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .footer-section {
+    text-align: center;
+  }
+
+  .made-with-love {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .copyright {
+    font-size: 0.9rem;
+    color: #00ffff;
+    margin: 0.5rem 0;
+  }
+
+  .footer-links {
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+  }
+
+  .footer-links a {
+    color: #ffff00;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .footer-links a:hover {
+    color: #ff00ff;
+    text-decoration: underline;
+  }
+
+  .separator {
+    margin: 0 0.5rem;
+    color: #00ffff;
+  }
+
+  .best-viewed-badge {
+    margin: 1rem 0;
+  }
+
+  .best-viewed-badge img {
+    display: inline-block;
+    border: 2px solid #00ffff;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  }
+
+  .footer-badges {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+  }
+
+  .footer-message {
+    margin-top: 2rem;
+  }
+
+  .footer-message p {
+    margin: 0.5rem 0;
+  }
+
+  .small-text {
+    font-size: 0.85rem;
+    color: #00ffff;
+  }
+
+  .small-text a {
+    color: #ffff00;
+    font-weight: bold;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .site-footer {
+      padding: 1.5rem 0 1rem;
+      margin-top: 3rem;
+    }
+
+    .footer-content {
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .made-with-love {
+      font-size: 1rem;
+    }
+
+    .copyright,
+    .footer-links {
+      font-size: 0.8rem;
+    }
+
+    .footer-badges {
+      gap: 0.5rem;
+    }
+
+    .small-text {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .separator {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // Visitor counter animation (placeholder - will be replaced with real data later)
+  function animateCounter() {
+    const digits = document.querySelectorAll(".visitor-counter-digit");
+    let count = 420;
+
+    // Simulate random visitor count increase
+    setInterval(() => {
+      count += Math.floor(Math.random() * 3);
+      const countStr = count.toString().padStart(6, "0");
+
+      digits.forEach((digit, index) => {
+        if (digit instanceof HTMLElement) {
+          digit.textContent = countStr[index];
+        }
+      });
+    }, 5000);
+  }
+
+  // Initialize counter animation
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", animateCounter);
+  } else {
+    animateCounter();
+  }
+</script>

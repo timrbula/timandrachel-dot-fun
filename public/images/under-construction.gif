@@ -1,0 +1,107 @@
+<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @keyframes dig {
+        0%, 100% { transform: rotate(-10deg); }
+        50% { transform: rotate(10deg); }
+      }
+      @keyframes blink-sign {
+        0%, 49%, 100% { opacity: 1; }
+        50%, 99% { opacity: 0.3; }
+      }
+      .worker {
+        fill: #FFA500;
+      }
+      .skin {
+        fill: #FFE4C4;
+      }
+      .shovel {
+        fill: #8B4513;
+        animation: dig 1.5s ease-in-out infinite;
+        transform-origin: 45px 55px;
+      }
+      .cone {
+        fill: #FF6347;
+      }
+      .cone-stripe {
+        fill: white;
+      }
+      .sign {
+        fill: #FFD700;
+        stroke: #000;
+        stroke-width: 2;
+        animation: blink-sign 1s step-end infinite;
+      }
+      .barrier {
+        fill: none;
+        stroke: #000;
+        stroke-width: 2;
+      }
+    </style>
+  </defs>
+  
+  <!-- Ground -->
+  <rect x="0" y="75" width="100" height="25" fill="#8B7355"/>
+  <ellipse cx="50" cy="80" rx="15" ry="5" fill="#654321" opacity="0.5"/>
+  
+  <!-- Construction barriers -->
+  <line class="barrier" x1="10" y1="70" x2="30" y2="70"/>
+  <line class="barrier" x1="10" y1="70" x2="10" y2="75"/>
+  <line class="barrier" x1="30" y1="70" x2="30" y2="75"/>
+  <line class="barrier" x1="70" y1="70" x2="90" y2="70"/>
+  <line class="barrier" x1="70" y1="70" x2="70" y2="75"/>
+  <line class="barrier" x1="90" y1="70" x2="90" y2="75"/>
+  
+  <!-- Traffic cones -->
+  <g>
+    <polygon class="cone" points="15,75 20,60 10,60"/>
+    <rect class="cone-stripe" x="11" y="65" width="8" height="2"/>
+    <ellipse class="cone" cx="15" cy="75" rx="5" ry="2"/>
+  </g>
+  
+  <g>
+    <polygon class="cone" points="85,75 90,60 80,60"/>
+    <rect class="cone-stripe" x="81" y="65" width="8" height="2"/>
+    <ellipse class="cone" cx="85" cy="75" rx="5" ry="2"/>
+  </g>
+  
+  <!-- Construction worker -->
+  <g>
+    <!-- Hard hat -->
+    <ellipse class="worker" cx="50" cy="42" rx="8" ry="6"/>
+    <rect class="worker" x="42" y="42" width="16" height="3"/>
+    
+    <!-- Head -->
+    <circle class="skin" cx="50" cy="48" r="6"/>
+    
+    <!-- Body -->
+    <rect class="worker" x="44" y="54" width="12" height="16" rx="2"/>
+    
+    <!-- Arms -->
+    <rect class="skin" x="40" y="56" width="4" height="12" rx="2"/>
+    <rect class="skin" x="56" y="56" width="4" height="12" rx="2"/>
+    
+    <!-- Legs -->
+    <rect fill="#4169E1" x="45" y="70" width="4" height="10" rx="1"/>
+    <rect fill="#4169E1" x="51" y="70" width="4" height="10" rx="1"/>
+    
+    <!-- Boots -->
+    <ellipse fill="#000" cx="47" cy="80" rx="3" ry="2"/>
+    <ellipse fill="#000" cx="53" cy="80" rx="3" ry="2"/>
+  </g>
+  
+  <!-- Shovel -->
+  <g class="shovel">
+    <rect x="44" y="55" width="2" height="25" fill="#8B4513"/>
+    <path d="M 40 78 L 45 75 L 45 82 Z" fill="#696969"/>
+  </g>
+  
+  <!-- Sign -->
+  <rect class="sign" x="25" y="20" width="50" height="25" rx="3"/>
+  <text x="50" y="28" font-size="6" fill="#000" text-anchor="middle" font-weight="bold">UNDER</text>
+  <text x="50" y="36" font-size="6" fill="#000" text-anchor="middle" font-weight="bold">CONSTRUCTION</text>
+  <text x="50" y="42" font-size="4" fill="#000" text-anchor="middle">⚠️ 🚧 ⚠️</text>
+  
+  <!-- Sign post -->
+  <rect x="48" y="45" width="4" height="30" fill="#8B4513"/>
+</svg>
