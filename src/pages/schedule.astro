@@ -4,6 +4,7 @@ import Marquee from "../components/react/Marquee";
 import BlinkingText from "../components/react/BlinkingText";
 import RainbowDivider from "../components/react/RainbowDivider";
 import GeoButton from "../components/react/GeoButton";
+import UnderConstruction from "@/components/react/UnderConstruction";
 
 const VENUE_NAME = "Neptune @ Radio Star";
 const VENUE_ADDRESS = "13 Greenpoint Ave, Brooklyn, NY 11222";
@@ -35,6 +36,15 @@ const CEREMONY_TIME = "6:00 PM";
       </p>
     </section>
 
+    <!-- Under Construction Notice for Future Pages -->
+    <section class="construction-section">
+      <h2 class="text-center text-neon">Coming Soon!</h2>
+      <UnderConstruction
+        client:load
+        message="More awesome content is on the way!"
+      />
+    </section>
+
     <RainbowDivider client:load variant="animated" />
 
     <!-- Date & Time Box -->
@@ -50,7 +60,7 @@ const CEREMONY_TIME = "6:00 PM";
     <RainbowDivider client:load variant="stars" />
 
     <!-- Timeline -->
-    <section class="timeline-section">
+    <!-- <section class="timeline-section">
       <h2 class="text-center text-3d">
         <BlinkingText client:load>✨</BlinkingText>
         Event Timeline
@@ -58,7 +68,6 @@ const CEREMONY_TIME = "6:00 PM";
       </h2>
 
       <div class="timeline">
-        <!-- Event 1: Ceremony -->
         <div class="timeline-item geo-box-raised">
           <div class="timeline-icon">💒</div>
           <div class="timeline-content">
@@ -71,11 +80,6 @@ const CEREMONY_TIME = "6:00 PM";
           </div>
         </div>
 
-        <div class="timeline-arrow text-center">
-          <span class="arrow-down">⬇️</span>
-        </div>
-
-        <!-- Event 2: Cocktail Hour -->
         <div class="timeline-item geo-box-raised">
           <div class="timeline-icon">🍸</div>
           <div class="timeline-content">
@@ -89,11 +93,6 @@ const CEREMONY_TIME = "6:00 PM";
           </div>
         </div>
 
-        <div class="timeline-arrow text-center">
-          <span class="arrow-down">⬇️</span>
-        </div>
-
-        <!-- Event 3: Reception & Dinner -->
         <div class="timeline-item geo-box-raised">
           <div class="timeline-icon">🍽️</div>
           <div class="timeline-content">
@@ -107,11 +106,6 @@ const CEREMONY_TIME = "6:00 PM";
           </div>
         </div>
 
-        <div class="timeline-arrow text-center">
-          <span class="arrow-down">⬇️</span>
-        </div>
-
-        <!-- Event 4: Dancing -->
         <div class="timeline-item geo-box-raised">
           <div class="timeline-icon">💃</div>
           <div class="timeline-content">
@@ -126,11 +120,6 @@ const CEREMONY_TIME = "6:00 PM";
           </div>
         </div>
 
-        <div class="timeline-arrow text-center">
-          <span class="arrow-down">⬇️</span>
-        </div>
-
-        <!-- Event 5: Cake Cutting -->
         <div class="timeline-item geo-box-raised">
           <div class="timeline-icon">🎂</div>
           <div class="timeline-content">
@@ -143,11 +132,6 @@ const CEREMONY_TIME = "6:00 PM";
           </div>
         </div>
 
-        <div class="timeline-arrow text-center">
-          <span class="arrow-down">⬇️</span>
-        </div>
-
-        <!-- Event 6: Last Call -->
         <div class="timeline-item geo-box-raised">
           <div class="timeline-icon">🌙</div>
           <div class="timeline-content">
@@ -160,65 +144,7 @@ const CEREMONY_TIME = "6:00 PM";
       </div>
     </section>
 
-    <RainbowDivider client:load variant="dots" />
-
-    <!-- Venue Details -->
-    <section class="venue-section">
-      <h2 class="text-center text-3d">
-        <BlinkingText client:load>📍</BlinkingText>
-        Venue Details
-        <BlinkingText client:load>📍</BlinkingText>
-      </h2>
-
-      <div class="venue-grid">
-        <!-- Venue Info -->
-        <div class="venue-info geo-box-neon">
-          <h3 class="text-neon">🎪 {VENUE_NAME}</h3>
-          <p><strong>Address:</strong></p>
-          <p>{VENUE_ADDRESS}</p>
-          <p class="venue-description">
-            Radio Star is an awesome Brooklyn venue with great vibes, amazing
-            food, and the perfect space for our celebration!
-          </p>
-          <GeoButton
-            client:load
-            variant="primary"
-            href="https://www.google.com/maps/search/?api=1&query=Radio+Star+13+Greenpoint+Ave+Brooklyn+NY"
-          >
-            🗺️ Open in Google Maps
-          </GeoButton>
-        </div>
-
-        <!-- Subway Directions -->
-        <div class="subway-info geo-box-neon">
-          <h3 class="text-neon-pink">🚇 Subway Directions</h3>
-          <p><strong>Nearest Station:</strong></p>
-          <p class="text-neon">Greenpoint Ave (G train)</p>
-          <p>Just a 5-minute walk from the station!</p>
-
-          <div class="subway-routes">
-            <p><strong>From Manhattan:</strong></p>
-            <ul>
-              <li>Take L train to Bedford Ave</li>
-              <li>Transfer to G train</li>
-              <li>Get off at Greenpoint Ave</li>
-            </ul>
-            <p><em>OR</em></p>
-            <ul>
-              <li>Take 7 train to Court Sq</li>
-              <li>Transfer to G train</li>
-              <li>Get off at Greenpoint Ave</li>
-            </ul>
-          </div>
-
-          <p class="subway-tip">
-            <BlinkingText client:load>💡</BlinkingText>
-            <strong>Pro Tip:</strong> The G train runs less frequently than other
-            lines, so plan extra time!
-          </p>
-        </div>
-      </div>
-    </section>
+    <RainbowDivider client:load variant="dots" /> -->
 
     <RainbowDivider client:load variant="solid" />
 
@@ -243,24 +169,6 @@ const CEREMONY_TIME = "6:00 PM";
     <!-- Additional Info -->
     <section class="additional-info">
       <div class="info-grid">
-        <!-- Parking -->
-        <div class="info-card geo-box-raised">
-          <h3>🚗 Parking</h3>
-          <p><strong>Street Parking:</strong></p>
-          <p>Available nearby (check signs for restrictions)</p>
-          <p><strong>Parking Garages:</strong></p>
-          <ul>
-            <li>Icon Parking - 67 West St (0.3 miles)</li>
-            <li>Various Greenpoint Parking locations</li>
-          </ul>
-          <p class="parking-tip">
-            <em
-              >💡 Tip: Uber/Lyft might be easier if you're planning to enjoy the
-              open bar! 🍻</em
-            >
-          </p>
-        </div>
-
         <!-- Weather -->
         <div class="info-card geo-box-raised">
           <h3>🌤️ October Weather</h3>
@@ -272,23 +180,6 @@ const CEREMONY_TIME = "6:00 PM";
           <p>👗 Layers are your friend!</p>
           <p class="weather-note">
             October in NYC is beautiful with fall foliage! 🍂
-          </p>
-        </div>
-
-        <!-- Accessibility -->
-        <div class="info-card geo-box-raised">
-          <h3>♿ Accessibility</h3>
-          <p><strong>Venue Access:</strong></p>
-          <p>✅ Street-level entrance</p>
-          <p>✅ Accessible restrooms</p>
-          <p><strong>Subway Access:</strong></p>
-          <p>G train has elevator access at select stops</p>
-          <p class="accessibility-note">
-            <em
-              >Questions about accessibility? <a href="/rsvp" class="text-neon"
-                >Contact us!</a
-              ></em
-            >
           </p>
         </div>
       </div>
@@ -320,8 +211,8 @@ const CEREMONY_TIME = "6:00 PM";
 
   <!-- Bottom Marquee -->
   <Marquee client:load speed={20} direction="right">
-    🎉 See you on October 9th, 2026! 📅 Radio Star, Brooklyn 🗽 Let's celebrate!
-    💕
+    🎉 See you on October 9th, 2026! 📅 Neptune @ Radio Star, Brooklyn 🗽 Let's
+    celebrate! 💕
   </Marquee>
 </BaseLayout>
 

@@ -1,7 +1,7 @@
 .animation-toggle {
   position: fixed;
-  top: 1rem;
-  left: 1rem;
+  bottom: 1rem;
+  right: 1rem;
   background: linear-gradient(180deg, #ffff00, #ff8800);
   border: 3px outset #ffff00;
   padding: 0.5rem 0.75rem;
@@ -44,11 +44,12 @@
 /* Mobile Styles */
 @media (max-width: 768px) {
   .animation-toggle {
-    top: 0;
-    right: 4.5rem;
+    top: 1rem;
+    right: 1rem;
     left: auto;
     padding: 0.75rem;
     font-size: 1rem;
+    height: 1rem;
   }
 }
 

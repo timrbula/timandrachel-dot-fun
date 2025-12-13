@@ -4,12 +4,12 @@ import './AnimationToggle.css';
 const ANIMATION_PREF_KEY = 'animations-enabled';
 
 export default function AnimationToggle() {
-  const [isEnabled, setIsEnabled] = useState(true);
+  const [isEnabled, setIsEnabled] = useState(false);
 
   useEffect(() => {
     // Check saved preference on mount
     const saved = localStorage.getItem(ANIMATION_PREF_KEY);
-    const enabled = saved !== 'false';
+    const enabled = saved === 'true';
     setIsEnabled(enabled);
     
     // Apply initial state

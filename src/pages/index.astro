@@ -22,62 +22,88 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
 >
   <!-- Marquee Banner -->
   <Marquee client:load speed={15}>
-    💕 Welcome to Rachel & Tim's Wedding Website! 💕 October 9, 2026 💕
-    Brooklyn, NY 💕
+    Welcome to Rachel & Tim's Wedding Website! October 9, 2026 Brooklyn, NY
   </Marquee>
 
   <div class="container">
+    <!-- Welcome Message -->
+    <section class="welcome-section geo-box bg-hot-pink">
+      <h2 class="text-beveled-green" style="font-size: 3rem;">
+        We're getting married
+      </h2>
+      <p>
+        {weddingDateFormatted}
+      </p>
+      <p>Neptune @ Radio Star • Brooklyn, NY</p>
+      <!-- <p style="font-size: 1.3rem; font-weight: bold;">
+        Hey there friend or family member! 👋 We're excited to celebrate our
+        wedding with you!
+      </p>
+      <p style="font-size: 1.3rem; font-weight: bold;">
+        This website is your one-stop shop for all the deets about our big day.
+        We've got the schedule, travel info, RSVP form, and even a guestbook
+        where you can leave us a message (please do, we love reading them! 💕).
+      </p> -->
+    </section>
+
+    <!-- <section class="welcome-section geo-box bg-hot-pink">
+      <h2 class="text-beveled-green" style="font-size: 3rem;">
+        We're getting married
+      </h2> -->
+    <!-- <p style="font-size: 1.3rem; font-weight: bold;">
+        Hey there friend or family member! 👋 We're excited to celebrate our
+        wedding with you!
+      </p>
+      <p style="font-size: 1.3rem; font-weight: bold;">
+        This website is your one-stop shop for all the deets about our big day.
+        We've got the schedule, travel info, RSVP form, and even a guestbook
+        where you can leave us a message (please do, we love reading them! 💕).
+      </p> -->
+    <!-- </section> -->
+
     <!-- Hero Section -->
-    <section class="hero-section text-center">
-      <h1 class="text-3d">
+    <section class="welcome-section text-center">
+      <!-- <h1 class="text-3d">
         <BlinkingText client:load speed="slow">💕</BlinkingText>
         Rachel & Tim
         <BlinkingText client:load speed="slow">💕</BlinkingText>
       </h1>
 
-      <h2 class="text-neon">Are Getting Married!</h2>
+      <h2 class="text-neon">Are Getting Married!</h2> -->
 
-      <div class="wedding-date geo-box-neon">
-        <p class="date-text rainbow-text">{weddingDateFormatted}</p>
-        <p class="location-text text-neon-pink">
+      <!-- <div class="wedding-date geo-box-neon bg-lime-green">
+        <p
+          class="date-text"
+          style="color: #ff0000; font-weight: bold; text-shadow: 2px 2px 0 #000;"
+        >
+          {weddingDateFormatted}
+        </p>
+        <p
+          class="location-text"
+          style="color: #0000ff; font-weight: bold; text-shadow: 1px 1px 0 #000;"
+        >
           Neptune @ Radio Star • Brooklyn, NY
         </p>
-      </div>
+      </div> -->
 
       <!-- Countdown -->
-      <div class="countdown geo-box-raised">
-        <h3 class="text-outline">
-          <BlinkingText client:load>⏰</BlinkingText>
-          Countdown to the Big Day!
-          <BlinkingText client:load>⏰</BlinkingText>
-        </h3>
+      <div class="countdown geo-box-raised bg-pattern-flames">
+        <h3 class="text-outline">Countdown to the Big Day!</h3>
         <p class="countdown-number">
-          <span class="text-neon glow-text">{daysLeft}</span>
+          <span class="text-beveled-blue">{daysLeft}</span>
         </p>
-        <p class="countdown-label">Days to Go!</p>
+        <p class="countdown-label text-beveled-yellow" style="font-size: 2rem;">
+          Days to Go!
+        </p>
       </div>
     </section>
 
-    <RainbowDivider client:load variant="animated" />
+    <!-- <RainbowDivider client:load variant="animated" /> -->
 
-    <!-- Welcome Message -->
-    <section class="welcome-section geo-box">
-      <h2 class="text-neon-pink">Welcome to Our Website!</h2>
-      <p>
-        Hey there friend or family member! 👋 We're excited to celebrate our
-        wedding with you!
-      </p>
-      <p>
-        This website is your one-stop shop for all the deets about our big day.
-        We've got the schedule, travel info, RSVP form, and even a guestbook
-        where you can leave us a message (please do, we love reading them! 💕).
-      </p>
-    </section>
-
-    <RainbowDivider client:load variant="stars" />
+    <!-- <RainbowDivider client:load variant="stars" /> -->
 
     <!-- Quick Links -->
-    <section class="quick-links-section text-center">
+    <!-- <section class="quick-links-section text-center">
       <h2 class="text-3d">Quick Links</h2>
       <div class="button-grid">
         <GeoButton client:load variant="primary" href="/schedule">
@@ -93,71 +119,11 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
           📖 Sign Guestbook
         </GeoButton>
       </div>
-    </section>
-
-    <RainbowDivider client:load variant="dots" />
-
-    <!-- Our Story (Placeholder) -->
-    <section class="story-section geo-box-raised">
-      <h2 class="text-neon">Our Story</h2>
-      <div class="story-content">
-        <p>
-          <span class="text-neon-pink">Rachel</span> and <span class="text-neon"
-            >Tim</span
-          > met in the most Brooklyn way possible... 🗽
-        </p>
-        <p>
-          <em
-            >(More details coming soon! We're still writing this part because we
-            can't agree on who made the first move 😂)</em
-          >
-        </p>
-      </div>
-    </section>
-
-    <RainbowDivider client:load variant="solid" />
-
-    <!-- Important Info -->
-    <section class="info-section">
-      <div class="info-grid">
-        <div class="info-box geo-box-neon">
-          <h3>📍 Location</h3>
-          <p><strong>Radio Star</strong></p>
-          <p>13 Greenpoint Ave</p>
-          <p>Brooklyn, NY 11222</p>
-          <GeoButton client:load variant="secondary" href="/travel">
-            Get Directions
-          </GeoButton>
-        </div>
-
-        <div class="info-box geo-box-neon">
-          <h3>⏰ Time</h3>
-          <p><strong>Ceremony:</strong> 6:00 PM</p>
-          <p><strong>Reception:</strong> 7:00 PM</p>
-          <p><strong>Last Call:</strong> 12:00 AM</p>
-          <GeoButton client:load variant="secondary" href="/schedule">
-            Full Schedule
-          </GeoButton>
-        </div>
-
-        <div class="info-box geo-box-neon">
-          <h3>👔 Dress Code</h3>
-          <p><strong>Cocktail Attire</strong></p>
-          <p>Dress to impress!</p>
-          <p>(But also be comfortable for dancing 💃🕺)</p>
-        </div>
-      </div>
-    </section>
-
-    <RainbowDivider client:load variant="animated" />
+    </section> -->
 
     <!-- RSVP CTA -->
     <section class="rsvp-cta text-center geo-box-raised">
-      <h2 class="text-3d">
-        <BlinkingText client:load>✨</BlinkingText>
-        Don't Forget to RSVP!
-        <BlinkingText client:load>✨</BlinkingText>
-      </h2>
+      <h2 class="text-3d">Don't Forget to RSVP!</h2>
       <p class="rsvp-text">
         We need to know if you're coming so we can plan accordingly! Please RSVP
         by <strong class="text-neon-pink">April 9, 2026</strong>.
@@ -167,25 +133,70 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
       </GeoButton>
     </section>
 
-    <RainbowDivider client:load variant="stars" />
+    <!-- Important Info -->
+    <section class="info-section">
+      <div class="info-grid">
+        <div class="info-box geo-box-neon bg-electric-blue">
+          <h3 class="text-beveled-yellow" style="font-size: 2rem;">
+            📍 Location
+          </h3>
+          <p style="font-size: 1.2rem; font-weight: bold;">
+            <strong>Neptune @ Radio Star</strong>
+          </p>
+          <p style="font-size: 1.1rem;">13 Greenpoint Ave</p>
+          <p style="font-size: 1.1rem;">Brooklyn, NY 11222</p>
+          <GeoButton client:load variant="secondary" href="/travel">
+            Get Directions
+          </GeoButton>
+        </div>
+
+        <div class="info-box geo-box-neon bg-lime-green">
+          <h3 class="text-beveled-red" style="font-size: 2rem;">⏰ Time</h3>
+          <p style="color: #000; font-size: 1.2rem; font-weight: bold;">
+            <strong>Ceremony:</strong> 6:00 PM
+          </p>
+          <p style="color: #000; font-size: 1.2rem; font-weight: bold;">
+            <strong>Reception:</strong> 7:00 PM
+          </p>
+          <p style="color: #000; font-size: 1.2rem; font-weight: bold;">
+            <strong>Last Call:</strong> 12:00 AM
+          </p>
+          <GeoButton client:load variant="secondary" href="/schedule">
+            Full Schedule
+          </GeoButton>
+        </div>
+
+        <div class="info-box geo-box-neon bg-hot-pink">
+          <h3 class="text-beveled-blue" style="font-size: 2rem;">
+            👔 Dress Code
+          </h3>
+          <p style="font-size: 1.2rem; font-weight: bold;">
+            <strong>Cocktail Attire</strong>
+          </p>
+          <p style="font-size: 1.1rem;">Dress to impress!</p>
+          <p style="font-size: 1.1rem;">
+            (But also be comfortable for dancing 💃🕺)
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="animated" />
 
     <!-- Fun Badges Section -->
     <section class="badges-section text-center">
-      <h3 class="text-rainbow">Check Out These Cool Badges!</h3>
       <div class="badges-container">
         <span class="geo-badge geo-badge-new blink">✨ NEW</span>
-        <span class="geo-badge geo-badge-hot">🔥 HOT</span>
-        <span class="geo-badge geo-badge-cool">😎 COOL</span>
+        <span class="geo-badge geo-badge-hot blink">🔥 HOT</span>
+        <span class="geo-badge geo-badge-cool blink">😎 COOL</span>
         <span
-          class="geo-badge"
+          class="geo-badge blink"
           style="background: #FF00FF; color: #FFFF00; border-color: #00FFFF;"
         >
           💕 LOVE
         </span>
       </div>
     </section>
-
-    <RainbowDivider client:load variant="dots" />
 
     <!-- Under Construction Notice for Future Pages -->
     <section class="construction-section">
@@ -199,7 +210,7 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
 
   <!-- Bottom Marquee -->
   <Marquee client:load speed={20} direction="right">
-    🎉 See you in Brooklyn! 🗽 October 9, 2026 💕 Rachel & Tim 💕
+    See you in NYC! October 9, 2026 Rachel & Tim
   </Marquee>
 </BaseLayout>
 

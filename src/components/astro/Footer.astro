@@ -4,20 +4,8 @@ const currentYear = new Date().getFullYear();
 
 <footer class="site-footer">
   <div class="container">
-    <!-- Rainbow Divider -->
-    <hr class="geo-divider" />
-
     <!-- Footer Content -->
     <div class="footer-content">
-      <!-- Made With Love -->
-      <div class="footer-section">
-        <p class="made-with-love">
-          <span class="blink">💕</span>
-          Made with <span class="text-neon-pink">❤️</span> in Brooklyn
-          <span class="blink">💕</span>
-        </p>
-      </div>
-
       <!-- Visitor Counter -->
       <div class="footer-section">
         <div class="visitor-counter">
@@ -29,18 +17,6 @@ const currentYear = new Date().getFullYear();
           <span class="visitor-counter-digit">2</span>
           <span class="visitor-counter-digit">0</span>
         </div>
-      </div>
-
-      <!-- Copyright & Links -->
-      <div class="footer-section">
-        <p class="copyright">
-          © {currentYear} Rachel & Tim • All Rights Reserved
-        </p>
-        <p class="footer-links">
-          <a href="mailto:wedding@rachelandtim.fun">Contact</a>
-          <span class="separator">|</span>
-          <a href="/privacy">Privacy</a>
-        </p>
       </div>
 
       <!-- Best Viewed Badge -->
@@ -58,14 +34,21 @@ const currentYear = new Date().getFullYear();
 
       <!-- Geocities-style Badges -->
       <div class="footer-badges">
-        <span class="geo-badge geo-badge-hot">🔥 HOT</span>
+        <span class="geo-badge geo-badge-hot blink">🔥 HOT</span>
         <span class="geo-badge geo-badge-new blink-slow">✨ NEW</span>
-        <span class="geo-badge geo-badge-cool">😎 COOL</span>
+        <span class="geo-badge geo-badge-cool blink">😎 COOL</span>
       </div>
     </div>
 
     <!-- Bottom Divider -->
     <hr class="geo-divider-stars" />
+
+    <!-- Copyright & Links -->
+    <div class="footer-section">
+      <p class="copyright">
+        © {currentYear} Rachel & Tim • All Rights Reserved
+      </p>
+    </div>
   </div>
 </footer>
 

@@ -1,0 +1,314 @@
+---
+// GeoCities-style sidebar with navigation links
+import AnimationToggle from "../react/AnimationToggle";
+---
+
+<!-- Mobile Menu Toggle -->
+<button
+  class="mobile-sidebar-toggle"
+  aria-label="Toggle navigation menu"
+  aria-expanded="false"
+  id="mobile-sidebar-toggle"
+>
+  <span class="hamburger-icon"></span>
+</button>
+
+<!-- Site Title (Mobile) -->
+<div class="mobile-site-title">
+  <h1 class="text-neon-pink">
+    <span class="sparkle">💕</span>
+    Rachel & Tim
+    <span class="sparkle">💕</span>
+  </h1>
+</div>
+
+<!-- Animation Toggle (Mobile) -->
+<div class="mobile-animation-toggle">
+  <AnimationToggle client:load />
+</div>
+
+<aside class="geocities-sidebar" id="geocities-sidebar">
+  <!-- Site Title (Desktop) -->
+  <div class="sidebar-site-title">
+    <h1 class="text-neon-pink">💕 R&T 💕</h1>
+    <p class="subtitle">Oct 9, 2026</p>
+  </div>
+
+  <!-- Animation Toggle (Desktop) -->
+  <div class="sidebar-animation-toggle">
+    <AnimationToggle client:load />
+  </div>
+  <div class="sidebar-section-title">🌟 Cool Links 🌟</div>
+
+  <!-- Home -->
+  <a href="/" class="sidebar-badge">
+    <img
+      src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='31'%3E%3Crect width='88' height='31' fill='%230066cc'/%3E%3Ctext x='44' y='20' font-family='Arial Black' font-size='14' fill='white' text-anchor='middle' font-weight='bold'%3E🏠 HOME%3C/text%3E%3C/svg%3E"
+      alt="Home"
+    />
+  </a>
+
+  <!-- Schedule -->
+  <a href="/schedule" class="sidebar-badge">
+    <img
+      src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='31'%3E%3Crect width='88' height='31' fill='%23ff6600'/%3E%3Ctext x='44' y='12' font-family='Arial' font-size='10' fill='white' text-anchor='middle' font-weight='bold'%3E📅 Schedule%3C/text%3E%3Ctext x='44' y='24' font-family='Arial' font-size='8' fill='yellow' text-anchor='middle'%3EView Events%3C/text%3E%3C/svg%3E"
+      alt="Schedule"
+    />
+  </a>
+
+  <!-- Travel Info -->
+  <a href="/travel" class="sidebar-badge">
+    <img
+      src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='31'%3E%3Crect width='88' height='31' fill='%23000080'/%3E%3Ctext x='44' y='12' font-family='Arial Black' font-size='11' fill='%2300ffff' text-anchor='middle'%3E✈️ Travel%3C/text%3E%3Ctext x='44' y='24' font-family='Arial' font-size='8' fill='white' text-anchor='middle'%3EGet There!%3C/text%3E%3C/svg%3E"
+      alt="Travel Info"
+    />
+  </a>
+
+  <!-- RSVP -->
+  <a href="/rsvp" class="sidebar-badge">
+    <img
+      src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='31'%3E%3Crect width='88' height='31' fill='%23cc0000'/%3E%3Ctext x='44' y='12' font-family='Arial' font-size='9' fill='white' text-anchor='middle' font-weight='bold'%3E💌 RSVP%3C/text%3E%3Ctext x='44' y='24' font-family='Arial' font-size='9' fill='%23ffff00' text-anchor='middle' font-weight='bold'%3ENOW!%3C/text%3E%3C/svg%3E"
+      alt="RSVP"
+    />
+  </a>
+
+  <!-- Guestbook -->
+  <a href="/guestbook" class="sidebar-badge">
+    <img
+      src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='31'%3E%3Crect width='88' height='31' fill='%2300ccff'/%3E%3Ctext x='44' y='12' font-family='Arial' font-size='9' fill='black' text-anchor='middle' font-weight='bold'%3E📖 Sign My%3C/text%3E%3Ctext x='44' y='24' font-family='Arial Black' font-size='10' fill='%23ff00ff' text-anchor='middle'%3EGuestbook%3C/text%3E%3C/svg%3E"
+      alt="Guestbook"
+    />
+  </a>
+
+  <!-- Play Games -->
+  <a href="/play" class="sidebar-badge">
+    <img
+      src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='31'%3E%3Crect width='88' height='31' fill='%23006600'/%3E%3Ctext x='44' y='12' font-family='Arial' font-size='9' fill='white' text-anchor='middle'%3E🎮 Play%3C/text%3E%3Ctext x='44' y='24' font-family='Arial Black' font-size='10' fill='%2300ff00' text-anchor='middle'%3EGames!%3C/text%3E%3C/svg%3E"
+      alt="Play Games"
+    />
+  </a>
+
+  <!-- Privacy Policy -->
+  <a href="/privacy" class="sidebar-badge">
+    <img
+      src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='31'%3E%3Crect width='88' height='31' fill='%23336699'/%3E%3Ctext x='44' y='12' font-family='Arial' font-size='8' fill='white' text-anchor='middle'%3E🔒 Privacy%3C/text%3E%3Ctext x='44' y='24' font-family='Arial' font-size='9' fill='%2300ff00' text-anchor='middle'%3EPolicy%3C/text%3E%3C/svg%3E"
+      alt="Privacy Policy"
+    />
+  </a>
+</aside>
+
+<script>
+  // Mobile sidebar toggle functionality
+  const toggle = document.getElementById("mobile-sidebar-toggle");
+  const sidebar = document.getElementById("geocities-sidebar");
+
+  if (toggle && sidebar) {
+    toggle.addEventListener("click", () => {
+      const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!isExpanded));
+      sidebar.classList.toggle("open");
+      document.body.classList.toggle("sidebar-open");
+    });
+
+    // Close sidebar when clicking outside
+    document.addEventListener("click", (e) => {
+      if (
+        !toggle.contains(e.target as Node) &&
+        !sidebar.contains(e.target as Node)
+      ) {
+        toggle.setAttribute("aria-expanded", "false");
+        sidebar.classList.remove("open");
+        document.body.classList.remove("sidebar-open");
+      }
+    });
+
+    // Close sidebar on escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        toggle.setAttribute("aria-expanded", "false");
+        sidebar.classList.remove("open");
+        document.body.classList.remove("sidebar-open");
+      }
+    });
+
+    // Close sidebar when clicking a link
+    const sidebarLinks = sidebar.querySelectorAll("a");
+    sidebarLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        toggle.setAttribute("aria-expanded", "false");
+        sidebar.classList.remove("open");
+        document.body.classList.remove("sidebar-open");
+      });
+    });
+  }
+</script>
+
+<style>
+  /* Mobile Header */
+  .mobile-sidebar-toggle {
+    display: none;
+  }
+
+  .mobile-site-title {
+    display: none;
+  }
+
+  .mobile-animation-toggle {
+    display: none;
+  }
+
+  /* Desktop Sidebar Title */
+  .sidebar-site-title {
+    text-align: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #00ffff;
+  }
+
+  .sidebar-site-title h1 {
+    font-size: 1.5rem;
+    margin: 0;
+    animation: glow-text 2s ease-in-out infinite;
+  }
+
+  .sidebar-site-title .subtitle {
+    font-size: 0.8rem;
+    color: #ffff00;
+    margin: 0.25rem 0 0;
+    font-family: "Comic Sans MS", cursive;
+  }
+
+  .sidebar-animation-toggle {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #ff00ff;
+  }
+
+  .sparkle {
+    display: inline-block;
+    animation: sparkle 1s ease-in-out infinite;
+  }
+
+  /* Mobile Styles */
+  @media (max-width: 768px) {
+    .mobile-sidebar-toggle {
+      display: block;
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      background: #ff00ff;
+      border: 3px outset #ff00ff;
+      padding: 0.75rem;
+      cursor: pointer;
+      z-index: 1001;
+      box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+    }
+
+    .mobile-sidebar-toggle:active {
+      border-style: inset;
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+    }
+
+    .hamburger-icon {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: #ffff00;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger-icon::before,
+    .hamburger-icon::after {
+      content: "";
+      position: absolute;
+      width: 25px;
+      height: 3px;
+      background: #ffff00;
+      transition: all 0.3s ease;
+      left: 0;
+    }
+
+    .hamburger-icon::before {
+      top: -8px;
+    }
+
+    .hamburger-icon::after {
+      bottom: -8px;
+    }
+
+    .mobile-sidebar-toggle[aria-expanded="true"] .hamburger-icon {
+      background: transparent;
+    }
+
+    .mobile-sidebar-toggle[aria-expanded="true"] .hamburger-icon::before {
+      transform: rotate(45deg);
+      top: 0;
+    }
+
+    .mobile-sidebar-toggle[aria-expanded="true"] .hamburger-icon::after {
+      transform: rotate(-45deg);
+      bottom: 0;
+    }
+
+    .mobile-site-title {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 128, 0.95),
+        rgba(0, 0, 80, 0.95)
+      );
+      border-bottom: 5px solid;
+      border-image: linear-gradient(90deg, #ff00ff, #00ffff, #ffff00, #00ff00) 1;
+      padding: 1rem 0;
+      text-align: center;
+      z-index: 999;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .mobile-site-title h1 {
+      font-size: 1.5rem;
+      margin: 0;
+      animation: glow-text 2s ease-in-out infinite;
+    }
+
+    .mobile-animation-toggle {
+      display: block;
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1001;
+    }
+
+    .sidebar-site-title,
+    .sidebar-animation-toggle {
+      display: none;
+    }
+
+    .geocities-sidebar {
+      position: fixed;
+      left: -100%;
+      top: 0;
+      width: 80%;
+      max-width: 300px;
+      height: 100vh;
+      padding-top: 5rem;
+      transition: left 0.3s ease;
+      z-index: 1000;
+    }
+
+    .geocities-sidebar.open {
+      left: 0;
+    }
+
+    /* Prevent body scroll when sidebar is open */
+    :global(body.sidebar-open) {
+      overflow: hidden;
+    }
+  }
+</style>

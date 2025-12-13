@@ -13,15 +13,37 @@ html {
 }
 
 body {
-  font-family:
-    "Comic Sans MS", "Chalkboard SE", "Comic Neue", cursive, sans-serif;
+  /* font-family:
+    "Comic Sans MS", "Chalkboard SE", "Comic Neue", cursive, sans-serif; */
   line-height: 1.6;
   color: #ffffff;
-  background: #000080
-    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0ic3RhcnMiIHg9IjAiIHk9IjAiIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSIxIiBmaWxsPSIjRkZGRkZGIi8+PGNpcmNsZSBjeD0iODAiIGN5PSI4MCIgcj0iMS41IiBmaWxsPSIjRkZGRkZGIi8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iNDAiIHI9IjEiIGZpbGw9IiNGRkZGRkYiLz48Y2lyY2xlIGN4PSI2MCIgY3k9IjE0MCIgcj0iMSIgZmlsbD0iI0ZGRkZGRiIvPjxjaXJjbGUgY3g9IjE2MCIgY3k9IjEyMCIgcj0iMS41IiBmaWxsPSIjRkZGRkZGIi8+PGNpcmNsZSBjeD0iMTAwIiBjeT0iMTgwIiByPSIxIiBmaWxsPSIjRkZGRkZGIi8+PGNpcmNsZSBjeD0iMTgwIiBjeT0iNjAiIHI9IjEiIGZpbGw9IiNGRkZGRkYiLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjEwMCIgcj0iMS41IiBmaWxsPSIjRkZGRkZGIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0idXJsKCNzdGFycykiLz48L3N2Zz4=");
+  background-color: #0033cc;
+  //background-image: url("/images/background-3.png");
+  background-repeat: repeat;
   background-attachment: fixed;
+  background-size: 600px 600px;
   min-height: 100vh;
   overflow-x: hidden;
+  border-left: 10px solid;
+  border-right: 10px solid;
+  border-image: repeating-linear-gradient(
+      45deg,
+      #ff0000 0px,
+      #ff0000 10px,
+      #ff8800 10px,
+      #ff8800 20px,
+      #ffff00 20px,
+      #ffff00 30px,
+      #00ff00 30px,
+      #00ff00 40px,
+      #00ffff 40px,
+      #00ffff 50px,
+      #0080ff 50px,
+      #0080ff 60px,
+      #ff00ff 60px,
+      #ff00ff 70px
+    )
+    10;
 }
 
 /* Typography */
@@ -334,5 +356,78 @@ img {
 
   .construction-subtext {
     font-size: 0.9rem;
+  }
+}
+
+/* GeoCities Sidebar */
+.geocities-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 200px;
+  height: 100vh;
+  background: linear-gradient(180deg, #000080 0%, #000040 100%);
+  border-right: 5px ridge #00ffff;
+  padding: 1rem 0.5rem;
+  overflow-y: auto;
+  z-index: 100;
+  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.8);
+}
+
+.geocities-sidebar::-webkit-scrollbar {
+  width: 12px;
+}
+
+.geocities-sidebar::-webkit-scrollbar-track {
+  background: #000040;
+}
+
+.geocities-sidebar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff00ff, #00ffff);
+  border: 2px solid #000;
+}
+
+.sidebar-badge {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  border: 3px outset #808080;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.sidebar-badge:hover {
+  transform: scale(1.05);
+  border-style: inset;
+}
+
+.sidebar-badge img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.sidebar-section-title {
+  color: #ffff00;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 1rem 0 0.5rem;
+  text-shadow: 2px 2px 0 #000;
+  text-transform: uppercase;
+}
+
+/* Adjust main content for sidebar */
+@media (min-width: 769px) {
+  body {
+    margin-left: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    margin-left: 0;
+    padding-top: 4.5rem;
   }
 }

@@ -10,7 +10,7 @@
   padding: 2rem;
   background: rgba(0, 255, 255, 0.05);
   border: 2px solid var(--color-cyan);
-  border-radius: 8px;
+  border-radius: 0;
 }
 
 .search-title {
@@ -37,7 +37,7 @@
   padding: 0.8rem;
   background: rgba(0, 0, 0, 0.3);
   border: 2px solid var(--color-cyan);
-  border-radius: 4px;
+  border-radius: 0;
   color: var(--color-white);
   font-family: "Comic Sans MS", cursive;
   font-size: 1rem;
@@ -80,7 +80,7 @@
   margin-top: 1rem;
   padding: 1rem;
   background: rgba(255, 0, 255, 0.1);
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 .contact-note {
@@ -162,7 +162,7 @@
   font-family: inherit;
   background: rgba(0, 0, 0, 0.3);
   border: 2px solid var(--color-cyan);
-  border-radius: 4px;
+  border-radius: 0;
   color: var(--color-white);
   transition: all 0.3s ease;
 }
@@ -205,7 +205,7 @@
   gap: 1rem;
   padding: 1rem;
   background: rgba(0, 255, 255, 0.05);
-  border-radius: 8px;
+  border-radius: 0;
   border: 2px solid var(--color-cyan);
 }
 
@@ -217,7 +217,7 @@
   padding: 0.75rem;
   background: rgba(0, 0, 0, 0.3);
   border: 2px solid transparent;
-  border-radius: 6px;
+  border-radius: 0;
   transition: all 0.3s ease;
 }
 
@@ -247,7 +247,7 @@
   padding: 1rem;
   background: rgba(255, 0, 255, 0.1);
   border: 2px solid var(--color-magenta);
-  border-radius: 6px;
+  border-radius: 0;
   transition: all 0.3s ease;
 }
 
@@ -278,7 +278,7 @@
   gap: 0.5rem;
   padding: 0.5rem;
   background: rgba(255, 0, 0, 0.1);
-  border-radius: 4px;
+  border-radius: 0;
   border-left: 3px solid var(--color-red);
 }
 
@@ -291,7 +291,7 @@
   padding: 1rem;
   background: rgba(255, 0, 0, 0.2);
   border: 2px solid var(--color-red);
-  border-radius: 8px;
+  border-radius: 0;
   color: var(--color-white);
   text-align: center;
 }
@@ -312,7 +312,7 @@
   background: linear-gradient(180deg, var(--color-magenta), #8000ff);
   color: var(--color-yellow);
   border: 3px outset var(--color-magenta);
-  border-radius: 8px;
+  border-radius: 0;
   cursor: pointer;
   transition: all 0.3s ease;
   text-transform: uppercase;
