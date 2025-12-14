@@ -31,7 +31,7 @@
 
 /* Form Section */
 .guestbook-form-section {
-  background: rgba(0, 255, 255, 0.05);
+  background: rgb(0, 51, 51);
   border: 3px solid var(--color-cyan);
   border-radius: 0;
   padding: 2rem;
@@ -74,7 +74,7 @@
   padding: 0.75rem;
   font-size: 1rem;
   font-family: inherit;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgb(0, 0, 0);
   border: 2px solid var(--color-cyan);
   border-radius: 0;
   color: var(--color-white);
@@ -86,7 +86,7 @@
   outline: none;
   border-color: var(--color-magenta);
   box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
-  background: rgba(0, 0, 0, 0.5);
+  background: rgb(0, 0, 0);
 }
 
 .form-input::placeholder,
@@ -103,7 +103,7 @@
 .form-input.error,
 .form-textarea.error {
   border-color: var(--color-red);
-  background: rgba(255, 0, 0, 0.1);
+  background: rgb(51, 0, 0);
 }
 
 .form-textarea {
@@ -125,7 +125,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem;
-  background: rgba(255, 0, 0, 0.1);
+  background: rgb(51, 0, 0);
   border-radius: 0;
   border-left: 3px solid var(--color-red);
 }
@@ -136,7 +136,7 @@
 
 .submit-error {
   padding: 1rem;
-  background: rgba(255, 0, 0, 0.2);
+  background: rgb(51, 0, 0);
   border: 2px solid var(--color-red);
   border-radius: 0;
   color: var(--color-white);
@@ -145,7 +145,7 @@
 
 .submit-success {
   padding: 1rem;
-  background: rgba(0, 255, 0, 0.2);
+  background: rgb(0, 51, 0);
   border: 2px solid #00ff00;
   border-radius: 0;
   color: var(--color-white);
@@ -189,7 +189,7 @@
 
 /* Entries Section */
 .guestbook-entries-section {
-  background: rgba(255, 0, 255, 0.05);
+  background: rgb(51, 0, 51);
   border: 3px solid var(--color-magenta);
   border-radius: 0;
   padding: 2rem;

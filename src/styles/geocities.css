@@ -66,7 +66,7 @@
 
 /* Geocities Box Styles */
 .geo-box {
-  background: rgba(0, 0, 128, 0.8);
+  background: rgb(0, 0, 128);
   border: 4px ridge var(--color-cyan);
   padding: 1.5rem;
   margin: 1rem 0;
@@ -93,11 +93,7 @@
 }
 
 .geo-box-raised {
-  background: linear-gradient(
-    135deg,
-    rgba(0, 128, 255, 0.9),
-    rgba(0, 0, 128, 0.9)
-  );
+  background: linear-gradient(135deg, rgba(0, 128, 255), rgba(0, 0, 128));
   border: 4px outset var(--color-magenta);
   padding: 1.5rem;
   margin: 1rem 0;
@@ -105,7 +101,7 @@
 }
 
 .geo-box-sunken {
-  background: rgba(0, 0, 0, 0.6);
+  background: rgb(0, 0, 0);
   border: 4px inset var(--color-lime);
   padding: 1.5rem;
   margin: 1rem 0;
@@ -113,7 +109,7 @@
 }
 
 .geo-box-neon {
-  background: rgba(0, 0, 0, 0.8);
+  background: rgb(0, 0, 0);
   border: 3px solid var(--color-cyan);
   padding: 1.5rem;
   margin: 1rem 0;

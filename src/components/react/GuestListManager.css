@@ -44,7 +44,7 @@
   flex: 1;
   min-width: 250px;
   padding: 0.8rem;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgb(0, 0, 0);
   border: 2px solid var(--color-cyan);
   border-radius: 0;
   color: var(--color-white);
@@ -62,7 +62,7 @@
 .error-box {
   padding: 1rem;
   margin-bottom: 1.5rem;
-  background: rgba(255, 0, 0, 0.1);
+  background: rgb(51, 0, 0);
   border: 2px solid var(--color-red);
   color: var(--color-red);
 }
@@ -71,7 +71,7 @@
   color: var(--color-red);
   margin-top: 1rem;
   padding: 0.5rem;
-  background: rgba(255, 0, 0, 0.1);
+  background: rgb(51, 0, 0);
   border-radius: 0;
 }
 
@@ -110,7 +110,7 @@
 .form-input,
 .form-textarea {
   padding: 0.8rem;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgb(0, 0, 0);
   border: 2px solid var(--color-cyan);
   border-radius: 0;
   color: var(--color-white);
@@ -148,7 +148,7 @@
 
 .stat {
   padding: 1rem;
-  background: rgba(0, 255, 255, 0.1);
+  background: rgb(0, 51, 51);
   border-radius: 0;
 }
 
@@ -199,13 +199,13 @@
 }
 
 .rsvp-badge.attending {
-  background: rgba(0, 255, 0, 0.2);
+  background: rgb(0, 51, 0);
   color: var(--color-green);
   border: 2px solid var(--color-green);
 }
 
 .rsvp-badge.declined {
-  background: rgba(255, 0, 0, 0.2);
+  background: rgb(51, 0, 0);
   color: var(--color-red);
   border: 2px solid var(--color-red);
 }

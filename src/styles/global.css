@@ -18,10 +18,9 @@ body {
   line-height: 1.6;
   color: #ffffff;
   background-color: #0033cc;
-  //background-image: url("/images/background-3.png");
+  background-image: url("/images/background-5.png");
   background-repeat: repeat;
   background-attachment: fixed;
-  background-size: 600px 600px;
   min-height: 100vh;
   overflow-x: hidden;
   border-left: 10px solid;
@@ -253,7 +252,7 @@ img {
 .marquee-container {
   overflow: hidden;
   white-space: nowrap;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgb(0, 0, 0);
   padding: 0.5rem 0;
   border-top: 2px solid var(--color-cyan, #00ffff);
   border-bottom: 2px solid var(--color-magenta, #ff00ff);
@@ -293,7 +292,7 @@ img {
 .under-construction {
   text-align: center;
   padding: 3rem 1rem;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgb(0, 0, 0);
   border: 5px dashed var(--color-yellow, #ffff00);
   margin: 2rem 0;
 }
