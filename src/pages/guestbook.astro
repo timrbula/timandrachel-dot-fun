@@ -5,6 +5,7 @@ import BlinkingText from "../components/react/BlinkingText";
 import RainbowDivider from "../components/react/RainbowDivider";
 import GeoButton from "../components/react/GeoButton";
 import GuestbookComponent from "../components/react/Guestbook";
+import GuestbookStats from "../components/react/GuestbookStats";
 ---
 
 <BaseLayout
@@ -37,14 +38,6 @@ import GuestbookComponent from "../components/react/Guestbook";
           <BlinkingText client:load>✨</BlinkingText>
         </h2>
         <div class="intro-content">
-          <p>
-            Remember the good old days when every website had a guestbook? We're
-            bringing it back! 🎉
-          </p>
-          <p>
-            Drop us a line, share your excitement about the wedding, give us
-            some marriage advice, or just say hi! 💕
-          </p>
           <p class="intro-highlight rainbow-text">
             All messages are public, so keep it fun and friendly! 😊
           </p>
@@ -57,58 +50,6 @@ import GuestbookComponent from "../components/react/Guestbook";
     <!-- Guestbook Component -->
     <section class="guestbook-section">
       <GuestbookComponent client:load />
-    </section>
-
-    <RainbowDivider client:load variant="solid" />
-
-    <!-- Guidelines -->
-    <section class="guidelines-section">
-      <div class="guidelines-box geo-box">
-        <h2 class="text-center text-neon">
-          <BlinkingText client:load>📝</BlinkingText>
-          Guestbook Guidelines
-          <BlinkingText client:load>📝</BlinkingText>
-        </h2>
-        <div class="guidelines-content">
-          <div class="guideline-item">
-            <span class="guideline-icon">✅</span>
-            <p>
-              <strong>Do:</strong> Share your excitement, wedding advice, or favorite
-              memories!
-            </p>
-          </div>
-          <div class="guideline-item">
-            <span class="guideline-icon">✅</span>
-            <p>
-              <strong>Do:</strong> Keep it fun, friendly, and appropriate for all
-              ages!
-            </p>
-          </div>
-          <div class="guideline-item">
-            <span class="guideline-icon">✅</span>
-            <p>
-              <strong>Do:</strong> Use emojis! The more, the merrier! 🎉💕✨
-            </p>
-          </div>
-          <div class="guideline-item">
-            <span class="guideline-icon">❌</span>
-            <p>
-              <strong>Don't:</strong> Share personal contact information publicly
-            </p>
-          </div>
-          <div class="guideline-item">
-            <span class="guideline-icon">❌</span>
-            <p><strong>Don't:</strong> Post spam or promotional content</p>
-          </div>
-          <div class="guideline-item">
-            <span class="guideline-icon">💡</span>
-            <p>
-              <strong>Tip:</strong> Your message will be visible to everyone, so spread
-              the love! 💕
-            </p>
-          </div>
-        </div>
-      </div>
     </section>
 
     <RainbowDivider client:load variant="animated" />
@@ -165,7 +106,7 @@ import GuestbookComponent from "../components/react/Guestbook";
 
     <RainbowDivider client:load variant="stars" />
 
-    <!-- Stats Section (Placeholder) -->
+    <!-- Stats Section -->
     <section class="stats-section">
       <div class="stats-box geo-box-neon text-center">
         <h2 class="text-3d">
@@ -173,61 +114,26 @@ import GuestbookComponent from "../components/react/Guestbook";
           Guestbook Stats
           <BlinkingText client:load>📊</BlinkingText>
         </h2>
-        <div class="stats-grid">
-          <div class="stat-item">
-            <p class="stat-number rainbow-text">0</p>
-            <p class="stat-label">Total Entries</p>
-          </div>
-          <div class="stat-item">
-            <p class="stat-number text-neon">0</p>
-            <p class="stat-label">Cities Represented</p>
-          </div>
-          <div class="stat-item">
-            <p class="stat-number text-neon-pink">0</p>
-            <p class="stat-label">Emojis Used</p>
-          </div>
-        </div>
-        <p class="stats-note">
-          <em>Stats will update once the guestbook goes live! 🚀</em>
-        </p>
+        <GuestbookStats client:load />
       </div>
     </section>
 
     <RainbowDivider client:load variant="dots" />
 
-    <!-- CTA Section -->
-    <section class="cta-section text-center">
-      <div class="cta-box geo-box-raised">
-        <h2 class="text-3d">
-          <BlinkingText client:load>🎉</BlinkingText>
-          Explore More
-          <BlinkingText client:load>🎉</BlinkingText>
-        </h2>
-        <p class="cta-text">
-          Check out the rest of our website while you're here!
-        </p>
-        <div class="cta-buttons">
+    <div class="container">
+      <section class="navigation-section text-center geo-box-raised">
+        <h2 class="text-neon-pink">Ready to RSVP?</h2>
+        <p>Heard enough? Don't forget to RSVP for the real celebration!</p>
+        <div class="button-group">
           <GeoButton client:load variant="warning" href="/rsvp">
-            💌 RSVP Now!
+            💌 RSVP Now
           </GeoButton>
-          <GeoButton client:load variant="primary" href="/schedule">
-            📅 View Schedule
-          </GeoButton>
-          <GeoButton client:load variant="secondary" href="/travel">
-            ✈️ Travel Info
-          </GeoButton>
-          <GeoButton client:load variant="primary" href="/">
-            📸 Pics
-          </GeoButton>
-          <GeoButton client:load variant="secondary" href="/travel">
-            🎮 Game
-          </GeoButton>
-          <GeoButton client:load variant="primary" href="/">
+          <GeoButton client:load variant="secondary" href="/">
             🏠 Back to Home
           </GeoButton>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </div>
 
   <!-- Bottom Marquee -->
@@ -514,33 +420,6 @@ import GuestbookComponent from "../components/react/Guestbook";
     padding: 2.5rem;
   }
 
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-    margin: 2rem 0;
-  }
-
-  .stat-item {
-    text-align: center;
-  }
-
-  .stat-number {
-    font-size: 4rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-  }
-
-  .stat-label {
-    font-size: 1.1rem;
-    color: var(--color-yellow);
-  }
-
-  .stats-note {
-    margin-top: 2rem;
-    font-size: 1.1rem;
-  }
-
   /* CTA Section */
   .cta-section {
     margin: 3rem 0;
@@ -589,14 +468,6 @@ import GuestbookComponent from "../components/react/Guestbook";
 
     .prompts-grid {
       grid-template-columns: 1fr;
-    }
-
-    .stats-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .stat-number {
-      font-size: 3rem;
     }
 
     .cta-buttons {

@@ -1,7 +1,9 @@
 ---
+import BlinkingText from "@/components/react/BlinkingText";
 import BaseLayout from "../components/astro/BaseLayout.astro";
 import Marquee from "../components/react/Marquee";
 import RainbowDivider from "../components/react/RainbowDivider";
+import GeoButton from "@/components/react/GeoButton";
 
 // Array of image filenames - you can update these with your actual image names
 const images = [
@@ -32,7 +34,12 @@ const images = [
   <div class="container">
     <!-- Page Header -->
     <section class="header-section text-center">
-      <h1 class="text-3d">Some Pics</h1>
+      <h1 class="text-3d">
+        <BlinkingText client:load speed="slow">📷</BlinkingText> Pics <BlinkingText
+          client:load
+          speed="slow">📸</BlinkingText
+        >
+      </h1>
       <!-- <p class="subtitle geo-box bg-hot-pink">
         Some of our favorite moments captured together!
       </p> -->
@@ -63,6 +70,21 @@ const images = [
         <span class="geo-badge geo-badge-new blink">📸 PICS</span>
         <span class="geo-badge geo-badge-hot blink">💕 LOVE</span>
         <span class="geo-badge geo-badge-cool blink">✨ MEMORIES</span>
+      </div>
+    </section>
+  </div>
+
+  <div class="pictures-section">
+    <section class="navigation-section text-center geo-box-raised">
+      <h2 class="text-neon-pink">Ready to RSVP?</h2>
+      <p>Seen enough? Don't forget to RSVP for the real celebration!</p>
+      <div class="button-group">
+        <GeoButton client:load variant="warning" href="/rsvp">
+          💌 RSVP Now
+        </GeoButton>
+        <GeoButton client:load variant="secondary" href="/">
+          🏠 Back to Home
+        </GeoButton>
       </div>
     </section>
   </div>

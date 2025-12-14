@@ -4,12 +4,19 @@ import Marquee from "../components/react/Marquee";
 import BlinkingText from "../components/react/BlinkingText";
 import RainbowDivider from "../components/react/RainbowDivider";
 import GeoButton from "../components/react/GeoButton";
+import AddToCalendarButton from "../components/react/AddToCalendarButton";
 import UnderConstruction from "@/components/react/UnderConstruction";
 
-const VENUE_NAME = "Neptune @ Radio Star";
+const VENUE_NAME = "Neptune Room @ Radio Star";
 const VENUE_ADDRESS = "13 Greenpoint Ave, Brooklyn, NY 11222";
 const WEDDING_DATE = "Friday, October 9th, 2026";
 const CEREMONY_TIME = "6:00 PM";
+
+// Calendar event details
+const EVENT_START = "2026-10-09T18:00:00-04:00"; // 6:00 PM EDT
+const EVENT_END = "2026-10-10T00:00:00-04:00"; // 12:00 AM EDT (next day)
+const EVENT_DESCRIPTION =
+  "Join us for our wedding celebration! Ceremony at 6:00 PM followed by cocktails, dinner, and dancing. We can't wait to celebrate with you!";
 ---
 
 <BaseLayout
@@ -18,7 +25,7 @@ const CEREMONY_TIME = "6:00 PM";
 >
   <!-- Top Marquee -->
   <Marquee client:load speed={15}>
-    📅 Wedding Day Schedule 📅 October 9th, 2026 📅 Neptune @ Radio Star,
+    📅 Wedding Schedule 📅 October 9th, 2026 📅 Neptune Room @ Radio Star,
     Brooklyn 📅
   </Marquee>
 
@@ -27,10 +34,9 @@ const CEREMONY_TIME = "6:00 PM";
     <section class="page-header text-center">
       <h1 class="text-3d">
         <BlinkingText client:load speed="slow">🕐</BlinkingText>
-        Wedding Day Schedule
+        Wedding Schedule
         <BlinkingText client:load speed="slow">🕐</BlinkingText>
       </h1>
-      <!-- <p class="subtitle text-neon-pink">Write this down!</p> -->
     </section>
 
     <!-- Date & Time Box -->
@@ -40,6 +46,15 @@ const CEREMONY_TIME = "6:00 PM";
         <p class="ceremony-time rainbow-text">{CEREMONY_TIME}</p>
         <p class="venue-name text-neon-pink">{VENUE_NAME}</p>
         <p class="venue-address">{VENUE_ADDRESS}</p>
+        <AddToCalendarButton
+          client:load
+          eventTitle="Rachel & Tim's Wedding"
+          eventDescription={EVENT_DESCRIPTION}
+          location={VENUE_ADDRESS}
+          startDate={EVENT_START}
+          endDate={EVENT_END}
+          variant="primary"
+        />
       </div>
     </section>
 
@@ -161,9 +176,8 @@ const CEREMONY_TIME = "6:00 PM";
     </section>
 
     <!-- Additional Info -->
-    <section class="additional-info">
+    <!-- <section class="additional-info">
       <div class="info-grid">
-        <!-- Weather -->
         <div class="info-card geo-box-raised">
           <h3>🌤️ October Weather</h3>
           <p><strong>Expected Conditions:</strong></p>
@@ -177,7 +191,7 @@ const CEREMONY_TIME = "6:00 PM";
           </p>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <RainbowDivider client:load variant="stars" />
 
@@ -205,8 +219,8 @@ const CEREMONY_TIME = "6:00 PM";
 
   <!-- Bottom Marquee -->
   <Marquee client:load speed={20} direction="right">
-    🎉 See you on October 9th, 2026! 📅 Neptune @ Radio Star, Brooklyn 🗽 Let's
-    celebrate! 💕
+    🎉 See you on October 9th, 2026! 📅 Neptune Room @ Radio Star, Brooklyn 🗽
+    Let's celebrate! 💕
   </Marquee>
 </BaseLayout>
 

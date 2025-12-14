@@ -233,7 +233,7 @@ export default function RSVPFormWithSearch() {
       <div className="guest-search-section">
         <h3 className="search-title">🔍 Find Your Invitation</h3>
         <p className="search-description">
-          Search by your name or email to see if you're on our guest list!
+          Search by your name or email
         </p>
         <form onSubmit={handleSearch} className="search-form">
           <input

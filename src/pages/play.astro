@@ -3,6 +3,7 @@ import BaseLayout from "../components/astro/BaseLayout.astro";
 import Marquee from "../components/react/Marquee";
 import GameTabs from "../components/react/GameTabs";
 import GeoButton from "../components/react/GeoButton";
+import BlinkingText from "@/components/react/BlinkingText";
 ---
 
 <BaseLayout
@@ -17,7 +18,12 @@ import GeoButton from "../components/react/GeoButton";
   <div class="container">
     <!-- Page Header -->
     <section class="page-header text-center">
-      <h1 class="text-3d">🎮 Flappy Wedding 🎮</h1>
+      <h1 class="text-3d">
+        <BlinkingText client:load speed="slow">🎮</BlinkingText> Flappy Wedding <BlinkingText
+          client:load
+          speed="slow">🎮</BlinkingText
+        >
+      </h1>
     </section>
 
     <!-- Game and Leaderboard Tabs -->

@@ -38,7 +38,7 @@ export default function UnderConstruction({
         </p>
         
         <p className="construction-subtext">
-          Check back soon for updates! 🚧👷‍♀️👷‍♂️🚧
+          Check back soon for awesome updates! 🚧👷‍♀️👷‍♂️🚧
         </p>
       </div>
     </div>

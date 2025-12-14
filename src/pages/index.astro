@@ -5,6 +5,7 @@ import RainbowDivider from "../components/react/RainbowDivider";
 import GeoButton from "../components/react/GeoButton";
 import UnderConstruction from "../components/react/UnderConstruction";
 import { daysUntilWedding, formatDate, WEDDING_DATE } from "../lib/utils";
+import BlinkingText from "@/components/react/BlinkingText";
 
 const daysLeft = daysUntilWedding();
 const weddingDateFormatted = formatDate(WEDDING_DATE, {
@@ -29,6 +30,7 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
     <section class="welcome-section geo-box bg-hot-pink">
       <h2 class="text-beveled-green" style="font-size: 3rem;">
         We're getting married
+        <BlinkingText client:load speed="slow">🌟💕✨</BlinkingText>
       </h2>
       <p style="font-size: 2rem; font-weight: bold" class="rainbow-text">
         {weddingDateFormatted}
@@ -81,7 +83,7 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
           class="location-text"
           style="color: #0000ff; font-weight: bold; text-shadow: 1px 1px 0 #000;"
         >
-          Neptune @ Radio Star • Brooklyn, NY
+          Neptune Room @ Radio Star • Brooklyn, NY
         </p>
       </div> -->
 
@@ -128,13 +130,13 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
             📍 Location
           </h3>
           <p style="font-size: 1.2rem; font-weight: bold;">
-            <strong>Neptune @ Radio Star</strong>
+            <strong>Neptune Room @ Radio Star</strong>
           </p>
           <p style="font-size: 1.1rem;">13 Greenpoint Ave</p>
           <p style="font-size: 1.1rem;">Brooklyn, NY 11222</p>
           <GeoButton
             client:load
-            variant="secondary"
+            variant="primary"
             href="https://www.google.com/maps/dir/?api=1&destination=Neptune+at+Radio+Star,13+Greenpoint+Ave,Brooklyn,NY+11222"
             target="_blank"
             rel="noopener noreferrer"
@@ -149,8 +151,8 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
             <strong>6:00 PM</strong>
           </p>
           <p style="font-size: 1.1rem;">Don't be late!</p>
-          <p style="font-size: 1.1rem;">Bring your date!</p>
-          <GeoButton client:load variant="secondary" href="/schedule">
+          <p style="font-size: 1.1rem;">Don't forget your date!</p>
+          <GeoButton client:load variant="warning" href="/schedule">
             Full Schedule
           </GeoButton>
         </div>

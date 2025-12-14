@@ -1,7 +1,9 @@
 ---
+import GeoButton from "@/components/react/GeoButton";
 import BaseLayout from "../components/astro/BaseLayout.astro";
 import Marquee from "../components/react/Marquee";
 import MidiPlayer from "../components/react/MidiPlayer";
+import BlinkingText from "@/components/react/BlinkingText";
 ---
 
 <BaseLayout
@@ -16,16 +18,12 @@ import MidiPlayer from "../components/react/MidiPlayer";
   <div class="container">
     <!-- Page Header -->
     <section class="page-header text-center">
-      <h1 class="text-3d">Listen</h1>
-    </section>
-
-    <!-- MIDI Player -->
-    <section class="midi-section">
-      <MidiPlayer
-        client:load
-        midiUrl="/audio/HotelCalifornia.mid"
-        title="Hotel California"
-      />
+      <h1 class="text-3d">
+        <BlinkingText client:load speed="slow">🎵</BlinkingText> Listen <BlinkingText
+          client:load
+          speed="slow">🎵</BlinkingText
+        >
+      </h1>
     </section>
 
     <!-- MIDI Player -->
@@ -54,6 +52,21 @@ import MidiPlayer from "../components/react/MidiPlayer";
         title="Fireflies"
       />
     </section>
+
+    <div class="midi-section">
+      <section class="navigation-section text-center geo-box-raised">
+        <h2 class="text-neon-pink">Ready to RSVP?</h2>
+        <p>Heard enough? Don't forget to RSVP for the real celebration!</p>
+        <div class="button-group">
+          <GeoButton client:load variant="warning" href="/rsvp">
+            💌 RSVP Now
+          </GeoButton>
+          <GeoButton client:load variant="secondary" href="/">
+            🏠 Back to Home
+          </GeoButton>
+        </div>
+      </section>
+    </div>
   </div>
 
   <!-- Bottom Marquee -->

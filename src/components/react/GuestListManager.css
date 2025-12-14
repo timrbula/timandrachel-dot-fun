@@ -48,7 +48,7 @@
   border: 2px solid var(--color-cyan);
   border-radius: 0;
   color: var(--color-white);
-  font-family: "Comic Sans MS", cursive;
+  font-family: "Comic Sans MS";
   font-size: 1rem;
 }
 
@@ -114,7 +114,7 @@
   border: 2px solid var(--color-cyan);
   border-radius: 0;
   color: var(--color-white);
-  font-family: "Comic Sans MS", cursive;
+  font-family: "Comic Sans MS";
   font-size: 1rem;
 }
 

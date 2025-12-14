@@ -8,22 +8,34 @@
 .guest-search-section {
   margin-bottom: 2rem;
   padding: 2rem;
-  background: rgb(0, 51, 51);
-  border: 2px solid var(--color-cyan);
+  background: linear-gradient(180deg, #ff6b35 0%, #ffa500 50%, #ffd700 100%);
+  border: 5px solid #ff0000;
   border-radius: 0;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .search-title {
-  font-size: 1.5rem;
-  color: var(--color-yellow);
+  font-size: 2rem;
+  color: #ffff00;
   margin-bottom: 0.5rem;
   text-align: center;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-shadow:
+    -2px -2px 0 #000,
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+    2px 2px 0 #000,
+    0 0 10px rgba(0, 0, 0, 0.5);
+  letter-spacing: 2px;
 }
 
 .search-description {
   text-align: center;
   margin-bottom: 1.5rem;
-  color: var(--color-cyan);
+  color: #000;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .search-form {
@@ -35,18 +47,19 @@
 .search-input {
   flex: 1;
   padding: 0.8rem;
-  background: rgb(0, 0, 0);
-  border: 2px solid var(--color-cyan);
+  background: rgb(255, 255, 255);
+  border: 3px solid #ff0000;
   border-radius: 0;
-  color: var(--color-white);
-  font-family: "Comic Sans MS", cursive;
+  color: #000;
+  font-family: "Comic Sans MS";
   font-size: 1rem;
+  font-weight: 600;
 }
 
 .search-input:focus {
   outline: none;
-  border-color: var(--color-yellow);
-  box-shadow: 0 0 10px var(--color-yellow);
+  border-color: #ff6b35;
+  box-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
 }
 
 .search-results {
@@ -86,29 +99,31 @@
 .contact-note {
   font-size: 0.9rem;
   font-style: italic;
-  color: var(--color-cyan);
+  color: #000;
+  font-weight: 600;
 }
 
 .skip-search {
   text-align: center;
   margin-top: 1.5rem;
   padding-top: 1.5rem;
-  border-top: 2px dashed var(--color-cyan);
+  border-top: 2px dashed #ff0000;
 }
 
 .skip-button {
   background: none;
   border: none;
-  color: var(--color-cyan);
+  color: #ff0000;
   text-decoration: underline;
   cursor: pointer;
-  font-family: "Comic Sans MS", cursive;
+  font-family: "Comic Sans MS";
   font-size: 1rem;
   padding: 0.5rem;
+  font-weight: bold;
 }
 
 .skip-button:hover {
-  color: var(--color-yellow);
+  color: #ff6b35;
 }
 
 .form-divider {
@@ -308,7 +323,7 @@
   padding: 1rem 3rem;
   font-size: 1.2rem;
   font-weight: bold;
-  font-family: "Comic Sans MS", cursive;
+  font-family: "Comic Sans MS";
   background: linear-gradient(180deg, var(--color-magenta), #8000ff);
   color: var(--color-yellow);
   border: 3px outset var(--color-magenta);

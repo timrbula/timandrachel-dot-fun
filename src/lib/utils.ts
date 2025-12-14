@@ -247,7 +247,7 @@ export function shuffleArray<T>(array: T[]): T[] {
  * Constants
  */
 export const WEDDING_DATE = new Date("2026-10-09T18:00:00-04:00");
-export const VENUE_NAME = "Neptune @ Radio Star";
+export const VENUE_NAME = "Neptune Room @ Radio Star";
 export const VENUE_ADDRESS = "13 Greenpoint Ave, Brooklyn, NY 11222";
 export const VENUE_COORDINATES = { lat: 40.7308, lng: -73.9566 };
 

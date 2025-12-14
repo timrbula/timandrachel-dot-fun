@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useId } from 'react';
 import * as Tone from 'tone';
 import './MidiPlayer.css';
 
@@ -21,6 +21,7 @@ export default function MidiPlayer({ midiUrl, title = 'MIDI Player' }: MidiPlaye
   const midiRef = useRef<any>(null);
   const partsRef = useRef<Tone.Part[]>([]);
   const animationFrameRef = useRef<number | null>(null);
+  const isActiveRef = useRef<boolean>(false);
 
   // Ensure component only runs on client
   useEffect(() => {
@@ -83,6 +84,8 @@ export default function MidiPlayer({ midiUrl, title = 'MIDI Player' }: MidiPlaye
   };
 
   const cleanup = () => {
+    isActiveRef.current = false;
+    
     // Stop and dispose all parts
     partsRef.current.forEach(part => {
       part.stop();
@@ -99,13 +102,10 @@ export default function MidiPlayer({ midiUrl, title = 'MIDI Player' }: MidiPlaye
       cancelAnimationFrame(animationFrameRef.current);
       animationFrameRef.current = null;
     }
-    
-    // Clear transport
-    Tone.Transport.cancel();
   };
 
   const updateTime = () => {
-    if (Tone.Transport.state === 'started') {
+    if (isActiveRef.current && Tone.Transport.state === 'started') {
       setCurrentTime(Tone.Transport.seconds);
       animationFrameRef.current = requestAnimationFrame(updateTime);
     }
@@ -122,6 +122,7 @@ export default function MidiPlayer({ midiUrl, title = 'MIDI Player' }: MidiPlaye
       
       // If we already have parts, just resume transport
       if (partsRef.current.length > 0) {
+        isActiveRef.current = true;
         setIsPlaying(true);
         Tone.Transport.start();
         animationFrameRef.current = requestAnimationFrame(updateTime);
@@ -143,26 +144,30 @@ export default function MidiPlayer({ midiUrl, title = 'MIDI Player' }: MidiPlaye
         }));
         
         const part = new Tone.Part((time, value) => {
-          // Use the scheduled time parameter for accurate timing
-          synth.triggerAttackRelease(
-            value.note,
-            value.duration,
-            time,
-            value.velocity
-          );
+          // Only play if this instance is active
+          if (isActiveRef.current) {
+            synth.triggerAttackRelease(
+              value.note,
+              value.duration,
+              time,
+              value.velocity
+            );
+          }
         }, events).start(0);
         
         partsRef.current.push(part);
       });
 
-      // Schedule stop at end
+      // Schedule stop at end for this instance only
       Tone.Transport.schedule((time) => {
-        // Use Tone.Draw to sync with animation frame for UI updates
-        Tone.Draw.schedule(() => {
-          stop();
-        }, time);
+        if (isActiveRef.current) {
+          Tone.Draw.schedule(() => {
+            stop();
+          }, time);
+        }
       }, midi.duration);
 
+      isActiveRef.current = true;
       setIsPlaying(true);
       Tone.Transport.start();
       animationFrameRef.current = requestAnimationFrame(updateTime);
@@ -174,6 +179,7 @@ export default function MidiPlayer({ midiUrl, title = 'MIDI Player' }: MidiPlaye
   };
 
   const pause = () => {
+    isActiveRef.current = false;
     Tone.Transport.pause();
     setIsPlaying(false);
     if (animationFrameRef.current) {
@@ -183,8 +189,8 @@ export default function MidiPlayer({ midiUrl, title = 'MIDI Player' }: MidiPlaye
   };
 
   const stop = () => {
+    isActiveRef.current = false;
     Tone.Transport.stop();
-    Tone.Transport.cancel();
     Tone.Transport.position = 0;
     setIsPlaying(false);
     setCurrentTime(0);
@@ -217,9 +223,10 @@ export default function MidiPlayer({ midiUrl, title = 'MIDI Player' }: MidiPlaye
     
     // Resume if it was playing
     if (wasPlaying) {
+      isActiveRef.current = true;
       Tone.Transport.start();
       setIsPlaying(true);
-      updateTime();
+      animationFrameRef.current = requestAnimationFrame(updateTime);
     }
   };
 

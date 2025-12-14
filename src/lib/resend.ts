@@ -41,7 +41,7 @@ export async function sendRSVPConfirmation(
 
   const html = attending
     ? `
-      <div style="font-family: 'Comic Sans MS', cursive; background: linear-gradient(180deg, #000080, #008080); color: #FFFFFF; padding: 2rem; text-align: center;">
+      <div style="font-family: 'Comic Sans MS'; background: linear-gradient(180deg, #000080, #008080); color: #FFFFFF; padding: 2rem; text-align: center;">
         <h1 style="color: #FF00FF; text-shadow: 2px 2px 0 #00FFFF;">💕 RSVP Confirmed! 💕</h1>
         <p style="font-size: 1.2rem;">Hey ${name}!</p>
         <p style="font-size: 1.1rem;">We're SO EXCITED that you'll be joining us on October 9th, 2026!</p>
@@ -52,7 +52,7 @@ export async function sendRSVPConfirmation(
       </div>
     `
     : `
-      <div style="font-family: 'Comic Sans MS', cursive; background: linear-gradient(180deg, #000080, #008080); color: #FFFFFF; padding: 2rem; text-align: center;">
+      <div style="font-family: 'Comic Sans MS'; background: linear-gradient(180deg, #000080, #008080); color: #FFFFFF; padding: 2rem; text-align: center;">
         <h1 style="color: #FF00FF; text-shadow: 2px 2px 0 #00FFFF;">💔 We'll Miss You! 💔</h1>
         <p style="font-size: 1.2rem;">Hey ${name},</p>
         <p style="font-size: 1.1rem;">We're sad you can't make it to our wedding, but we totally understand!</p>
