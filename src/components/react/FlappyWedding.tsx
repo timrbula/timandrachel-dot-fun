@@ -23,7 +23,6 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [qualifiesForLeaderboard, setQualifiesForLeaderboard] = useState(false);
 
   // Game state refs
   const gameStateRef = useRef({
@@ -648,7 +647,6 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
       
       // Check if score qualifies for top 10
       if (leaderboard.length < 10 || finalScore > leaderboard[leaderboard.length - 1].score) {
-        setQualifiesForLeaderboard(true);
         setShowNameInput(true);
       }
     } catch (error) {
@@ -707,7 +705,6 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
 
   const handleSkipSubmit = () => {
     setShowNameInput(false);
-    setQualifiesForLeaderboard(false);
     setPlayerName('');
   };
 

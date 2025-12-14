@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { prisma } from "../../lib/supabase";
+import prisma from "../../lib/prisma";
 import { sanitizeInput, isValidEmail } from "../../lib/utils";
 
 // Simple authentication check (you should implement proper auth)

@@ -254,7 +254,7 @@
   color: var(--color-magenta);
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  //text-shadow: 0 0 5px var(--color-magenta);
+  /* text-shadow: 0 0 5px var(--color-magenta); */
 }
 
 .game-info ul {

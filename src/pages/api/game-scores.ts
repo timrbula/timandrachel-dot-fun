@@ -1,11 +1,10 @@
 import type { APIRoute } from "astro";
-import { prisma } from "../../lib/supabase";
+import prisma from "../../lib/prisma";
 import { sanitizeInput } from "../../lib/utils";
 
 // Rate limiting map
 const rateLimitMap = new Map<string, number>();
 const RATE_LIMIT_WINDOW = 60000; // 1 minute
-const MAX_REQUESTS = 10; // Max 10 score submissions per minute per IP
 
 /**
  * Check rate limit
@@ -181,39 +180,6 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       );
     }
 
-    // Check if score qualifies for top 10
-    const topScores = await prisma.gameScore.findMany({
-      orderBy: {
-        score: "desc",
-      },
-      take: 10,
-      select: {
-        score: true,
-      },
-    });
-
-    const lowestTopScore = topScores.length === 10 ? topScores[9].score : 0;
-    const qualifiesForLeaderboard =
-      topScores.length < 10 || body.score > lowestTopScore;
-
-    if (!qualifiesForLeaderboard) {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          message: "Score doesn't qualify for top 10",
-          qualifies: false,
-          score: body.score,
-          minimumScore: lowestTopScore,
-        }),
-        {
-          status: 200,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-    }
-
     // Sanitize inputs
     const sanitizedData = {
       name: sanitizeInput(body.name.trim()),
@@ -239,7 +205,6 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       JSON.stringify({
         success: true,
         message: "Score submitted successfully!",
-        qualifies: true,
         entry: {
           id: entry.id,
           name: entry.name,

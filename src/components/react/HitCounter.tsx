@@ -109,7 +109,7 @@ export default function HitCounter() {
           </div>
         ))}
       </div>
-      <div className="counter-footer">Since June 2024 🎉</div>
+      <div className="counter-footer">Since December 2025 🎉</div>
     </div>
   );
 }

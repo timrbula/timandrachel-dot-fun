@@ -296,7 +296,7 @@ export default function GuestListManager() {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyPress={(e) => e.key === "Enter" && handleSearch()}
+            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             placeholder="Search by name or email..."
             className="search-input"
           />

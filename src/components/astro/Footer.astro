@@ -1,4 +1,5 @@
 ---
+import HitCounter from "../react/HitCounter";
 const currentYear = new Date().getFullYear();
 ---
 
@@ -8,9 +9,7 @@ const currentYear = new Date().getFullYear();
     <div class="footer-content">
       <!-- Visitor Counter -->
       <div class="footer-section">
-        <div class="visitor-counter">
-          <span>👀 Visitors:</span>
-        </div>
+        <HitCounter client:load />
       </div>
 
       <!-- Best Viewed Badge -->
@@ -183,41 +182,3 @@ const currentYear = new Date().getFullYear();
     }
   }
 </style>
-
-<script>
-  // Fetch real visitor count from database
-  async function fetchVisitorCount() {
-    const digits = document.querySelectorAll(".visitor-counter-digit");
-
-    try {
-      const response = await fetch("/api/counter");
-      if (!response.ok) {
-        throw new Error("Failed to fetch counter");
-      }
-
-      const data = await response.json();
-      const countStr = data.count.toString().padStart(6, "0");
-
-      digits.forEach((digit, index) => {
-        if (digit instanceof HTMLElement) {
-          digit.textContent = countStr[index];
-        }
-      });
-    } catch (error) {
-      console.error("Error fetching visitor count:", error);
-      // Show error state
-      digits.forEach((digit) => {
-        if (digit instanceof HTMLElement) {
-          digit.textContent = "?";
-        }
-      });
-    }
-  }
-
-  // Initialize counter
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", fetchVisitorCount);
-  } else {
-    fetchVisitorCount();
-  }
-</script>
