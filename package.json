@@ -48,6 +48,7 @@
     "@prisma/adapter-pg": "^7.1.0",
     "@prisma/client": "^7.1.0",
     "@supabase/supabase-js": "^2.87.1",
+    "@tonejs/midi": "^2.0.28",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "astro": "^5.16.5",
@@ -56,6 +57,7 @@
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "resend": "^6.6.0",
+    "tone": "^15.1.22",
     "typescript": "^5.9.3"
   },
   "devDependencies": {

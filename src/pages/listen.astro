@@ -1,0 +1,163 @@
+---
+import BaseLayout from "../components/astro/BaseLayout.astro";
+import Marquee from "../components/react/Marquee";
+import MidiPlayer from "../components/react/MidiPlayer";
+---
+
+<BaseLayout
+  title="Play Flappy Wedding - Rachel & Tim's Wedding"
+  description="Play our NYC and wedding-themed Flappy Bird game! Help the bride and groom navigate through the city!"
+>
+  <!-- Marquee Banner -->
+  <Marquee client:load speed={15}>
+    🎵 Play music! Listen to it! Enjoy it!
+  </Marquee>
+
+  <div class="container">
+    <!-- Page Header -->
+    <section class="page-header text-center">
+      <h1 class="text-3d">Listen</h1>
+    </section>
+
+    <!-- MIDI Player -->
+    <section class="midi-section">
+      <MidiPlayer
+        client:load
+        midiUrl="/audio/HotelCalifornia.mid"
+        title="Hotel California"
+      />
+    </section>
+
+    <!-- MIDI Player -->
+    <section class="midi-section">
+      <MidiPlayer
+        client:load
+        midiUrl="/audio/WakeMeUpWhenSeptemberEnds.mid"
+        title="Wake Me Up When September Ends"
+      />
+    </section>
+
+    <!-- MIDI Player -->
+    <section class="midi-section">
+      <MidiPlayer
+        client:load
+        midiUrl="/audio/DancingQueen.mid"
+        title="Dancing Queen"
+      />
+    </section>
+
+    <!-- MIDI Player -->
+    <section class="midi-section">
+      <MidiPlayer
+        client:load
+        midiUrl="/audio/Fireflies.mid"
+        title="Fireflies"
+      />
+    </section>
+  </div>
+
+  <!-- Bottom Marquee -->
+  <Marquee client:load speed={20} direction="right">
+    💕 Thanks for listening! 💕 See you at the wedding! 🎉 October 9, 2026 🗽
+  </Marquee>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding: 2rem 0;
+  }
+
+  .page-header h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .midi-section {
+    margin: 2rem 0;
+  }
+
+  .game-tabs-section {
+    margin: 2rem 0;
+  }
+
+  .navigation-section {
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 2rem;
+  }
+
+  .navigation-section h2 {
+    margin-bottom: 1rem;
+  }
+
+  .navigation-section p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .fun-facts {
+    max-width: 700px;
+    margin: 3rem auto;
+  }
+
+  .fun-facts h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .fun-facts ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .fun-facts li {
+    font-size: 1.1rem;
+    color: var(--color-cyan);
+    margin-bottom: 0.75rem;
+    padding-left: 0;
+  }
+
+  .fun-facts li::before {
+    content: "▸ ";
+    color: var(--color-yellow);
+    font-weight: bold;
+    margin-right: 0.5rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-header h1 {
+      font-size: 2.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+    }
+
+    .navigation-section {
+      padding: 1.5rem;
+    }
+
+    .button-group {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .fun-facts li {
+      font-size: 1rem;
+    }
+  }
+</style>
