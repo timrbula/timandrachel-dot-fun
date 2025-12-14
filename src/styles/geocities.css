@@ -245,9 +245,9 @@
 }
 
 .text-rainbow {
-  background: var(--gradient-rainbow);
+  /* background: var(--gradient-rainbow);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent; */
   background-clip: text;
   font-weight: bold;
 }
