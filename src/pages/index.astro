@@ -120,18 +120,6 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
       </div>
     </section> -->
 
-    <!-- RSVP CTA -->
-    <section class="rsvp-cta text-center geo-box-raised">
-      <h2 class="text-3d">Don't Forget to RSVP!</h2>
-      <p class="rsvp-text">
-        We need to know if you're coming so we can plan accordingly! Please RSVP
-        by <strong class="text-neon-pink">April 9, 2026</strong>.
-      </p>
-      <GeoButton client:load variant="warning" href="/rsvp">
-        🎉 RSVP Now! 🎉
-      </GeoButton>
-    </section>
-
     <!-- Important Info -->
     <section class="info-section">
       <div class="info-grid">
@@ -181,6 +169,34 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
     </section>
 
     <RainbowDivider client:load variant="animated" />
+
+    <!-- RSVP CTA -->
+    <section class="rsvp-cta text-center geo-box-raised">
+      <h2 class="text-3d">Don't Forget to RSVP!</h2>
+      <p class="rsvp-text">
+        We need to know if you're coming so we can plan accordingly!
+      </p>
+      <GeoButton client:load variant="warning" href="/rsvp">
+        🎉 RSVP Now! 🎉
+      </GeoButton>
+    </section>
+
+    <RainbowDivider client:load variant="stars" />
+
+    <!-- RSVP CTA -->
+    <section class="geo-box bg-hot-pink">
+      <h2 class="text-neon">Have some fun while you're here</h2>
+      <div class="button-group">
+        <GeoButton client:load variant="warning" href="/rsvp">
+          💌 Pics
+        </GeoButton>
+        <GeoButton client:load variant="secondary" href="/">
+          🏠 Game
+        </GeoButton>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="dots" />
 
     <!-- Fun Badges Section -->
     <section class="badges-section text-center">

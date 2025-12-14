@@ -4,7 +4,7 @@ import { sanitizeInput } from "../../lib/utils";
 
 // Rate limiting map
 const rateLimitMap = new Map<string, number>();
-const RATE_LIMIT_WINDOW = 60000; // 1 minute
+const RATE_LIMIT_WINDOW = 6000; // 1 minute
 
 /**
  * Check rate limit
