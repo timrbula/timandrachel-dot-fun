@@ -148,6 +148,8 @@ export default function RSVPForm() {
       const data = await response.json();
 
       if (!response.ok) {
+        console.error(response);
+        console.error(data);
         throw new Error(data.error || "Failed to submit RSVP");
       }
 

@@ -30,22 +30,8 @@ const CEREMONY_TIME = "6:00 PM";
         Wedding Day Schedule
         <BlinkingText client:load speed="slow">🕐</BlinkingText>
       </h1>
-      <p class="subtitle text-neon-pink">
-        Mark your calendars! Here's everything you need to know about our big
-        day!
-      </p>
+      <!-- <p class="subtitle text-neon-pink">Write this down!</p> -->
     </section>
-
-    <!-- Under Construction Notice for Future Pages -->
-    <section class="construction-section">
-      <h2 class="text-center text-neon">Coming Soon!</h2>
-      <UnderConstruction
-        client:load
-        message="More awesome content is on the way!"
-      />
-    </section>
-
-    <RainbowDivider client:load variant="animated" />
 
     <!-- Date & Time Box -->
     <section class="date-section">
@@ -56,6 +42,8 @@ const CEREMONY_TIME = "6:00 PM";
         <p class="venue-address">{VENUE_ADDRESS}</p>
       </div>
     </section>
+
+    <RainbowDivider client:load variant="animated" />
 
     <RainbowDivider client:load variant="stars" />
 
@@ -164,7 +152,13 @@ const CEREMONY_TIME = "6:00 PM";
       </div>
     </section>
 
-    <RainbowDivider client:load variant="animated" />
+    <!-- Under Construction Notice for Future Pages -->
+    <section class="construction-section">
+      <UnderConstruction
+        client:load
+        message="More awesome content is on the way!"
+      />
+    </section>
 
     <!-- Additional Info -->
     <section class="additional-info">

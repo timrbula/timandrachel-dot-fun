@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { prisma } from "../../lib/supabase";
+import prisma from "../../lib/prisma";
 
 // Rate limiting map (in-memory, simple implementation)
 const rateLimitMap = new Map<string, number>();

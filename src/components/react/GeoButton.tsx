@@ -8,6 +8,8 @@ interface GeoButtonProps {
   disabled?: boolean;
   className?: string;
   href?: string;
+  target?: string;
+  rel?: string;
 }
 
 export default function GeoButton({
@@ -18,6 +20,8 @@ export default function GeoButton({
   disabled = false,
   className = '',
   href,
+  target,
+  rel,
 }: GeoButtonProps) {
   const variantClass = `geo-button-${variant}`;
   const baseClasses = `geo-button ${variantClass} ${className}`;
@@ -29,6 +33,8 @@ export default function GeoButton({
         href={href}
         className={baseClasses}
         aria-disabled={disabled}
+        target={target}
+        rel={rel}
         onClick={(e) => {
           if (disabled) {
             e.preventDefault();

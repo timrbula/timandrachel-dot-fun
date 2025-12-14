@@ -94,6 +94,7 @@ export default function GuestListManager() {
       }
 
       if (!response.ok) {
+        console.error(response);
         throw new Error("Failed to fetch guests");
       }
 
@@ -128,6 +129,8 @@ export default function GuestListManager() {
 
       if (!response.ok) {
         const data = await response.json();
+        console.error(response);
+        console.error(data);
         throw new Error(data.error || "Failed to add guest");
       }
 
@@ -168,6 +171,8 @@ export default function GuestListManager() {
 
       if (!response.ok) {
         const data = await response.json();
+        console.error(response);
+        console.error(data);
         throw new Error(data.error || "Failed to update guest");
       }
 

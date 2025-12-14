@@ -21,6 +21,7 @@ const Leaderboard = () => {
       const response = await fetch('/api/game-scores');
       
       if (!response.ok) {
+        console.error(response);
         throw new Error('Failed to fetch leaderboard');
       }
       

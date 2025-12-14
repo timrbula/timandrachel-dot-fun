@@ -1,0 +1,174 @@
+---
+import BaseLayout from "../components/astro/BaseLayout.astro";
+import Marquee from "../components/react/Marquee";
+import RainbowDivider from "../components/react/RainbowDivider";
+
+// Array of image filenames - you can update these with your actual image names
+const images = [
+  "pic0.jpg",
+  "pic1.jpg",
+  "pic2.jpg",
+  "pic3.jpg",
+  "pic4.jpg",
+  "pic5.jpg",
+  "pic6.jpg",
+  "pic7.jpg",
+  "pic8.jpg",
+  "pic9.jpg",
+  "pic10.jpg",
+  "pic11.jpg",
+];
+---
+
+<BaseLayout
+  title="Pictures - Rachel & Tim's Wedding"
+  description="Check out our favorite photos together! 💕"
+>
+  <!-- Marquee Banner -->
+  <Marquee client:load speed={15}>
+    📸 Some favorite pics of Rachel & Tim 📸
+  </Marquee>
+
+  <div class="container">
+    <!-- Page Header -->
+    <section class="header-section text-center">
+      <h1 class="text-3d">Some Pics</h1>
+      <!-- <p class="subtitle geo-box bg-hot-pink">
+        Some of our favorite moments captured together!
+      </p> -->
+    </section>
+
+    <RainbowDivider client:load variant="animated" />
+
+    <!-- Pictures Gallery -->
+    <section class="pictures-section">
+      <div class="pictures-column">
+        {
+          images.map((image, index) => (
+            <div class="picture-box geo-box-raised">
+              <img
+                src={`/assets/images/${image}`}
+                alt={`Rachel and Tim - Photo ${index + 1}`}
+                loading="lazy"
+              />
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Fun Badges Section -->
+    <section class="badges-section text-center">
+      <div class="badges-container">
+        <span class="geo-badge geo-badge-new blink">📸 PICS</span>
+        <span class="geo-badge geo-badge-hot blink">💕 LOVE</span>
+        <span class="geo-badge geo-badge-cool blink">✨ MEMORIES</span>
+      </div>
+    </section>
+  </div>
+
+  <!-- Bottom Marquee -->
+  <Marquee client:load speed={20} direction="right">
+    More memories to come! October 9, 2026 💕 Rachel & Tim
+  </Marquee>
+</BaseLayout>
+
+<style>
+  /* Header Section */
+  .header-section {
+    margin: 3rem auto;
+    max-width: 800px;
+  }
+
+  .header-section h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.3rem;
+    padding: 1.5rem;
+    margin: 1rem auto;
+    max-width: 600px;
+  }
+
+  /* Pictures Section */
+  .pictures-section {
+    margin: 3rem auto;
+    max-width: 800px;
+  }
+
+  .pictures-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .picture-box {
+    background: linear-gradient(135deg, #ff00ff, #00ffff);
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .picture-box img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 4px solid #ffff00;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .picture-caption {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 0 #000;
+  }
+
+  /* Badges Section */
+  .badges-section {
+    margin: 3rem 0;
+  }
+
+  .badges-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .header-section h1 {
+      font-size: 2.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      padding: 1rem;
+    }
+
+    .pictures-column {
+      gap: 1.5rem;
+    }
+
+    .picture-box {
+      padding: 0.75rem;
+    }
+
+    .picture-caption {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .header-section h1 {
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+    }
+  }
+</style>

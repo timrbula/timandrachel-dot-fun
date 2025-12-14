@@ -4,6 +4,7 @@ import Marquee from "../components/react/Marquee";
 import BlinkingText from "../components/react/BlinkingText";
 import RainbowDivider from "../components/react/RainbowDivider";
 import GeoButton from "../components/react/GeoButton";
+import UnderConstruction from "@/components/react/UnderConstruction";
 ---
 
 <BaseLayout
@@ -25,7 +26,7 @@ import GeoButton from "../components/react/GeoButton";
       </h1>
       <p class="subtitle text-neon-pink">
         Your complete guide to getting to Brooklyn and making the most of your
-        NYC adventure!
+        trip!
       </p>
     </section>
 
@@ -39,9 +40,17 @@ import GeoButton from "../components/react/GeoButton";
         <BlinkingText client:load>🏨</BlinkingText>
       </h2>
 
-      <div class="hotels-grid">
-        <!-- The William Vale -->
-        <div class="hotel-card geo-box-neon">
+      <!-- Under Construction Notice for Future Pages -->
+      <section class="construction-section">
+        <UnderConstruction
+          client:load
+          message="More awesome content is on the way!"
+        />
+      </section>
+
+      <!-- <div class="hotels-grid"> -->
+      <!-- The William Vale -->
+      <!-- <div class="hotel-card geo-box-neon">
           <h3 class="text-neon">The William Vale</h3>
           <p class="hotel-location">📍 111 N 12th St, Williamsburg</p>
           <p class="hotel-distance">🚶 1.2 miles from venue</p>
@@ -62,10 +71,10 @@ import GeoButton from "../components/react/GeoButton";
           >
             🔗 Book Now
           </GeoButton>
-        </div>
+        </div> -->
 
-        <!-- The Hoxton -->
-        <div class="hotel-card geo-box-neon">
+      <!-- The Hoxton -->
+      <!-- <div class="hotel-card geo-box-neon">
           <h3 class="text-neon-pink">The Hoxton, Williamsburg</h3>
           <p class="hotel-location">📍 97 Wythe Ave, Williamsburg</p>
           <p class="hotel-distance">🚶 1.5 miles from venue</p>
@@ -86,10 +95,10 @@ import GeoButton from "../components/react/GeoButton";
           >
             🔗 Book Now
           </GeoButton>
-        </div>
+        </div> -->
 
-        <!-- McCarren Hotel -->
-        <div class="hotel-card geo-box-neon">
+      <!-- McCarren Hotel -->
+      <!-- <div class="hotel-card geo-box-neon">
           <h3 class="text-neon">McCarren Hotel & Pool</h3>
           <p class="hotel-location">📍 160 N 12th St, Williamsburg</p>
           <p class="hotel-distance">🚶 1.3 miles from venue</p>
@@ -119,7 +128,7 @@ import GeoButton from "../components/react/GeoButton";
           <strong>Pro Tip:</strong> Book early for the best rates! October is a popular
           time in NYC. 🍂
         </p>
-      </div>
+      </div> -->
     </section>
 
     <RainbowDivider client:load variant="stars" />
@@ -212,10 +221,9 @@ import GeoButton from "../components/react/GeoButton";
         <div class="subway-info">
           <h3 class="text-neon-pink">🎫 MetroCard Basics</h3>
           <ul>
-            <li>💳 Purchase at any subway station</li>
+            <li>📱 OMNY tap-to-pay on your phone!</li>
             <li>💰 $2.90 per ride</li>
-            <li>🎟️ Unlimited 7-day pass: $34</li>
-            <li>📱 OMNY tap-to-pay also available!</li>
+            <li>🎟️ Keep tapping, you'll max at $34 for the week</li>
           </ul>
 
           <h3 class="text-neon">🗺️ The G Train</h3>
@@ -231,10 +239,9 @@ import GeoButton from "../components/react/GeoButton";
           <ul>
             <li>🚶 Stand clear of the closing doors!</li>
             <li>📱 Download the MTA app for real-time updates</li>
-            <li>🎒 Keep bags close during rush hour</li>
             <li>🚫 Don't block the doors</li>
             <li>👀 Watch for service changes on weekends</li>
-            <li>🗣️ New Yorkers are actually helpful - just ask!</li>
+            <li>🗣️ People are actually helpful - just ask!</li>
           </ul>
         </div>
       </div>
@@ -253,8 +260,8 @@ import GeoButton from "../components/react/GeoButton";
       <div class="neighborhood-intro geo-box text-center">
         <p class="neighborhood-description">
           Greenpoint is a hip, artistic neighborhood with Polish heritage,
-          waterfront views, and some of the best food and coffee in Brooklyn!
-          🎨☕
+          waterfront views, and some of the best food and coffee in Brooklyn! 🎨
+          ☕
         </p>
       </div>
 
@@ -280,7 +287,6 @@ import GeoButton from "../components/react/GeoButton";
               <strong>Transmitter Park</strong> - Waterfront park with Manhattan views
             </li>
             <li><strong>McCarren Park</strong> - Great for walking/running</li>
-            <li><strong>WNYC Transmitter Park</strong> - Sunset views 🌅</li>
             <li><strong>Local boutiques</strong> - Unique shopping</li>
             <li><strong>Street art</strong> - Murals everywhere!</li>
             <li><strong>Polish delis</strong> - Try the pierogis!</li>
@@ -293,12 +299,18 @@ import GeoButton from "../components/react/GeoButton";
           <ul>
             <li><strong>Walk!</strong> - Most walkable neighborhood</li>
             <li><strong>Citi Bike</strong> - Bike share stations everywhere</li>
-            <li><strong>G Train</strong> - Connects to Williamsburg</li>
+            <li>
+              <strong>G Train</strong> - Connects to Williamsburg and central/south
+              Brooklyn
+            </li>
             <li>
               <strong>L Train</strong> - Quick to Manhattan (from Bedford)
             </li>
+            <li>
+              <strong>Bus</strong> - Free in our communist utopia
+            </li>
             <li><strong>Uber/Lyft</strong> - Always available</li>
-            <li><strong>Yellow Cabs</strong> - Classic NYC experience 🚕</li>
+            <li><strong>Yellow Cabs</strong> - Classic experience 🚕</li>
           </ul>
         </div>
       </div>
@@ -310,7 +322,7 @@ import GeoButton from "../components/react/GeoButton";
     <section class="tips-section">
       <h2 class="text-center text-3d">
         <BlinkingText client:load>🗽</BlinkingText>
-        NYC Survival Tips
+        City Tips
         <BlinkingText client:load>🗽</BlinkingText>
       </h2>
 
@@ -318,26 +330,9 @@ import GeoButton from "../components/react/GeoButton";
         <!-- Walking -->
         <div class="tip-card geo-box-neon">
           <h3>👟 Walking</h3>
-          <p>New Yorkers walk FAST. Keep right, walk left!</p>
+          <p>People walk fast. Keep right, walk left!</p>
           <p>Wear comfortable shoes - you'll walk A LOT.</p>
           <p>Don't stop in the middle of the sidewalk! 🚶‍♂️</p>
-        </div>
-
-        <!-- Food -->
-        <div class="tip-card geo-box-neon">
-          <h3>🍕 Food</h3>
-          <p>Pizza by the slice is a way of life.</p>
-          <p>Bodega breakfast sandwiches are amazing.</p>
-          <p>Try a real NYC bagel with schmear! 🥯</p>
-        </div>
-
-        <!-- Tipping -->
-        <div class="tip-card geo-box-neon">
-          <h3>💵 Tipping</h3>
-          <p>Restaurants: 18-20%</p>
-          <p>Bars: $1-2 per drink</p>
-          <p>Taxis: 15-20%</p>
-          <p>Coffee: $1 in the tip jar ☕</p>
         </div>
 
         <!-- Weather -->
@@ -351,7 +346,9 @@ import GeoButton from "../components/react/GeoButton";
         <!-- Safety -->
         <div class="tip-card geo-box-neon">
           <h3>🔒 Safety</h3>
-          <p>NYC is very safe! Use common sense.</p>
+          <p>
+            It's acutally very safe! Don't believe their lies. Use common sense.
+          </p>
           <p>Keep valuables close on the subway.</p>
           <p>Trust your instincts. 👀</p>
         </div>
@@ -372,7 +369,7 @@ import GeoButton from "../components/react/GeoButton";
     <section class="attractions-section">
       <h2 class="text-center text-3d">
         <BlinkingText client:load>🎭</BlinkingText>
-        Things to Do in NYC
+        Things to Do in Brookyln
         <BlinkingText client:load>🎭</BlinkingText>
       </h2>
 
@@ -390,41 +387,12 @@ import GeoButton from "../components/react/GeoButton";
             <li>Smorgasburg food market (weekends)</li>
           </ul>
         </div>
-
-        <!-- Manhattan -->
-        <div class="attraction-card geo-box-raised">
-          <h3 class="text-neon-pink">🗽 Manhattan Must-Sees</h3>
-          <ul>
-            <li>Central Park 🌳</li>
-            <li>Times Square (touristy but iconic)</li>
-            <li>High Line Park</li>
-            <li>9/11 Memorial</li>
-            <li>Statue of Liberty & Ellis Island</li>
-            <li>MoMA or Met Museum</li>
-            <li>Chelsea Market</li>
-          </ul>
-        </div>
-
-        <!-- Food Tours -->
-        <div class="attraction-card geo-box-raised">
-          <h3 class="text-neon">🍴 Food Adventures</h3>
-          <ul>
-            <li>Pizza tour (obviously) 🍕</li>
-            <li>Chinatown dim sum</li>
-            <li>Little Italy</li>
-            <li>Chelsea Market</li>
-            <li>Eataly (Italian food hall)</li>
-            <li>Katz's Deli (pastrami sandwich)</li>
-            <li>Levain Bakery (cookies!) 🍪</li>
-          </ul>
-        </div>
       </div>
 
       <div class="attractions-note geo-box text-center">
         <p>
           <BlinkingText client:load>⭐</BlinkingText>
-          <strong>Need more recommendations?</strong> Hit us up! We love sharing our
-          favorite spots! 💕
+          <strong>Need more recommendations?</strong> Text us!
         </p>
       </div>
     </section>
@@ -435,7 +403,7 @@ import GeoButton from "../components/react/GeoButton";
     <section class="cta-section text-center geo-box-neon">
       <h2 class="text-3d">
         <BlinkingText client:load>🎉</BlinkingText>
-        Ready for Your NYC Adventure?
+        Ready?
         <BlinkingText client:load>🎉</BlinkingText>
       </h2>
       <p class="cta-text">
@@ -457,7 +425,7 @@ import GeoButton from "../components/react/GeoButton";
 
   <!-- Bottom Marquee -->
   <Marquee client:load speed={20} direction="right">
-    🗽 Welcome to NYC! 🍕 Brooklyn awaits! ☕ See you in October! 💕
+    🗽 Welcome! 🍕 Brooklyn awaits! ☕ See you in October! 💕
   </Marquee>
 </BaseLayout>
 

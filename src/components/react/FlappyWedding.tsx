@@ -638,7 +638,10 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
     
     try {
       const response = await fetch('/api/game-scores');
-      if (!response.ok) return;
+      if (!response.ok) {
+        console.error(response);
+        return;
+      }
       
       const data = await response.json();
       const leaderboard = data.leaderboard || [];
@@ -676,6 +679,8 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
       const data = await response.json();
       
       if (!response.ok) {
+        console.error(response);
+        console.error(data);
         throw new Error(data.error || 'Failed to submit score');
       }
       

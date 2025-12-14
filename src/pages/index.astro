@@ -31,10 +31,10 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
       <h2 class="text-beveled-green" style="font-size: 3rem;">
         We're getting married
       </h2>
-      <p>
+      <p style="font-size: 2rem; font-weight: bold" class="rainbow-text">
         {weddingDateFormatted}
       </p>
-      <p>Neptune @ Radio Star • Brooklyn, NY</p>
+      <p style="font-size: 2rem; font-weight: bold">NYC</p>
       <!-- <p style="font-size: 1.3rem; font-weight: bold;">
         Hey there friend or family member! 👋 We're excited to celebrate our
         wedding with you!
@@ -145,7 +145,13 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
           </p>
           <p style="font-size: 1.1rem;">13 Greenpoint Ave</p>
           <p style="font-size: 1.1rem;">Brooklyn, NY 11222</p>
-          <GeoButton client:load variant="secondary" href="/travel">
+          <GeoButton
+            client:load
+            variant="secondary"
+            href="https://www.google.com/maps/dir/?api=1&destination=Neptune+at+Radio+Star,13+Greenpoint+Ave,Brooklyn,NY+11222"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Get Directions
           </GeoButton>
         </div>
@@ -153,14 +159,10 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
         <div class="info-box geo-box-neon bg-lime-green">
           <h3 class="text-beveled-red" style="font-size: 2rem;">⏰ Time</h3>
           <p style="color: #000; font-size: 1.2rem; font-weight: bold;">
-            <strong>Ceremony:</strong> 6:00 PM
+            <strong>6:00 PM</strong>
           </p>
-          <p style="color: #000; font-size: 1.2rem; font-weight: bold;">
-            <strong>Reception:</strong> 7:00 PM
-          </p>
-          <p style="color: #000; font-size: 1.2rem; font-weight: bold;">
-            <strong>Last Call:</strong> 12:00 AM
-          </p>
+          <p style="font-size: 1.1rem;">Don't be late!</p>
+          <p style="font-size: 1.1rem;">Bring your date!</p>
           <GeoButton client:load variant="secondary" href="/schedule">
             Full Schedule
           </GeoButton>
@@ -174,9 +176,7 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
             <strong>Cocktail Attire</strong>
           </p>
           <p style="font-size: 1.1rem;">Dress to impress!</p>
-          <p style="font-size: 1.1rem;">
-            (But also be comfortable for dancing 💃🕺)
-          </p>
+          <p style="font-size: 1.1rem;">Kinda</p>
         </div>
       </div>
     </section>

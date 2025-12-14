@@ -37,6 +37,7 @@ export default function HitCounter() {
           const fetchResponse = await fetch("/api/counter");
 
           if (!fetchResponse.ok) {
+            console.error(fetchResponse);
             throw new Error("Failed to fetch counter");
           }
 
