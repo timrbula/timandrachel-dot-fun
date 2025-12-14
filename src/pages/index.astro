@@ -36,7 +36,7 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
       <p style="font-size: 2rem; font-weight: bold" class="rainbow-text">
         {weddingDateFormatted}
       </p>
-      <p style="font-size: 2rem; font-weight: bold">NYC</p>
+      <p style="font-size: 2rem; font-weight: bold">NYC 🗽</p>
       <!-- <p style="font-size: 1.3rem; font-weight: bold;">
         Hey there friend or family member! 👋 We're excited to celebrate our
         wedding with you!
@@ -88,24 +88,12 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
         </p>
       </div> -->
 
-      <!-- Countdown -->
-      <div class="countdown geo-box-raised bg-pattern-flames">
-        <h3 class="text-outline">Countdown to the Big Day!</h3>
-        <p class="countdown-number">
-          <span class="text-beveled-blue">{daysLeft}</span>
-        </p>
-        <p class="countdown-label text-beveled-yellow" style="font-size: 2rem;">
-          Days to Go!
-        </p>
-      </div>
-    </section>
+      <!-- <RainbowDivider client:load variant="animated" /> -->
 
-    <!-- <RainbowDivider client:load variant="animated" /> -->
+      <!-- <RainbowDivider client:load variant="stars" /> -->
 
-    <!-- <RainbowDivider client:load variant="stars" /> -->
-
-    <!-- Quick Links -->
-    <!-- <section class="quick-links-section text-center">
+      <!-- Quick Links -->
+      <!-- <section class="quick-links-section text-center">
       <h2 class="text-3d">Quick Links</h2>
       <div class="button-grid">
         <GeoButton client:load variant="primary" href="/schedule">
@@ -123,52 +111,66 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
       </div>
     </section> -->
 
-    <!-- Important Info -->
-    <section class="info-section">
-      <div class="info-grid">
-        <div class="info-box geo-box-neon bg-electric-blue">
-          <h3 class="text-beveled-yellow" style="font-size: 2rem;">
-            📍 Location
-          </h3>
-          <p style="font-size: 1.2rem; font-weight: bold;">
-            <strong>Neptune Room @ Radio Star</strong>
-          </p>
-          <p style="font-size: 1.1rem;">13 Greenpoint Ave</p>
-          <p style="font-size: 1.1rem;">Brooklyn, NY 11222</p>
-          <GeoButton
-            client:load
-            variant="primary"
-            href="https://www.google.com/maps/dir/?api=1&destination=Neptune+at+Radio+Star,13+Greenpoint+Ave,Brooklyn,NY+11222"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Get Directions
-          </GeoButton>
-        </div>
+      <!-- Important Info -->
+      <section class="info-section">
+        <div class="info-grid">
+          <div class="info-box geo-box-neon bg-electric-blue">
+            <h3 class="text-beveled-yellow" style="font-size: 2rem;">
+              📍 Location
+            </h3>
+            <p style="font-size: 1.2rem; font-weight: bold;">
+              <strong>Neptune Room @ Radio Star</strong>
+            </p>
+            <p style="font-size: 1.1rem;">13 Greenpoint Ave</p>
+            <p style="font-size: 1.1rem;">Brooklyn, NY 11222</p>
+            <GeoButton
+              client:load
+              variant="primary"
+              href="https://www.google.com/maps/dir/?api=1&destination=Neptune+at+Radio+Star,13+Greenpoint+Ave,Brooklyn,NY+11222"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Get Directions
+            </GeoButton>
+          </div>
 
-        <div class="info-box geo-box-neon bg-lime-green">
-          <h3 class="text-beveled-red" style="font-size: 2rem;">⏰ Time</h3>
-          <p style="color: #000; font-size: 1.2rem; font-weight: bold;">
-            <strong>6:00 PM</strong>
-          </p>
-          <p style="font-size: 1.1rem;">Don't be late</p>
-          <p style="font-size: 1.1rem;">Don't forget your date</p>
-          <GeoButton client:load variant="warning" href="/schedule">
-            Full Schedule
-          </GeoButton>
+          <div class="info-box geo-box-neon bg-lime-green">
+            <h3 class="text-beveled-red" style="font-size: 2rem;">⏰ Time</h3>
+            <p style="color: #000; font-size: 1.2rem; font-weight: bold;">
+              <strong>6:00 PM</strong>
+            </p>
+            <p style="font-size: 1.1rem;">Don't be late</p>
+            <p style="font-size: 1.1rem;">Don't forget your date</p>
+            <GeoButton client:load variant="warning" href="/schedule">
+              Full Schedule
+            </GeoButton>
+          </div>
         </div>
+      </section>
+
+      <RainbowDivider client:load variant="animated" />
+
+      <!-- RSVP CTA -->
+      <section class="rsvp-cta text-center geo-box-raised">
+        <h2 class="text-3d">Don't Forget to RSVP!</h2>
+        <p class="rsvp-text">Please tell us!</p>
+        <GeoButton client:load variant="warning" href="/rsvp">
+          🎉 RSVP Now! 🎉
+        </GeoButton>
+      </section>
+
+      <!-- Countdown -->
+      <div class="countdown geo-box-raised bg-pattern-flames">
+        <h3 class="text-outline">Countdown to the Big Day!</h3>
+        <p class="countdown-number">
+          <BlinkingText client:load speed="normal"
+            ><span class="text-beveled-blue">{daysLeft}</span>
+          </BlinkingText>
+        </p>
+        <p class="countdown-label text-beveled-yellow" style="font-size: 2rem;">
+          Days to Go!
+        </p>
       </div>
-    </section>
-
-    <RainbowDivider client:load variant="animated" />
-
-    <!-- RSVP CTA -->
-    <section class="rsvp-cta text-center geo-box-raised">
-      <h2 class="text-3d">Don't Forget to RSVP!</h2>
-      <p class="rsvp-text">Please tell us!</p>
-      <GeoButton client:load variant="warning" href="/rsvp">
-        🎉 RSVP Now! 🎉
-      </GeoButton>
     </section>
 
     <RainbowDivider client:load variant="stars" />
