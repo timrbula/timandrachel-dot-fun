@@ -9,8 +9,8 @@
 .section-title {
   font-size: 2rem;
   text-align: center;
-  color: var(--color-magenta);
-  text-shadow: 2px 2px 0 var(--color-cyan);
+  color: var(--color-blue);
+  text-shadow: 2px 2px 0 var(--color-magenta);
   margin-bottom: 2rem;
 }
 

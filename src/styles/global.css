@@ -23,26 +23,6 @@ body {
   background-attachment: fixed;
   min-height: 100vh;
   overflow-x: hidden;
-  border-left: 10px solid;
-  border-right: 10px solid;
-  border-image: repeating-linear-gradient(
-      45deg,
-      #ff0000 0px,
-      #ff0000 10px,
-      #ff8800 10px,
-      #ff8800 20px,
-      #ffff00 20px,
-      #ffff00 30px,
-      #00ff00 30px,
-      #00ff00 40px,
-      #00ffff 40px,
-      #00ffff 50px,
-      #0080ff 50px,
-      #0080ff 60px,
-      #ff00ff 60px,
-      #ff00ff 70px
-    )
-    10;
 }
 
 /* Typography */

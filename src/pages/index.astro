@@ -29,8 +29,9 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
     <!-- Welcome Message -->
     <section class="welcome-section geo-box bg-hot-pink">
       <h2 class="text-beveled-green" style="font-size: 3rem;">
+        <BlinkingText client:load speed="slow">✨</BlinkingText>
         We're getting married
-        <BlinkingText client:load speed="slow">🌟💕✨</BlinkingText>
+        <BlinkingText client:load speed="slow">✨</BlinkingText>
       </h2>
       <p style="font-size: 2rem; font-weight: bold" class="rainbow-text">
         {weddingDateFormatted}
@@ -150,22 +151,11 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
           <p style="color: #000; font-size: 1.2rem; font-weight: bold;">
             <strong>6:00 PM</strong>
           </p>
-          <p style="font-size: 1.1rem;">Don't be late!</p>
-          <p style="font-size: 1.1rem;">Don't forget your date!</p>
+          <p style="font-size: 1.1rem;">Don't be late</p>
+          <p style="font-size: 1.1rem;">Don't forget your date</p>
           <GeoButton client:load variant="warning" href="/schedule">
             Full Schedule
           </GeoButton>
-        </div>
-
-        <div class="info-box geo-box-neon bg-hot-pink">
-          <h3 class="text-beveled-blue" style="font-size: 2rem;">
-            👔 Dress Code
-          </h3>
-          <p style="font-size: 1.2rem; font-weight: bold;">
-            <strong>Cocktail Attire</strong>
-          </p>
-          <p style="font-size: 1.1rem;">Dress to impress!</p>
-          <p style="font-size: 1.1rem;">Kinda</p>
         </div>
       </div>
     </section>
@@ -175,9 +165,7 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
     <!-- RSVP CTA -->
     <section class="rsvp-cta text-center geo-box-raised">
       <h2 class="text-3d">Don't Forget to RSVP!</h2>
-      <p class="rsvp-text">
-        We need to know if you're coming so we can plan accordingly!
-      </p>
+      <p class="rsvp-text">Please tell us!</p>
       <GeoButton client:load variant="warning" href="/rsvp">
         🎉 RSVP Now! 🎉
       </GeoButton>
@@ -187,7 +175,7 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
 
     <!-- RSVP CTA -->
     <section class="geo-box bg-hot-pink">
-      <h2 class="text-neon">Have some fun while you're here</h2>
+      <h2 class="text-neon">Have some fun while you're here!!!</h2>
       <div class="button-group">
         <GeoButton client:load variant="warning" href="/pics">
           📸 Pics
@@ -202,21 +190,6 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
     </section>
 
     <RainbowDivider client:load variant="dots" />
-
-    <!-- Fun Badges Section -->
-    <section class="badges-section text-center">
-      <div class="badges-container">
-        <span class="geo-badge geo-badge-new blink">✨ NEW</span>
-        <span class="geo-badge geo-badge-hot blink">🔥 HOT</span>
-        <span class="geo-badge geo-badge-cool blink">😎 COOL</span>
-        <span
-          class="geo-badge blink"
-          style="background: #FF00FF; color: #FFFF00; border-color: #00FFFF;"
-        >
-          💕 LOVE
-        </span>
-      </div>
-    </section>
 
     <!-- Under Construction Notice for Future Pages -->
     <section class="construction-section">
