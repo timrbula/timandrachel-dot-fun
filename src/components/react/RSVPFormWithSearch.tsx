@@ -44,6 +44,7 @@ export default function RSVPFormWithSearch() {
   const [lookupEmail, setLookupEmail] = useState("");
   const [lookingUp, setLookingUp] = useState(false);
   const [showLookup, setShowLookup] = useState(false);
+  const [searchError, setSearchError] = useState<string | null>(null);
 
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -109,11 +110,23 @@ export default function RSVPFormWithSearch() {
     setGuestInfo(null);
     setShowForm(false);
     setEditMode(false);
+    setSearchError(null);
 
     try {
       const response = await fetch(
         `/api/guest-search?q=${encodeURIComponent(searchQuery.trim())}`
       );
+
+      if (response.status === 429) {
+        const data = await response.json();
+        setSearchError(
+          `Too many search attempts. Please wait ${data.retryAfter} seconds and try again.`
+        );
+        setSearching(false);
+        setSearchPerformed(false); // Don't show "No invitation found" for rate limit errors
+        return;
+      }
+
       const data = await response.json();
 
       if (data.found && data.guest) {
@@ -291,7 +304,7 @@ export default function RSVPFormWithSearch() {
         <div className="guest-search-section">
           <h3 className="search-title">🔍 Find Your Invitation</h3>
           <p className="search-description">
-            Search by your name or email to submit a new RSVP
+            Search by your full name (exactly as on invitation) or email address
           </p>
           <form onSubmit={handleSearch} className="search-form">
             <input
@@ -310,6 +323,13 @@ export default function RSVPFormWithSearch() {
               {searching ? "Searching..." : "🔍 Search"}
             </button>
           </form>
+
+          {/* Rate Limit Error - Show inside search box */}
+          {searchError && (
+            <div className="submit-error" style={{ marginTop: "1rem" }}>
+              <strong>⚠️</strong> {searchError}
+            </div>
+          )}
 
         {/* Search Results */}
         {searchPerformed && !searching && (
@@ -394,7 +414,7 @@ export default function RSVPFormWithSearch() {
               className={`form-input ${errors.name ? "error" : ""}`}
               value={formData.name}
               onChange={handleChange}
-              placeholder="Rose Szilagyi"
+              placeholder="Ur Name"
               disabled={loading}
               aria-required="true"
               aria-invalid={!!errors.name}
@@ -503,7 +523,7 @@ export default function RSVPFormWithSearch() {
                 className={`form-input ${errors.plusOneName ? "error" : ""}`}
                 value={formData.plusOneName}
                 onChange={handleChange}
-                placeholder="Moth Angel"
+                placeholder="Ur Name"
                 disabled={loading}
                 aria-required="true"
                 aria-invalid={!!errors.plusOneName}

@@ -201,7 +201,7 @@ export default function Guestbook() {
                 className={`form-input ${errors.name ? "error" : ""}`}
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="Rose Szilagyi"
+                placeholder="Ur Name"
                 disabled={submitting}
                 maxLength={100}
               />

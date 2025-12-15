@@ -1,13 +1,39 @@
 import type { APIRoute } from "astro";
 import prisma from "../../lib/prisma";
+import { guestSearchLimiter } from "../../lib/rate-limiter";
 
 /**
  * GET /api/guest-search?q=email_or_name
  * Public endpoint to search for a guest by email or name
  * Returns guest info if found (for RSVP form lookup)
  */
-export const GET: APIRoute = async ({ url }) => {
+export const GET: APIRoute = async ({ url, request }) => {
   try {
+    // Get client IP (works with Vercel)
+    const clientIp =
+      request.headers.get("x-forwarded-for")?.split(",")[0] ||
+      request.headers.get("x-real-ip") ||
+      "unknown";
+
+    // Check rate limit
+    const rateLimit = guestSearchLimiter.check(clientIp);
+    if (!rateLimit.allowed) {
+      const retryAfter = Math.ceil((rateLimit.resetAt - Date.now()) / 1000);
+      return new Response(
+        JSON.stringify({
+          error: "Too many search attempts. Please try again later.",
+          retryAfter,
+        }),
+        {
+          status: 429,
+          headers: {
+            "Content-Type": "application/json",
+            "Retry-After": retryAfter.toString(),
+          },
+        }
+      );
+    }
+
     const query = url.searchParams.get("q");
 
     if (!query || query.trim().length < 2) {
@@ -19,12 +45,12 @@ export const GET: APIRoute = async ({ url }) => {
 
     const searchTerm = query.trim().toLowerCase();
 
-    // Search for guest by email or name
+    // Search for guest by email or name (exact match for both)
     const guest = await prisma.guest.findFirst({
       where: {
         OR: [
           { email: { equals: searchTerm, mode: "insensitive" } },
-          { name: { contains: searchTerm, mode: "insensitive" } },
+          { name: { equals: searchTerm, mode: "insensitive" } },
         ],
       },
       select: {
