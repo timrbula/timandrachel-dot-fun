@@ -226,8 +226,9 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
   };
 
   // Game constants - Same gameplay, optimized rendering for mobile
-  const GRAVITY = 0.2; // Same for all devices
-  const JUMP_STRENGTH = -5; // Same for all devices
+  const BASE_GRAVITY = 0.2; // Base gravity at base speed
+  const BASE_JUMP_STRENGTH = -5; // Base jump strength at base speed
+  const BASE_SPEED = 3.5; // Base game speed
   const PIPE_WIDTH = 70; // Same for all devices
   const PIPE_GAP = 220; // Same for all devices
   const PIPE_SPEED = 3.0
@@ -785,8 +786,10 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
     // Draw background
     drawBackground(ctx, canvas, state.frameCount);
 
-    // Update bird
-    state.bird.velocity += GRAVITY;
+    // Update bird with speed-scaled gravity
+    const speedMultiplier = state.currentSpeed / BASE_SPEED;
+    const scaledGravity = BASE_GRAVITY * speedMultiplier;
+    state.bird.velocity += scaledGravity;
     state.bird.y += state.bird.velocity;
 
     // Update pipes
@@ -883,10 +886,10 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
           state.score++;
           setScore(state.score);
           
-          // Increase speed every 10 points - check if we just crossed a multiple of 10
-          const crossedMultipleOf10 = Math.floor(previousScore / 10) < Math.floor(state.score / 10);
-          if (crossedMultipleOf10) {
-            state.currentSpeed += 1;
+          // Increase speed every 5 points - check if we just crossed a multiple of 5
+          const crossedMultipleOf5 = Math.floor(previousScore / 5) < Math.floor(state.score / 5);
+          if (crossedMultipleOf5) {
+            state.currentSpeed += 0.25;
           }
         }
       }
@@ -915,10 +918,10 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
           state.score++;
           setScore(state.score);
           
-          // Increase speed every 10 points - check if we just crossed a multiple of 10
-          const crossedMultipleOf10 = Math.floor(previousScore / 10) < Math.floor(state.score / 10);
-          if (crossedMultipleOf10) {
-            state.currentSpeed += 1;
+          // Increase speed every 5 points - check if we just crossed a multiple of 5
+          const crossedMultipleOf5 = Math.floor(previousScore / 5) < Math.floor(state.score / 5);
+          if (crossedMultipleOf5) {
+            state.currentSpeed += 0.25;
           }
         }
       }
@@ -976,7 +979,9 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
 
   const jump = () => {
     if (!gameStarted || gameOver) return;
-    gameStateRef.current.bird.velocity = JUMP_STRENGTH;
+    const speedMultiplier = gameStateRef.current.currentSpeed / BASE_SPEED;
+    const scaledJumpStrength = BASE_JUMP_STRENGTH * speedMultiplier;
+    gameStateRef.current.bird.velocity = scaledJumpStrength;
   };
 
   const checkLeaderboardQualification = async (finalScore: number) => {
