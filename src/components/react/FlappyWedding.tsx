@@ -791,8 +791,13 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
     // Update pipes
     state.frameCount++;
     
+    // Calculate dynamic spawn interval based on current speed to maintain consistent spacing
+    // Base interval is 110 frames at base speed (3.5), adjust proportionally
+    const baseSpeed = 3.5;
+    const dynamicSpawnInterval = Math.round(SPAWN_INTERVAL * (baseSpeed / state.currentSpeed));
+    
     // Spawn new obstacle - either pipe or rats
-    if (state.frameCount % SPAWN_INTERVAL === 0) {
+    if (state.frameCount % dynamicSpawnInterval === 0) {
       // Check if next score will be a multiple of 10 (spawn rats instead of pipes)
       const nextScore = state.score + 1;
       const shouldSpawnRat = nextScore % 10 === 0 && nextScore !== state.lastObstacleScore;
