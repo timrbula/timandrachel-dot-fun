@@ -12,11 +12,11 @@ interface Pipe extends GameObject {
   scored: boolean;
 }
 
-// Mobile detection utility
-const isMobileDevice = () => {
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-    (window.innerWidth <= 768);
-};
+interface Obstacle extends GameObject {
+  passed: boolean;
+  isTop?: boolean;
+}
+
 
 const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -30,9 +30,6 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  // Performance mode detection
-  const isMobile = useRef(false);
-  
   // Sprite cache for buildings
   const buildingSpritesRef = useRef<Map<string, HTMLCanvasElement>>(new Map());
   const backgroundCacheRef = useRef<HTMLCanvasElement | null>(null);
@@ -42,15 +39,17 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
   const gameStateRef = useRef({
     bird: { x: 100, y: 250, width: 40, height: 40, velocity: 0 },
     pipes: [] as Pipe[],
+    obstacles: [] as Obstacle[],
     score: 0,
     frameCount: 0,
+    lastObstacleScore: 0,
+    currentSpeed: 3.5,
   });
 
   const gameLoopRef = useRef<number | undefined>(undefined);
 
   // Initialize mobile detection and load high score
   useEffect(() => {
-    isMobile.current = isMobileDevice();
     const saved = localStorage.getItem('flappyWeddingHighScore');
     if (saved) setHighScore(parseInt(saved, 10));
   }, []);
@@ -230,11 +229,87 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
   const JUMP_STRENGTH = -5; // Same for all devices
   const PIPE_WIDTH = 70; // Same for all devices
   const PIPE_GAP = 220; // Same for all devices
-  const PIPE_SPEED = isMobile.current ? 3.5 : 3.5; // Faster speed for both
+  const PIPE_SPEED = 3.0
   const SPAWN_INTERVAL = 110; // Same for all devices
   
   // Manhattan building types
   const BUILDING_TYPES = ['empire', 'chrysler', 'onewtc', 'standard'] as const;
+  
+  // Obstacle constants
+  const OBSTACLE_WIDTH = 60;
+  const OBSTACLE_HEIGHT = 50;
+  const OBSTACLE_SPEED = PIPE_SPEED;
+
+  // Draw NYC Rat obstacle
+  const drawRat = (ctx: CanvasRenderingContext2D, obstacle: Obstacle) => {
+    ctx.save();
+    
+    // Rat body (gray/brown)
+    ctx.fillStyle = '#5a4a42';
+    ctx.beginPath();
+    ctx.ellipse(obstacle.x + 30, obstacle.y + 25, 25, 20, 0, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // Rat head
+    ctx.beginPath();
+    ctx.ellipse(obstacle.x + 50, obstacle.y + 20, 15, 12, 0, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // Ears
+    ctx.fillStyle = '#6a5a52';
+    ctx.beginPath();
+    ctx.arc(obstacle.x + 45, obstacle.y + 10, 6, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(obstacle.x + 55, obstacle.y + 10, 6, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // Eyes (beady and menacing)
+    ctx.fillStyle = '#ff0000';
+    ctx.beginPath();
+    ctx.arc(obstacle.x + 52, obstacle.y + 18, 3, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(obstacle.x + 58, obstacle.y + 18, 3, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // Nose
+    ctx.fillStyle = '#3a2a22';
+    ctx.beginPath();
+    ctx.arc(obstacle.x + 60, obstacle.y + 22, 2, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // Tail (curvy)
+    ctx.strokeStyle = '#5a4a42';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(obstacle.x + 10, obstacle.y + 25);
+    ctx.quadraticCurveTo(obstacle.x, obstacle.y + 15, obstacle.x - 5, obstacle.y + 20);
+    ctx.stroke();
+    
+    // Legs
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(obstacle.x + 20, obstacle.y + 35);
+    ctx.lineTo(obstacle.x + 18, obstacle.y + 45);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(obstacle.x + 30, obstacle.y + 35);
+    ctx.lineTo(obstacle.x + 28, obstacle.y + 45);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(obstacle.x + 40, obstacle.y + 35);
+    ctx.lineTo(obstacle.x + 42, obstacle.y + 45);
+    ctx.stroke();
+    
+    // Add "NYC RAT" label above
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 10px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('RAT!!!', obstacle.x + 30, obstacle.y - 5);
+    
+    ctx.restore();
+  };
 
   const drawBird = (ctx: CanvasRenderingContext2D, bird: GameObject) => {
     // Draw bride/groom character (alternating) - emoji style!
@@ -661,7 +736,7 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
     ctx.drawImage(skylineCacheRef.current, 0, canvas.height - 60);
   };
 
-  const checkCollision = (bird: GameObject, pipes: Pipe[], canvas: HTMLCanvasElement): boolean => {
+  const checkCollision = (bird: GameObject, pipes: Pipe[], obstacles: Obstacle[], canvas: HTMLCanvasElement): boolean => {
     // Check ground and ceiling
     if (bird.y + bird.height > canvas.height - 60 || bird.y < 0) {
       return true;
@@ -674,6 +749,18 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
         bird.x < pipe.x + pipe.width &&
         bird.y + bird.height > pipe.y &&
         bird.y < pipe.y + pipe.height
+      ) {
+        return true;
+      }
+    }
+
+    // Check obstacles (rats)
+    for (const obstacle of obstacles) {
+      if (
+        bird.x + bird.width > obstacle.x &&
+        bird.x < obstacle.x + obstacle.width &&
+        bird.y + bird.height > obstacle.y &&
+        bird.y < obstacle.y + obstacle.height
       ) {
         return true;
       }
@@ -704,48 +791,78 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
     // Update pipes
     state.frameCount++;
     
-    // Spawn new pipe (Manhattan building)
+    // Spawn new obstacle - either pipe or rats
     if (state.frameCount % SPAWN_INTERVAL === 0) {
-      // Create more varied gap positions - force gaps to be in different vertical zones
-      const playableHeight = canvas.height - 60 - PIPE_GAP;
-      const zones = 5; // Divide playable area into 5 zones
-      const zoneHeight = playableHeight / zones;
+      // Check if next score will be a multiple of 10 (spawn rats instead of pipes)
+      const nextScore = state.score + 1;
+      const shouldSpawnRat = nextScore % 10 === 0 && nextScore !== state.lastObstacleScore;
       
-      // Pick a random zone (0-4) and place gap within that zone
-      const zone = Math.floor(Math.random() * zones);
-      const minHeightInZone = zone * zoneHeight + 50; // Add 50px padding
-      const maxHeightInZone = (zone + 1) * zoneHeight - 50; // Subtract 50px padding
-      
-      // Ensure we have valid bounds
-      const minHeight = Math.max(50, minHeightInZone);
-      const maxHeight = Math.min(playableHeight - 50, maxHeightInZone);
-      
-      // Random height within the selected zone
-      const topHeight = Math.random() * (maxHeight - minHeight) + minHeight;
-      const buildingType = BUILDING_TYPES[Math.floor(Math.random() * BUILDING_TYPES.length)];
-      
-      state.pipes.push({
-        x: canvas.width,
-        y: 0,
-        width: PIPE_WIDTH,
-        height: topHeight,
-        scored: false,
-        buildingType,
-      } as Pipe & { buildingType: string });
-      
-      state.pipes.push({
-        x: canvas.width,
-        y: topHeight + PIPE_GAP,
-        width: PIPE_WIDTH,
-        height: canvas.height - 60 - topHeight - PIPE_GAP,
-        scored: false,
-        buildingType,
-      } as Pipe & { buildingType: string });
+      if (shouldSpawnRat) {
+        // Spawn TWO NYC rat obstacles stacked on top of each other in the middle
+        const playableHeight = canvas.height - 60;
+        const middleY = playableHeight / 2;
+        
+        // Top rat (counts for scoring)
+        state.obstacles.push({
+          x: canvas.width,
+          y: middleY - OBSTACLE_HEIGHT - 5, // 5px gap between rats
+          width: OBSTACLE_WIDTH,
+          height: OBSTACLE_HEIGHT,
+          passed: false,
+          isTop: true,
+        });
+        
+        // Bottom rat (also counts for scoring)
+        state.obstacles.push({
+          x: canvas.width,
+          y: middleY + 5, // 5px gap between rats
+          width: OBSTACLE_WIDTH,
+          height: OBSTACLE_HEIGHT,
+          passed: false,
+          isTop: false,
+        });
+      } else {
+        // Spawn normal Manhattan building pipes
+        const playableHeight = canvas.height - 60 - PIPE_GAP;
+        const zones = 5; // Divide playable area into 5 zones
+        const zoneHeight = playableHeight / zones;
+        
+        // Pick a random zone (0-4) and place gap within that zone
+        const zone = Math.floor(Math.random() * zones);
+        const minHeightInZone = zone * zoneHeight + 50; // Add 50px padding
+        const maxHeightInZone = (zone + 1) * zoneHeight - 50; // Subtract 50px padding
+        
+        // Ensure we have valid bounds
+        const minHeight = Math.max(50, minHeightInZone);
+        const maxHeight = Math.min(playableHeight - 50, maxHeightInZone);
+        
+        // Random height within the selected zone
+        const topHeight = Math.random() * (maxHeight - minHeight) + minHeight;
+        const buildingType = BUILDING_TYPES[Math.floor(Math.random() * BUILDING_TYPES.length)];
+        
+        state.pipes.push({
+          x: canvas.width,
+          y: 0,
+          width: PIPE_WIDTH,
+          height: topHeight,
+          scored: false,
+          buildingType,
+        } as Pipe & { buildingType: string });
+        
+        state.pipes.push({
+          x: canvas.width,
+          y: topHeight + PIPE_GAP,
+          width: PIPE_WIDTH,
+          height: canvas.height - 60 - topHeight - PIPE_GAP,
+          scored: false,
+          buildingType,
+        } as Pipe & { buildingType: string });
+      }
     }
 
     // Move and draw pipes
     state.pipes = state.pipes.filter(pipe => {
-      pipe.x -= PIPE_SPEED;
+      pipe.x -= state.currentSpeed;
       
       // Score when passing pipe
       if (!pipe.scored && pipe.x + pipe.width < state.bird.x) {
@@ -761,11 +878,33 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
       return pipe.x + pipe.width > 0;
     });
 
+    // Move and draw obstacles (rats)
+    state.obstacles = state.obstacles.filter(obstacle => {
+      obstacle.x -= state.currentSpeed;
+      
+      // Score when passing rat obstacle (both rats count for scoring)
+      if (!obstacle.passed && obstacle.x + obstacle.width < state.bird.x) {
+        obstacle.passed = true;
+        const previousScore = state.score;
+        state.score++;
+        setScore(state.score);
+        
+        // Increase speed every 10 points - check if we just crossed a multiple of 10
+        const crossedMultipleOf10 = Math.floor(previousScore / 10) < Math.floor(state.score / 10);
+        if (crossedMultipleOf10) {
+          state.currentSpeed += 1;
+        }
+      }
+      
+      drawRat(ctx, obstacle);
+      return obstacle.x + obstacle.width > 0;
+    });
+
     // Draw bird
     drawBird(ctx, state.bird);
 
     // Check collision
-    if (checkCollision(state.bird, state.pipes, canvas)) {
+    if (checkCollision(state.bird, state.pipes, state.obstacles, canvas)) {
       setGameOver(true);
       setGameStarted(false);
       
@@ -793,8 +932,11 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
     gameStateRef.current = {
       bird: { x: 100, y: 250, width: 40, height: 40, velocity: 0 },
       pipes: [],
+      obstacles: [],
       score: 0,
       frameCount: 0,
+      lastObstacleScore: 0,
+      currentSpeed: 3.5,
     };
 
     setScore(0);
