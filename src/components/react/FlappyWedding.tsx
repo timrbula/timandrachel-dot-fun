@@ -15,6 +15,7 @@ interface Pipe extends GameObject {
 interface Obstacle extends GameObject {
   passed: boolean;
   isTop?: boolean;
+  pairId?: number;
 }
 
 
@@ -798,16 +799,16 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
     
     // Spawn new obstacle - either pipe or rats
     if (state.frameCount % dynamicSpawnInterval === 0) {
-      // Check if next score will be a multiple of 10 (spawn rats instead of pipes)
-      const nextScore = state.score + 1;
-      const shouldSpawnRat = nextScore % 10 === 0 && nextScore !== state.lastObstacleScore;
+      // Check if current score is a multiple of 10 (spawn rats instead of pipes)
+      const shouldSpawnRat = state.score % 10 === 0 && state.score > 0 && state.score !== state.lastObstacleScore;
       
       if (shouldSpawnRat) {
         // Spawn TWO NYC rat obstacles stacked on top of each other in the middle
         const playableHeight = canvas.height - 60;
         const middleY = playableHeight / 2;
+        const pairId = Date.now(); // Unique ID for this rat pair
         
-        // Top rat (counts for scoring)
+        // Top rat
         state.obstacles.push({
           x: canvas.width,
           y: middleY - OBSTACLE_HEIGHT - 5, // 5px gap between rats
@@ -815,9 +816,10 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
           height: OBSTACLE_HEIGHT,
           passed: false,
           isTop: true,
+          pairId,
         });
         
-        // Bottom rat (also counts for scoring)
+        // Bottom rat
         state.obstacles.push({
           x: canvas.width,
           y: middleY + 5, // 5px gap between rats
@@ -825,7 +827,11 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
           height: OBSTACLE_HEIGHT,
           passed: false,
           isTop: false,
+          pairId,
         });
+        
+        // Mark that we've spawned rats for this score milestone
+        state.lastObstacleScore = state.score;
       } else {
         // Spawn normal Manhattan building pipes
         const playableHeight = canvas.height - 60 - PIPE_GAP;
@@ -894,17 +900,26 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
     state.obstacles = state.obstacles.filter(obstacle => {
       obstacle.x -= state.currentSpeed;
       
-      // Score when passing rat obstacle (both rats count for scoring)
+      // Score when bird passes the rat pair (only score once per pair)
       if (!obstacle.passed && obstacle.x + obstacle.width < state.bird.x) {
         obstacle.passed = true;
-        const previousScore = state.score;
-        state.score++;
-        setScore(state.score);
         
-        // Increase speed every 10 points - check if we just crossed a multiple of 10
-        const crossedMultipleOf10 = Math.floor(previousScore / 10) < Math.floor(state.score / 10);
-        if (crossedMultipleOf10) {
-          state.currentSpeed += 1;
+        // Only score if this is the first rat in the pair to be passed
+        const otherRatInPair = state.obstacles.find(
+          o => o.pairId === obstacle.pairId && o !== obstacle
+        );
+        
+        // Score if the other rat hasn't been passed yet, or if it doesn't exist
+        if (!otherRatInPair || !otherRatInPair.passed) {
+          const previousScore = state.score;
+          state.score++;
+          setScore(state.score);
+          
+          // Increase speed every 10 points - check if we just crossed a multiple of 10
+          const crossedMultipleOf10 = Math.floor(previousScore / 10) < Math.floor(state.score / 10);
+          if (crossedMultipleOf10) {
+            state.currentSpeed += 1;
+          }
         }
       }
       
