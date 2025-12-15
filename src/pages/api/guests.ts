@@ -94,14 +94,7 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    if (!body.email || typeof body.email !== "string") {
-      return new Response(JSON.stringify({ error: "Email is required" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
-    }
-
-    if (!isValidEmail(body.email)) {
+    if (body.email && !isValidEmail(body.email)) {
       return new Response(JSON.stringify({ error: "Invalid email address" }), {
         status: 400,
         headers: { "Content-Type": "application/json" },

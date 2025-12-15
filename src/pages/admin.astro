@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../components/astro/BaseLayout.astro";
-import Marquee from "../components/react/Marquee";
 import BlinkingText from "../components/react/BlinkingText";
 import RainbowDivider from "../components/react/RainbowDivider";
 import GuestListManager from "../components/react/GuestListManager";
@@ -10,11 +9,6 @@ import GuestListManager from "../components/react/GuestListManager";
   title="Admin - Guest List Manager 🔐"
   description="Manage wedding guest list and invitations"
 >
-  <!-- Top Marquee -->
-  <Marquee client:load speed={15}>
-    🔐 Admin Area - Guest List Management 🔐
-  </Marquee>
-
   <div class="container">
     <!-- Page Header -->
     <section class="page-header text-center">
@@ -23,9 +17,6 @@ import GuestListManager from "../components/react/GuestListManager";
         Guest List Manager
         <BlinkingText client:load speed="slow">🔐</BlinkingText>
       </h1>
-      <p class="subtitle text-neon-pink">
-        Manage your wedding guest list and track RSVPs
-      </p>
     </section>
 
     <RainbowDivider client:load variant="animated" />
@@ -34,92 +25,56 @@ import GuestListManager from "../components/react/GuestListManager";
     <section class="manager-section">
       <GuestListManager client:load />
     </section>
-
-    <RainbowDivider client:load variant="stars" />
-
-    <!-- Info Section -->
-    <section class="info-section">
-      <div class="info-box geo-box-neon">
-        <h2 class="text-center text-neon">
-          <BlinkingText client:load>ℹ️</BlinkingText>
-          How to Use
-          <BlinkingText client:load>ℹ️</BlinkingText>
-        </h2>
-        <div class="info-content">
-          <p>
-            <strong>Add Guests:</strong> Click "Add New Guest" to add people to your
-            invitation list
-          </p>
-          <p>
-            <strong>Search:</strong> Use the search bar to find guests by name or
-            email
-          </p>
-          <p><strong>Edit:</strong> Click on any guest to edit their details</p>
-          <p>
-            <strong>Track RSVPs:</strong> See who has responded and their attendance
-            status
-          </p>
-          <p>
-            <strong>Plus-Ones:</strong> Set whether each guest can bring a plus-one
-          </p>
-        </div>
-      </div>
-    </section>
   </div>
 
-  <!-- Bottom Marquee -->
-  <Marquee client:load speed={20} direction="right">
-    🔐 Secure Admin Area 🔐 Guest List Management 🔐
-  </Marquee>
-</BaseLayout>
+  <style>
+    /* Page Header */
+    .page-header {
+      padding: 2rem 0;
+    }
 
-<style>
-  /* Page Header */
-  .page-header {
-    padding: 2rem 0;
-  }
-
-  .page-header h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  }
-
-  .subtitle {
-    font-size: 1.2rem;
-    max-width: 700px;
-    margin: 0 auto;
-  }
-
-  /* Manager Section */
-  .manager-section {
-    margin: 3rem 0;
-  }
-
-  /* Info Section */
-  .info-section {
-    margin: 3rem 0;
-  }
-
-  .info-box {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2.5rem;
-  }
-
-  .info-content p {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-    line-height: 1.6;
-  }
-
-  /* Responsive */
-  @media (max-width: 768px) {
     .page-header h1 {
-      font-size: 2rem;
+      font-size: 3rem;
+      margin-bottom: 1rem;
     }
 
     .subtitle {
-      font-size: 1rem;
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
     }
-  }
-</style>
+
+    /* Manager Section */
+    .manager-section {
+      margin: 3rem 0;
+    }
+
+    /* Info Section */
+    .info-section {
+      margin: 3rem 0;
+    }
+
+    .info-box {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2.5rem;
+    }
+
+    .info-content p {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .page-header h1 {
+        font-size: 2rem;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</BaseLayout>

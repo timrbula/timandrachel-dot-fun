@@ -6,13 +6,13 @@ interface Guest {
   name: string;
   email: string;
   allowPlusOne: boolean;
-  maxGuests: number;
   invitationSent: boolean;
   invitationSentAt: string | null;
   notes: string | null;
   rsvps: Array<{
     id: string;
     attending: boolean;
+    numberOfGuests: number;
     createdAt: string;
   }>;
 }
@@ -21,7 +21,6 @@ interface GuestFormData {
   name: string;
   email: string;
   allowPlusOne: boolean;
-  maxGuests: number;
   invitationSent: boolean;
   notes: string;
 }
@@ -40,7 +39,6 @@ export default function GuestListManager() {
     name: "",
     email: "",
     allowPlusOne: false,
-    maxGuests: 1,
     invitationSent: false,
     notes: "",
   });
@@ -139,7 +137,6 @@ export default function GuestListManager() {
         name: "",
         email: "",
         allowPlusOne: false,
-        maxGuests: 1,
         invitationSent: false,
         notes: "",
       });
@@ -181,7 +178,6 @@ export default function GuestListManager() {
         name: "",
         email: "",
         allowPlusOne: false,
-        maxGuests: 1,
         invitationSent: false,
         notes: "",
       });
@@ -223,7 +219,6 @@ export default function GuestListManager() {
       name: guest.name,
       email: guest.email,
       allowPlusOne: guest.allowPlusOne,
-      maxGuests: guest.maxGuests,
       invitationSent: guest.invitationSent,
       notes: guest.notes || "",
     });
@@ -236,7 +231,6 @@ export default function GuestListManager() {
       name: "",
       email: "",
       allowPlusOne: false,
-      maxGuests: 1,
       invitationSent: false,
       notes: "",
     });
@@ -347,7 +341,7 @@ export default function GuestListManager() {
               </div>
 
               <div className="form-group">
-                <label htmlFor="email">Email *</label>
+                <label htmlFor="email">Email</label>
                 <input
                   type="email"
                   id="email"
@@ -356,7 +350,6 @@ export default function GuestListManager() {
                     setFormData({ ...formData, email: e.target.value })
                   }
                   className="form-input"
-                  required
                 />
               </div>
             </div>
@@ -371,30 +364,11 @@ export default function GuestListManager() {
                       setFormData({
                         ...formData,
                         allowPlusOne: e.target.checked,
-                        maxGuests: e.target.checked ? 2 : 1,
                       })
                     }
                   />
                   Allow Plus-One
                 </label>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="maxGuests">Max Guests</label>
-                <input
-                  type="number"
-                  id="maxGuests"
-                  min="1"
-                  max="10"
-                  value={formData.maxGuests}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      maxGuests: parseInt(e.target.value),
-                    })
-                  }
-                  className="form-input"
-                />
               </div>
 
               <div className="form-group">
@@ -467,11 +441,9 @@ export default function GuestListManager() {
               </div>
               <div className="stat">
                 <strong>Attending:</strong>{" "}
-                {
-                  guests.filter(
-                    (g) => g.rsvps.length > 0 && g.rsvps[0].attending
-                  ).length
-                }
+                {guests
+                  .filter((g) => g.rsvps.length > 0 && g.rsvps[0].attending)
+                  .reduce((total, g) => total + (g.rsvps[0].numberOfGuests || 1), 0)}
               </div>
               <div className="stat">
                 <strong>Declined:</strong>{" "}
@@ -508,17 +480,12 @@ export default function GuestListManager() {
                       {guest.allowPlusOne ? "Yes" : "No"}
                     </p>
                     <p>
-                      <strong>🎫 Max Guests:</strong> {guest.maxGuests}
-                    </p>
-                    <p>
                       <strong>✉️ Invitation:</strong>{" "}
                       {guest.invitationSent ? "Sent" : "Not Sent"}
                     </p>
-                    {guest.notes && (
-                      <p>
-                        <strong>📝 Notes:</strong> {guest.notes}
-                      </p>
-                    )}
+                    <p>
+                      <strong>📝 Notes:</strong> {guest.notes}
+                    </p>
                   </div>
 
                   <div className="guest-actions">

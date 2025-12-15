@@ -280,66 +280,6 @@ export default function RSVPFormWithSearch() {
 
   return (
     <div className="rsvp-form-container">
-      {/* Modify Existing RSVP Section */}
-      {!showForm && (
-        <div className="modify-rsvp-section">
-          <div className="modify-box geo-box-neon">
-            <h3 className="text-neon">✏️ Modify Your RSVP</h3>
-            <p>Already RSVP'd? Enter your email to update your response:</p>
-            <form onSubmit={handleLookup} className="search-form">
-              <input
-                type="email"
-                value={lookupEmail}
-                onChange={(e) => setLookupEmail(e.target.value)}
-                placeholder="Enter your email address..."
-                className="search-input"
-                disabled={lookingUp}
-              />
-              <button
-                type="submit"
-                className="geo-button-primary"
-                disabled={lookingUp || !lookupEmail.trim()}
-              >
-                {lookingUp ? "Looking up..." : "🔍 Find My RSVP"}
-              </button>
-            </form>
-            {submitError && !existingRSVP && (
-              <div className="submit-error" style={{ marginTop: "1rem" }}>
-                <strong>⚠️</strong> {submitError}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* Magic Link Sent Message */}
-      {existingRSVP && viewingRSVP && !editMode && !submitted && (
-        <div className="existing-rsvp-info geo-box-neon">
-          <h4 className="text-neon-pink">📧 Check Your Email!</h4>
-          <div style={{ marginTop: "1rem" }}>
-            <p>
-              We've sent a secure link to <strong>{existingRSVP.email}</strong>
-            </p>
-            <p style={{ marginTop: "1rem" }}>
-              Click the link in your email to edit your RSVP. The link will expire in 15 minutes for security.
-            </p>
-            <p style={{ marginTop: "1rem", fontSize: "0.9rem", color: "var(--color-cyan)" }}>
-              💡 Didn't receive it? Check your spam folder or try again.
-            </p>
-          </div>
-          <button
-            onClick={() => {
-              setExistingRSVP(null);
-              setViewingRSVP(false);
-              setLookupEmail("");
-            }}
-            className="geo-button-secondary"
-            style={{ marginTop: "1rem" }}
-          >
-            🔙 Back
-          </button>
-        </div>
-      )}
 
       {/* Guest Search Section */}
       {!editMode && !showLookup && (
@@ -395,7 +335,7 @@ export default function RSVPFormWithSearch() {
                         : "❌ Declined"}
                     </p>
                     <p className="contact-note">
-                      Need to update your RSVP? Try the other form!
+                      Need to update your RSVP? Look below!
                     </p>
                   </div>
                 ) : (
@@ -668,6 +608,66 @@ export default function RSVPFormWithSearch() {
             <span className="required-indicator">*</span> Required fields
           </p>
         </form>
+      )}
+            {/* Modify Existing RSVP Section */}
+      {!showForm && (
+        <div className="modify-rsvp-section">
+          <div className="modify-box geo-box-neon">
+            <h3 className="text-neon">✏️ Modify Your RSVP</h3>
+            <p>Already RSVP'd? Enter your email to update your response:</p>
+            <form onSubmit={handleLookup} className="search-form">
+              <input
+                type="email"
+                value={lookupEmail}
+                onChange={(e) => setLookupEmail(e.target.value)}
+                placeholder="Enter your email address..."
+                className="search-input"
+                disabled={lookingUp}
+              />
+              <button
+                type="submit"
+                className="geo-button-primary"
+                disabled={lookingUp || !lookupEmail.trim()}
+              >
+                {lookingUp ? "Looking up..." : "🔍 Find My RSVP"}
+              </button>
+            </form>
+            {submitError && !existingRSVP && (
+              <div className="submit-error" style={{ marginTop: "1rem" }}>
+                <strong>⚠️</strong> {submitError}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Magic Link Sent Message */}
+      {existingRSVP && viewingRSVP && !editMode && !submitted && (
+        <div className="existing-rsvp-info geo-box-neon">
+          <h4 className="text-neon-pink">📧 Check Your Email!</h4>
+          <div style={{ marginTop: "1rem" }}>
+            <p>
+              We've sent a secure link to <strong>{existingRSVP.email}</strong>
+            </p>
+            <p style={{ marginTop: "1rem" }}>
+              Click the link in your email to edit your RSVP. The link will expire in 15 minutes for security.
+            </p>
+            <p style={{ marginTop: "1rem", fontSize: "0.9rem", color: "var(--color-cyan)" }}>
+              💡 Didn't receive it? Check your spam folder or try again.
+            </p>
+          </div>
+          <button
+            onClick={() => {
+              setExistingRSVP(null);
+              setViewingRSVP(false);
+              setLookupEmail("");
+            }}
+            className="geo-button-secondary"
+            style={{ marginTop: "1rem" }}
+          >
+            🔙 Back
+          </button>
+        </div>
       )}
     </div>
   );
