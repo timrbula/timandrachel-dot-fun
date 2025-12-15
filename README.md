@@ -3,7 +3,7 @@
 A gloriously nostalgic Geocities-style wedding website celebrating Rachel & Tim's wedding in Brooklyn, NYC!
 
 **Live Site:** [Coming Soon]
-**Venue:** Neptune Room @ Radio Star, Brooklyn
+**Venue:** Neptune Room @ Radio Star, Brooklyn, NY
 **Date:** Friday, October 9th, 2026
 
 ---

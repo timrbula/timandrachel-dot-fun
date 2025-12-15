@@ -130,13 +130,13 @@ import RSVPFormWithSearch from "../components/react/RSVPFormWithSearch";
           Thank You!
           <BlinkingText client:load>🎊</BlinkingText>
         </h2>
-        <p class="success-text rainbow-text">Your RSVP has been received!</p>
+        <p class="success-text rainbow-text" id="success-message-text">
+          Your RSVP has been received!
+        </p>
         <div class="success-animation">
           <p class="success-icon">🎉</p>
           <p>Check your email for confirmation!</p>
-          <p class="text-neon-pink">
-            We're so excited to celebrate with you in Brooklyn!
-          </p>
+          <p class="text-neon-pink">We're can't wait to celebrate with you!</p>
         </div>
         <GeoButton client:load variant="primary" href="/">
           🏠 Back to Home
@@ -177,30 +177,6 @@ import RSVPFormWithSearch from "../components/react/RSVPFormWithSearch";
 
       <div class="faq-grid">
         <div class="faq-card geo-box-raised">
-          <h3 class="text-neon">Can I change my RSVP?</h3>
-          <p>
-            Of course! Life happens. Just reach out to us and we'll update your
-            response.
-          </p>
-        </div>
-
-        <div class="faq-card geo-box-raised">
-          <h3 class="text-neon-pink">What if I have dietary restrictions?</h3>
-          <p>
-            No problem! Let us know in the form and we'll make sure you're taken
-            care of. 🍽️
-          </p>
-        </div>
-
-        <div class="faq-card geo-box-raised">
-          <h3 class="text-neon">Can I bring my kids?</h3>
-          <p>
-            We love your little ones, but this is an adults-only celebration.
-            Thank you for understanding! 💕
-          </p>
-        </div>
-
-        <div class="faq-card geo-box-raised">
           <h3 class="text-neon-pink">What should I wear?</h3>
           <p>
             Cocktail attire! Dress to impress, but be comfortable for dancing!
@@ -209,18 +185,32 @@ import RSVPFormWithSearch from "../components/react/RSVPFormWithSearch";
         </div>
 
         <div class="faq-card geo-box-raised">
-          <h3 class="text-neon">Will there be parking?</h3>
+          <h3 class="text-neon">Can I change my RSVP?</h3>
           <p>
-            Street parking and nearby garages available. Check out our <a
-              href="/schedule"
-              class="text-cyan">Schedule page</a
-            > for details!
+            Of course! Just enter your email address at the top of the form to
+            find and update your existing RSVP.
           </p>
         </div>
 
         <div class="faq-card geo-box-raised">
+          <h3 class="text-neon-pink">What if I have dietary restrictions?</h3>
+          <p>
+            No problem! Let us know in the form and we'll make sure you're taken
+            care of 🍽️
+          </p>
+        </div>
+        <div class="faq-card geo-box-raised">
           <h3 class="text-neon-pink">Can I take photos?</h3>
-          <p>Absolutely! We'll have a photographer but please snap away :)</p>
+          <p>Absolutely! We'll have a photographer but please snap away</p>
+        </div>
+
+        <div class="faq-card geo-box-raised">
+          <h3 class="text-neon">Can I bring my kids?</h3>
+          <p>
+            You're kiddos are great, but this is an adults-only celebration
+            outside some younger attendees from our immediate familes. Thank you
+            for understanding! 💕
+          </p>
         </div>
       </div>
     </section>

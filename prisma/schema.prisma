@@ -77,3 +77,21 @@ model GameScore {
   @@index([createdAt(sort: Desc)], map: "idx_game_scores_created_at")
   @@map("game_scores")
 }
+
+model RSVPModificationToken {
+  id        String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  email     String   @map("email")
+  token     String   @unique
+  expiresAt DateTime @map("expires_at") @db.Timestamptz(6)
+  used      Boolean  @default(false)
+  usedAt    DateTime? @map("used_at") @db.Timestamptz(6)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  ipAddress String?  @map("ip_address")
+  userAgent String?  @map("user_agent")
+
+  @@index([token], map: "idx_rsvp_tokens_token")
+  @@index([email], map: "idx_rsvp_tokens_email")
+  @@index([expiresAt], map: "idx_rsvp_tokens_expires")
+  @@index([createdAt], map: "idx_rsvp_tokens_created")
+  @@map("rsvp_modification_tokens")
+}

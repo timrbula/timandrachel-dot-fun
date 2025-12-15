@@ -74,14 +74,15 @@
     left: auto;
     padding: 0.75rem;
     font-size: 1rem;
-    height: 1rem;
+    height: 2rem;
+    width: 3rem;
   }
 
   .animation-toggle::before {
     content: "👉";
     bottom: auto;
     top: 50%;
-    right: 100%;
+    right: 3.25rem;
     left: auto;
     transform: translateY(-50%);
     font-size: 1.5rem;
@@ -90,10 +91,10 @@
   @keyframes bounce-arrow {
     0%,
     100% {
-      transform: translateY(-50%) translateX(-20px);
+      transform: translateY(-50%) translateX(-10px);
     }
     50% {
-      transform: translateY(-50%) translateX(-10px);
+      transform: translateY(-50%) translateX(0px);
     }
   }
 }

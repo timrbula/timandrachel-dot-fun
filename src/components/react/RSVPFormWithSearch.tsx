@@ -36,6 +36,12 @@ export default function RSVPFormWithSearch() {
   const [guestInfo, setGuestInfo] = useState<GuestInfo | null>(null);
   const [searchPerformed, setSearchPerformed] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [existingRSVP, setExistingRSVP] = useState<any>(null);
+  const [viewingRSVP, setViewingRSVP] = useState(false);
+  const [lookupEmail, setLookupEmail] = useState("");
+  const [lookingUp, setLookingUp] = useState(false);
+  const [showLookup, setShowLookup] = useState(false);
 
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -53,6 +59,43 @@ export default function RSVPFormWithSearch() {
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
+  // Handle RSVP lookup by email - Request magic link
+  const handleLookup = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!lookupEmail.trim()) return;
+
+    setLookingUp(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch("/api/rsvp-modify-request", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: lookupEmail.trim().toLowerCase(),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Show success message
+        setExistingRSVP({ email: lookupEmail.trim() });
+        setViewingRSVP(true);
+        setShowLookup(false);
+      } else {
+        setSubmitError(data.error || "Failed to send magic link. Please try again.");
+      }
+    } catch (error) {
+      console.error("Lookup error:", error);
+      setSubmitError("Error requesting magic link. Please try again.");
+    } finally {
+      setLookingUp(false);
+    }
+  };
+
   // Handle guest search
   const handleSearch = async (e: FormEvent) => {
     e.preventDefault();
@@ -62,6 +105,7 @@ export default function RSVPFormWithSearch() {
     setSearchPerformed(true);
     setGuestInfo(null);
     setShowForm(false);
+    setEditMode(false);
 
     try {
       const response = await fetch(
@@ -168,8 +212,9 @@ export default function RSVPFormWithSearch() {
     setLoading(true);
 
     try {
+      const method = editMode ? "PUT" : "POST";
       const response = await fetch("/api/rsvp", {
-        method: "POST",
+        method,
         headers: {
           "Content-Type": "application/json",
         },
@@ -191,20 +236,26 @@ export default function RSVPFormWithSearch() {
       if (!response.ok) {
         console.error(response);
         console.error(data);
-        throw new Error(data.error || "Failed to submit RSVP");
+        throw new Error(data.error || `Failed to ${editMode ? "update" : "submit"} RSVP`);
       }
 
       setSubmitted(true);
 
       setTimeout(() => {
         const successElement = document.getElementById("success-message");
+        const successText = document.getElementById("success-message-text");
         if (successElement) {
+          if (successText) {
+            successText.textContent = editMode
+              ? "Your RSVP has been updated successfully!"
+              : "Your RSVP has been received!";
+          }
           successElement.style.display = "block";
           successElement.scrollIntoView({ behavior: "smooth", block: "center" });
         }
       }, 100);
     } catch (error) {
-      console.error("Error submitting RSVP:", error);
+      console.error(`Error ${editMode ? "updating" : "submitting"} RSVP:`, error);
       setSubmitError(
         error instanceof Error
           ? error.message
@@ -229,29 +280,91 @@ export default function RSVPFormWithSearch() {
 
   return (
     <div className="rsvp-form-container">
-      {/* Guest Search Section */}
-      <div className="guest-search-section">
-        <h3 className="search-title">🔍 Find Your Invitation</h3>
-        <p className="search-description">
-          Search by your name or email
-        </p>
-        <form onSubmit={handleSearch} className="search-form">
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Enter your name or email..."
-            className="search-input"
-            disabled={searching}
-          />
+      {/* Modify Existing RSVP Section */}
+      {!showForm && (
+        <div className="modify-rsvp-section">
+          <div className="modify-box geo-box-neon">
+            <h3 className="text-neon">✏️ Modify Your RSVP</h3>
+            <p>Already RSVP'd? Enter your email to update your response:</p>
+            <form onSubmit={handleLookup} className="search-form">
+              <input
+                type="email"
+                value={lookupEmail}
+                onChange={(e) => setLookupEmail(e.target.value)}
+                placeholder="Enter your email address..."
+                className="search-input"
+                disabled={lookingUp}
+              />
+              <button
+                type="submit"
+                className="geo-button-primary"
+                disabled={lookingUp || !lookupEmail.trim()}
+              >
+                {lookingUp ? "Looking up..." : "🔍 Find My RSVP"}
+              </button>
+            </form>
+            {submitError && !existingRSVP && (
+              <div className="submit-error" style={{ marginTop: "1rem" }}>
+                <strong>⚠️</strong> {submitError}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Magic Link Sent Message */}
+      {existingRSVP && viewingRSVP && !editMode && !submitted && (
+        <div className="existing-rsvp-info geo-box-neon">
+          <h4 className="text-neon-pink">📧 Check Your Email!</h4>
+          <div style={{ marginTop: "1rem" }}>
+            <p>
+              We've sent a secure link to <strong>{existingRSVP.email}</strong>
+            </p>
+            <p style={{ marginTop: "1rem" }}>
+              Click the link in your email to edit your RSVP. The link will expire in 15 minutes for security.
+            </p>
+            <p style={{ marginTop: "1rem", fontSize: "0.9rem", color: "var(--color-cyan)" }}>
+              💡 Didn't receive it? Check your spam folder or try again.
+            </p>
+          </div>
           <button
-            type="submit"
+            onClick={() => {
+              setExistingRSVP(null);
+              setViewingRSVP(false);
+              setLookupEmail("");
+            }}
             className="geo-button-secondary"
-            disabled={searching || !searchQuery.trim()}
+            style={{ marginTop: "1rem" }}
           >
-            {searching ? "Searching..." : "🔍 Search"}
+            🔙 Back
           </button>
-        </form>
+        </div>
+      )}
+
+      {/* Guest Search Section */}
+      {!editMode && !showLookup && (
+        <div className="guest-search-section">
+          <h3 className="search-title">🔍 Find Your Invitation</h3>
+          <p className="search-description">
+            Search by your name or email to submit a new RSVP
+          </p>
+          <form onSubmit={handleSearch} className="search-form">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Enter your name or email..."
+              className="search-input"
+              disabled={searching}
+            />
+            <button
+              type="submit"
+              className="geo-button-secondary"
+              disabled={searching || !searchQuery.trim()}
+            >
+              {searching ? "Searching..." : "🔍 Search"}
+            </button>
+          </form>
 
         {/* Search Results */}
         {searchPerformed && !searching && (
@@ -282,7 +395,7 @@ export default function RSVPFormWithSearch() {
                         : "❌ Declined"}
                     </p>
                     <p className="contact-note">
-                      Need to update your RSVP? Please contact us directly.
+                      Need to update your RSVP? Try the other form!
                     </p>
                   </div>
                 ) : (
@@ -300,35 +413,24 @@ export default function RSVPFormWithSearch() {
                 <p>
                   We couldn't find an invitation with that name or email.
                 </p>
-                <p>You can still RSVP below, or contact us if you think this is an error.</p>
-                <button
-                  onClick={() => setShowForm(true)}
-                  className="geo-button-secondary"
-                >
-                  📝 RSVP Anyway
-                </button>
+                <p>Contact us if you think this is an error!</p>
               </div>
             )}
           </div>
         )}
-
-        {/* Skip Search Option */}
-        {!showForm && !searchPerformed && (
-          <div className="skip-search">
-            <button
-              onClick={() => setShowForm(true)}
-              className="skip-button"
-            >
-              Skip search and RSVP directly →
-            </button>
-          </div>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* RSVP Form */}
       {showForm && (
         <form className="rsvp-form" onSubmit={handleSubmit}>
           <div className="form-divider"></div>
+          
+          {editMode && (
+            <div className="edit-mode-notice geo-box-neon">
+              <p className="text-neon">✏️ Editing Mode - Update your RSVP below</p>
+            </div>
+          )}
 
           {/* Name Field */}
           <div className="form-group">
@@ -368,7 +470,7 @@ export default function RSVPFormWithSearch() {
               value={formData.email}
               onChange={handleChange}
               placeholder="jane@example.com"
-              disabled={loading}
+              disabled={loading || editMode}
               aria-required="true"
               aria-invalid={!!errors.email}
               aria-describedby={errors.email ? "email-error" : undefined}
@@ -377,6 +479,9 @@ export default function RSVPFormWithSearch() {
               <span id="email-error" className="form-error">
                 {errors.email}
               </span>
+            )}
+            {editMode && (
+              <p className="form-note">Email cannot be changed when editing</p>
             )}
           </div>
 
@@ -528,6 +633,21 @@ export default function RSVPFormWithSearch() {
 
           {/* Submit Button */}
           <div className="form-actions">
+            {editMode && (
+              <button
+                type="button"
+                className="submit-button geo-button-secondary"
+                onClick={() => {
+                  setEditMode(false);
+                  setShowForm(false);
+                  setViewingRSVP(true);
+                }}
+                disabled={loading}
+                style={{ marginRight: "1rem" }}
+              >
+                ❌ Cancel
+              </button>
+            )}
             <button
               type="submit"
               className="submit-button geo-button-primary"
@@ -535,10 +655,10 @@ export default function RSVPFormWithSearch() {
             >
               {loading ? (
                 <>
-                  <span className="spinner">⏳</span> Submitting...
+                  <span className="spinner">⏳</span> {editMode ? "Updating..." : "Submitting..."}
                 </>
               ) : (
-                <>✨ Submit RSVP ✨</>
+                <>{editMode ? "✨ Update RSVP ✨" : "✨ Submit RSVP ✨"}</>
               )}
             </button>
           </div>

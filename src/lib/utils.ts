@@ -2,6 +2,39 @@
  * Utility functions for the wedding website
  */
 
+import crypto from "crypto";
+
+/**
+ * Generate a cryptographically secure random token
+ * @returns 64-character hex string
+ */
+export function generateSecureToken(): string {
+  return crypto.randomBytes(32).toString("hex");
+}
+
+/**
+ * Check if a token has expired
+ */
+export function isTokenExpired(expiresAt: Date): boolean {
+  return new Date() > expiresAt;
+}
+
+/**
+ * Get token expiration time (15 minutes from now)
+ */
+export function getTokenExpiration(): Date {
+  const expiration = new Date();
+  expiration.setMinutes(expiration.getMinutes() + 15);
+  return expiration;
+}
+
+/**
+ * Validate token format (64 hex characters)
+ */
+export function isValidTokenFormat(token: string): boolean {
+  return /^[a-f0-9]{64}$/i.test(token);
+}
+
 /**
  * Format a date string to a readable format
  */

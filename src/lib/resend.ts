@@ -48,7 +48,7 @@ export async function sendRSVPConfirmation(
         ${plusOne ? `<p style="font-size: 1.1rem;">And we can't wait to meet ${plusOneName || "your plus one"}!</p>` : ""}
         <p style="font-size: 1rem; margin-top: 2rem;">Check out our website for all the details:</p>
         <a href="https://rachelandtim.fun" style="display: inline-block; padding: 1rem 2rem; background: linear-gradient(180deg, #FF00FF, #8000FF); color: #FFFF00; text-decoration: none; font-weight: bold; border: 3px outset #FF00FF; margin: 1rem 0;">Visit Our Website</a>
-        <p style="font-size: 0.9rem; margin-top: 2rem; color: #00FFFF;">See you in Brooklyn! 🗽✨</p>
+        <p style="font-size: 0.9rem; margin-top: 2rem; color: #00FFFF;">See you there! 🗽✨</p>
       </div>
     `
     : `
@@ -57,7 +57,7 @@ export async function sendRSVPConfirmation(
         <p style="font-size: 1.2rem;">Hey ${name},</p>
         <p style="font-size: 1.1rem;">We're sad you can't make it to our wedding, but we totally understand!</p>
         <p style="font-size: 1rem;">We'll be thinking of you on our special day. 💕</p>
-        <p style="font-size: 0.9rem; margin-top: 2rem; color: #00FFFF;">Much love from Brooklyn! 🗽✨</p>
+        <p style="font-size: 0.9rem; margin-top: 2rem; color: #00FFFF;">Much love! 🗽✨</p>
       </div>
     `;
 
@@ -166,6 +166,55 @@ export async function sendGuestbookNotification(name: string, message: string) {
 
     if (error) {
       console.error("Error sending guestbook notification:", error);
+      return null;
+    }
+
+    return data;
+  } catch (error) {
+    console.error("Error sending email:", error);
+    return null;
+  }
+}
+
+/**
+ * Send magic link email for RSVP modification
+ */
+export async function sendMagicLinkEmail(
+  to: string,
+  name: string,
+  token: string
+) {
+  if (!resend) {
+    console.warn("Resend client not initialized. Skipping email.");
+    return null;
+  }
+
+  const magicLink = `https://rachelandtim.fun/rsvp/edit?token=${token}`;
+  const subject = "✨ Edit Your RSVP - Rachel & Tim's Wedding";
+
+  const html = `
+    <div style="font-family: 'Comic Sans MS'; background: linear-gradient(180deg, #000080, #008080); color: #FFFFFF; padding: 2rem; text-align: center;">
+      <h1 style="color: #FF00FF; text-shadow: 2px 2px 0 #00FFFF;">✨ Edit Your RSVP ✨</h1>
+      <p style="font-size: 1.2rem;">Hey ${name}!</p>
+      <p style="font-size: 1.1rem;">Click the button below to edit your RSVP for our wedding:</p>
+      <a href="${magicLink}" style="display: inline-block; padding: 1rem 2rem; background: linear-gradient(180deg, #FF00FF, #8000FF); color: #FFFF00; text-decoration: none; font-weight: bold; border: 3px outset #FF00FF; margin: 2rem 0; font-size: 1.2rem;">Edit My RSVP</a>
+      <p style="font-size: 0.9rem; color: #00FFFF;">This link will expire in 15 minutes for security.</p>
+      <p style="font-size: 0.8rem; color: #CCCCCC; margin-top: 2rem;">If you didn't request this, you can safely ignore this email.</p>
+      <p style="font-size: 0.9rem; margin-top: 2rem; color: #00FFFF;">See you at the wedding! 🗽✨</p>
+    </div>
+  `;
+
+  try {
+    const { data, error } = await resend.emails.send({
+      from: EMAIL_CONFIG.from,
+      to,
+      subject,
+      html,
+      replyTo: EMAIL_CONFIG.replyTo,
+    });
+
+    if (error) {
+      console.error("Error sending magic link email:", error);
       return null;
     }
 
