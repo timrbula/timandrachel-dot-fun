@@ -456,7 +456,8 @@ export default function GuestListManager() {
           <>
             <div className="guest-stats geo-box">
               <div className="stat">
-                <strong>Total Guests:</strong> {guests.length}
+                <strong>Total Guests:</strong>{" "}
+                {guests.reduce((total, g) => total + (g.allowPlusOne ? 2 : 1), 0)}
               </div>
               <div className="stat">
                 <strong>RSVP'd:</strong>{" "}
