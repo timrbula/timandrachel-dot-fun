@@ -27,8 +27,8 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
 
   <div class="container">
     <!-- Welcome Message -->
-    <section class="welcome-section geo-box bg-hot-pink">
-      <h2 class="text-beveled-green" style="font-size: 3rem;">
+    <section class="welcome-section geo-box bg-gradient-ocean">
+      <h2 style="font-size: 3rem;">
         <BlinkingText client:load speed="slow">✨</BlinkingText>
         We're getting married
         <BlinkingText client:load speed="slow">✨</BlinkingText>
@@ -114,7 +114,7 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
       <!-- Important Info -->
       <section class="info-section">
         <div class="info-grid">
-          <div class="info-box geo-box-neon bg-electric-blue">
+          <div class="info-box geo-box-neon bg-gradient-sunset">
             <h3 class="text-beveled-yellow" style="font-size: 2rem;">
               📍 Location
             </h3>
@@ -123,9 +123,10 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
             </p>
             <p style="font-size: 1.1rem;">13 Greenpoint Ave</p>
             <p style="font-size: 1.1rem;">Brooklyn, NY 11222</p>
+            <br />
             <GeoButton
               client:load
-              variant="primary"
+              variant="secondary"
               href="https://www.google.com/maps/dir/?api=1&destination=Neptune+at+Radio+Star,13+Greenpoint+Ave,Brooklyn,NY+11222"
               target="_blank"
               rel="noopener noreferrer"
@@ -134,13 +135,14 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
             </GeoButton>
           </div>
 
-          <div class="info-box geo-box-neon bg-lime-green">
+          <div class="info-box geo-box-neon bg-pattern-stars">
             <h3 class="text-beveled-red" style="font-size: 2rem;">⏰ Time</h3>
-            <p style="color: #000; font-size: 1.2rem; font-weight: bold;">
+            <p style="color: #fff; font-size: 1.2rem; font-weight: bold;">
               <strong>6:00 PM</strong>
             </p>
             <p style="font-size: 1.1rem;">Don't be late</p>
-            <p style="font-size: 1.1rem;">Don't forget your date!</p>
+            <p style="font-size: 1.1rem;">Bring your date!</p>
+            <br />
             <GeoButton client:load variant="warning" href="/schedule">
               Full Schedule
             </GeoButton>
@@ -154,7 +156,7 @@ const weddingDateFormatted = formatDate(WEDDING_DATE, {
       <section class="rsvp-cta text-center geo-box-raised">
         <h2 class="text-3d">Don't Forget to RSVP!</h2>
         <p class="rsvp-text">Please tell us!</p>
-        <GeoButton client:load variant="warning" href="/rsvp">
+        <GeoButton client:load variant="primary" href="/rsvp">
           🎉 RSVP Now! 🎉
         </GeoButton>
       </section>

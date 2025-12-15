@@ -314,6 +314,21 @@
   letter-spacing: 0.1em;
 }
 
+.text-beveled-orange {
+  font-family: "Impact", "Arial Black", sans-serif;
+  font-size: 4rem;
+  font-weight: 900;
+  color: #ff8800;
+  text-transform: uppercase;
+  /* text-shadow:
+    1px 1px 0 #cc6600,
+    2px 2px 0 #994400,
+    3px 3px 0 #662200,
+    4px 4px 0 #331100,
+    10px 10px 20px rgba(0, 0, 0, 0.8); */
+  letter-spacing: 0.1em;
+}
+
 .text-chrome {
   font-family: "Impact", "Arial Black", sans-serif;
   font-size: 4rem;
