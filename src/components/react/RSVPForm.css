@@ -488,3 +488,120 @@
 }
 
 /* Made with Bob */
+
+/* Loading, Error, and Success States */
+.rsvp-form-loading,
+.rsvp-form-error,
+.rsvp-form-success {
+  text-align: center;
+  padding: 3rem 2rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.rsvp-form-loading .loading-spinner {
+  font-size: 4rem;
+  animation: spin 2s linear infinite;
+  margin-bottom: 1rem;
+}
+
+.rsvp-form-loading p {
+  font-size: 1.3rem;
+  color: var(--color-cyan);
+}
+
+.rsvp-form-error {
+  background: rgba(255, 0, 0, 0.1);
+  border: 3px solid var(--color-red);
+  border-radius: 0;
+}
+
+.rsvp-form-error .error-title {
+  font-size: 2rem;
+  color: var(--color-red);
+  margin-bottom: 1rem;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.rsvp-form-error .error-text {
+  font-size: 1.2rem;
+  color: var(--color-white);
+  margin-bottom: 1rem;
+}
+
+.rsvp-form-error .error-note {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 2rem;
+}
+
+.rsvp-form-error .error-actions {
+  margin-top: 2rem;
+}
+
+.rsvp-form-success .success-icon {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+  animation: bounce 1s ease-in-out;
+}
+
+.rsvp-form-success .success-title {
+  font-size: 2.5rem;
+  color: var(--color-green);
+  margin-bottom: 1rem;
+  text-shadow:
+    -2px -2px 0 #000,
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+    2px 2px 0 #000;
+}
+
+.rsvp-form-success .success-message {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.rsvp-form-success .success-note {
+  font-size: 1.1rem;
+  color: var(--color-magenta);
+  margin-bottom: 2rem;
+}
+
+.rsvp-form-success .success-actions {
+  margin-top: 2rem;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.form-notice {
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border: 3px solid var(--color-magenta);
+  border-radius: 0;
+  text-align: center;
+}
+
+.form-notice p {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-white);
+}
+
+.form-help {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+}

@@ -33,36 +33,8 @@ const token = url.searchParams.get("token");
 
     <RainbowDivider client:load variant="animated" />
 
-    <!-- Loading State -->
-    <section class="loading-section" id="loading-section">
-      <div class="loading-box geo-box-neon text-center">
-        <div class="loading-spinner">⏳</div>
-        <p class="loading-text">Verifying your link...</p>
-      </div>
-    </section>
-
-    <!-- Error State -->
-    <section class="error-section" id="error-section" style="display: none;">
-      <div class="error-box geo-box text-center">
-        <h2 class="text-neon">
-          <BlinkingText client:load>⚠️</BlinkingText>
-          Invalid or Expired Link
-          <BlinkingText client:load>⚠️</BlinkingText>
-        </h2>
-        <p class="error-text" id="error-text">
-          This link is invalid or has expired.
-        </p>
-        <p>Please request a new link to edit your RSVP.</p>
-        <div class="error-actions">
-          <GeoButton client:load variant="primary" href="/rsvp">
-            🔙 Back to RSVP
-          </GeoButton>
-        </div>
-      </div>
-    </section>
-
     <!-- Edit Form Container -->
-    <section class="form-section" id="form-section" style="display: none;">
+    <section class="form-section">
       <div class="form-container geo-box-raised">
         <h2 class="text-center text-3d">
           <BlinkingText client:load>✨</BlinkingText>
@@ -70,7 +42,7 @@ const token = url.searchParams.get("token");
           <BlinkingText client:load>✨</BlinkingText>
         </h2>
 
-        <!-- Form will be injected here by React component -->
+        <!-- React component handles all loading, error, and form states -->
         <RSVPEditForm client:load token={token || ""} />
       </div>
     </section>
@@ -103,55 +75,6 @@ const token = url.searchParams.get("token");
   </Marquee>
 </BaseLayout>
 
-<script define:vars={{ token }}>
-  // Verify token on page load
-  async function verifyToken() {
-    const loadingSection = document.getElementById("loading-section");
-    const errorSection = document.getElementById("error-section");
-    const formSection = document.getElementById("form-section");
-    const errorText = document.getElementById("error-text");
-
-    if (!token) {
-      loadingSection.style.display = "none";
-      errorSection.style.display = "block";
-      errorText.textContent = "No authentication token provided.";
-      return;
-    }
-
-    try {
-      const response = await fetch(
-        `/api/rsvp-verify-token?token=${encodeURIComponent(token)}`
-      );
-      const data = await response.json();
-
-      if (response.ok && data.valid) {
-        // Token is valid, show form
-        loadingSection.style.display = "none";
-        formSection.style.display = "block";
-      } else {
-        // Token is invalid
-        loadingSection.style.display = "none";
-        errorSection.style.display = "block";
-        errorText.textContent =
-          data.error || "This link is invalid or has expired.";
-      }
-    } catch (error) {
-      console.error("Error verifying token:", error);
-      loadingSection.style.display = "none";
-      errorSection.style.display = "block";
-      errorText.textContent =
-        "An error occurred while verifying your link. Please try again.";
-    }
-  }
-
-  // Run verification when page loads
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", verifyToken);
-  } else {
-    verifyToken();
-  }
-</script>
-
 <style>
   /* Page Header */
   .page-header {
@@ -167,58 +90,6 @@ const token = url.searchParams.get("token");
     font-size: 1.3rem;
     max-width: 700px;
     margin: 0 auto;
-  }
-
-  /* Loading Section */
-  .loading-section {
-    margin: 3rem 0;
-  }
-
-  .loading-box {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 3rem;
-  }
-
-  .loading-spinner {
-    font-size: 4rem;
-    animation: spin 2s linear infinite;
-  }
-
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  .loading-text {
-    font-size: 1.3rem;
-    margin-top: 1rem;
-  }
-
-  /* Error Section */
-  .error-section {
-    margin: 3rem 0;
-  }
-
-  .error-box {
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 3rem 2rem;
-    background: rgba(255, 0, 0, 0.1);
-    border: 3px solid var(--color-red);
-  }
-
-  .error-text {
-    font-size: 1.3rem;
-    margin: 1rem 0;
-  }
-
-  .error-actions {
-    margin-top: 2rem;
   }
 
   /* Form Section */

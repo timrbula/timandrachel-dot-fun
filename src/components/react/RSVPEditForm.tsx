@@ -242,7 +242,18 @@ export default function RSVPEditForm({ token }: RSVPEditFormProps) {
   if (loadError) {
     return (
       <div className="rsvp-form-error">
-        <p className="error-text">⚠️ {loadError}</p>
+        <h3 className="error-title">
+          ⚠️ Invalid or Expired Link ⚠️
+        </h3>
+        <p className="error-text">{loadError}</p>
+        <p className="error-note">
+          Please request a new link to edit your RSVP.
+        </p>
+        <div className="error-actions">
+          <a href="/rsvp" className="geo-button-primary">
+            🔙 Back to RSVP
+          </a>
+        </div>
       </div>
     );
   }

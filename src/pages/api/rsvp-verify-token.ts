@@ -4,7 +4,7 @@ import { isValidTokenFormat, isTokenExpired } from "../../lib/utils";
 
 // Rate limiting map
 const rateLimitMap = new Map<string, number>();
-const RATE_LIMIT_WINDOW = 1000; // 1 second
+const RATE_LIMIT_WINDOW = 500; // 500ms - enough to prevent abuse but allow legitimate retries
 
 /**
  * Check rate limit
