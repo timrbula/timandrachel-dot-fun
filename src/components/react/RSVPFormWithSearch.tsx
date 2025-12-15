@@ -340,9 +340,6 @@ export default function RSVPFormWithSearch() {
                 <p>
                   <strong>Name:</strong> {guestInfo.name}
                 </p>
-                <p>
-                  <strong>Email:</strong> {guestInfo.email}
-                </p>
                 {guestInfo.allowPlusOne && (
                   <p className="plus-one-notice">
                     👥 You're welcome to bring a plus-one!
