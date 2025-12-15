@@ -10,6 +10,7 @@ interface RSVPData {
   plus_one: boolean;
   plus_one_name: string | null;
   dietary_restrictions: string | null;
+  plus_one_dietary_restrictions: string | null;
   song_requests: string | null;
   special_accommodations: string | null;
   number_of_guests: number;
@@ -22,6 +23,7 @@ interface FormData {
   plusOne: boolean;
   plusOneName: string;
   dietaryRestrictions: string;
+  plusOneDietaryRestrictions: string;
   songRequests: string;
   message: string;
 }
@@ -45,6 +47,7 @@ export default function RSVPEditForm({ token }: RSVPEditFormProps) {
     plusOne: false,
     plusOneName: "",
     dietaryRestrictions: "",
+    plusOneDietaryRestrictions: "",
     songRequests: "",
     message: "",
   });
@@ -80,6 +83,7 @@ export default function RSVPEditForm({ token }: RSVPEditFormProps) {
           plusOne: rsvp.plus_one,
           plusOneName: rsvp.plus_one_name || "",
           dietaryRestrictions: rsvp.dietary_restrictions || "",
+          plusOneDietaryRestrictions: rsvp.plus_one_dietary_restrictions || "",
           songRequests: rsvp.song_requests || "",
           message: rsvp.special_accommodations || "",
         });
@@ -197,6 +201,7 @@ export default function RSVPEditForm({ token }: RSVPEditFormProps) {
           plus_one: formData.plusOne,
           plus_one_name: formData.plusOneName.trim() || null,
           dietary_restrictions: formData.dietaryRestrictions.trim() || null,
+          plus_one_dietary_restrictions: formData.plusOneDietaryRestrictions.trim() || null,
           song_requests: formData.songRequests.trim() || null,
           special_accommodations: formData.message.trim() || null,
           number_of_guests: formData.plusOne ? 2 : 1,
@@ -408,7 +413,7 @@ export default function RSVPEditForm({ token }: RSVPEditFormProps) {
       {formData.attending === "yes" && (
         <div className="form-group">
           <label htmlFor="dietaryRestrictions" className="form-label">
-            🍽️ Dietary Restrictions or Allergies
+            🍽️ Your Dietary Restrictions or Allergies
           </label>
           <textarea
             id="dietaryRestrictions"
@@ -417,6 +422,25 @@ export default function RSVPEditForm({ token }: RSVPEditFormProps) {
             value={formData.dietaryRestrictions}
             onChange={handleChange}
             placeholder="Let us know about any dietary needs"
+            rows={3}
+            disabled={submitting}
+          />
+        </div>
+      )}
+
+      {/* Plus One Dietary Restrictions */}
+      {formData.attending === "yes" && formData.plusOne && (
+        <div className="form-group">
+          <label htmlFor="plusOneDietaryRestrictions" className="form-label">
+            🍽️ Plus-One's Dietary Restrictions or Allergies
+          </label>
+          <textarea
+            id="plusOneDietaryRestrictions"
+            name="plusOneDietaryRestrictions"
+            className="form-textarea"
+            value={formData.plusOneDietaryRestrictions}
+            onChange={handleChange}
+            placeholder="Let us know about your plus-one's dietary needs"
             rows={3}
             disabled={submitting}
           />

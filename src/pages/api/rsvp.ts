@@ -144,6 +144,9 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       dietary_restrictions: body.dietary_restrictions
         ? sanitizeInput(body.dietary_restrictions.trim())
         : null,
+      plus_one_dietary_restrictions: body.plus_one_dietary_restrictions
+        ? sanitizeInput(body.plus_one_dietary_restrictions.trim())
+        : null,
       song_requests: body.song_requests
         ? sanitizeInput(body.song_requests.trim())
         : null,
@@ -206,6 +209,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
         plusOne: sanitizedData.plus_one,
         plusOneName: sanitizedData.plus_one_name,
         dietaryRestrictions: sanitizedData.dietary_restrictions,
+        plusOneDietaryRestrictions: sanitizedData.plus_one_dietary_restrictions,
         songRequests: sanitizedData.song_requests,
         specialAccommodations: sanitizedData.special_accommodations,
         numberOfGuests: sanitizedData.number_of_guests,
@@ -511,6 +515,12 @@ export const PUT: APIRoute = async ({ request, clientAddress }) => {
     if (body.dietary_restrictions !== undefined) {
       updateData.dietaryRestrictions = body.dietary_restrictions
         ? sanitizeInput(body.dietary_restrictions.trim())
+        : null;
+    }
+
+    if (body.plus_one_dietary_restrictions !== undefined) {
+      updateData.plusOneDietaryRestrictions = body.plus_one_dietary_restrictions
+        ? sanitizeInput(body.plus_one_dietary_restrictions.trim())
         : null;
     }
 

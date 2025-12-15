@@ -5,7 +5,6 @@ import { isValidTokenFormat, isTokenExpired } from "../../lib/utils";
 // Rate limiting map
 const rateLimitMap = new Map<string, number>();
 const RATE_LIMIT_WINDOW = 1000; // 1 second
-const MAX_REQUESTS = 10; // Max 10 verifications per minute per IP
 
 /**
  * Check rate limit

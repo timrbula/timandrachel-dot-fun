@@ -29,19 +29,20 @@ model Guest {
 }
 
 model RSVP {
-  id                     String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  createdAt              DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
-  guestId                String?  @map("guest_id") @db.Uuid
-  guestName              String   @map("guest_name")
-  guestEmail             String   @map("guest_email")
-  attending              Boolean
-  plusOne                Boolean  @default(false) @map("plus_one")
-  plusOneName            String?  @map("plus_one_name")
-  dietaryRestrictions    String?  @map("dietary_restrictions")
-  songRequests           String?  @map("song_requests")
-  specialAccommodations  String?  @map("special_accommodations")
-  numberOfGuests         Int      @default(1) @map("number_of_guests")
-  guest                  Guest?   @relation(fields: [guestId], references: [id], onDelete: SetNull)
+  id                          String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  createdAt                   DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  guestId                     String?  @map("guest_id") @db.Uuid
+  guestName                   String   @map("guest_name")
+  guestEmail                  String   @map("guest_email")
+  attending                   Boolean
+  plusOne                     Boolean  @default(false) @map("plus_one")
+  plusOneName                 String?  @map("plus_one_name")
+  dietaryRestrictions         String?  @map("dietary_restrictions")
+  plusOneDietaryRestrictions  String?  @map("plus_one_dietary_restrictions")
+  songRequests                String?  @map("song_requests")
+  specialAccommodations       String?  @map("special_accommodations")
+  numberOfGuests              Int      @default(1) @map("number_of_guests")
+  guest                       Guest?   @relation(fields: [guestId], references: [id], onDelete: SetNull)
 
   @@index([guestEmail], map: "idx_rsvps_email")
   @@index([guestId], map: "idx_rsvps_guest_id")
