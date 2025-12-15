@@ -204,7 +204,7 @@ export default function RSVPForm() {
           className={`form-input ${errors.name ? "error" : ""}`}
           value={formData.name}
           onChange={handleChange}
-          placeholder="Jane Doe"
+          placeholder="Rose Szilagyi"
           disabled={loading}
           aria-required="true"
           aria-invalid={!!errors.name}
@@ -229,7 +229,7 @@ export default function RSVPForm() {
           className={`form-input ${errors.email ? "error" : ""}`}
           value={formData.email}
           onChange={handleChange}
-          placeholder="jane@example.com"
+          placeholder="rose@rachelandtim.fun"
           disabled={loading}
           aria-required="true"
           aria-invalid={!!errors.email}
@@ -311,7 +311,7 @@ export default function RSVPForm() {
             className={`form-input ${errors.plusOneName ? "error" : ""}`}
             value={formData.plusOneName}
             onChange={handleChange}
-            placeholder="John Doe"
+            placeholder="Moth Angel"
             disabled={loading}
             aria-required="true"
             aria-invalid={!!errors.plusOneName}

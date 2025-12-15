@@ -302,7 +302,7 @@ export default function RSVPEditForm({ token }: RSVPEditFormProps) {
           className={`form-input ${errors.name ? "error" : ""}`}
           value={formData.name}
           onChange={handleChange}
-          placeholder="Jane Doe"
+          placeholder="Rose Szilagyi"
           disabled={submitting}
           aria-required="true"
           aria-invalid={!!errors.name}
@@ -404,7 +404,7 @@ export default function RSVPEditForm({ token }: RSVPEditFormProps) {
             className={`form-input ${errors.plusOneName ? "error" : ""}`}
             value={formData.plusOneName}
             onChange={handleChange}
-            placeholder="John Doe"
+            placeholder="Moth Angel"
             disabled={submitting}
             aria-required="true"
             aria-invalid={!!errors.plusOneName}
