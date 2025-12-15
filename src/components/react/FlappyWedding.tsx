@@ -868,8 +868,15 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
       if (!pipe.scored && pipe.x + pipe.width < state.bird.x) {
         pipe.scored = true;
         if (pipe.y === 0) { // Only count top pipes
+          const previousScore = state.score;
           state.score++;
           setScore(state.score);
+          
+          // Increase speed every 10 points - check if we just crossed a multiple of 10
+          const crossedMultipleOf10 = Math.floor(previousScore / 10) < Math.floor(state.score / 10);
+          if (crossedMultipleOf10) {
+            state.currentSpeed += 1;
+          }
         }
       }
       
