@@ -44,8 +44,8 @@ export async function sendRSVPConfirmation(
       <div style="font-family: 'Comic Sans MS'; background: linear-gradient(180deg, #000080, #008080); color: #FFFFFF; padding: 2rem; text-align: center;">
         <h1 style="color: #FF00FF; text-shadow: 2px 2px 0 #00FFFF;">💕 RSVP Confirmed! 💕</h1>
         <p style="font-size: 1.2rem;">Hey ${name}!</p>
-        <p style="font-size: 1.1rem;">We're SO EXCITED that you'll be joining us on October 9th, 2026!</p>
-        ${plusOne ? `<p style="font-size: 1.1rem;">And we can't wait to meet ${plusOneName || "your plus one"}!</p>` : ""}
+        <p style="font-size: 1.1rem;">We're EXCITED that you'll be joining us on October 9th, 2026!</p>
+        ${plusOne ? `<p style="font-size: 1.1rem;">And we can't wait to celebrate with you and ${plusOneName || "your plus one"}!</p>` : ""}
         <p style="font-size: 1rem; margin-top: 2rem;">Check out our website for all the details:</p>
         <a href="https://rachelandtim.fun" style="display: inline-block; padding: 1rem 2rem; background: linear-gradient(180deg, #FF00FF, #8000FF); color: #FFFF00; text-decoration: none; font-weight: bold; border: 3px outset #FF00FF; margin: 1rem 0;">Visit Our Website</a>
         <p style="font-size: 0.9rem; margin-top: 2rem; color: #00FFFF;">See you there! 🗽✨</p>

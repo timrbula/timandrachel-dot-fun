@@ -13,8 +13,8 @@ html {
 }
 
 body {
-  /* font-family:
-    "Comic Sans MS", "Chalkboard SE", "Comic Neue", cursive, sans-serif; */
+  font-family:
+    "Comic Sans MS", "Chalkboard SE", "Comic Neue", cursive, sans-serif;
   line-height: 1.6;
   color: #ffffff;
   background-color: #0033cc;

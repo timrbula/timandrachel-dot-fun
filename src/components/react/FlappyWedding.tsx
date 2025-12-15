@@ -12,6 +12,12 @@ interface Pipe extends GameObject {
   scored: boolean;
 }
 
+// Mobile detection utility
+const isMobileDevice = () => {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+    (window.innerWidth <= 768);
+};
+
 const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [gameStarted, setGameStarted] = useState(false);
@@ -24,6 +30,14 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
+  // Performance mode detection
+  const isMobile = useRef(false);
+  
+  // Sprite cache for buildings
+  const buildingSpritesRef = useRef<Map<string, HTMLCanvasElement>>(new Map());
+  const backgroundCacheRef = useRef<HTMLCanvasElement | null>(null);
+  const skylineCacheRef = useRef<HTMLCanvasElement | null>(null);
+
   // Game state refs
   const gameStateRef = useRef({
     bird: { x: 100, y: 250, width: 40, height: 40, velocity: 0 },
@@ -34,11 +48,204 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
 
   const gameLoopRef = useRef<number | undefined>(undefined);
 
-  // Load high score from localStorage
+  // Initialize mobile detection and load high score
   useEffect(() => {
+    isMobile.current = isMobileDevice();
     const saved = localStorage.getItem('flappyWeddingHighScore');
     if (saved) setHighScore(parseInt(saved, 10));
   }, []);
+
+  // Create sprite cache for buildings
+  const createBuildingSprite = (buildingType: string, width: number, height: number, isTop: boolean): HTMLCanvasElement => {
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return canvas;
+
+    const pipe = { x: 0, y: 0, width, height, scored: false };
+    
+    // Simplified rendering for mobile
+    if (isMobile.current) {
+      // Simple solid buildings with minimal detail
+      ctx.fillStyle = buildingType === 'empire' ? '#D4D4D4' :
+                      buildingType === 'chrysler' ? '#C0C0C0' :
+                      buildingType === 'onewtc' ? '#A8A8A8' : '#4A4A4A';
+      ctx.fillRect(0, 0, width, height);
+      
+      // Simple windows (fewer)
+      ctx.fillStyle = '#FFFF00';
+      for (let y = 10; y < height - 5; y += 15) {
+        for (let x = 8; x < width - 8; x += 15) {
+          ctx.fillRect(x, y, 5, 6);
+        }
+      }
+      
+      // Simple border
+      ctx.strokeStyle = '#00FFFF';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(0, 0, width, height);
+    } else {
+      // Full detail for desktop (original code)
+      drawPipeDetailed(ctx, pipe, buildingType, isTop);
+    }
+    
+    return canvas;
+  };
+
+  // Detailed pipe drawing (desktop only)
+  const drawPipeDetailed = (ctx: CanvasRenderingContext2D, pipe: GameObject, buildingType: string, isTop: boolean) => {
+    if (buildingType === 'empire') {
+      ctx.fillStyle = '#D4D4D4';
+      ctx.fillRect(pipe.x, pipe.y, pipe.width, pipe.height);
+      
+      ctx.fillStyle = '#B8B8B8';
+      const setbackWidth = pipe.width * 0.8;
+      ctx.fillRect(pipe.x + (pipe.width - setbackWidth) / 2, pipe.y, setbackWidth, pipe.height * 0.3);
+      
+      if (!isTop) {
+        const spireWidth = 12;
+        const spireHeight = 25;
+        ctx.fillStyle = '#FFD700';
+        ctx.fillRect(pipe.x + pipe.width / 2 - spireWidth / 2, pipe.y, spireWidth, spireHeight);
+        
+        ctx.fillStyle = '#FF0000';
+        ctx.fillRect(pipe.x + pipe.width / 2 - 1, pipe.y, 2, 10);
+        
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(pipe.x + pipe.width / 2 - 8, pipe.y + spireHeight, 16, 8);
+      }
+      
+      ctx.fillStyle = '#FFFF00';
+      for (let y = pipe.y + 35; y < pipe.y + pipe.height - 5; y += 8) {
+        for (let x = pipe.x + 6; x < pipe.x + pipe.width - 6; x += 8) {
+          ctx.fillRect(x, y, 4, 5);
+        }
+      }
+      
+      ctx.strokeStyle = '#FFD700';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(pipe.x, pipe.y, pipe.width, pipe.height);
+      
+    } else if (buildingType === 'chrysler') {
+      ctx.fillStyle = '#C0C0C0';
+      ctx.fillRect(pipe.x, pipe.y, pipe.width, pipe.height);
+      
+      if (!isTop) {
+        const crownLevels = 7;
+        ctx.fillStyle = '#E8E8E8';
+        for (let i = 0; i < crownLevels; i++) {
+          const levelWidth = pipe.width - (i * 6);
+          const levelHeight = 4;
+          const levelY = pipe.y + (i * 4);
+          ctx.fillRect(pipe.x + (pipe.width - levelWidth) / 2, levelY, levelWidth, levelHeight);
+          
+          ctx.fillStyle = '#FFFFFF';
+          const numWindows = Math.max(2, Math.floor(levelWidth / 10));
+          for (let w = 0; w < numWindows; w++) {
+            const wx = pipe.x + (pipe.width - levelWidth) / 2 + (w * (levelWidth / numWindows)) + 2;
+            ctx.beginPath();
+            ctx.moveTo(wx, levelY + levelHeight);
+            ctx.lineTo(wx + 3, levelY);
+            ctx.lineTo(wx + 6, levelY + levelHeight);
+            ctx.closePath();
+            ctx.fill();
+          }
+          ctx.fillStyle = '#E8E8E8';
+        }
+        
+        ctx.fillStyle = '#A0A0A0';
+        ctx.fillRect(pipe.x, pipe.y + 30, 8, 8);
+        ctx.fillRect(pipe.x + pipe.width - 8, pipe.y + 30, 8, 8);
+      }
+      
+      ctx.fillStyle = '#FFFF00';
+      for (let y = pipe.y + 40; y < pipe.y + pipe.height - 5; y += 9) {
+        for (let x = pipe.x + 8; x < pipe.x + pipe.width - 8; x += 9) {
+          ctx.fillRect(x, y, 5, 6);
+        }
+      }
+      
+      ctx.strokeStyle = '#E8E8E8';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(pipe.x, pipe.y, pipe.width, pipe.height);
+      
+    } else if (buildingType === 'onewtc') {
+      ctx.fillStyle = '#A8A8A8';
+      ctx.fillRect(pipe.x, pipe.y, pipe.width, pipe.height);
+      
+      ctx.fillStyle = '#C0C0C0';
+      const chamfer = 8;
+      ctx.beginPath();
+      ctx.moveTo(pipe.x, pipe.y);
+      ctx.lineTo(pipe.x + chamfer, pipe.y + pipe.height * 0.2);
+      ctx.lineTo(pipe.x, pipe.y + pipe.height * 0.4);
+      ctx.closePath();
+      ctx.fill();
+      
+      ctx.beginPath();
+      ctx.moveTo(pipe.x + pipe.width, pipe.y);
+      ctx.lineTo(pipe.x + pipe.width - chamfer, pipe.y + pipe.height * 0.2);
+      ctx.lineTo(pipe.x + pipe.width, pipe.y + pipe.height * 0.4);
+      ctx.closePath();
+      ctx.fill();
+      
+      if (!isTop) {
+        const spireWidth = 8;
+        const spireHeight = 35;
+        ctx.fillStyle = '#E0E0E0';
+        ctx.fillRect(pipe.x + pipe.width / 2 - spireWidth / 2, pipe.y, spireWidth, spireHeight);
+        
+        ctx.fillStyle = '#00FFFF';
+        ctx.fillRect(pipe.x + pipe.width / 2 - 3, pipe.y, 6, 8);
+        
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(pipe.x + pipe.width / 2 - 1, pipe.y, 2, 15);
+      }
+      
+      ctx.fillStyle = '#FFFF00';
+      for (let y = pipe.y + 40; y < pipe.y + pipe.height - 5; y += 10) {
+        for (let x = pipe.x + 5; x < pipe.x + pipe.width - 5; x += 10) {
+          if (Math.random() > 0.6) {
+            ctx.fillRect(x, y, 8, 8);
+          }
+        }
+      }
+      
+      ctx.strokeStyle = '#FFFFFF';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(pipe.x, pipe.y, pipe.width, pipe.height);
+      
+    } else {
+      ctx.fillStyle = '#4A4A4A';
+      ctx.fillRect(pipe.x, pipe.y, pipe.width, pipe.height);
+      
+      ctx.fillStyle = '#FFFF00';
+      for (let y = pipe.y + 10; y < pipe.y + pipe.height - 5; y += 10) {
+        for (let x = pipe.x + 8; x < pipe.x + pipe.width - 8; x += 10) {
+          if (Math.random() > 0.3) {
+            ctx.fillRect(x, y, 5, 6);
+          }
+        }
+      }
+      
+      ctx.strokeStyle = '#00FFFF';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(pipe.x, pipe.y, pipe.width, pipe.height);
+    }
+  };
+
+  // Get or create cached building sprite
+  const getBuildingSprite = (buildingType: string, width: number, height: number, isTop: boolean): HTMLCanvasElement => {
+    const key = `${buildingType}-${width}-${height}-${isTop}`;
+    
+    if (!buildingSpritesRef.current.has(key)) {
+      const sprite = createBuildingSprite(buildingType, width, height, isTop);
+      buildingSpritesRef.current.set(key, sprite);
+    }
+    
+    return buildingSpritesRef.current.get(key)!;
+  };
 
   // Game constants - Made easier!
   const GRAVITY = 0.2; // Reduced from 0.5 for slower falling
@@ -220,190 +427,114 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
   const drawPipe = (ctx: CanvasRenderingContext2D, pipe: Pipe & { buildingType?: string }, isTop: boolean) => {
     const buildingType = pipe.buildingType || 'standard';
     
-    if (buildingType === 'empire') {
-      // EMPIRE STATE BUILDING - Iconic Art Deco design
-      ctx.fillStyle = '#D4D4D4'; // Light gray limestone
-      ctx.fillRect(pipe.x, pipe.y, pipe.width, pipe.height);
+    // Use cached sprite
+    const sprite = getBuildingSprite(buildingType, pipe.width, pipe.height, isTop);
+    ctx.drawImage(sprite, pipe.x, pipe.y);
+  };
+
+  // Create cached skyline (static background elements)
+  const createSkylineCache = (canvas: HTMLCanvasElement): HTMLCanvasElement => {
+    const skylineCanvas = document.createElement('canvas');
+    skylineCanvas.width = canvas.width;
+    skylineCanvas.height = 60;
+    const ctx = skylineCanvas.getContext('2d');
+    if (!ctx) return skylineCanvas;
+
+    // Manhattan skyline silhouette at bottom
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(0, 0, canvas.width, 60);
+    
+    if (isMobile.current) {
+      // Simplified skyline for mobile
+      const buildings = [
+        { x: 0, h: 40 },
+        { x: 100, h: 55 },
+        { x: 200, h: 35 },
+        { x: 300, h: 50 },
+        { x: 400, h: 45 },
+        { x: 500, h: 42 },
+      ];
       
-      // Setback design (Art Deco stepped profile)
-      ctx.fillStyle = '#B8B8B8';
-      const setbackWidth = pipe.width * 0.8;
-      ctx.fillRect(pipe.x + (pipe.width - setbackWidth) / 2, pipe.y, setbackWidth, pipe.height * 0.3);
-      
-      if (!isTop) {
-        // Famous spire at top
-        const spireWidth = 12;
-        const spireHeight = 25;
-        ctx.fillStyle = '#FFD700'; // Gold spire
-        ctx.fillRect(pipe.x + pipe.width / 2 - spireWidth / 2, pipe.y, spireWidth, spireHeight);
+      buildings.forEach(b => {
+        ctx.fillStyle = '#0a0a0a';
+        ctx.fillRect(b.x, 60 - b.h, 80, b.h);
         
-        // Antenna on top
-        ctx.fillStyle = '#FF0000';
-        ctx.fillRect(pipe.x + pipe.width / 2 - 1, pipe.y, 2, 10);
-        
-        // Observation deck lights
-        ctx.fillStyle = '#FFFFFF';
-        ctx.fillRect(pipe.x + pipe.width / 2 - 8, pipe.y + spireHeight, 16, 8);
-      }
-      
-      // Windows in vertical strips (Empire State style)
-      ctx.fillStyle = '#FFFF00';
-      for (let y = pipe.y + 35; y < pipe.y + pipe.height - 5; y += 8) {
-        for (let x = pipe.x + 6; x < pipe.x + pipe.width - 6; x += 8) {
-          ctx.fillRect(x, y, 4, 5);
-        }
-      }
-      
-      // Gold Art Deco border
-      ctx.strokeStyle = '#FFD700';
-      ctx.lineWidth = 3;
-      ctx.strokeRect(pipe.x, pipe.y, pipe.width, pipe.height);
-      
-    } else if (buildingType === 'chrysler') {
-      // CHRYSLER BUILDING - Distinctive Art Deco crown
-      ctx.fillStyle = '#C0C0C0'; // Stainless steel color
-      ctx.fillRect(pipe.x, pipe.y, pipe.width, pipe.height);
-      
-      if (!isTop) {
-        // Famous terraced crown with triangular windows
-        const crownLevels = 7;
-        ctx.fillStyle = '#E8E8E8'; // Bright steel
-        for (let i = 0; i < crownLevels; i++) {
-          const levelWidth = pipe.width - (i * 6);
-          const levelHeight = 4;
-          const levelY = pipe.y + (i * 4);
-          ctx.fillRect(pipe.x + (pipe.width - levelWidth) / 2, levelY, levelWidth, levelHeight);
-          
-          // Triangular windows on crown
-          ctx.fillStyle = '#FFFFFF';
-          const numWindows = Math.max(2, Math.floor(levelWidth / 10));
-          for (let w = 0; w < numWindows; w++) {
-            const wx = pipe.x + (pipe.width - levelWidth) / 2 + (w * (levelWidth / numWindows)) + 2;
-            ctx.beginPath();
-            ctx.moveTo(wx, levelY + levelHeight);
-            ctx.lineTo(wx + 3, levelY);
-            ctx.lineTo(wx + 6, levelY + levelHeight);
-            ctx.closePath();
-            ctx.fill();
-          }
-          ctx.fillStyle = '#E8E8E8';
-        }
-        
-        // Eagle gargoyles (simplified as rectangles)
-        ctx.fillStyle = '#A0A0A0';
-        ctx.fillRect(pipe.x, pipe.y + 30, 8, 8);
-        ctx.fillRect(pipe.x + pipe.width - 8, pipe.y + 30, 8, 8);
-      }
-      
-      // Regular windows
-      ctx.fillStyle = '#FFFF00';
-      for (let y = pipe.y + 40; y < pipe.y + pipe.height - 5; y += 9) {
-        for (let x = pipe.x + 8; x < pipe.x + pipe.width - 8; x += 9) {
-          ctx.fillRect(x, y, 5, 6);
-        }
-      }
-      
-      // Metallic border
-      ctx.strokeStyle = '#E8E8E8';
-      ctx.lineWidth = 3;
-      ctx.strokeRect(pipe.x, pipe.y, pipe.width, pipe.height);
-      
-    } else if (buildingType === 'onewtc') {
-      // ONE WORLD TRADE CENTER - Modern glass design
-      ctx.fillStyle = '#A8A8A8'; // Glass/steel
-      ctx.fillRect(pipe.x, pipe.y, pipe.width, pipe.height);
-      
-      // Chamfered edges (tapered design)
-      ctx.fillStyle = '#C0C0C0';
-      const chamfer = 8;
-      ctx.beginPath();
-      ctx.moveTo(pipe.x, pipe.y);
-      ctx.lineTo(pipe.x + chamfer, pipe.y + pipe.height * 0.2);
-      ctx.lineTo(pipe.x, pipe.y + pipe.height * 0.4);
-      ctx.closePath();
-      ctx.fill();
-      
-      ctx.beginPath();
-      ctx.moveTo(pipe.x + pipe.width, pipe.y);
-      ctx.lineTo(pipe.x + pipe.width - chamfer, pipe.y + pipe.height * 0.2);
-      ctx.lineTo(pipe.x + pipe.width, pipe.y + pipe.height * 0.4);
-      ctx.closePath();
-      ctx.fill();
-      
-      if (!isTop) {
-        // Tall spire (408 feet!)
-        const spireWidth = 8;
-        const spireHeight = 35;
-        ctx.fillStyle = '#E0E0E0';
-        ctx.fillRect(pipe.x + pipe.width / 2 - spireWidth / 2, pipe.y, spireWidth, spireHeight);
-        
-        // Beacon light at top
-        ctx.fillStyle = '#00FFFF';
-        ctx.fillRect(pipe.x + pipe.width / 2 - 3, pipe.y, 6, 8);
-        
-        // Antenna
-        ctx.fillStyle = '#FFFFFF';
-        ctx.fillRect(pipe.x + pipe.width / 2 - 1, pipe.y, 2, 15);
-      }
-      
-      // Modern glass windows (reflective pattern)
-      ctx.fillStyle = '#87CEEB'; // Sky blue reflection
-      for (let y = pipe.y + 40; y < pipe.y + pipe.height - 5; y += 10) {
-        for (let x = pipe.x + 5; x < pipe.x + pipe.width - 5; x += 10) {
-          if ((x + y) % 20 === 0) {
-            ctx.fillRect(x, y, 8, 8);
+        // Simple windows
+        ctx.fillStyle = '#FFFF00';
+        for (let y = 60 - b.h + 5; y < 55; y += 12) {
+          for (let x = b.x + 10; x < b.x + 70; x += 15) {
+            ctx.fillRect(x, y, 4, 4);
           }
         }
-      }
-      
-      // Some lit windows
-      ctx.fillStyle = '#FFFF00';
-      for (let y = pipe.y + 40; y < pipe.y + pipe.height - 5; y += 10) {
-        for (let x = pipe.x + 5; x < pipe.x + pipe.width - 5; x += 10) {
-          if (Math.random() > 0.6) {
-            ctx.fillRect(x, y, 8, 8);
-          }
-        }
-      }
-      
-      // White modern border
-      ctx.strokeStyle = '#FFFFFF';
-      ctx.lineWidth = 3;
-      ctx.strokeRect(pipe.x, pipe.y, pipe.width, pipe.height);
-      
+      });
     } else {
-      // STANDARD NYC BUILDING
-      ctx.fillStyle = '#4A4A4A';
-      ctx.fillRect(pipe.x, pipe.y, pipe.width, pipe.height);
+      // Full detail skyline for desktop
+      const buildings = [
+        { x: 0, h: 40, name: 'standard' },
+        { x: 70, h: 55, name: 'standard' },
+        { x: 140, h: 35, name: 'standard' },
+        { x: 200, h: 50, name: 'chrysler' },
+        { x: 270, h: 45, name: 'empire' },
+        { x: 340, h: 58, name: 'onewtc' },
+        { x: 410, h: 38, name: 'chrysler' },
+        { x: 480, h: 52, name: 'empire' },
+        { x: 550, h: 42, name: 'onewtc' },
+      ];
       
-      // Regular windows
-      ctx.fillStyle = '#FFFF00';
-      for (let y = pipe.y + 10; y < pipe.y + pipe.height - 5; y += 10) {
-        for (let x = pipe.x + 8; x < pipe.x + pipe.width - 8; x += 10) {
-          if (Math.random() > 0.3) {
-            ctx.fillRect(x, y, 5, 6);
+      buildings.forEach(b => {
+        ctx.fillStyle = '#0a0a0a';
+        ctx.fillRect(b.x, 60 - b.h, 60, b.h);
+        
+        if (b.name === 'empire') {
+          ctx.fillStyle = '#FFD700';
+          ctx.fillRect(b.x + 25, 60 - b.h - 8, 10, 8);
+        } else if (b.name === 'chrysler') {
+          ctx.fillStyle = '#C0C0C0';
+          for (let i = 0; i < 4; i++) {
+            ctx.fillRect(b.x + 15 + (i * 3), 60 - b.h - (4 - i) * 2, 30 - (i * 6), 2);
+          }
+        } else if (b.name === 'onewtc') {
+          ctx.fillStyle = '#E0E0E0';
+          ctx.fillRect(b.x + 27, 60 - b.h - 10, 6, 10);
+        }
+        
+        ctx.fillStyle = '#FFFF00';
+        for (let y = 60 - b.h + 5; y < 55; y += 8) {
+          for (let x = b.x + 5; x < b.x + 55; x += 10) {
+            if (Math.random() > 0.3) {
+              ctx.fillRect(x, y, 4, 4);
+            }
           }
         }
-      }
-      
-      ctx.strokeStyle = '#00FFFF';
-      ctx.lineWidth = 2;
-      ctx.strokeRect(pipe.x, pipe.y, pipe.width, pipe.height);
+      });
     }
+    
+    return skylineCanvas;
   };
 
   const drawBackground = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, frameCount: number) => {
-    // Manhattan night sky gradient
-    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-    gradient.addColorStop(0, '#1a1a2e');
-    gradient.addColorStop(0.5, '#16213e');
-    gradient.addColorStop(1, '#0f3460');
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // Use cached background gradient
+    if (!backgroundCacheRef.current) {
+      const bgCanvas = document.createElement('canvas');
+      bgCanvas.width = canvas.width;
+      bgCanvas.height = canvas.height;
+      const bgCtx = bgCanvas.getContext('2d');
+      if (bgCtx) {
+        const gradient = bgCtx.createLinearGradient(0, 0, 0, canvas.height);
+        gradient.addColorStop(0, '#1a1a2e');
+        gradient.addColorStop(0.5, '#16213e');
+        gradient.addColorStop(1, '#0f3460');
+        bgCtx.fillStyle = gradient;
+        bgCtx.fillRect(0, 0, canvas.width, canvas.height);
+      }
+      backgroundCacheRef.current = bgCanvas;
+    }
+    ctx.drawImage(backgroundCacheRef.current, 0, 0);
     
-    // Stars twinkling
+    // Reduced stars for mobile
+    const starCount = isMobile.current ? 30 : 60;
     ctx.fillStyle = '#FFFFFF';
-    for (let i = 0; i < 60; i++) {
+    for (let i = 0; i < starCount; i++) {
       const x = (i * 37) % canvas.width;
       const y = (i * 53) % (canvas.height - 100);
       const twinkle = Math.sin(frameCount * 0.05 + i) > 0.5;
@@ -412,75 +543,30 @@ const FlappyWedding = ({ onScoreSubmitted }: { onScoreSubmitted?: () => void }) 
       }
     }
     
-    // Yellow taxi cabs moving across (Manhattan traffic!)
-    const taxiX = (frameCount * 3) % (canvas.width + 100);
-    ctx.fillStyle = '#FFFF00';
-    ctx.fillRect(taxiX - 100, canvas.height - 75, 30, 15);
-    ctx.fillStyle = '#000000';
-    ctx.fillRect(taxiX - 95, canvas.height - 73, 8, 8);
-    ctx.fillRect(taxiX - 78, canvas.height - 73, 8, 8);
-    
-    // Second taxi going opposite direction
-    const taxiX2 = canvas.width - ((frameCount * 2.5) % (canvas.width + 100));
-    ctx.fillStyle = '#FFFF00';
-    ctx.fillRect(taxiX2, canvas.height - 90, 30, 15);
-    ctx.fillStyle = '#000000';
-    ctx.fillRect(taxiX2 + 5, canvas.height - 88, 8, 8);
-    ctx.fillRect(taxiX2 + 22, canvas.height - 88, 8, 8);
-    
-    // Manhattan skyline silhouette at bottom
-    ctx.fillStyle = '#000000';
-    ctx.fillRect(0, canvas.height - 60, canvas.width, 60);
-    
-    // Iconic Manhattan buildings silhouette
-    const buildings = [
-      { x: 0, h: 40, name: 'standard' },
-      { x: 70, h: 55, name: 'standard' }, // Empire State
-      { x: 140, h: 35, name: 'standard' },
-      { x: 200, h: 50, name: 'chrysler' }, // Chrysler
-      { x: 270, h: 45, name: 'empire' },
-      { x: 340, h: 58, name: 'onewtc' }, // One WTC
-      { x: 410, h: 38, name: 'chrysler' },
-      { x: 480, h: 52, name: 'empire' },
-      { x: 550, h: 42, name: 'onewtc' },
-    ];
-    
-    buildings.forEach(b => {
-      ctx.fillStyle = '#0a0a0a';
-      ctx.fillRect(b.x, canvas.height - 60 - b.h, 60, b.h);
-      
-      // Add distinctive tops for iconic buildings
-      if (b.name === 'empire') {
-        // Empire State spire
-        ctx.fillStyle = '#FFD700';
-        ctx.fillRect(b.x + 25, canvas.height - 60 - b.h - 8, 10, 8);
-      } else if (b.name === 'chrysler') {
-        // Chrysler crown
-        ctx.fillStyle = '#C0C0C0';
-        for (let i = 0; i < 4; i++) {
-          ctx.fillRect(b.x + 15 + (i * 3), canvas.height - 60 - b.h - (4 - i) * 2, 30 - (i * 6), 2);
-        }
-      } else if (b.name === 'onewtc') {
-        // One WTC spire
-        ctx.fillStyle = '#E0E0E0';
-        ctx.fillRect(b.x + 27, canvas.height - 60 - b.h - 10, 6, 10);
-      }
-      
-      // Building windows
+    // Simplified or no taxis on mobile
+    if (!isMobile.current) {
+      // Yellow taxi cabs moving across (Manhattan traffic!)
+      const taxiX = (frameCount * 3) % (canvas.width + 100);
       ctx.fillStyle = '#FFFF00';
-      for (let y = canvas.height - 60 - b.h + 5; y < canvas.height - 65; y += 8) {
-        for (let x = b.x + 5; x < b.x + 55; x += 10) {
-          if (Math.random() > 0.3) {
-            ctx.fillRect(x, y, 4, 4);
-          }
-        }
-      }
-    });
+      ctx.fillRect(taxiX - 100, canvas.height - 75, 30, 15);
+      ctx.fillStyle = '#000000';
+      ctx.fillRect(taxiX - 95, canvas.height - 73, 8, 8);
+      ctx.fillRect(taxiX - 78, canvas.height - 73, 8, 8);
+      
+      // Second taxi going opposite direction
+      const taxiX2 = canvas.width - ((frameCount * 2.5) % (canvas.width + 100));
+      ctx.fillStyle = '#FFFF00';
+      ctx.fillRect(taxiX2, canvas.height - 90, 30, 15);
+      ctx.fillStyle = '#000000';
+      ctx.fillRect(taxiX2 + 5, canvas.height - 88, 8, 8);
+      ctx.fillRect(taxiX2 + 22, canvas.height - 88, 8, 8);
+    }
     
-    // "MANHATTAN" text in the sky
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
-    ctx.font = 'bold 40px Impact';
-    ctx.fillText('', canvas.width / 2 - 120, 80);
+    // Use cached skyline
+    if (!skylineCacheRef.current) {
+      skylineCacheRef.current = createSkylineCache(canvas);
+    }
+    ctx.drawImage(skylineCacheRef.current, 0, canvas.height - 60);
   };
 
   const checkCollision = (bird: GameObject, pipes: Pipe[], canvas: HTMLCanvasElement): boolean => {
