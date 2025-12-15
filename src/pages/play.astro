@@ -50,6 +50,14 @@ import BlinkingText from "@/components/react/BlinkingText";
   <Marquee client:load speed={20} direction="right">
     💕 Thanks for playing! 💕 See you at the wedding! 🎉 October 9, 2026 🗽
   </Marquee>
+
+  <!-- Flying NYC Elements -->
+  <div class="flying-elements">
+    <div class="flying-taxi">🚕</div>
+    <div class="flying-pizza">🍕</div>
+    <div class="flying-bagel">🥯</div>
+    <div class="flying-coffee">☕</div>
+  </div>
 </BaseLayout>
 
 <style>
@@ -144,6 +152,123 @@ import BlinkingText from "@/components/react/BlinkingText";
 
     .fun-facts li {
       font-size: 1rem;
+    }
+  }
+
+  /* Flying NYC Elements */
+  .flying-elements {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .flying-taxi {
+    position: absolute;
+    font-size: 3rem;
+    animation: fly-diagonal-1 12s linear infinite;
+  }
+
+  .flying-pizza {
+    position: absolute;
+    font-size: 3rem;
+    animation: fly-diagonal-2 15s linear infinite;
+    animation-delay: 3s;
+  }
+
+  .flying-bagel {
+    position: absolute;
+    font-size: 3rem;
+    animation: fly-diagonal-3 18s linear infinite;
+    animation-delay: 6s;
+  }
+
+  .flying-coffee {
+    position: absolute;
+    font-size: 3rem;
+    animation: fly-diagonal-4 14s linear infinite;
+    animation-delay: 9s;
+  }
+
+  /* Diagonal flight path 1 - bottom-left to top-right */
+  @keyframes fly-diagonal-1 {
+    0% {
+      left: -100px;
+      top: 100%;
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+    100% {
+      left: calc(100% + 100px);
+      top: -100px;
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Diagonal flight path 2 - top-left to bottom-right */
+  @keyframes fly-diagonal-2 {
+    0% {
+      left: -100px;
+      top: -100px;
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+    100% {
+      left: calc(100% + 100px);
+      top: 100%;
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Diagonal flight path 3 - middle-left to top-right */
+  @keyframes fly-diagonal-3 {
+    0% {
+      left: -100px;
+      top: 60%;
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+    100% {
+      left: calc(100% + 100px);
+      top: 10%;
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Diagonal flight path 4 - top-left to middle-right */
+  @keyframes fly-diagonal-4 {
+    0% {
+      left: -100px;
+      top: 20%;
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+    100% {
+      left: calc(100% + 100px);
+      top: 70%;
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Responsive - smaller on mobile */
+  @media (max-width: 768px) {
+    .flying-taxi,
+    .flying-pizza,
+    .flying-bagel,
+    .flying-coffee {
+      font-size: 2rem;
     }
   }
 </style>
