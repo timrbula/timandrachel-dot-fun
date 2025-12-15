@@ -6,6 +6,7 @@ interface Guest {
   name: string;
   email: string;
   allowPlusOne: boolean;
+  plusOneName: string | null;
   invitationSent: boolean;
   invitationSentAt: string | null;
   notes: string | null;
@@ -21,6 +22,7 @@ interface GuestFormData {
   name: string;
   email: string;
   allowPlusOne: boolean;
+  plusOneName: string;
   invitationSent: boolean;
   notes: string;
 }
@@ -39,6 +41,7 @@ export default function GuestListManager() {
     name: "",
     email: "",
     allowPlusOne: false,
+    plusOneName: "",
     invitationSent: false,
     notes: "",
   });
@@ -137,6 +140,7 @@ export default function GuestListManager() {
         name: "",
         email: "",
         allowPlusOne: false,
+        plusOneName: "",
         invitationSent: false,
         notes: "",
       });
@@ -178,6 +182,7 @@ export default function GuestListManager() {
         name: "",
         email: "",
         allowPlusOne: false,
+        plusOneName: "",
         invitationSent: false,
         notes: "",
       });
@@ -219,6 +224,7 @@ export default function GuestListManager() {
       name: guest.name,
       email: guest.email,
       allowPlusOne: guest.allowPlusOne,
+      plusOneName: guest.plusOneName || "",
       invitationSent: guest.invitationSent,
       notes: guest.notes || "",
     });
@@ -231,6 +237,7 @@ export default function GuestListManager() {
       name: "",
       email: "",
       allowPlusOne: false,
+      plusOneName: "",
       invitationSent: false,
       notes: "",
     });
@@ -388,6 +395,22 @@ export default function GuestListManager() {
               </div>
             </div>
 
+            {formData.allowPlusOne && (
+              <div className="form-group">
+                <label htmlFor="plusOneName">Plus-One Name (Optional)</label>
+                <input
+                  type="text"
+                  id="plusOneName"
+                  value={formData.plusOneName}
+                  onChange={(e) =>
+                    setFormData({ ...formData, plusOneName: e.target.value })
+                  }
+                  className="form-input"
+                  placeholder="Enter plus-one's name if known"
+                />
+              </div>
+            )}
+
             <div className="form-group">
               <label htmlFor="notes">Notes</label>
               <textarea
@@ -479,6 +502,11 @@ export default function GuestListManager() {
                       <strong>👥 Plus-One:</strong>{" "}
                       {guest.allowPlusOne ? "Yes" : "No"}
                     </p>
+                    {guest.allowPlusOne && guest.plusOneName && (
+                      <p>
+                        <strong>👤 Plus-One Name:</strong> {guest.plusOneName}
+                      </p>
+                    )}
                     <p>
                       <strong>✉️ Invitation:</strong>{" "}
                       {guest.invitationSent ? "Sent" : "Not Sent"}

@@ -14,8 +14,9 @@ model Guest {
   createdAt         DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt         DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
   name              String
-  email             String   @unique
+  email             String?
   allowPlusOne      Boolean  @default(false) @map("allow_plus_one")
+  plusOneName       String?  @map("plus_one_name")
   maxGuests         Int      @default(1) @map("max_guests")
   invitationSent    Boolean  @default(false) @map("invitation_sent")
   invitationSentAt  DateTime? @map("invitation_sent_at") @db.Timestamptz(6)

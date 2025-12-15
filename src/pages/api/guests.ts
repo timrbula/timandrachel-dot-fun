@@ -101,28 +101,42 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    // Check if guest already exists
-    const existingGuest = await prisma.guest.findUnique({
-      where: { email: body.email.trim().toLowerCase() },
-    });
+    // Check if guest already exists (only if email is provided and not empty)
+    const emailToCheck =
+      body.email && body.email.trim() !== ""
+        ? body.email.trim().toLowerCase()
+        : null;
 
-    if (existingGuest) {
-      return new Response(
-        JSON.stringify({ error: "Guest with this email already exists" }),
-        { status: 409, headers: { "Content-Type": "application/json" } }
-      );
+    if (emailToCheck) {
+      const existingGuest = await prisma.guest.findFirst({
+        where: { email: emailToCheck },
+      });
+
+      if (existingGuest) {
+        return new Response(
+          JSON.stringify({ error: "Guest with this email already exists" }),
+          { status: 409, headers: { "Content-Type": "application/json" } }
+        );
+      }
     }
 
     // Create guest
     const guest = await prisma.guest.create({
       data: {
         name: sanitizeInput(body.name.trim()),
-        email: body.email.trim().toLowerCase(),
+        email: emailToCheck,
         allowPlusOne: body.allowPlusOne || false,
+        plusOneName:
+          body.plusOneName && body.plusOneName.trim() !== ""
+            ? sanitizeInput(body.plusOneName.trim())
+            : null,
         maxGuests: body.maxGuests || 1,
         invitationSent: body.invitationSent || false,
         invitationSentAt: body.invitationSent ? new Date() : null,
-        notes: body.notes ? sanitizeInput(body.notes.trim()) : null,
+        notes:
+          body.notes && body.notes.trim() !== ""
+            ? sanitizeInput(body.notes.trim())
+            : null,
       },
     });
 
@@ -166,17 +180,27 @@ export const PUT: APIRoute = async ({ request }) => {
     const updateData: any = {};
 
     if (body.name) updateData.name = sanitizeInput(body.name.trim());
-    if (body.email) {
-      if (!isValidEmail(body.email)) {
-        return new Response(
-          JSON.stringify({ error: "Invalid email address" }),
-          { status: 400, headers: { "Content-Type": "application/json" } }
-        );
+    if (body.email !== undefined) {
+      const trimmedEmail = body.email?.trim();
+      if (trimmedEmail && trimmedEmail !== "") {
+        if (!isValidEmail(trimmedEmail)) {
+          return new Response(
+            JSON.stringify({ error: "Invalid email address" }),
+            { status: 400, headers: { "Content-Type": "application/json" } }
+          );
+        }
+        updateData.email = trimmedEmail.toLowerCase();
+      } else {
+        updateData.email = null;
       }
-      updateData.email = body.email.trim().toLowerCase();
     }
     if (typeof body.allowPlusOne === "boolean")
       updateData.allowPlusOne = body.allowPlusOne;
+    if (body.plusOneName !== undefined) {
+      updateData.plusOneName = body.plusOneName
+        ? sanitizeInput(body.plusOneName.trim())
+        : null;
+    }
     if (body.maxGuests) updateData.maxGuests = body.maxGuests;
     if (typeof body.invitationSent === "boolean") {
       updateData.invitationSent = body.invitationSent;

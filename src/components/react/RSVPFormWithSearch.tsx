@@ -25,6 +25,7 @@ interface GuestInfo {
   name: string;
   email: string;
   allowPlusOne: boolean;
+  plusOneName: string | null;
   maxGuests: number;
   hasRSVPd: boolean;
   rsvpStatus: "attending" | "declined" | null;
@@ -120,6 +121,7 @@ export default function RSVPFormWithSearch() {
           ...prev,
           name: data.guest.name,
           email: data.guest.email,
+          plusOneName: data.guest.plusOneName || "",
         }));
       }
     } catch (error) {
@@ -321,6 +323,11 @@ export default function RSVPFormWithSearch() {
                 {guestInfo.allowPlusOne && (
                   <p className="plus-one-notice">
                     👥 You're welcome to bring a plus-one!
+                    {guestInfo.plusOneName && (
+                      <span style={{ display: "block", marginTop: "0.5rem" }}>
+                        Plus-One: <strong>{guestInfo.plusOneName}</strong>
+                      </span>
+                    )}
                   </p>
                 )}
                 {guestInfo.hasRSVPd ? (

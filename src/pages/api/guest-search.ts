@@ -32,6 +32,7 @@ export const GET: APIRoute = async ({ url }) => {
         name: true,
         email: true,
         allowPlusOne: true,
+        plusOneName: true,
         maxGuests: true,
         rsvps: {
           select: {
@@ -63,6 +64,7 @@ export const GET: APIRoute = async ({ url }) => {
           name: guest.name,
           email: guest.email,
           allowPlusOne: guest.allowPlusOne,
+          plusOneName: guest.plusOneName,
           maxGuests: guest.maxGuests,
           hasRSVPd,
           rsvpStatus: hasRSVPd
