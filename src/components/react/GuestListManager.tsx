@@ -27,8 +27,23 @@ interface GuestFormData {
   notes: string;
 }
 
+export interface RSVP {
+  id: string;
+  created_at: string;
+  guest_name: string;
+  guest_email: string;
+  attending: boolean;
+  plusOne: boolean;
+  plusOneName?: string | null;
+  plusOneDietaryRestrictions?: string | null;
+  songRequests?: string | null;
+  specialAccommodations?: string | null;
+  numberOfGuests: number;
+}
+
 export default function GuestListManager() {
   const [guests, setGuests] = useState<Guest[]>([]);
+  const [rsvps, setRsvps] = useState<RSVP[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -53,6 +68,7 @@ export default function GuestListManager() {
       setAdminSecret(stored);
       setIsAuthenticated(true);
       fetchGuests(stored);
+      fetchRsvps(stored)
     } else {
       setLoading(false);
     }
@@ -64,6 +80,7 @@ export default function GuestListManager() {
       localStorage.setItem("adminSecret", adminSecret);
       setIsAuthenticated(true);
       fetchGuests(adminSecret);
+      fetchRsvps(adminSecret)
     }
   };
 
@@ -72,6 +89,7 @@ export default function GuestListManager() {
     setAdminSecret("");
     setIsAuthenticated(false);
     setGuests([]);
+    setRsvps([]);
   };
 
   const fetchGuests = async (secret: string) => {
@@ -108,9 +126,42 @@ export default function GuestListManager() {
     }
   };
 
+    const fetchRsvps = async (secret: string) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const url= `/api/rsvp`
+
+      const response = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${secret}`,
+        },
+      });
+
+      if (response.status === 401) {
+        setError("Invalid admin secret");
+        handleLogout();
+        return;
+      }
+
+      if (!response.ok) {
+        console.error(response);
+        throw new Error("Failed to fetch rsvps");
+      }
+
+      const data = await response.json();
+      setRsvps(data || []);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to load rsvps");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleSearch = () => {
     if (isAuthenticated) {
       fetchGuests(adminSecret);
+      fetchRsvps(adminSecret)
     }
   };
 
@@ -242,6 +293,8 @@ export default function GuestListManager() {
       notes: "",
     });
   };
+
+  console.log(rsvps)
 
   // Login form
   if (!isAuthenticated) {
@@ -441,7 +494,6 @@ export default function GuestListManager() {
           </form>
         </div>
       )}
-
       {/* Guest List */}
       <div className="guest-list">
         {loading ? (
@@ -461,13 +513,13 @@ export default function GuestListManager() {
               </div>
               <div className="stat">
                 <strong>RSVP'd:</strong>{" "}
-                {guests.filter((g) => g.rsvps.length > 0).length}
+               {rsvps.length}
               </div>
               <div className="stat">
                 <strong>Attending:</strong>{" "}
-                {guests
-                  .filter((g) => g.rsvps.length > 0 && g.rsvps[0].attending)
-                  .reduce((total, g) => total + (g.rsvps[0].numberOfGuests || 1), 0)}
+                {rsvps
+                  .filter((r) => r.attending)
+                  .reduce((total, r) => total + (r.numberOfGuests || 1), 0)}
               </div>
               <div className="stat">
                 <strong>Declined:</strong>{" "}

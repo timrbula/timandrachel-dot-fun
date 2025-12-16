@@ -13,7 +13,7 @@ import {
 
 // Rate limiting map
 const rateLimitMap = new Map<string, number>();
-const RATE_LIMIT_WINDOW = 300000; // 5 minutes
+const RATE_LIMIT_WINDOW = 1000; // 5 minutes
 // const MAX_REQUESTS = 3; // Max 3 RSVP submissions per 5 minutes per IP (currently unused)
 
 /**
