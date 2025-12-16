@@ -14,7 +14,7 @@ export const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
 // Email configuration
 export const EMAIL_CONFIG = {
-  from: "Rachel & Tim <noreply@rachelandtim.fun>",
+  from: "Rachel & Tim <sup@rachelandtim.fun>",
   replyTo: "hello@rachelandtim.fun",
 };
 
