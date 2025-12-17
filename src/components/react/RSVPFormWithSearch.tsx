@@ -499,11 +499,6 @@ export default function RSVPFormWithSearch() {
                 />
                 <span className="checkbox-text">👥 I'm bringing a plus-one</span>
               </label>
-              {guestInfo && !guestInfo.allowPlusOne && (
-                <p className="form-note">
-                  Your invitation is for one guest only.
-                </p>
-              )}
             </div>
           )}
 
