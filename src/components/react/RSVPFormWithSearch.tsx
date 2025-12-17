@@ -487,7 +487,7 @@ export default function RSVPFormWithSearch() {
           </div>
 
           {/* Plus One Checkbox */}
-          {formData.attending === "yes" && (
+          {formData.attending === "yes" && guestInfo?.allowPlusOne && (
             <div className="form-group">
               <label className="checkbox-label">
                 <input
