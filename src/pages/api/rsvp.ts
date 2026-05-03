@@ -603,8 +603,24 @@ export const PUT: APIRoute = async ({ request, clientAddress }) => {
   }
 };
 
-export const GET: APIRoute = async ({ clientAddress }) => {
+export const GET: APIRoute = async ({ request, clientAddress }) => {
   try {
+    // Check authentication
+    const authHeader = request.headers.get("Authorization");
+    const adminSecret = import.meta.env.ADMIN_SECRET || "change-me-in-production";
+    
+    if (authHeader !== `Bearer ${adminSecret}`) {
+      return new Response(
+        JSON.stringify({ error: "Unauthorized" }),
+        {
+          status: 401,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    }
+
     // Get client identifier
     const identifier = clientAddress || "unknown";
 
@@ -624,7 +640,9 @@ export const GET: APIRoute = async ({ clientAddress }) => {
       );
     }
 
-    const rsvp_list = await prisma.rSVP.findMany({});
+    const rsvp_list = await prisma.rSVP.findMany({
+      orderBy: { createdAt: "desc" },
+    });
     return new Response(JSON.stringify(rsvp_list), { status: 200 });
   } catch (error) {
     console.error("Error in GET /api/rsvp:", error);

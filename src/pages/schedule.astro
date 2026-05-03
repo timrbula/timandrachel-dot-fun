@@ -7,26 +7,53 @@ import GeoButton from "../components/react/GeoButton";
 import AddToCalendarButton from "../components/react/AddToCalendarButton";
 import UnderConstruction from "@/components/react/UnderConstruction";
 
-const VENUE_NAME = "Neptune Room @ Radio Star";
-const VENUE_ADDRESS = "13 Greenpoint Ave, Brooklyn, NY 11222";
+const WELCOME_VENUE = "Threes Brewing";
+const WELCOME_ADDRESS = "333 Douglass St, Brooklyn, NY 11217";
+const WELCOME_DATE = "Thursday, October 8th, 2026";
+const WELCOME_TIME = "7:00 PM";
+
+const CEREMONY_VENUE = "City Hall";
+const CEREMONY_ADDRESS = "Broadway &, Chambers St, New York, NY 10007";
+const CEREMONY_DATE = "Friday, October 9th, 2026";
+const CEREMONY_TIME = "TBD";
+
+const WEDDING_VENUE = "Neptune Room @ Radio Star";
+const WEDDING_ADDRESS = "13 Greenpoint Ave, Brooklyn, NY 11222";
 const WEDDING_DATE = "Friday, October 9th, 2026";
-const CEREMONY_TIME = "6:00 PM";
+const WEDDING_TIME = "6:00 PM";
+
+const PICNIC_VENUE = "Prospect Park";
+const PICNIC_ADDRESS = "Long Meadow";
+const PICNIC_DATE = "Saturday, October 10th, 2026";
+const PICNIC_TIME = "12:00 PM";
 
 // Calendar event details
-const EVENT_START = "2026-10-09T18:00:00-04:00"; // 6:00 PM EDT
-const EVENT_END = "2026-10-10T00:00:00-04:00"; // 12:00 AM EDT (next day)
-const EVENT_DESCRIPTION =
-  "Join us for our wedding celebration! Ceremony at 6:00 PM followed by cocktails, dinner, and dancing. We can't wait to celebrate with you!";
+const WELCOME_START = "2026-10-08T19:00:00-04:00"; // 7:00 PM EDT
+const WELCOME_END = "2026-10-08T22:00:00-04:00";
+const WELCOME_DESCRIPTION = "Come get some drinks with (and on!) us the night before. Children are more than welcome by us and the venue."
+
+const CEREMONY_START = "2026-10-08T19:00:00-04:00"; // 7:00 PM EDT
+const CEREMONY_END = "2026-10-08T22:00:00-04:00";
+const CEREMONY_DESCRIPTION = "THIS IS OPTIONAL! We are getting legally married at City Hall ~sometime~ depending on the availability and then going to the venue after. If you want to see us come out of the building and clap then this is your event. Check back three weeks prior to know the exact time!"
+
+const WEDDING_START = "2026-10-09T18:00:00-04:00"; // 6:00 PM EDT
+const WEDDING_END = "2026-10-09T23:00:00-04:00"; // 11:00 PM EDT
+const WEDDING_DESCRIPTION =
+  "Join us for our wedding celebration! Welcome drinks start at 6:00 PM followed dinner, desert and dancing. We can't wait to celebrate with you!";
+
+const PICNIC_START = "2026-10-10T11:00:00-04:00"; // 11:00 AM EDT
+const PICNIC_END = "2026-10-10T13:00:00-04:00"; // 1:00 PM EDT
+const PICNIC_DESCRIPTION =
+  "Join us in our park of choice get get some coffee and pastries. We'll just be hanging out";
 ---
 
 <BaseLayout
-  title="Wedding Schedule - Rachel & Tim 📅"
-  description="All the details for our wedding day! Timeline, venue info, and directions to Radio Star in Brooklyn."
+  title="Schedule - Rachel & Tim 📅"
+  description="All the details for our wedding weekend!"
 >
   <!-- Top Marquee -->
   <Marquee client:load speed={15}>
-    📅 Wedding Schedule 📅 October 9th, 2026 📅 Neptune Room @ Radio Star,
-    Brooklyn 📅
+    📅 Schedule 📅 October 8th-10th, 2026 📅
   </Marquee>
 
   <div class="container">
@@ -34,27 +61,93 @@ const EVENT_DESCRIPTION =
     <section class="page-header text-center">
       <h1 class="text-3d">
         <BlinkingText client:load speed="slow">🕐</BlinkingText>
-        Wedding Schedule
+        Schedule
         <BlinkingText client:load speed="slow">🕐</BlinkingText>
       </h1>
     </section>
 
-    <!-- Date & Time Box -->
+      <!-- Welcome -->
     <section class="date-section">
       <div class="date-box geo-box-neon text-center">
-        <h2 class="text-neon">📅 {WEDDING_DATE}</h2>
-        <p class="ceremony-time rainbow-text">{CEREMONY_TIME}</p>
-        <p class="venue-name text-neon-pink">{VENUE_NAME}</p>
-        <p class="venue-address">{VENUE_ADDRESS}</p>
+        <h1 class="text-beveled-green">Welcome Party</h1>
+        <h2 class="text-neon">📅 {WELCOME_DATE}</h2>
+        <p class="ceremony-time rainbow-text">{WELCOME_TIME}</p>
+        <p class="venue-name text-neon-pink">{WELCOME_VENUE}</p>
+        <p class="venue-address">{WELCOME_ADDRESS}</p>
         <AddToCalendarButton
           client:load
-          eventTitle="Rachel & Tim's Wedding"
-          eventDescription={EVENT_DESCRIPTION}
-          location={VENUE_ADDRESS}
-          startDate={EVENT_START}
-          endDate={EVENT_END}
+          eventTitle="Rachel & Tim's Welcome Party"
+          eventDescription={WELCOME_DESCRIPTION}
+          location={WELCOME_ADDRESS}
+          startDate={WELCOME_START}
+          endDate={WELCOME_END}
+          variant="secondary"
+        />
+        <p style="margin-top: 1rem;">{WELCOME_DESCRIPTION}</p>
+      </div>
+     
+    </section>
+
+      <!-- Ceremony Date & Time -->
+    <section class="date-section">
+      <div class="date-box geo-box-neon text-center">
+      <h1 class="text-beveled-orange">Ceremony</h1>
+        <h2 class="text-neon">📅 {CEREMONY_DATE}</h2>
+        <p class="ceremony-time rainbow-text">{CEREMONY_TIME}</p>
+        <p class="venue-name text-neon-pink">{CEREMONY_VENUE}</p>
+        <p class="venue-address">{CEREMONY_ADDRESS}</p>
+        <AddToCalendarButton
+          client:load
+          eventTitle="Rachel & Tim's Ceremony"
+          eventDescription={CEREMONY_DESCRIPTION}
+          location={CEREMONY_ADDRESS}
+          startDate={CEREMONY_START}
+          endDate={CEREMONY_END}
           variant="primary"
         />
+        <p style="margin-top: 1rem;">{CEREMONY_DESCRIPTION}</p>
+      </div>
+    </section>
+
+    <!-- Party Date & Time -->
+    <section class="date-section">
+      <div class="date-box geo-box-neon text-center">
+      <h1 class="text-beveled-red">Wedding Party</h1>
+        <h2 class="text-neon">📅 {WEDDING_DATE}</h2>
+        <p class="ceremony-time rainbow-text">{WEDDING_TIME}</p>
+        <p class="venue-name text-neon-pink">{WEDDING_VENUE}</p>
+        <p class="venue-address">{WEDDING_ADDRESS}</p>
+        <AddToCalendarButton
+          client:load
+          eventTitle="Rachel & Tim's Wedding Party"
+          eventDescription={WEDDING_DESCRIPTION}
+          location={WEDDING_ADDRESS}
+          startDate={WEDDING_START}
+          endDate={WEDDING_END}
+          variant="secondary"
+        />
+        <p style="margin-top: 1rem;">{WEDDING_DESCRIPTION}</p>
+      </div>
+    </section>
+
+     <!-- Picnic Date & Time -->
+    <section class="date-section">
+      <div class="date-box geo-box-neon text-center">
+        <h1 class="text-beveled-blue">Picnic</h1>
+        <h2 class="text-neon">📅 {PICNIC_DATE}</h2>
+        <p class="ceremony-time rainbow-text">{PICNIC_TIME}</p>
+        <p class="venue-name text-neon-pink">{PICNIC_VENUE}</p>
+        <p class="venue-address">{PICNIC_ADDRESS}</p>
+        <AddToCalendarButton
+          client:load
+          eventTitle="Rachel & Tim's Picnic"
+          eventDescription={PICNIC_DESCRIPTION}
+          location={PICNIC_ADDRESS}
+          startDate={PICNIC_START}
+          endDate={PICNIC_END}
+          variant="primary"
+        />
+        <p style="margin-top: 1rem;">{PICNIC_DESCRIPTION}</p>
       </div>
     </section>
 
@@ -151,12 +244,18 @@ const EVENT_DESCRIPTION =
 
     <RainbowDivider client:load variant="solid" />
 
+     <h1 class="text-center">Places</h2>
+
+        <section class="cta-section text-center">
+       <GeoButton client:load variant="primary" href="https://maps.app.goo.gl/iHQQ5XgZBPAFLebU8">Google Maps List</GeoButton>
+       </section>
+
     <!-- Map Section -->
-    <section class="map-section">
-      <h2 class="text-center text-3d">📍 Find Us Here! 📍</h2>
+      <section class="map-section">
+      <h2 class="text-center">📍 Welcome Party 📍</h2>
       <div class="map-container geo-box">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.2076489476847!2d-73.95634!3d40.730831!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2594a0b0b0b0b%3A0x0!2s13%20Greenpoint%20Ave%2C%20Brooklyn%2C%20NY%2011222!5e0!3m2!1sen!2sus!4v1234567890"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12105.087771549255!2d-73.98115170425285!3d40.66797670236825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25bab47b7fbff%3A0x7ddcbcc39bb2c360!2sThrees%20Brewing!5e0!3m2!1sen!2sus!4v1777848282156!5m2!1sen!2sus"
           width="100%"
           height="450"
           style="border:0;"
@@ -166,13 +265,47 @@ const EVENT_DESCRIPTION =
           title="Radio Star Location Map"></iframe>
       </div>
     </section>
-
-    <!-- Under Construction Notice for Future Pages -->
-    <section class="construction-section">
-      <UnderConstruction
-        client:load
-        message="More awesome content is on the way!"
-      />
+      <section class="map-section">
+      <h2 class="text-center">📍 Ceremony 📍</h2>
+      <div class="map-container geo-box">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1285.2868461307146!2d-74.00698860523515!3d40.71259967244583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a189a3d1c07%3A0x93b158798e363627!2sCity%20Hall%20Park!5e0!3m2!1sen!2sus!4v1777848839395!5m2!1sen!2sus" 
+          width="100%"
+          height="450"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Radio Star Location Map"></iframe>
+      </div>
+    </section>
+        <section class="map-section">
+      <h2 class="text-center">📍 Wedding Party 📍</h2>
+      <div class="map-container geo-box">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.4646460365666!2d-73.96273948795883!3d40.72980033640552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259003a3591cd%3A0xb2fd69b7319785a6!2sThe%20Neptune%20Room!5e0!3m2!1sen!2sus!4v1777848572967!5m2!1sen!2sus"
+          width="100%"
+          height="450"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Radio Star Location Map"></iframe>
+      </div>
+    </section>
+    <section class="map-section">
+      <h2 class="text-center">📍 Picnic 📍</h2>
+      <div class="map-container geo-box">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12105.093514103854!2d-73.98110878649958!3d40.66794506618967!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25b1aaf583941%3A0xdecbf5a4bb1654ea!2sLong%20Meadow!5e0!3m2!1sen!2sus!4v1777848203608!5m2!1sen!2sus"
+          width="100%"
+          height="450"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Radio Star Location Map"></iframe>
+      </div>
     </section>
 
     <!-- Additional Info -->

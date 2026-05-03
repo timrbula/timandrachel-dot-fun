@@ -3,25 +3,50 @@ import BaseLayout from "../components/astro/BaseLayout.astro";
 import BlinkingText from "../components/react/BlinkingText";
 import RainbowDivider from "../components/react/RainbowDivider";
 import GuestListManager from "../components/react/GuestListManager";
+import RSVPListViewer from "../components/react/RSVPListViewer";
 ---
 
 <BaseLayout
-  title="Admin - Guest List Manager 🔐"
-  description="Manage wedding guest list and invitations"
+  title="Admin - Wedding Management 🔐"
+  description="Manage wedding guest list, RSVPs, and invitations"
 >
   <div class="container">
     <!-- Page Header -->
     <section class="page-header text-center">
       <h1 class="text-3d">
         <BlinkingText client:load speed="slow">🔐</BlinkingText>
-        Guest List Manager
+        Wedding Management
         <BlinkingText client:load speed="slow">🔐</BlinkingText>
       </h1>
+      <p class="subtitle">Guest List & RSVP Dashboard</p>
     </section>
 
     <RainbowDivider client:load variant="animated" />
 
+    <!-- RSVP List Viewer Component -->
+    <section class="section-header text-center">
+      <h2 class="text-neon">
+        <BlinkingText client:load speed="normal">💌</BlinkingText>
+        RSVP List
+        <BlinkingText client:load speed="normal">💌</BlinkingText>
+      </h2>
+    </section>
+
+    <section class="viewer-section">
+      <RSVPListViewer client:load />
+    </section>
+
+    <RainbowDivider client:load variant="dots" />
+
     <!-- Guest List Manager Component -->
+    <section class="section-header text-center">
+      <h2 class="text-neon">
+        <BlinkingText client:load speed="normal">📋</BlinkingText>
+        Guest List Manager
+        <BlinkingText client:load speed="normal">📋</BlinkingText>
+      </h2>
+    </section>
+
     <section class="manager-section">
       <GuestListManager client:load />
     </section>
@@ -42,11 +67,24 @@ import GuestListManager from "../components/react/GuestListManager";
       font-size: 1.2rem;
       max-width: 700px;
       margin: 0 auto;
+      color: rgba(255, 255, 255, 0.8);
     }
 
-    /* Manager Section */
+    /* Section Header */
+    .section-header {
+      padding: 2rem 0 1rem;
+      margin-top: 2rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      margin: 0;
+    }
+
+    /* Sections */
+    .viewer-section,
     .manager-section {
-      margin: 3rem 0;
+      margin: 2rem 0 3rem;
     }
 
     /* Info Section */
@@ -70,6 +108,10 @@ import GuestListManager from "../components/react/GuestListManager";
     @media (max-width: 768px) {
       .page-header h1 {
         font-size: 2rem;
+      }
+
+      .section-header h2 {
+        font-size: 1.8rem;
       }
 
       .subtitle {
