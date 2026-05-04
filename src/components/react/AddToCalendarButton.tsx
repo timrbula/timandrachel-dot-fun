@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import GeoButton from './GeoButton';
 import './AddToCalendarButton.css';
 
@@ -20,6 +20,29 @@ export default function AddToCalendarButton({
   variant = 'primary',
 }: AddToCalendarButtonProps) {
   const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  
+  // Debug: log when dropdown state changes
+  useEffect(() => {
+    console.log('AddToCalendarButton - showDropdown:', showDropdown);
+  }, [showDropdown]);
+  
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setShowDropdown(false);
+      }
+    };
+
+    if (showDropdown) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showDropdown]);
 
   // Format dates for different calendar services
   const formatGoogleDate = (date: string): string => {
@@ -45,6 +68,17 @@ export default function AddToCalendarButton({
 
   // AOL Calendar URL (uses same format as Yahoo since AOL calendar is powered by Yahoo)
   const aolCalendarUrl = `https://calendar.aol.com/?v=60&view=d&type=20&title=${encodeURIComponent(eventTitle)}&st=${start}&et=${end}&desc=${encodeURIComponent(eventDescription)}&in_loc=${encodeURIComponent(location)}`;
+
+  // Handle opening calendar URLs with fallback for popup blockers
+  const handleCalendarClick = (url: string) => {
+    setShowDropdown(false);
+    // Try to open in new window, with fallback to same window if blocked
+    const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+    if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+      // Popup was blocked, open in same window
+      window.location.href = url;
+    }
+  };
 
   const handleDownloadICS = () => {
     const icsStart = formatICSDate(startDate);
@@ -90,7 +124,7 @@ export default function AddToCalendarButton({
   };
 
   return (
-    <div className="add-to-calendar-wrapper">
+    <div className="add-to-calendar-wrapper" ref={dropdownRef}>
       <GeoButton onClick={() => setShowDropdown(!showDropdown)} variant={variant}>
         📅 Add to Calendar
       </GeoButton>
@@ -99,10 +133,7 @@ export default function AddToCalendarButton({
         <div className="calendar-dropdown geo-box-raised">
           <button
             className="calendar-option"
-            onClick={() => {
-              window.open(googleCalendarUrl, '_blank');
-              setShowDropdown(false);
-            }}
+            onClick={() => handleCalendarClick(googleCalendarUrl)}
           >
             <span className="calendar-icon">📅</span>
             Google Calendar
@@ -110,10 +141,7 @@ export default function AddToCalendarButton({
           
           <button
             className="calendar-option"
-            onClick={() => {
-              window.open(outlookCalendarUrl, '_blank');
-              setShowDropdown(false);
-            }}
+            onClick={() => handleCalendarClick(outlookCalendarUrl)}
           >
             <span className="calendar-icon">📧</span>
             Outlook Calendar
@@ -121,10 +149,7 @@ export default function AddToCalendarButton({
           
           <button
             className="calendar-option"
-            onClick={() => {
-              window.open(yahooCalendarUrl, '_blank');
-              setShowDropdown(false);
-            }}
+            onClick={() => handleCalendarClick(yahooCalendarUrl)}
           >
             <span className="calendar-icon">📮</span>
             Yahoo Calendar
@@ -132,10 +157,7 @@ export default function AddToCalendarButton({
           
           <button
             className="calendar-option"
-            onClick={() => {
-              window.open(aolCalendarUrl, '_blank');
-              setShowDropdown(false);
-            }}
+            onClick={() => handleCalendarClick(aolCalendarUrl)}
           >
             <span className="calendar-icon">💿</span>
             AOL Calendar

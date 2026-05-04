@@ -11,8 +11,11 @@
   transform: translateX(-50%);
   min-width: 250px;
   padding: 0.5rem;
-  z-index: 1000;
+  z-index: 9999;
   animation: slideDown 0.2s ease-out;
+  background: #000080;
+  border: 3px solid var(--color-cyan, #00ffff);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
 }
 
 @keyframes slideDown {
