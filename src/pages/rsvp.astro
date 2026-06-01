@@ -160,58 +160,21 @@ import RSVPFormWithSearch from "../components/react/RSVPFormWithSearch";
 
     <RainbowDivider client:load variant="stars" />
 
-    <!-- FAQ Section -->
-    <section class="faq-section">
-      <h2 class="text-center text-3d">
-        <BlinkingText client:load>❓</BlinkingText>
-        RSVP Questions?
-        <BlinkingText client:load>❓</BlinkingText>
-      </h2>
-
-      <div class="faq-grid">
-        <div class="faq-card geo-box-raised">
-          <h3 class="text-neon-pink">What's a good wedding present?</h3>
-          <p>Your presence! You are more than enough, we promise 🎁</p>
-        </div>
-
-        <div class="faq-card geo-box-raised">
-          <h3 class="text-neon-pink">What should I wear?</h3>
-          <p>
-            Cocktail attire! Dress to impress, but be comfortable for dancing!
-            👗🕺
-          </p>
-        </div>
-
-        <div class="faq-card geo-box-raised">
-          <h3 class="text-neon">Can I change my RSVP?</h3>
-          <p>
-            Of course! Just enter your email address at the top of the form.
-            You'll get an email with a link to edit it.
-          </p>
-        </div>
-
-        <div class="faq-card geo-box-raised">
-          <h3 class="text-neon-pink">What if I have dietary restrictions?</h3>
-          <p>
-            No problem! Let us know in the form and we'll make sure you're taken
-            care of 🍽️
-          </p>
-        </div>
-        
-        <div class="faq-card geo-box-raised">
-          <h3 class="text-neon">Can I bring my kids?</h3>
-          <p>
-            This is an adults-only celebration besides some younger attendees from our immediate familes. Thank you
-            for understanding! 💕
-          </p>
+    <!-- FAQ Link -->
+    <section class="faq-link-section text-center">
+      <div class="faq-link-box geo-box-raised">
+        <h2 class="text-3d">
+          <BlinkingText client:load>❓</BlinkingText>
+          Have Questions?
+          <BlinkingText client:load>❓</BlinkingText>
+        </h2>
+        <p>Check out our FAQ page for answers to common questions!</p>
+        <div class="faq-cta">
+          <GeoButton client:load variant="primary" href="/faq">
+            ❓ View FAQ
+          </GeoButton>
         </div>
       </div>
-      
-
-       <div class="faq-card geo-box-raised">
-          <h3 class="text-neon-pink">Where is my RSVP confirmation?</h3>
-          <p>You should have received an email. Please check your spam folder!</p>
-        </div>
     </section>
 
     <RainbowDivider client:load variant="dots" />
@@ -468,30 +431,24 @@ import RSVPFormWithSearch from "../components/react/RSVPFormWithSearch";
     margin: 1rem 0;
   }
 
-  /* FAQ Section */
-  .faq-section {
+  /* FAQ Link Section */
+  .faq-link-section {
     margin: 3rem 0;
   }
 
-  .faq-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 2rem auto;
+  .faq-link-box {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2.5rem;
   }
 
-  .faq-card {
-    padding: 2rem;
+  .faq-link-box p {
+    font-size: 1.1rem;
+    margin: 1rem 0;
   }
 
-  .faq-card h3 {
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
-  }
-
-  .faq-card p {
-    line-height: 1.6;
+  .faq-cta {
+    margin-top: 1.5rem;
   }
 
   /* Contact Section */
@@ -562,10 +519,6 @@ import RSVPFormWithSearch from "../components/react/RSVPFormWithSearch";
 
     .success-text {
       font-size: 1.5rem;
-    }
-
-    .faq-grid {
-      grid-template-columns: 1fr;
     }
 
     .cta-buttons {

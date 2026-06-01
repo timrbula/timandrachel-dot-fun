@@ -27,7 +27,7 @@ export default function UnderConstruction({
           </div>
         )}
         
-        <div className="construction-banner construction-warning">
+        {/* <div className="construction-banner construction-warning">
           <span className="blink">⚠️</span>
           <span className="construction-text">{message}</span>
           <span className="blink">⚠️</span>
@@ -39,7 +39,7 @@ export default function UnderConstruction({
         
         <p className="construction-subtext">
           Check back soon for awesome updates! 🚧👷‍♀️👷‍♂️🚧
-        </p>
+        </p> */}
       </div>
     </div>
   );

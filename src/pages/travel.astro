@@ -4,7 +4,6 @@ import Marquee from "../components/react/Marquee";
 import BlinkingText from "../components/react/BlinkingText";
 import RainbowDivider from "../components/react/RainbowDivider";
 import GeoButton from "../components/react/GeoButton";
-import UnderConstruction from "@/components/react/UnderConstruction";
 ---
 
 <BaseLayout
@@ -36,13 +35,78 @@ import UnderConstruction from "@/components/react/UnderConstruction";
         <BlinkingText client:load>🏨</BlinkingText>
       </h2>
 
-      <!-- Under Construction Notice for Future Pages -->
-      <section class="construction-section">
-        <UnderConstruction
-          client:load
-          message="More awesome content is on the way!"
-        />
-      </section>
+      <div class="hotel-note geo-box text-center">
+        <p>
+          <BlinkingText client:load>💡</BlinkingText>
+          <strong>Pro Tip:</strong> We recommend staying in one of these three neighborhoods for easy access to our events. Book early — October in NYC fills up fast! 🍂
+        </p>
+      </div>
+
+      <div class="neighborhoods-grid">
+        <!-- Midtown -->
+        <div class="hotel-card geo-box-neon">
+          <div>
+          <h3 class="text-neon">Midtown Manhattan</h3>
+          <div class="hotel-details">
+            <ul>
+              <li>✅ Subway access to all of our events in Brooklyn</li>
+              <li>✅ Widest selection of hotels</li>
+              <li>✅ Central Park and many attractions</li>
+              <li>❌ Can be a bit overwhelming</li>
+            </ul>
+          </div>
+          </div>
+          <GeoButton
+            client:load
+            variant="primary"
+            href="https://www.google.com/maps/search/hotels+midtown+manhattan"
+          >
+            🔍 Search Hotels
+          </GeoButton>
+        </div>
+
+        <!-- Downtown Brooklyn -->
+        <div class="hotel-card geo-box-neon">
+          <div>
+          <h3 class="text-neon">Downtown Brooklyn</h3>
+          <div class="hotel-details">
+            <ul>
+              <li>✅ Easiest access to all of the events</li>
+              <li>✅ More affordable than Manhattan</li>
+              <li>❌ Not the cutest part of the city, imo</li>
+            </ul>
+          </div>
+          </div>
+          <GeoButton
+            client:load
+            variant="primary"
+            href="https://www.google.com/maps/search/hotels+downtown+brooklyn"
+          >
+            🔍 Search Hotels
+          </GeoButton>
+        </div>
+
+        <!-- Lower Manhattan -->
+        <div class="hotel-card geo-box-neon">
+        <div>
+          <h3 class="text-neon-pink">Lower Manhattan</h3>
+          <div class="hotel-details">
+            <ul>
+              <li>✅ Multiple subway lines to Brooklyn</li>
+              <li>✅ More fun place to stay, imo</li>
+              <li>❌ Less hotel options</li>
+            </ul>
+          </div>
+          </div>
+          <GeoButton
+            client:load
+            variant="primary"
+            href="https://www.google.com/maps/search/hotels+lower+manhattan"
+          >
+            🔍 Search Hotels
+          </GeoButton>
+        </div>
+      </div>
 
       <!-- <div class="hotels-grid"> -->
       <!-- The William Vale -->
@@ -81,7 +145,6 @@ import UnderConstruction from "@/components/react/UnderConstruction";
               <li>🎨 Trendy boutique hotel</li>
               <li>🍔 Great restaurant & bar</li>
               <li>☕ Lobby coffee shop</li>
-              <li>🎯 Hip Williamsburg location</li>
             </ul>
           </div>
           <GeoButton
@@ -434,7 +497,8 @@ import UnderConstruction from "@/components/react/UnderConstruction";
     margin: 3rem 0;
   }
 
-  .hotels-grid {
+  .hotels-grid,
+  .neighborhoods-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
@@ -444,6 +508,9 @@ import UnderConstruction from "@/components/react/UnderConstruction";
 
   .hotel-card {
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .hotel-card h3 {

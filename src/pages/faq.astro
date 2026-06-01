@@ -1,0 +1,203 @@
+---
+import BaseLayout from "../components/astro/BaseLayout.astro";
+import Marquee from "../components/react/Marquee";
+import BlinkingText from "../components/react/BlinkingText";
+import RainbowDivider from "../components/react/RainbowDivider";
+import GeoButton from "../components/react/GeoButton";
+---
+
+<BaseLayout
+  title="FAQ - Rachel & Tim ❓"
+  description="Answers to your most frequently asked questions about our wedding!"
+>
+  <!-- Top Marquee -->
+  <Marquee client:load speed={15}>
+    ❓ Frequently Asked Questions ❓ We've got answers! ❓
+  </Marquee>
+
+  <div class="container">
+    <!-- Page Header -->
+    <section class="page-header text-center">
+      <h1 class="text-3d">
+        <BlinkingText client:load speed="slow">❓</BlinkingText>
+        FAQ
+        <BlinkingText client:load speed="slow">❓</BlinkingText>
+      </h1>
+      <p class="subtitle">Got questions? We've got answers!</p>
+    </section>
+
+    <RainbowDivider client:load variant="animated" />
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <div class="faq-grid">
+        <div class="faq-card geo-box-raised">
+          <h3 class="text-neon-pink">What's a good wedding present?</h3>
+          <p>Your presence! You are more than enough, we promise 🎁</p>
+        </div>
+
+        <div class="faq-card geo-box-raised">
+          <h3 class="text-neon-pink">What should I wear?</h3>
+          <p>
+            Cocktail attire! Dress to impress, but be comfortable for dancing!
+            👗🕺
+          </p>
+        </div>
+
+        <div class="faq-card geo-box-raised">
+          <h3 class="text-neon">Can I change my RSVP?</h3>
+          <p>
+            Of course! Just enter your email address at the top of the form.
+            You'll get an email with a link to edit it.
+          </p>
+        </div>
+
+        <div class="faq-card geo-box-raised">
+          <h3 class="text-neon-pink">What if I have dietary restrictions?</h3>
+          <p>
+            No problem! Let us know in the RSVP form and we'll make sure you're
+            taken care of 🍽️
+          </p>
+        </div>
+
+        <div class="faq-card geo-box-raised">
+          <h3 class="text-neon">Can I bring my kids?</h3>
+          <p>
+            This is an adults-only celebration besides some younger attendees
+            from our immediate families. Thank you for understanding! 💕
+          </p>
+        </div>
+
+        <div class="faq-card geo-box-raised">
+          <h3 class="text-neon-pink">Where is my RSVP confirmation?</h3>
+          <p>You should have received an email. Please check your spam folder!</p>
+        </div>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="dots" />
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+      <div class="contact-box geo-box-neon text-center">
+        <h2 class="text-3d">
+          <BlinkingText client:load>💬</BlinkingText>
+          Still have questions?
+          <BlinkingText client:load>💬</BlinkingText>
+        </h2>
+        <div class="contact-methods">
+          <p>
+            📧 Email: <a href="mailto:hello@rachelandtim.fun" class="text-cyan"
+              >hello@rachelandtim.fun</a
+            >
+          </p>
+          <p>📱 Text us on our phone numbers</p>
+        </div>
+        <div class="cta-buttons">
+          <GeoButton client:load variant="primary" href="/rsvp">
+            💌 RSVP Now
+          </GeoButton>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Bottom Marquee -->
+  <Marquee client:load speed={20} direction="right">
+    💕 Can't wait to celebrate with you! 🎉 RSVP by August 28th, 2026 💌
+  </Marquee>
+</BaseLayout>
+
+<style>
+  /* Page Header */
+  .page-header {
+    padding: 2rem 0;
+  }
+
+  .page-header h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.3rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* FAQ Section */
+  .faq-section {
+    margin: 3rem 0;
+  }
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+  }
+
+  .faq-card {
+    padding: 2rem;
+  }
+
+  .faq-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .faq-card p {
+    line-height: 1.6;
+  }
+
+  /* Contact Section */
+  .contact-section {
+    margin: 3rem 0;
+  }
+
+  .contact-box {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2.5rem;
+  }
+
+  .contact-methods {
+    margin-top: 2rem;
+  }
+
+  .contact-methods p {
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+  }
+
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  /* Links */
+  a {
+    text-decoration: underline;
+  }
+
+  a:hover {
+    opacity: 0.8;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-header h1 {
+      font-size: 2.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+    }
+
+    .faq-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
