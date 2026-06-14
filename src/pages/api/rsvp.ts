@@ -132,11 +132,28 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       );
     }
 
+    // Validate event attendance values if provided
+    const validEventValues = ["yes", "no", "not_sure"];
+    if (body.welcome_party && !validEventValues.includes(body.welcome_party)) {
+      return new Response(
+        JSON.stringify({ error: "Invalid value for welcome_party" }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    if (body.picnic && !validEventValues.includes(body.picnic)) {
+      return new Response(
+        JSON.stringify({ error: "Invalid value for picnic" }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
+    }
+
     // Sanitize inputs
     const sanitizedData = {
       guest_name: sanitizeInput(body.guest_name.trim()),
       guest_email: body.guest_email.trim().toLowerCase(),
       attending: body.attending,
+      welcome_party: validEventValues.includes(body.welcome_party) ? body.welcome_party : "not_sure",
+      picnic: validEventValues.includes(body.picnic) ? body.picnic : "not_sure",
       plus_one: body.plus_one || false,
       plus_one_name: body.plus_one_name
         ? sanitizeInput(body.plus_one_name.trim())
@@ -206,6 +223,8 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
         guestName: sanitizedData.guest_name,
         guestEmail: sanitizedData.guest_email,
         attending: sanitizedData.attending,
+        welcomeParty: sanitizedData.welcome_party,
+        picnic: sanitizedData.picnic,
         plusOne: sanitizedData.plus_one,
         plusOneName: sanitizedData.plus_one_name,
         dietaryRestrictions: sanitizedData.dietary_restrictions,
@@ -510,6 +529,20 @@ export const PUT: APIRoute = async ({ request, clientAddress }) => {
         ? sanitizeInput(body.plus_one_name.trim())
         : null;
       updateData.numberOfGuests = body.plus_one ? 2 : 1;
+    }
+
+    const validEventValues = ["yes", "no", "not_sure"];
+
+    if (body.welcome_party !== undefined) {
+      updateData.welcomeParty = validEventValues.includes(body.welcome_party)
+        ? body.welcome_party
+        : "not_sure";
+    }
+
+    if (body.picnic !== undefined) {
+      updateData.picnic = validEventValues.includes(body.picnic)
+        ? body.picnic
+        : "not_sure";
     }
 
     if (body.dietary_restrictions !== undefined) {

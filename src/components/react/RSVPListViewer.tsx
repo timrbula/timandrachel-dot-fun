@@ -7,6 +7,8 @@ interface RSVP {
   guestName: string;
   guestEmail: string;
   attending: boolean;
+  welcomeParty?: string | null;
+  picnic?: string | null;
   plusOne: boolean;
   plusOneName?: string | null;
   dietaryRestrictions?: string | null;
@@ -106,6 +108,12 @@ export default function RSVPListViewer() {
       }
     });
 
+  const formatEventStatus = (status?: string | null) => {
+    if (status === "yes") return "✅ Yes";
+    if (status === "no") return "❌ No";
+    return "🤔 Not sure";
+  };
+
   // Calculate statistics
   const stats = {
     total: rsvps.length,
@@ -115,6 +123,8 @@ export default function RSVPListViewer() {
       .filter((r) => r.attending)
       .reduce((sum, r) => sum + r.numberOfGuests, 0),
     withPlusOne: rsvps.filter((r) => r.attending && r.plusOne).length,
+    welcomePartyYes: rsvps.filter((r) => r.welcomeParty === "yes").length,
+    picnicYes: rsvps.filter((r) => r.picnic === "yes").length,
     dietaryRestrictions: rsvps.filter(
       (r) => r.attending && (r.dietaryRestrictions || r.plusOneDietaryRestrictions)
     ).length,
@@ -208,6 +218,14 @@ export default function RSVPListViewer() {
         <div className="stat-card">
           <div className="stat-value text-neon">{stats.withPlusOne}</div>
           <div className="stat-label">With Plus-One</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-value text-neon-green">{stats.welcomePartyYes}</div>
+          <div className="stat-label">Welcome Party</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-value text-neon-pink">{stats.picnicYes}</div>
+          <div className="stat-label">Picnic</div>
         </div>
         <div className="stat-card">
           <div className="stat-value text-neon-green">{stats.dietaryRestrictions}</div>
@@ -322,6 +340,18 @@ export default function RSVPListViewer() {
                     <span className="detail-icon">👥</span>
                     <span className="detail-label">Guests:</span>
                     <span className="detail-value">{rsvp.numberOfGuests}</span>
+                  </div>
+
+                  <div className="detail-row">
+                    <span className="detail-icon">🎉</span>
+                    <span className="detail-label">Welcome Party:</span>
+                    <span className="detail-value">{formatEventStatus(rsvp.welcomeParty)}</span>
+                  </div>
+
+                  <div className="detail-row">
+                    <span className="detail-icon">🧺</span>
+                    <span className="detail-label">Picnic:</span>
+                    <span className="detail-value">{formatEventStatus(rsvp.picnic)}</span>
                   </div>
 
                   {rsvp.plusOne && (

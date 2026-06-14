@@ -7,6 +7,8 @@ interface RSVPData {
   guest_name: string;
   guest_email: string;
   attending: boolean;
+  welcome_party: string | null;
+  picnic: string | null;
   plus_one: boolean;
   plus_one_name: string | null;
   dietary_restrictions: string | null;
@@ -20,6 +22,8 @@ interface FormData {
   name: string;
   email: string;
   attending: "yes" | "no" | "";
+  welcomeParty: "yes" | "no" | "not_sure";
+  picnic: "yes" | "no" | "not_sure";
   plusOne: boolean;
   plusOneName: string;
   dietaryRestrictions: string;
@@ -44,6 +48,8 @@ export default function RSVPEditForm({ token }: RSVPEditFormProps) {
     name: "",
     email: "",
     attending: "",
+    welcomeParty: "not_sure",
+    picnic: "not_sure",
     plusOne: false,
     plusOneName: "",
     dietaryRestrictions: "",
@@ -80,6 +86,8 @@ export default function RSVPEditForm({ token }: RSVPEditFormProps) {
           name: rsvp.guest_name,
           email: rsvp.guest_email,
           attending: rsvp.attending ? "yes" : "no",
+          welcomeParty: (rsvp.welcome_party as "yes" | "no" | "not_sure") || "not_sure",
+          picnic: (rsvp.picnic as "yes" | "no" | "not_sure") || "not_sure",
           plusOne: rsvp.plus_one,
           plusOneName: rsvp.plus_one_name || "",
           dietaryRestrictions: rsvp.dietary_restrictions || "",
@@ -143,6 +151,17 @@ export default function RSVPEditForm({ token }: RSVPEditFormProps) {
     }
   };
 
+  // Handle event attendance radio changes
+  const handleEventRadioChange = (
+    field: "welcomeParty" | "picnic",
+    value: "yes" | "no" | "not_sure"
+  ) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
   // Validate form
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -198,6 +217,8 @@ export default function RSVPEditForm({ token }: RSVPEditFormProps) {
           guest_name: formData.name.trim(),
           guest_email: formData.email.trim().toLowerCase(),
           attending: formData.attending === "yes",
+          welcome_party: formData.welcomeParty,
+          picnic: formData.picnic,
           plus_one: formData.plusOne,
           plus_one_name: formData.plusOneName.trim() || null,
           dietary_restrictions: formData.dietaryRestrictions.trim() || null,
@@ -371,6 +392,86 @@ export default function RSVPEditForm({ token }: RSVPEditFormProps) {
         {errors.attending && (
           <span className="form-error">{errors.attending}</span>
         )}
+      </div>
+
+      {/* Welcome Party Radio Buttons */}
+      <div className="form-group">
+        <label className="form-label">🎉 Welcome Party (Friday, Sept 25th) — Will you be joining us?</label>
+        <div className="radio-group">
+          <label className="radio-label">
+            <input
+              type="radio"
+              name="welcomeParty"
+              value="yes"
+              checked={formData.welcomeParty === "yes"}
+              onChange={() => handleEventRadioChange("welcomeParty", "yes")}
+              disabled={submitting}
+            />
+            <span className="radio-text">✅ Yes!</span>
+          </label>
+          <label className="radio-label">
+            <input
+              type="radio"
+              name="welcomeParty"
+              value="no"
+              checked={formData.welcomeParty === "no"}
+              onChange={() => handleEventRadioChange("welcomeParty", "no")}
+              disabled={submitting}
+            />
+            <span className="radio-text">❌ Can't make it</span>
+          </label>
+          <label className="radio-label">
+            <input
+              type="radio"
+              name="welcomeParty"
+              value="not_sure"
+              checked={formData.welcomeParty === "not_sure"}
+              onChange={() => handleEventRadioChange("welcomeParty", "not_sure")}
+              disabled={submitting}
+            />
+            <span className="radio-text">🤔 Not sure yet</span>
+          </label>
+        </div>
+      </div>
+
+      {/* Picnic Radio Buttons */}
+      <div className="form-group">
+        <label className="form-label">🧺 Post-Wedding Picnic (Monday, Sept 28th) — Will you be joining us?</label>
+        <div className="radio-group">
+          <label className="radio-label">
+            <input
+              type="radio"
+              name="picnic"
+              value="yes"
+              checked={formData.picnic === "yes"}
+              onChange={() => handleEventRadioChange("picnic", "yes")}
+              disabled={submitting}
+            />
+            <span className="radio-text">✅ Yes!</span>
+          </label>
+          <label className="radio-label">
+            <input
+              type="radio"
+              name="picnic"
+              value="no"
+              checked={formData.picnic === "no"}
+              onChange={() => handleEventRadioChange("picnic", "no")}
+              disabled={submitting}
+            />
+            <span className="radio-text">❌ Can't make it</span>
+          </label>
+          <label className="radio-label">
+            <input
+              type="radio"
+              name="picnic"
+              value="not_sure"
+              checked={formData.picnic === "not_sure"}
+              onChange={() => handleEventRadioChange("picnic", "not_sure")}
+              disabled={submitting}
+            />
+            <span className="radio-text">🤔 Not sure yet</span>
+          </label>
+        </div>
       </div>
 
       {/* Plus One Checkbox */}

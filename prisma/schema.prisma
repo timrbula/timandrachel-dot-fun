@@ -35,6 +35,8 @@ model RSVP {
   guestName                   String   @map("guest_name")
   guestEmail                  String   @map("guest_email")
   attending                   Boolean
+  welcomeParty                String?  @default("not_sure") @map("welcome_party")
+  picnic                      String?  @default("not_sure") @map("picnic")
   plusOne                     Boolean  @default(false) @map("plus_one")
   plusOneName                 String?  @map("plus_one_name")
   dietaryRestrictions         String?  @map("dietary_restrictions")
