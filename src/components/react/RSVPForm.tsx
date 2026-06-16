@@ -299,7 +299,7 @@ export default function RSVPForm() {
 
       {/* Welcome Party Radio Buttons */}
       <div className="form-group">
-        <label className="form-label">🎉 Welcome Party (Friday, Sept 25th) — Will you be joining us?</label>
+        <label className="form-label">🎉 Welcome Party (Thursday, October 8th) — Will you be joining us?</label>
         <div className="radio-group">
           <label className="radio-label">
             <input
@@ -339,7 +339,7 @@ export default function RSVPForm() {
 
       {/* Picnic Radio Buttons */}
       <div className="form-group">
-        <label className="form-label">🧺 Post-Wedding Picnic (Monday, Sept 28th) — Will you be joining us?</label>
+        <label className="form-label">🧺 Post-Wedding Picnic (Saturday, October 10th) — Will you be joining us?</label>
         <div className="radio-group">
           <label className="radio-label">
             <input
