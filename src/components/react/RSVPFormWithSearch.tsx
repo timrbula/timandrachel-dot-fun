@@ -545,7 +545,7 @@ export default function RSVPFormWithSearch() {
 
           {/* Picnic Radio Buttons */}
           <div className="form-group">
-            <label className="form-label">🧺 Post-Wedding Picnic (Monday, Sept 28th) — Will you be joining us?</label>
+            <label className="form-label">🧺 Post-Wedding Picnic (Saturday, October 10th) — Will you be joining us?</label>
             <div className="radio-group">
               <label className="radio-label">
                 <input
