@@ -505,7 +505,7 @@ export default function RSVPFormWithSearch() {
 
           {/* Welcome Party Radio Buttons */}
           <div className="form-group">
-            <label className="form-label">🎉 Welcome Party (Friday, Sept 25th) — Will you be joining us?</label>
+            <label className="form-label">🎉 Welcome Party (Thursday, October 8th) — Will you be joining us?</label>
             <div className="radio-group">
               <label className="radio-label">
                 <input
