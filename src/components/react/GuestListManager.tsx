@@ -29,9 +29,9 @@ interface GuestFormData {
 
 export interface RSVP {
   id: string;
-  created_at: string;
-  guest_name: string;
-  guest_email: string;
+  createdAt: string;
+  guestName: string;
+  guestEmail: string;
   attending: boolean;
   plusOne: boolean;
   plusOneName?: string | null;
@@ -294,7 +294,35 @@ export default function GuestListManager() {
     });
   };
 
-  console.log(rsvps)
+  // Helper to find RSVP for a guest (from relations or matching by email/name from rsvps list)
+  const getGuestRSVP = (guest: Guest): { attending: boolean } | null => {
+    if (guest.rsvps && guest.rsvps.length > 0) {
+      return guest.rsvps[0];
+    }
+    const guestEmail = guest.email?.trim().toLowerCase();
+    const guestName = guest.name?.trim().toLowerCase();
+
+    if (guestEmail) {
+      const matchByEmail = rsvps.find(
+        (r) => (r.guestEmail || (r as any).guest_email)?.trim().toLowerCase() === guestEmail
+      );
+      if (matchByEmail) return matchByEmail;
+    }
+
+    if (guestName) {
+      const matchByName = rsvps.find((r) => {
+        const rsvpName = ((r.guestName || (r as any).guest_name) || "").trim().toLowerCase();
+        return (
+          rsvpName === guestName ||
+          rsvpName.includes(guestName) ||
+          guestName.includes(rsvpName)
+        );
+      });
+      if (matchByName) return matchByName;
+    }
+
+    return null;
+  };
 
   // Login form
   if (!isAuthenticated) {
@@ -524,25 +552,28 @@ export default function GuestListManager() {
               <div className="stat">
                 <strong>Declined:</strong>{" "}
                 {
-                  guests.filter(
-                    (g) => g.rsvps.length > 0 && !g.rsvps[0].attending
-                  ).length
+                  guests.filter((g) => {
+                    const rsvp = getGuestRSVP(g);
+                    return rsvp !== null && !rsvp.attending;
+                  }).length
                 }
               </div>
             </div>
 
             <div className="guest-grid">
-              {guests.map((guest) => (
+              {guests.map((guest) => {
+                const rsvp = getGuestRSVP(guest);
+                return (
                 <div key={guest.id} className="guest-card geo-box-raised">
                   <div className="guest-header">
                     <h3 className="guest-name">{guest.name}</h3>
-                    {guest.rsvps.length > 0 && (
+                    {rsvp && (
                       <span
                         className={`rsvp-badge ${
-                          guest.rsvps[0].attending ? "attending" : "declined"
+                          rsvp.attending ? "attending" : "declined"
                         }`}
                       >
-                        {guest.rsvps[0].attending ? "✅ Attending" : "❌ Declined"}
+                        {rsvp.attending ? "✅ Attending" : "❌ Declined"}
                       </span>
                     )}
                   </div>
@@ -584,7 +615,8 @@ export default function GuestListManager() {
                     </button>
                   </div>
                 </div>
-              ))}
+              );
+            })}
             </div>
           </>
         )}

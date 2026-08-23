@@ -201,14 +201,28 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     // Try to find matching guest in the guest list
     let guestId: string | null = null;
     try {
-      const matchingGuest = await prisma.guest.findFirst({
+      // First try matching by email (case-insensitive)
+      let matchingGuest = await prisma.guest.findFirst({
         where: {
-          email: sanitizedData.guest_email,
+          email: { equals: sanitizedData.guest_email, mode: "insensitive" },
         },
         select: {
           id: true,
         },
       });
+
+      // If no email match, try matching by name (case-insensitive)
+      if (!matchingGuest) {
+        matchingGuest = await prisma.guest.findFirst({
+          where: {
+            name: { equals: sanitizedData.guest_name, mode: "insensitive" },
+          },
+          select: {
+            id: true,
+          },
+        });
+      }
+
       if (matchingGuest) {
         guestId = matchingGuest.id;
       }
@@ -260,6 +274,24 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     } catch (emailError) {
       console.error("Error sending admin notification:", emailError);
       // Don't fail the request if email fails
+    }
+
+    // If the guest record existed without an email, save this email to the guest record
+    if (guestId) {
+      try {
+        const linkedGuest = await prisma.guest.findUnique({
+          where: { id: guestId },
+          select: { email: true },
+        });
+        if (linkedGuest && !linkedGuest.email) {
+          await prisma.guest.update({
+            where: { id: guestId },
+            data: { email: sanitizedData.guest_email },
+          });
+        }
+      } catch (updateErr) {
+        console.error("Failed to update guest email:", updateErr);
+      }
     }
 
     // Return success response
@@ -569,6 +601,34 @@ export const PUT: APIRoute = async ({ request, clientAddress }) => {
         : null;
     }
 
+    // If RSVP doesn't have a linked guestId yet, try to link it now
+    if (!existingRSVP.guestId) {
+      try {
+        const guestName = updateData.guestName || existingRSVP.guestName;
+        let matchingGuest = await prisma.guest.findFirst({
+          where: {
+            email: { equals: email, mode: "insensitive" },
+          },
+          select: { id: true },
+        });
+
+        if (!matchingGuest && guestName) {
+          matchingGuest = await prisma.guest.findFirst({
+            where: {
+              name: { equals: guestName, mode: "insensitive" },
+            },
+            select: { id: true },
+          });
+        }
+
+        if (matchingGuest) {
+          updateData.guestId = matchingGuest.id;
+        }
+      } catch (err) {
+        console.log("Guest lookup on RSVP update failed:", err);
+      }
+    }
+
     // Update RSVP in database
     const updatedRSVP = await prisma.rSVP.update({
       where: {
@@ -647,25 +707,6 @@ export const GET: APIRoute = async ({ request, clientAddress }) => {
         JSON.stringify({ error: "Unauthorized" }),
         {
           status: 401,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-    }
-
-    // Get client identifier
-    const identifier = clientAddress || "unknown";
-
-    // Check rate limit
-    if (!checkRateLimit(identifier)) {
-      return new Response(
-        JSON.stringify({
-          error:
-            "Too many RSVP submissions. Please wait a few minutes and try again.",
-        }),
-        {
-          status: 429,
           headers: {
             "Content-Type": "application/json",
           },
