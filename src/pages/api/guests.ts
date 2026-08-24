@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import prisma from "../../lib/prisma";
-import { sanitizeInput, isValidEmail } from "../../lib/utils";
+import { sanitizeInput, isValidEmail, isValidPhone } from "../../lib/utils";
 
 // Simple authentication check (you should implement proper auth)
 const ADMIN_SECRET = import.meta.env.ADMIN_SECRET || "change-me-in-production";
@@ -101,6 +101,13 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
+    if (body.phone && !isValidPhone(body.phone)) {
+      return new Response(JSON.stringify({ error: "Invalid phone number" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
     // Check if guest already exists (only if email is provided and not empty)
     const emailToCheck =
       body.email && body.email.trim() !== ""
@@ -125,6 +132,10 @@ export const POST: APIRoute = async ({ request }) => {
       data: {
         name: sanitizeInput(body.name.trim()),
         email: emailToCheck,
+        phone:
+          body.phone && body.phone.trim() !== ""
+            ? body.phone.trim()
+            : null,
         allowPlusOne: body.allowPlusOne || false,
         plusOneName:
           body.plusOneName && body.plusOneName.trim() !== ""
@@ -192,6 +203,20 @@ export const PUT: APIRoute = async ({ request }) => {
         updateData.email = trimmedEmail.toLowerCase();
       } else {
         updateData.email = null;
+      }
+    }
+    if (body.phone !== undefined) {
+      const trimmedPhone = body.phone?.trim();
+      if (trimmedPhone && trimmedPhone !== "") {
+        if (!isValidPhone(trimmedPhone)) {
+          return new Response(
+            JSON.stringify({ error: "Invalid phone number" }),
+            { status: 400, headers: { "Content-Type": "application/json" } }
+          );
+        }
+        updateData.phone = trimmedPhone;
+      } else {
+        updateData.phone = null;
       }
     }
     if (typeof body.allowPlusOne === "boolean")

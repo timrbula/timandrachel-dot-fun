@@ -5,6 +5,7 @@ interface Guest {
   id: string;
   name: string;
   email: string;
+  phone: string | null;
   allowPlusOne: boolean;
   plusOneName: string | null;
   invitationSent: boolean;
@@ -21,6 +22,7 @@ interface Guest {
 interface GuestFormData {
   name: string;
   email: string;
+  phone: string;
   allowPlusOne: boolean;
   plusOneName: string;
   invitationSent: boolean;
@@ -55,6 +57,7 @@ export default function GuestListManager() {
   const [formData, setFormData] = useState<GuestFormData>({
     name: "",
     email: "",
+    phone: "",
     allowPlusOne: false,
     plusOneName: "",
     invitationSent: false,
@@ -190,6 +193,7 @@ export default function GuestListManager() {
       setFormData({
         name: "",
         email: "",
+        phone: "",
         allowPlusOne: false,
         plusOneName: "",
         invitationSent: false,
@@ -232,6 +236,7 @@ export default function GuestListManager() {
       setFormData({
         name: "",
         email: "",
+        phone: "",
         allowPlusOne: false,
         plusOneName: "",
         invitationSent: false,
@@ -274,6 +279,7 @@ export default function GuestListManager() {
     setFormData({
       name: guest.name,
       email: guest.email,
+      phone: guest.phone || "",
       allowPlusOne: guest.allowPlusOne,
       plusOneName: guest.plusOneName || "",
       invitationSent: guest.invitationSent,
@@ -287,6 +293,7 @@ export default function GuestListManager() {
     setFormData({
       name: "",
       email: "",
+      phone: "",
       allowPlusOne: false,
       plusOneName: "",
       invitationSent: false,
@@ -440,6 +447,20 @@ export default function GuestListManager() {
                   className="form-input"
                 />
               </div>
+
+              <div className="form-group">
+                <label htmlFor="phone">Phone</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  value={formData.phone}
+                  onChange={(e) =>
+                    setFormData({ ...formData, phone: e.target.value })
+                  }
+                  className="form-input"
+                  placeholder="(555) 123-4567"
+                />
+              </div>
             </div>
 
             <div className="form-row">
@@ -581,6 +602,9 @@ export default function GuestListManager() {
                   <div className="guest-details">
                     <p>
                       <strong>📧 Email:</strong> {guest.email}
+                    </p>
+                    <p>
+                      <strong>📱 Phone:</strong> {guest.phone || "Not provided"}
                     </p>
                     <p>
                       <strong>👥 Plus-One:</strong>{" "}

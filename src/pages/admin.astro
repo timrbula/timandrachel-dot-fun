@@ -4,6 +4,7 @@ import BlinkingText from "../components/react/BlinkingText";
 import RainbowDivider from "../components/react/RainbowDivider";
 import GuestListManager from "../components/react/GuestListManager";
 import RSVPListViewer from "../components/react/RSVPListViewer";
+import SmsBroadcast from "../components/react/SmsBroadcast";
 ---
 
 <BaseLayout
@@ -49,6 +50,21 @@ import RSVPListViewer from "../components/react/RSVPListViewer";
 
     <section class="manager-section">
       <GuestListManager client:load />
+    </section>
+
+    <RainbowDivider client:load variant="dots" />
+
+    <!-- SMS Broadcast Component -->
+    <section class="section-header text-center">
+      <h2 class="text-neon">
+        <BlinkingText client:load speed="normal">📱</BlinkingText>
+        Text All Attending Guests
+        <BlinkingText client:load speed="normal">📱</BlinkingText>
+      </h2>
+    </section>
+
+    <section class="manager-section">
+      <SmsBroadcast client:load />
     </section>
   </div>
 

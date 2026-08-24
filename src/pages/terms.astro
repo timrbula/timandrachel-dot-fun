@@ -1,0 +1,215 @@
+---
+import BaseLayout from "../components/astro/BaseLayout.astro";
+import Marquee from "../components/react/Marquee";
+import BlinkingText from "../components/react/BlinkingText";
+import RainbowDivider from "../components/react/RainbowDivider";
+import GeoButton from "../components/react/GeoButton";
+---
+
+<BaseLayout
+  title="Terms & Conditions - Rachel & Tim 📜"
+  description="Terms and conditions for using our wedding website."
+>
+  <!-- Top Marquee -->
+  <Marquee client:load speed={15}>
+    📜 Terms & Conditions 📜 The fine print 📜
+  </Marquee>
+
+  <div class="container">
+    <!-- Page Header -->
+    <section class="page-header text-center">
+      <h1 class="text-3d">
+        <BlinkingText client:load speed="slow">📜</BlinkingText>
+        Terms & Conditions
+        <BlinkingText client:load speed="slow">📜</BlinkingText>
+      </h1>
+      <p class="subtitle">Last updated: {new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</p>
+    </section>
+
+    <RainbowDivider client:load variant="animated" />
+
+    <!-- Content -->
+    <section class="terms-section">
+      <div class="terms-card geo-box-raised">
+        <h2 class="text-neon-pink">About This Site</h2>
+        <p>
+          This website is a personal, non-commercial site created to share
+          information about Rachel & Tim's wedding on October 9, 2026, and
+          to collect RSVPs and well wishes from our guests.
+        </p>
+      </div>
+
+      <div class="terms-card geo-box-raised">
+        <h2 class="text-neon">Acceptable Use</h2>
+        <p>By using this site, you agree to:</p>
+        <ul>
+          <li>Provide accurate information when RSVPing</li>
+          <li>Keep guestbook messages kind, fun, and appropriate</li>
+          <li>Not use the site to send spam, harass others, or attempt to disrupt the site</li>
+        </ul>
+      </div>
+
+      <div class="terms-card geo-box-raised">
+        <h2 class="text-neon-pink">Guestbook Content</h2>
+        <p>
+          Messages you submit to the guestbook are publicly visible and may
+          be moderated or removed at our discretion. Please see our
+          <a href="/privacy">Privacy Policy</a> for details on how guestbook
+          submissions are handled.
+        </p>
+      </div>
+
+      <div class="terms-card geo-box-raised">
+        <h2 class="text-neon">No Warranty</h2>
+        <p>
+          This site is provided "as is," in the spirit of good old-fashioned
+          GeoCities nostalgia. We make no guarantees about uptime, accuracy,
+          or that every marquee will scroll perfectly on every device. 🕺
+        </p>
+      </div>
+
+      <div class="terms-card geo-box-raised">
+        <h2 class="text-neon-pink">Changes to These Terms</h2>
+        <p>
+          We may update these terms from time to time as our wedding plans
+          evolve. Continued use of the site after changes means you accept
+          the updated terms.
+        </p>
+      </div>
+
+      <div class="terms-card geo-box-raised">
+        <h2 class="text-neon">Contact</h2>
+        <p>
+          Questions about these terms? Reach out to us using the contact
+          details below.
+        </p>
+      </div>
+    </section>
+
+    <RainbowDivider client:load variant="dots" />
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+      <div class="contact-box geo-box-neon text-center">
+        <h2 class="text-3d">
+          <BlinkingText client:load>💬</BlinkingText>
+          Questions?
+          <BlinkingText client:load>💬</BlinkingText>
+        </h2>
+        <div class="contact-methods">
+          <p>
+            📧 Email: <a href="mailto:hello@rachelandtim.fun" class="text-cyan"
+              >hello@rachelandtim.fun</a
+            >
+          </p>
+        </div>
+        <div class="cta-buttons">
+          <GeoButton client:load variant="primary" href="/">
+            🏠 Back to Home
+          </GeoButton>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Bottom Marquee -->
+  <Marquee client:load speed={20} direction="right">
+    💕 Can't wait to celebrate with you! 🎉 RSVP by August 28th, 2026 💌
+  </Marquee>
+</BaseLayout>
+
+<style>
+  /* Page Header */
+  .page-header {
+    padding: 2rem 0;
+  }
+
+  .page-header h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* Terms Section */
+  .terms-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 800px;
+    margin: 3rem auto;
+  }
+
+  .terms-card {
+    padding: 2rem;
+  }
+
+  .terms-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .terms-card p {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .terms-card ul {
+    margin: 0 0 1rem 1.5rem;
+    line-height: 1.6;
+  }
+
+  .terms-card li {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Contact Section */
+  .contact-section {
+    margin: 3rem 0;
+  }
+
+  .contact-box {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2.5rem;
+  }
+
+  .contact-methods {
+    margin-top: 2rem;
+  }
+
+  .contact-methods p {
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+  }
+
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  /* Links */
+  a {
+    text-decoration: underline;
+  }
+
+  a:hover {
+    opacity: 0.8;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-header h1 {
+      font-size: 2.5rem;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+    }
+  }
+</style>

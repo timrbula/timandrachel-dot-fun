@@ -36,6 +36,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.astro",
     "db:setup": "./scripts/setup-database.sh",
     "db:test": "tsx scripts/test-database.ts",
+    "db:backup-rsvps": "tsx scripts/backup-rsvps.ts",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev",
@@ -58,6 +59,7 @@
     "react-dom": "^19.2.3",
     "resend": "^6.6.0",
     "tone": "^15.1.22",
+    "twilio": "^5.13.1",
     "typescript": "^5.9.3"
   },
   "devDependencies": {

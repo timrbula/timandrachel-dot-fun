@@ -1,0 +1,121 @@
+---
+import BaseLayout from "../components/astro/BaseLayout.astro";
+import Marquee from "../components/react/Marquee";
+import WeddingQuest from "../components/react/WeddingQuest";
+import GeoButton from "../components/react/GeoButton";
+import BlinkingText from "@/components/react/BlinkingText";
+---
+
+<BaseLayout
+  title="Tim's Quest - Rachel & Tim's Wedding"
+  description="Watch our 8-bit NES-style love story! The groom races through World 1-1 to rescue the bride, then the sky lights up with fireworks!"
+>
+  <!-- Marquee Banner -->
+  <Marquee client:load speed={15}>
+    🎮 Tim's Quest! 🎮 Save the bride! 💕 Light up the sky with fireworks! 🎆
+  </Marquee>
+
+  <div class="container">
+    <!-- Page Header -->
+    <section class="page-header text-center">
+      <h1 class="text-3d">
+        <BlinkingText client:load speed="slow">🎮</BlinkingText> Tim's Quest <BlinkingText
+          client:load
+          speed="slow">🎆</BlinkingText
+        >
+      </h1>
+      <p class="subtitle rainbow-text">An 8-Bit Love Story</p>
+    </section>
+
+    <!-- Animation -->
+    <section class="quest-section">
+      <WeddingQuest client:load />
+    </section>
+
+    <!-- Back to Home -->
+    <section class="navigation-section text-center geo-box-raised">
+      <h2 class="text-neon-pink">Ready for the real thing?</h2>
+      <p>Loved the story? Don't forget to RSVP for our happily ever after!</p>
+      <div class="button-group">
+        <GeoButton client:load variant="warning" href="/rsvp">
+          💌 RSVP Now
+        </GeoButton>
+        <GeoButton client:load variant="secondary" href="/play">
+          🎮 Play Flappy Wedding
+        </GeoButton>
+        <GeoButton client:load variant="secondary" href="/">
+          🏠 Back to Home
+        </GeoButton>
+      </div>
+    </section>
+  </div>
+
+  <!-- Bottom Marquee -->
+  <Marquee client:load speed={20} direction="right">
+    💕 Rachel & Tim forever! 💕 See you at the wedding! 🎉 October 9, 2026 🗽
+  </Marquee>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding: 2rem 0;
+  }
+
+  .page-header h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .quest-section {
+    margin: 2rem 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .navigation-section {
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 2rem;
+  }
+
+  .navigation-section h2 {
+    margin-bottom: 1rem;
+  }
+
+  .navigation-section p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-header h1 {
+      font-size: 2.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+    }
+
+    .navigation-section {
+      padding: 1.5rem;
+    }
+
+    .button-group {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+</style>
