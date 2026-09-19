@@ -14,37 +14,47 @@ const WELCOME_TIME = "7:00 PM";
 
 const CEREMONY_VENUE = "City Hall";
 const CEREMONY_ADDRESS = "Broadway &, Chambers St, New York, NY 10007";
-const CEREMONY_DATE = "Friday, October 9th, 2026";
-const CEREMONY_TIME = "TBD";
+const CEREMONY_DATE = "Thursday, October 9th, 2026";
+const CEREMONY_TIME = "3:30 PM";
 
 const WEDDING_VENUE = "Neptune Room @ Radio Star";
 const WEDDING_ADDRESS = "13 Greenpoint Ave, Brooklyn, NY 11222";
 const WEDDING_DATE = "Friday, October 9th, 2026";
 const WEDDING_TIME = "6:00 PM";
 
-const PICNIC_VENUE = "Prospect Park";
-const PICNIC_ADDRESS = "Long Meadow";
+const AFTERPARTY_VENUE = "Goldie's Bar";
+const AFTERPARTY_ADDRESS = "195 Nassau Ave, Brooklyn, NY 11222";
+const AFTERPARTY_DATE = "Friday, October 9th, 2026";
+const AFTERPARTY_TIME = "11:30 PM";
+
+const PICNIC_VENUE = "Prospect Park - Near Picnic House";
+const PICNIC_ADDRESS = "40 West Dr, Brooklyn, NY 11215";
 const PICNIC_DATE = "Saturday, October 10th, 2026";
-const PICNIC_TIME = "12:00 PM";
+const PICNIC_TIME = "11:15 AM";
 
 // Calendar event details
 const WELCOME_START = "2026-10-08T19:00:00-04:00"; // 7:00 PM EDT
 const WELCOME_END = "2026-10-08T22:00:00-04:00";
-const WELCOME_DESCRIPTION = "Come get some drinks with (and on!) us the night before. Children welcome!"
+const WELCOME_DESCRIPTION = "Come get some drinks on us the night before. We'll have a bar tab and the brewery has food. Children, parents and friends are more than welcome! "
 
 const CEREMONY_START = "2026-10-08T19:00:00-04:00"; // 7:00 PM EDT
 const CEREMONY_END = "2026-10-08T22:00:00-04:00";
-const CEREMONY_DESCRIPTION = "THIS IS OPTIONAL! We are getting legally married at City Hall ~sometime~ depending on the availability and then going to the venue after. If you want to see us come out of the building and clap then this is your event. Check back three weeks prior to know the exact time!"
+const CEREMONY_DESCRIPTION = "THIS IS OPTIONAL! We are getting legally married at City Hall and only a few witnesses are allowed inside with us. If you want to see us come out of the building after and clap then this is your event."
 
 const WEDDING_START = "2026-10-09T18:00:00-04:00"; // 6:00 PM EDT
 const WEDDING_END = "2026-10-09T23:00:00-04:00"; // 11:00 PM EDT
 const WEDDING_DESCRIPTION =
   "Join us for our wedding celebration! Welcome drinks start at 6:00 PM followed dinner, dessert and dancing. We can't wait to celebrate with you!";
 
-const PICNIC_START = "2026-10-10T11:00:00-04:00"; // 11:00 AM EDT
-const PICNIC_END = "2026-10-10T13:00:00-04:00"; // 1:00 PM EDT
+const AFTERPARTY_START = "2026-10-09T23:00:00-04:00"; // 11:30 PM EDT
+const AFTERPARTY_END = "2026-10-10T01:30:00-04:00"; // 1:30 MA EDT
+const AFTERPARTY_DESCRIPTION =
+  "If you still have some energy join us after. We've got a private karaoke room booked.";
+
+const PICNIC_START = "2026-10-10T11:15:00-04:00"; // 11:00 AM EDT
+const PICNIC_END = "2026-10-10T13:15:00-04:00"; // 1:00 PM EDT
 const PICNIC_DESCRIPTION =
-  "Join us in our park of choice get get some coffee and pastries. We'll just be hanging out";
+  "Join us in our park of choice for some catered breakfast sandwhiches, pastries and coffee. We'll just be hanging out";
 ---
 
 <BaseLayout
@@ -64,6 +74,27 @@ const PICNIC_DESCRIPTION =
         Schedule
         <BlinkingText client:load speed="slow">🕐</BlinkingText>
       </h1>
+    </section>
+
+    <!-- Ceremony Date & Time -->
+    <section class="date-section">
+      <div class="date-box geo-box-neon text-center">
+      <h1 class="text-beveled-orange">Ceremony</h1>
+        <h2 class="text-neon">📅 {CEREMONY_DATE}</h2>
+        <p class="ceremony-time rainbow-text">{CEREMONY_TIME}</p>
+        <p class="venue-name text-neon-pink">{CEREMONY_VENUE}</p>
+        <p class="venue-address">{CEREMONY_ADDRESS}</p>
+        <AddToCalendarButton
+          client:load
+          eventTitle="Rachel & Tim's Ceremony"
+          eventDescription={CEREMONY_DESCRIPTION}
+          location={CEREMONY_ADDRESS}
+          startDate={CEREMONY_START}
+          endDate={CEREMONY_END}
+          variant="primary"
+        />
+        <p style="margin-top: 1rem;">{CEREMONY_DESCRIPTION}</p>
+      </div>
     </section>
 
       <!-- Welcome -->
@@ -88,38 +119,17 @@ const PICNIC_DESCRIPTION =
      
     </section>
 
-      <!-- Ceremony Date & Time -->
+    <!-- Reception Date & Time -->
     <section class="date-section">
       <div class="date-box geo-box-neon text-center">
-      <h1 class="text-beveled-orange">Ceremony</h1>
-        <h2 class="text-neon">📅 {CEREMONY_DATE}</h2>
-        <p class="ceremony-time rainbow-text">{CEREMONY_TIME}</p>
-        <p class="venue-name text-neon-pink">{CEREMONY_VENUE}</p>
-        <p class="venue-address">{CEREMONY_ADDRESS}</p>
-        <AddToCalendarButton
-          client:load
-          eventTitle="Rachel & Tim's Ceremony"
-          eventDescription={CEREMONY_DESCRIPTION}
-          location={CEREMONY_ADDRESS}
-          startDate={CEREMONY_START}
-          endDate={CEREMONY_END}
-          variant="primary"
-        />
-        <p style="margin-top: 1rem;">{CEREMONY_DESCRIPTION}</p>
-      </div>
-    </section>
-
-    <!-- Party Date & Time -->
-    <section class="date-section">
-      <div class="date-box geo-box-neon text-center">
-      <h1 class="text-beveled-red">Wedding Party</h1>
+      <h1 class="text-beveled-red">Wedding Reception</h1>
         <h2 class="text-neon">📅 {WEDDING_DATE}</h2>
         <p class="ceremony-time rainbow-text">{WEDDING_TIME}</p>
         <p class="venue-name text-neon-pink">{WEDDING_VENUE}</p>
         <p class="venue-address">{WEDDING_ADDRESS}</p>
         <AddToCalendarButton
           client:load
-          eventTitle="Rachel & Tim's Wedding Party"
+          eventTitle="Rachel & Tim's Wedding Reception"
           eventDescription={WEDDING_DESCRIPTION}
           location={WEDDING_ADDRESS}
           startDate={WEDDING_START}
@@ -127,7 +137,28 @@ const PICNIC_DESCRIPTION =
           variant="secondary"
         />
         <p style="margin-top: 1rem;">{WEDDING_DESCRIPTION}</p>
-        <p style="margin-top: 1rem;">Cocktail attire</p>
+        <p style="margin-top: 1rem;">Cocktail attire. View our <a href="https://www.pinterest.com/rachelroserobinson/wedding/dress-code/">Pinterest board</a> for inspiration based on the flowers and season.</p>
+      </div>
+    </section>
+
+    <!-- After Party Date & Time -->
+    <section class="date-section">
+      <div class="date-box geo-box-neon text-center">
+      <h1 class="text-beveled-red">Afterparty Karaoke</h1>
+        <h2 class="text-neon">📅 {AFTERPARTY_DATE}</h2>
+        <p class="ceremony-time rainbow-text">{AFTERPARTY_TIME}</p>
+        <p class="venue-name text-neon-pink">{AFTERPARTY_VENUE}</p>
+        <p class="venue-address">{AFTERPARTY_ADDRESS}</p>
+        <AddToCalendarButton
+          client:load
+          eventTitle="Rachel & Tim's Afterparty"
+          eventDescription={AFTERPARTY_DESCRIPTION}
+          location={AFTERPARTY_ADDRESS}
+          startDate={AFTERPARTY_START}
+          endDate={AFTERPARTY_END}
+          variant="secondary"
+        />
+        <p style="margin-top: 1rem;">{AFTERPARTY_DESCRIPTION}</p>
       </div>
     </section>
 
@@ -156,93 +187,6 @@ const PICNIC_DESCRIPTION =
 
     <RainbowDivider client:load variant="stars" />
 
-    <!-- Timeline -->
-    <!-- <section class="timeline-section">
-      <h2 class="text-center text-3d">
-        <BlinkingText client:load>✨</BlinkingText>
-        Event Timeline
-        <BlinkingText client:load>✨</BlinkingText>
-      </h2>
-
-      <div class="timeline">
-        <div class="timeline-item geo-box-raised">
-          <div class="timeline-icon">💒</div>
-          <div class="timeline-content">
-            <h3 class="text-neon">6:00 PM - Ceremony</h3>
-            <p>Join us as we say "I do!" 💕</p>
-            <p>
-              The ceremony will be intimate and heartfelt (and hopefully not too
-              long because we want to party!)
-            </p>
-          </div>
-        </div>
-
-        <div class="timeline-item geo-box-raised">
-          <div class="timeline-icon">🍸</div>
-          <div class="timeline-content">
-            <h3 class="text-neon-pink">7:00 PM - Cocktail Hour</h3>
-            <p>Drinks, appetizers, and mingling! 🥂</p>
-            <p>
-              Enjoy signature cocktails and delicious bites while we take some
-              photos.
-            </p>
-            <p class="text-neon">🎵 Live music to set the vibe!</p>
-          </div>
-        </div>
-
-        <div class="timeline-item geo-box-raised">
-          <div class="timeline-icon">🍽️</div>
-          <div class="timeline-content">
-            <h3 class="text-neon">8:00 PM - Reception & Dinner</h3>
-            <p>Time to eat! 🍴</p>
-            <p>
-              Delicious food, heartfelt toasts, and maybe some embarrassing
-              stories from our friends and family.
-            </p>
-            <p><strong>Menu details coming soon!</strong></p>
-          </div>
-        </div>
-
-        <div class="timeline-item geo-box-raised">
-          <div class="timeline-icon">💃</div>
-          <div class="timeline-content">
-            <h3 class="text-neon-pink">9:30 PM - Dancing!</h3>
-            <p>Let's get this party started! 🕺💃</p>
-            <p>
-              First dance, parent dances, and then the dance floor is YOURS!
-            </p>
-            <p class="text-rainbow">
-              Bring your best moves! No judgment zone! 🎉
-            </p>
-          </div>
-        </div>
-
-        <div class="timeline-item geo-box-raised">
-          <div class="timeline-icon">🎂</div>
-          <div class="timeline-content">
-            <h3 class="text-neon">10:30 PM - Cake Cutting</h3>
-            <p>Sweet treats time! 🍰</p>
-            <p>
-              Watch us attempt to feed each other cake without making a mess
-              (spoiler: we will make a mess).
-            </p>
-          </div>
-        </div>
-
-        <div class="timeline-item geo-box-raised">
-          <div class="timeline-icon">🌙</div>
-          <div class="timeline-content">
-            <h3 class="text-neon-pink">12:00 AM - Last Call</h3>
-            <p>All good things must come to an end... 😢</p>
-            <p>But the memories will last forever! 💕</p>
-            <p><em>(After-party location TBD for the night owls! 🦉)</em></p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <RainbowDivider client:load variant="dots" /> -->
-
     <RainbowDivider client:load variant="solid" />
 
      <h1 class="text-center">Places</h2>
@@ -253,20 +197,7 @@ const PICNIC_DESCRIPTION =
        </section>
 
     <!-- Map Section -->
-      <section class="map-section">
-      <h2 class="text-center">📍 Welcome Party 📍</h2>
-      <div class="map-container geo-box">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12105.087771549255!2d-73.98115170425285!3d40.66797670236825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25bab47b7fbff%3A0x7ddcbcc39bb2c360!2sThrees%20Brewing!5e0!3m2!1sen!2sus!4v1777848282156!5m2!1sen!2sus"
-          width="100%"
-          height="450"
-          style="border:0;"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Radio Star Location Map"></iframe>
-      </div>
-    </section>
+         </section>
       <section class="map-section">
       <h2 class="text-center">📍 Ceremony 📍</h2>
       <div class="map-container geo-box">
@@ -281,8 +212,21 @@ const PICNIC_DESCRIPTION =
           title="Radio Star Location Map"></iframe>
       </div>
     </section>
-        <section class="map-section">
-      <h2 class="text-center">📍 Wedding Party 📍</h2>
+    <section class="map-section">
+      <h2 class="text-center">📍 Welcome Party 📍</h2>
+      <div class="map-container geo-box">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12105.087771549255!2d-73.98115170425285!3d40.66797670236825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25bab47b7fbff%3A0x7ddcbcc39bb2c360!2sThrees%20Brewing!5e0!3m2!1sen!2sus!4v1777848282156!5m2!1sen!2sus"
+          width="100%"
+          height="450"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Radio Star Location Map"></iframe>
+      </div>
+    <section class="map-section">
+      <h2 class="text-center">📍 Reception 📍</h2>
       <div class="map-container geo-box">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.4646460365666!2d-73.96273948795883!3d40.72980033640552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259003a3591cd%3A0xb2fd69b7319785a6!2sThe%20Neptune%20Room!5e0!3m2!1sen!2sus!4v1777848572967!5m2!1sen!2sus"
@@ -296,10 +240,24 @@ const PICNIC_DESCRIPTION =
       </div>
     </section>
     <section class="map-section">
+      <h2 class="text-center">📍 Afterparty 📍</h2>
+      <div class="map-container geo-box">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.650389475839!2d-73.94514029999999!3d40.7257122!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25948d98c971f%3A0x436aa07b769ffe0f!2sGoldie's%20Bar!5e0!3m2!1sen!2sus!4v1789844094212!5m2!1sen!2sus"
+          width="100%"
+          height="450"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Goldie's Location Map"></iframe>
+      </div>
+    </section>
+    <section class="map-section">
       <h2 class="text-center">📍 Picnic 📍</h2>
       <div class="map-container geo-box">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12105.093514103854!2d-73.98110878649958!3d40.66794506618967!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25b1aaf583941%3A0xdecbf5a4bb1654ea!2sLong%20Meadow!5e0!3m2!1sen!2sus!4v1777848203608!5m2!1sen!2sus"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3026.2688836581265!2d-73.9751267435742!3d40.66804411642369!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25b055bfa3cc5%3A0x313dd59571c32a1f!2sThe%20Picnic%20House%20in%20Prospect%20Park!5e0!3m2!1sen!2sus!4v1789835307374!5m2!1sen!2sus"
           width="100%"
           height="450"
           style="border:0;"
