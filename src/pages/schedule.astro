@@ -39,7 +39,7 @@ const WELCOME_DESCRIPTION = "Come get some drinks on us the night before. We'll 
 
 const CEREMONY_START = "2026-10-08T15:30:00-04:00"; // 3:30 PM EDT
 const CEREMONY_END = "2026-10-08T17:00:00-04:00";
-const CEREMONY_DESCRIPTION = "THIS IS OPTIONAL! We are getting legally married at City Hall and only a few witnesses are allowed inside with us. If you want to see us come out of the building after and clap then this is your event."
+const CEREMONY_DESCRIPTION = "OPTIONAL! We will be legally married at City Hall. Unfortunately, only few witnesses are allowed inside. This is your event if you want to see us come out of the building after and clap. Please clap."
 
 const WEDDING_START = "2026-10-09T18:00:00-04:00"; // 6:00 PM EDT
 const WEDDING_END = "2026-10-09T23:00:00-04:00"; // 11:00 PM EDT
@@ -54,7 +54,7 @@ const AFTERPARTY_DESCRIPTION =
 const PICNIC_START = "2026-10-10T11:15:00-04:00"; // 11:00 AM EDT
 const PICNIC_END = "2026-10-10T13:15:00-04:00"; // 1:00 PM EDT
 const PICNIC_DESCRIPTION =
-  "Join us in our park of choice for some catered breakfast sandwhiches, pastries and coffee. We'll just be hanging out";
+  "Join us in our park of choice for some catered breakfast sandwhiches, pastries and coffee. We'll be hanging out for a bit!";
 ---
 
 <BaseLayout
@@ -189,9 +189,8 @@ const PICNIC_DESCRIPTION =
 
     <RainbowDivider client:load variant="solid" />
 
-     <h1 class="text-center">Places</h2>
-
       <section class="cta-section text-center">
+        <h1 class="text-center">Places</h2>
       <p style="font-weight:bold">Check out Maps list to see all of the event locations in one convenient place :)</p>
        <GeoButton client:load variant="primary" href="https://maps.app.goo.gl/iHQQ5XgZBPAFLebU8">Google Maps List</GeoButton>
        </section>
